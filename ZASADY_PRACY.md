@@ -28,11 +28,20 @@ docs: aktualizacja opisu pól WYCENA
 
 ---
 
+## Oryginały i kopie
+
+- **Nie zmieniamy oryginalnych plików** – pliki źródłowe pozostają nietknięte.
+- **Pracujemy wyłącznie na kopiach** – edycje, poprawki i nowe wersje robimy w plikach skopiowanych (np. w folderze **Kopie** lub **Do_edycji**).
+- **Cofanie zmian** – jeśli chcemy cofnąć zmiany, wracamy do zapisanej kopii (bez nadpisywania oryginału).
+
+---
+
 ## Struktura projektu
 
 - **CHANGELOG.md** – historia zmian (aktualizowana przy każdym commicie).
 - **ZASADY_PRACY.md** – ten dokument (reguły pracy).
-- Pozostałe pliki – dokumentacja merytoryczna (CSV, XLSX, MD, DOCX) według potrzeb projektu.
+- **Kopie/** (lub **Do_edycji/**) – folder na kopie plików do pracy; tu wprowadzamy zmiany.
+- Pozostałe pliki w katalogu głównym – oryginały dokumentacji (CSV, XLSX, MD, DOCX); nie edytujemy ich bezpośrednio.
 
 ---
 
