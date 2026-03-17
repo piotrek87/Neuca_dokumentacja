@@ -1,0 +1,45 @@
+var Neuca;
+(function (Neuca) {
+    var Crm;
+    (function (Crm) {
+        var Magellan;
+        (function (Magellan) {
+            var WebResource;
+            (function (WebResource) {
+                var Entities;
+                (function (Entities) {
+                    var NeuAttachmentsSubgridLogic = /** @class */ (function () {
+                        function NeuAttachmentsSubgridLogic(Page) {
+                            this.Page = Page;
+                            this.SetAttachmentsGridFetchXML(Page);
+                        }
+                        NeuAttachmentsSubgridLogic.OnLoad = function () {
+                            new NeuAttachmentsSubgridLogic(Xrm.Page);
+                        };
+                        NeuAttachmentsSubgridLogic.prototype.SetAttachmentsGridFetchXML = function (Page) {
+                            var _this = this;
+                            var subGrid = Page.getControl("Attachments");
+                            if (!subGrid) {
+                                setTimeout(function () { _this.SetAttachmentsGridFetchXML(Page); }, 2000); //if the grid hasn’t loaded run this again when it has 
+                                return;
+                            }
+                            var fetchXml = "<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>" +
+                                "<entity name='neu_attachment'>" +
+                                "<attribute name='neu_name' />" +
+                                "<filter type='and'>" +
+                                "<condition attribute='neu_entityid' operator='eq' value='" + Xrm.Page.data.entity.getId().replace('{', '').replace('}', '') + "' />" +
+                                "</filter>" +
+                                "</entity>" +
+                                "</fetch>";
+                            subGrid.getGrid().setParameter("fetchXml", fetchXml);
+                            subGrid.refresh();
+                        };
+                        return NeuAttachmentsSubgridLogic;
+                    }());
+                    Entities.NeuAttachmentsSubgridLogic = NeuAttachmentsSubgridLogic;
+                })(Entities = WebResource.Entities || (WebResource.Entities = {}));
+            })(WebResource = Magellan.WebResource || (Magellan.WebResource = {}));
+        })(Magellan = Crm.Magellan || (Crm.Magellan = {}));
+    })(Crm = Neuca.Crm || (Neuca.Crm = {}));
+})(Neuca || (Neuca = {}));
+//# sourceMappingURL=neu_attachments_subgrid.js.map

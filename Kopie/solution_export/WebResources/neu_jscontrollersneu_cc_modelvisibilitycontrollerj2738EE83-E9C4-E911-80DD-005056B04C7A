@@ -1,0 +1,194 @@
+﻿/// <reference path="../common/neu_uiutils.js" />
+
+if (typeof (Neuca) == "undefined") {
+    Neuca = {};
+}
+
+if (typeof (Neuca.Crm) == "undefined") {
+    Neuca.Crm = {};
+}
+
+/** @namespace */
+Neuca.Crm.ModelVisibilityController = function ModelVisibilityController(model) {
+    var uiutils = Neuca.Crm.UiUtils;
+
+    this.model = model;
+
+    var runRule = function (rule, defaultValue) {
+        var type = typeof (rule);
+        if (type === "function")
+            return rule();
+        if (type === "boolean")
+            return rule;
+        return defaultValue; // Empty rule, default true
+    };
+
+    var runVisibilityRule = function (rule) {
+        return runRule(rule, true);
+    }
+
+    var runRequireRule = function (rule) {
+        return runRule(rule, false);
+    }
+
+    var runEnableRule = function (rule) {
+        return runRule(rule, true);
+    }
+
+    var runSubmitIfDisabledRule = function (rule) {
+        return runRule(rule, false);
+    }
+
+    var updateAttributes = function (attributes, isSectionVisible) {
+        var i = attributes.length;
+        var isFormEditable = false;
+        var formType = Xrm.Page.ui.getFormType();
+
+        // 1 - Create, 2 - Update
+        isFormEditable = [1, 2].indexOf(formType) != -1;
+
+        while (i--) {
+            var attribute = attributes[i];
+            var isVisible = false;
+
+            if (isSectionVisible) {
+                isVisible = runVisibilityRule(attribute.VisibleRule);
+            }
+
+            if (isVisible && isFormEditable) {
+                var isMandatory = runRequireRule(attribute.RequireRule);
+                var isEnabled = runEnableRule(attribute.EnableRule);
+
+                if (isEnabled && isMandatory)
+                    uiutils.setRequired(attribute.Name);
+                else
+                    uiutils.setNotRequired(attribute.Name);
+
+
+                var crmAttribute = uiutils.getField(attribute.Name);
+                var canWriteUpdate = crmAttribute.getUserPrivilege().canUpdate;
+                var canCreateUpdate = crmAttribute.getUserPrivilege().canCreate;
+                var canUpdate = (canWriteUpdate && uiutils.isUpdate()) ||
+                    (canCreateUpdate && uiutils.isCreate());
+
+                if (isEnabled && canUpdate)
+                    uiutils.enableField(attribute.Name);
+                else {
+                    uiutils.disableField(attribute.Name);
+
+                    //var submitIfDisabled = runSubmitIfDisabledRule(attribute.SubmitIfDisabledRule);
+
+                    //if (submitIfDisabled)
+                    //    uiutils.setSubmitModeAlways(attribute.Name);
+                }
+            } else {
+                uiutils.setNotRequired(attribute.Name);
+            }
+
+            if (isVisible) {
+                uiutils.showField(attribute.Name);
+            }
+            else {
+                uiutils.hideField(attribute.Name);
+                uiutils.enableField(attribute.Name);
+            }
+        }
+    };
+
+    var updateSections = function (sections, isTabVisible) {
+        var i = sections.length;
+
+        while (i--) {
+            var section = sections[i];
+            var isVisible = false;
+
+            if (!isTabVisible) {
+                uiutils.hideSection(section.Name);
+            }
+            else {
+                if (isVisible = runVisibilityRule(section.VisibleRule)) {
+                    uiutils.showSection(section.Name);
+                } else {
+                    uiutils.hideSection(section.Name);
+                }
+            }
+
+            if (section.Attributes)
+                updateAttributes(section.Attributes, isVisible);
+        }
+    };
+
+    var forceSubmitDirtyDisabledFields = function () {
+        if (!model || !model.Tabs) return;
+
+        var t = model.Tabs.length;
+        while (t--) {
+            var tab = model.Tabs[t];
+
+            if (!tab.Sections) continue;
+            var s = tab.Sections.length;
+
+            while (s--) {
+                var section = tab.Sections[s];
+
+                if (!section.Attributes) continue;
+                var a = section.Attributes.length;
+
+                while (a--) {
+                    var attribute = section.Attributes[a]
+                        , isEnabled = runEnableRule(attribute.EnableRule);
+
+                    if (isEnabled) continue;
+                    var submitIfDisabled = runSubmitIfDisabledRule(attribute.SubmitIfDisabledRule);
+
+                    if (!submitIfDisabled) continue;
+
+                    var crmAttribute = Xrm.Page.getAttribute(attribute.Name);
+                    if (!crmAttribute) throw ("There is no attribute with name '" + attribute.Name + "' on the form");
+
+                    var isDirty = crmAttribute.getIsDirty();
+
+                    if (isDirty) {
+                        crmAttribute.setSubmitMode("always");
+                        //console.log("always: " + attribute.Name);
+                    }
+                    else {
+                        crmAttribute.setSubmitMode("dirty"); // default
+                        //console.log("dirty: " + attribute.Name);
+                    }
+                }
+            }
+        }
+    }
+
+    this.updateTabs = function (tabs) {
+        var i = tabs.length;
+
+        while (i--) {
+            var tab = tabs[i];
+
+            var isVisible = runVisibilityRule(tab.VisibleRule);
+
+            if (isVisible) {
+                uiutils.showTab(tab.Name);
+            }
+            else {
+                uiutils.hideTab(tab.Name);
+            }
+
+            if (tab.Sections)
+                updateSections(tab.Sections, isVisible);
+        }
+    };
+
+    Xrm.Page.data.entity.addOnSave(forceSubmitDirtyDisabledFields);
+};
+
+Neuca.Crm.ModelVisibilityController.prototype.update = function () {
+    var model = this.model
+        , updateTabs = this.updateTabs;
+
+    if (model && model.Tabs)
+        updateTabs(model.Tabs);
+};
+//async http://www.eslinstructor.net/vkthread/

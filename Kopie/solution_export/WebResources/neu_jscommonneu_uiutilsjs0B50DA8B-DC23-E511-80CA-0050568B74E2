@@ -1,0 +1,847 @@
+﻿if (typeof (Neuca) == "undefined") {
+    Neuca = {};
+}
+
+if (typeof (Neuca.Crm) == "undefined") {
+    Neuca.Crm = {};
+}
+
+/** @namespace */
+Neuca.Crm.UiUtils = {
+    /*save mode*/
+    CRM_FORM_SAVE_MODE_SAVE: 1,
+    CRM_FORM_SAVE_MODE_SAVEANDCLOSE: 2,
+    CRM_FORM_SAVE_MODE_SAVEANDNEW: 59,
+    CRM_FORM_SAVE_MODE_SAVEASCOMPLETED: 58, //for Task, Phone Call, Letter, Fax, Appointment
+    CRM_FORM_SAVE_MODE_DEACTIVATE: 5,
+    CRM_FORM_SAVE_MODE_REACTIVATE: 6,
+    CRM_FORM_SAVE_MODE_ASSIGN: 47,
+    CRM_FORM_SAVE_MODE_SEND: 7, //for E-mail
+    CRM_FORM_SAVE_MODE_QUALIFY: 16, //for Lead
+    CRM_FORM_SAVE_MODE_DISQUALIFY: 15,  //for Lead
+
+    /*form type*/
+    CRM_FORM_TYPE_UNDEFINED: 0,
+    CRM_FORM_TYPE_CREATE: 1,
+    CRM_FORM_TYPE_UPDATE: 2,
+    CRM_FORM_TYPE_READONLY: 3,
+    CRM_FORM_TYPE_DISABLE: 4,
+    CRM_FORM_TYPE_QUICKCREATE: 5,
+    CRM_FORM_TYPE_BULKEDIT: 6,
+
+    isCreate: function () {
+        return this.isFormType(Neuca.Crm.UiUtils.CRM_FORM_TYPE_CREATE);
+    },
+
+    isUpdate: function () {
+        return this.isFormType(Neuca.Crm.UiUtils.CRM_FORM_TYPE_UPDATE);
+    },
+
+    isNullOrEmptyString: function (str) {
+        if (str == null)
+            return true;
+        else
+            return (str == "");
+
+    },
+    isNullOrUndefined: function (val) {
+        return val == undefined || val == null;
+    },
+
+    getQueryParameter: function (param) {
+        return (window.location.search.match(new RegExp('[?&]' + param + '=([^&]+)')) || [, null])[1];
+    },
+
+    setDate: function setDate(field, month, year, day) {
+        var d = new Date();
+        d.setDate(day);
+        d.setMonth(month);
+        d.setYear(year);
+        Xrm.Page.getAttribute(field).setValue(d);
+    },
+    attachExtendedEmailAddressValidation: function (attributeName) {
+        var checkFunc = function () {
+            var reg = new RegExp("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9]{2,}$");
+            var val = Neuca.Crm.UiUtils.getValue(attributeName);
+            if (Neuca.Crm.UiUtils.isEnable(attributeName) && val) {
+                var match = reg.test(val);
+                if (!match) {
+                    setSubmitMode.setNotification('You must enter a valid email address..');
+                } else {
+                    Neuca.Crm.UiUtils.getControl(attributeName).clearNotification();
+                }
+            } else {
+                Neuca.Crm.UiUtils.getControl(attributeName).clearNotification();
+            }
+        };
+        Neuca.Crm.UiUtils.addOnChange(attributeName, function () {
+            checkFunc();
+        });
+        checkFunc();
+    },
+
+    /**
+    * @description set's given (by fetchXML) filter to given subgrid and refreshes it
+    */
+    setFilterForSubGrid: function (subgridId, fetchXML) {
+
+        var subgrid = document.getElementById(subgridId);
+        if (subgrid == null || subgrid.readyState != "complete") {
+            setTimeout('Neuca.Crm.UiUtils.setFilterForSubGrid("' + subgridId + '","' + fetchXML + '")', 2000);
+            return;
+        }
+        subgrid.control.setParameter("fetchXml", fetchXML);
+        subgrid.control.refresh();
+    },
+    /**
+    * @description refreshes given subgrid
+    */
+    refreshSubGrid: function (subgridId) {
+
+        var subgrid = document.getElementById(subgridId);
+        if (subgrid == null || subgrid.readyState != "complete") {
+            setTimeout('Neuca.Crm.UiUtils.refreshSubGrid("' + subgridId + '")', 500);
+            return;
+        }
+        subgrid.control.refresh();
+    },
+    /**
+    * @param {String} entityName
+    * @param {String} attributes
+    * @param {String} order order by field
+    * @param {String} filterString e.g 	'<filter type="and"> <condition attribute="new_company" operator="eq" uitype="new_account" value="' + opportunity + '" /></filter>'+
+    */
+    createFilterXml: function (entityName, attributes, order, filterString) {
+        var xml = '<fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">' +
+            '<entity name="' + entityName + '">';
+        if (attributes != null) {
+            for (var i = 0; i < attributes.length; i++) {
+                xml += '<attribute name="' + attributes[i] + '" />';
+            }
+        }
+        if (order != undefined && order != null) {
+            xml += '<order attribute="' + order + '" descending="false" />';
+        }
+        xml += filterString;
+        /*e.g
+        '<filter type="and">'+
+        '<condition attribute="new_accaunt" operator="eq" uitype="new_company" value="' + opportunity + '" />'+
+        '</filter>'+
+        */
+        xml += '</entity>' + '</fetch>';
+        return xml;
+    },
+
+    /**
+   * @param {String} entityName
+   * @param {String} attributes
+   * @param {String} order order by field
+   * @param {String} filterString e.g 	'<filter type="and"> <condition attribute="new_company" operator="eq" uitype="new_account" value="' + opportunity + '" /></filter>'+
+   * @param {int} count number of elements on page, default 20
+   * @param {int} page number of page to get, default 1
+   * @param {bool} orderDesc is order descending, default false
+   * @param {bool} distinct distinct values, default false
+   */
+    createFilterXmlWithPageOptions: function (entityName, attributes, order, filterString, count, page, orderDesc, distinct) {
+        if (this.isNullOrUndefined(page)) {
+            page = 1;
+        }
+        if (this.isNullOrUndefined(count)) {
+            count = 20;
+        }
+        if (distinct == undefined) {
+            distinct = false;
+        }
+        var xml = '<fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="' + distinct + '" page=\'' + page + '\' count=\'' + count + '\'>' +
+            '<entity name="' + entityName + '">';
+        if (attributes != null) {
+            for (var i = 0; i < attributes.length; i++) {
+                xml += '<attribute name="' + attributes[i] + '" />';
+            }
+        }
+        if (!this.isNullOrUndefined(order)) {
+            if (this.isNullOrUndefined(orderDesc)) {
+                orderDesc = false;
+            }
+            xml += '<order attribute="' + order + '" descending="' + orderDesc + '" />';
+        }
+        xml += filterString;
+        /*e.g
+        '<filter type="and">'+
+        '<condition attribute="new_accaunt" operator="eq" uitype="new_company" value="' + opportunity + '" />'+
+        '</filter>'+
+        */
+        xml += '</entity>' + '</fetch>';
+        return xml;
+    },
+
+    /**
+    * @param {String} rowId
+    * @param {String} rowName
+    * @param {Array} cells
+    * @param {Array} width if one of values is 'null' default value will ne used
+    */
+    createGridXml: function (rowId, rowName, cells, width) {
+        var gridXml = "<grid name='resultset' " +
+            "object='1' " +
+            "jump='name' " +
+            "select='1' " +
+            "icon='1' " +
+            "preview='1'>";
+        gridXml += "<row name='" + rowName + "' ";
+        gridXml += "id='" + rowId + "'>";
+        for (var i = 0; i < cells.length; i++) {
+            gridXml += "<cell name='" + cells[i] + "'";
+            if (width[i] != null)
+                gridXml += " width='" + width[i] + "'";
+            gridXml += " />";
+        }
+        gridXml += "</row>" + "</grid>";
+        return gridXml;
+    },
+    /**
+    * @param {String} fieldName
+    * @param {String} entityName
+    * @param {String} displayName
+    * @param {String} filterXml
+    * @param {String} gridXml 
+    * @param {Number} sufix need to be uniq in context in which filter is used (e.g. using for one Form 001,002, ..., 00n is OK
+    */
+    setFilter: function (fieldName, entityName, displayName, filterXml, gridXml, sufix) {
+        var viewId = "{00000000-0000-0000-0000-000000000" + sufix + "}";
+        Neuca.Crm.UiUtils.getControl(fieldName).addCustomView(viewId, entityName, displayName, filterXml, gridXml, true);
+    },
+
+    setFilterForView: function (fieldName, entityName, displayName, filterXml, gridXml, viewId) {
+        var viewId = "{" + viewId + "}";
+        Neuca.Crm.UiUtils.getControl(fieldName).addCustomView(viewId, entityName, displayName, filterXml, gridXml, true);
+    },
+    addOnChange: function (attrName, func) {
+        var ctrl = Neuca.Crm.UiUtils.getField(attrName).addOnChange(func);
+    },
+
+    isEnable: function (name) {
+        return !Neuca.Crm.UiUtils.getControl(name).getDisabled();
+    },
+    isFormType: function (formType) {
+        return Xrm.Page.ui.getFormType() == formType ? true : false;
+    },
+
+    setErrorToField: function (fieldName, errorMessage) {
+        Neuca.Crm.UiUtils.getControl(fieldName).setNotification(errorMessage);
+    },
+
+    clearErrorFromField: function (fieldName) {
+        Neuca.Crm.UiUtils.getControl(fieldName).clearNotification();
+    },
+
+    removeOptionFromOptionSet: function (fieldNameOptionSet, item) {
+        Xrm.Page.getControl(fieldNameOptionSet).removeOption(item);
+
+    },
+
+    addOptionToOptionSet: function (fieldNameOptionSet, itemNumber) {
+        Xrm.Page.getControl(fieldNameOptionSet).addOption(Xrm.Page.getAttribute(fieldNameOptionSet).getOption(itemNumber), [1])
+    },
+
+    isExpandedTab: function (tabName) {
+        return Xrm.Page.ui.tabs.get(tabName).getDisplayState() == "expanded" ? true : false;
+    },
+
+    isCollapsedTab: function (tabName) {
+        return Xrm.Page.ui.tabs.get(tabName).getDisplayState() == "collapsed" ? true : false;
+    },
+
+    setDefaultForTwoOptionsField: function (fieldName) {
+        var field = Xrm.Page.getAttribute(fieldName);
+        field.setRequiredLevel("none");
+        field.setValue(field.getInitialValue());
+    },
+
+    setNullForTwoOptionsField: function (fieldName) {
+        var twoOptionField = Xrm.Page.getAttribute(fieldName);
+        twoOptionField.setRequiredLevel("required");
+        var twoOptionValue = twoOptionField.getValue();
+        twoOptionField.setValue(null); // set the value to null on create
+        // Needed for when you're using a Required 2 Options field - UNSUPPORTED
+        // The first Radio Button must be False, and the Default Value (is by default)
+        document.getElementById("rad_" + fieldName + "1").onclick = function () {
+            // Change the Value, then set it back to trick CRM into thinking its changed
+            if (twoOptionValue == false) {
+                twoOptionField.setValue(true);
+                twoOptionField.setValue(false);
+            }
+        }
+    },
+
+    /**
+    * @description if "toField" is empty this function will fill it with "fromField" field value
+    */
+    setSameValueIfEmpty: function (fromField, toField) {
+        var toBeSet = Xrm.Page.getAttribute(toField);
+        var valueToBe = toBeSet.getValue();
+        if (valueToBe != null && valueToBe != "")
+            return;
+        var value = Xrm.Page.getAttribute(fromField).getValue();
+        toBeSet.setValue(value);
+    },
+    /**
+    * @description sets given fields mandatory
+    * @param {Array} Array of fields names (strings)
+    */
+    setFieldsMandatory: function (fields) {
+        for (var i = 0; i < fields.length; i++) {
+            Neuca.Crm.UiUtils.setRequired(fields[i], true);
+        }
+    },
+
+    setSectionFieldsMandatory: function (sectionname) {
+        var tabs = Xrm.Page.ui.tabs.get();
+        for (var i = 0; i < tabs.length; i++) {
+            var tab = tabs[i];
+            var section = tab.sections.get(sectionname);
+            if (section !== null) {
+                var controls = section.controls.get();
+                for (var k = 0; k < controls.length; k++) {
+                    var control = controls[k];
+                    var attribute = control.getAttribute();
+                    attribute.setRequiredLevel("required");
+                }
+            }
+        }
+    },
+
+    setSectionFieldsNotMandatory: function (sectionname) {
+        var tabs = Xrm.Page.ui.tabs.get();
+        for (var i = 0; i < tabs.length; i++) {
+            var tab = tabs[i];
+            var section = tab.sections.get(sectionname);
+            if (section !== null) {
+                var controls = section.controls.get();
+                for (var k = 0; k < controls.length; k++) {
+                    var control = controls[k];
+                    var attribute = control.getAttribute();
+                    attribute.setRequiredLevel("none");
+                }
+            }
+        }
+    },
+
+
+    /**
+    * @description sets given fields not mandatory
+    * @param {Array} Array of fields names (strings)
+    */
+    setFieldsNotMandatory: function (fields) {
+        for (var i = 0; i < fields.length; i++) {
+            Neuca.Crm.UiUtils.setNotRequired(fields[i]);
+        }
+    },
+    disableFields: function (fields, onlyIfExists) {
+        for (var i = 0; i < fields.length; i++) {
+            if (onlyIfExists) {
+                if (!Neuca.Crm.UiUtils.attributeExists(fields[i])) {
+                    continue;
+                }
+            }
+            Neuca.Crm.UiUtils.disableField(fields[i]);
+        }
+    },
+    enableFields: function (fields, onlyIfExists) {
+        for (var i = 0; i < fields.length; i++) {
+            if (onlyIfExists) {
+                if (!Neuca.Crm.UiUtils.attributeExists(fields[i])) {
+                    continue;
+                }
+            }
+            Neuca.Crm.UiUtils.enableField(fields[i]);
+        }
+    },
+
+    hideFields: function (fields, onlyIfExists) {
+        for (var i = 0; i < fields.length; i++) {
+            if (onlyIfExists) {
+                if (!Neuca.Crm.UiUtils.attributeExists(fields[i])) {
+                    continue;
+                }
+            }
+            Neuca.Crm.UiUtils.hideField(fields[i]);
+        }
+    },
+    showFields: function (fields, onlyIfExists) {
+        for (var i = 0; i < fields.length; i++) {
+            if (onlyIfExists) {
+                if (!Neuca.Crm.UiUtils.attributeExists(fields[i])) {
+                    continue;
+                }
+            }
+            Neuca.Crm.UiUtils.showField(fields[i]);
+        }
+    },
+    hideSections: function (sections) {
+        for (var i = 0; i < sections.length; i++) {
+            Neuca.Crm.UiUtils.hideSection(sections[i]);
+        }
+    },
+    showSections: function (sections) {
+        for (var i = 0; i < sections.length; i++) {
+            Neuca.Crm.UiUtils.showSection(sections[i]);
+        }
+    },
+    getSection: function (sectionname) {
+        var tabs = Xrm.Page.ui.tabs.get();
+        for (var i in tabs) {
+            var tab = tabs[i];
+            var section = tab.sections.get(sectionname);
+            if (section !== null) {
+                return section;
+            }
+        }
+        return null;
+    },
+    isSectionVisible: function (section) {
+        var section = Neuca.Crm.UiUtils.getSection(section);
+        if (section)
+            return section.getVisible();
+        return false;
+    },
+    hideField: function (field) {
+        var control = Xrm.Page.ui.controls.get(field);
+        if (control == null) {
+            return;
+        }
+        control.setVisible(false);
+    },
+    showField: function (field) {
+        var control = Xrm.Page.ui.controls.get(field);
+        if (control == null) {
+            return;
+        }
+        control.setVisible(true);
+    },
+    setVisibleField: function(field, isVisible) {
+        var control = Xrm.Page.ui.controls.get(field);
+        if (control == null) {
+            return;
+        }
+        control.setVisible(isVisible);
+    },
+    hideSection: function (sectionname) {
+        var tabs = Xrm.Page.ui.tabs.get();
+        for (var i in tabs) {
+            var tab = tabs[i];
+            var section = tab.sections.get(sectionname);
+            if (section) {
+                if (section.getVisible())
+                    section.setVisible(false);
+                return;
+            }
+        }
+    },
+    showSection: function (sectionname) {
+        var tabs = Xrm.Page.ui.tabs.get();
+        for (var i in tabs) {
+            var tab = tabs[i];
+            var section = tab.sections.get(sectionname);
+            if (section) {
+                if (!section.getVisible())
+                    section.setVisible(true);
+                return;
+            }
+        }
+    },
+    setVisibleSection: function (sectionname, isVisible) {
+        var tabs = Xrm.Page.ui.tabs.get();
+        for (var i in tabs) {
+            var tab = tabs[i];
+            var section = tab.sections.get(sectionname);
+            if (section) {
+                section.setVisible(isVisible);
+            }
+        }
+    },
+    showTab: function (tabname) {
+        var control = Xrm.Page.ui.tabs.get(tabname);
+        if (control == null) {
+            return;
+        }
+        if (!control.getVisible())
+            control.setVisible(true);
+    },
+    hideTab: function (tabname) {
+        var control = Xrm.Page.ui.tabs.get(tabname);
+        if (control == null) {
+            return;
+        }
+        if (control.getVisible())
+            control.setVisible(false);
+    },
+    setVisibleTab: function (tabname, isVisible) {
+        var control = Xrm.Page.ui.tabs.get(tabname);
+        if (control == null) {
+            return;
+        }
+        control.setVisible(isVisible);
+    },
+    showTabs: function (tabs) {
+        for (var i = 0; i < tabs.length; i++) {
+            Neuca.Crm.UiUtils.showTab(tabs[i]);
+        }
+    },
+    hideTabs: function (tabs) {
+        for (var i = 0; i < tabs.length; i++) {
+            Neuca.Crm.UiUtils.hideTab(tabs[i]);
+        }
+    },
+    getField: function (name) {
+        var ctrl = Xrm.Page.getAttribute(name);
+        if (!ctrl) {
+            throw new Error('attribute not found: ' + name);
+        }
+        return ctrl;
+    },
+    setSubmitModeAlwaysForArray: function (fields) {
+        for (var i = 0; i < fields.length; i++) {
+            Neuca.Crm.UiUtils.setSubmitModeAlways(fields[i]);
+
+        }
+    },
+    setSubmitModeAlways: function (name) {
+        Neuca.Crm.UiUtils.getField(name).setSubmitMode("always");
+    },
+    setSubmitModeNever: function (name) {
+        Neuca.Crm.UiUtils.getField(name).setSubmitMode("never");
+    },
+    setSubmitModeAuto: function (name) {
+        Neuca.Crm.UiUtils.getField(name).setSubmitMode("dirty");
+    },
+    getControl: function (name) {
+        var ctrl = Xrm.Page.ui.controls.get(name);
+        if (!ctrl) {
+            throw new Error('control not found: ' + name);
+        }
+        return ctrl;
+    },
+    setFocus: function (name) {
+        Neuca.Crm.UiUtils.getControl(name).setFocus();
+    },
+    getValue: function (name) {
+        return Neuca.Crm.UiUtils.getField(name).getValue();
+    },
+    getText: function (name) {
+        return Neuca.Crm.UiUtils.getField(name).getText();
+    },
+    getLookUpFieldId: function (name) {
+        var lookup = Neuca.Crm.UiUtils.getLookupItem(name);
+        if (lookup == null)
+            return null;
+        return lookup.id;
+    },
+    /**
+    * @returns: LookUp value name or empty string (if not value is selected or field is undifined
+    */
+    getLookUpFieldName: function (name) {
+        var lookup = Neuca.Crm.UiUtils.getLookupItem(name);
+        if (lookup == null)
+            return "";
+        var value = lookup.name;
+        return value == null ? "" : value;
+    },
+    getLookupItem: function (lookup_name) {
+        var lookup = Neuca.Crm.UiUtils.getValue(lookup_name);
+        if (lookup == null || lookup.length < 1 || (lookup.length > 0 && (lookup[0] == null || lookup[0].id == null))) {
+            return null;
+        }
+        return lookup[0];
+    },
+    attributeExists: function (attrName) {
+        var field = Xrm.Page.getAttribute(attrName);
+        if (field == null) {
+            return false;
+        }
+        return true;
+    },
+    setValueToField: function (fieldName, value) {
+        var field = Xrm.Page.getAttribute(fieldName);
+        if (field == null)
+            throw new Error('Attribute not found: ' + fieldName);
+        field.setValue(value);
+    },
+    setValueToLookUpFieldBasenOnRetrievedData: function (fieldName, retrivedData) {
+        Neuca.Crm.UiUtils.setValueToField(fieldName, [{ id: retrivedData.Id, name: retrivedData.Name, entityType: retrivedData.LogicalName }]);
+    },
+    setLookUpValueToField: function (fieldName, id, text, entity) {
+        var val = new Array();
+        val[0] = new Object();
+        val[0].id = id;
+        val[0].name = text;
+        val[0].entityType = entity;
+
+        Neuca.Crm.UiUtils.setValueToField(fieldName, val);
+    },
+    removeOption: function (fieldName, id, text, entity) {
+        var val = new Array();
+        val[0] = new Object();
+        val[0].id = id;
+        val[0].name = text;
+        val[0].entityType = entity;
+
+        Neuca.Crm.UiUtils.setValueToField(fieldName, val);
+    },
+    setRequired: function (field, isRequired) {
+        if (Xrm.Page.getAttribute(field) == null) {
+            Neuca.Crm.CustomForms.Alert.show("SetRequired: cannot find attribute for '" + field + "'");
+            return;
+        }
+
+        if (isRequired)
+            Xrm.Page.getAttribute(field).setRequiredLevel("required");
+        else
+            Xrm.Page.getAttribute(field).setRequiredLevel("none");
+    },
+    setRecomended: function (field) {
+        if (Xrm.Page.getAttribute(field) == null) {
+            Neuca.Crm.CustomForms.Alert.show("SetRecomended: cannot find attribute for '" + field + "'");
+            //return;
+        }
+        Xrm.Page.getAttribute(field).setRequiredLevel("recommended");
+    },
+    /**
+    * @description Returns a string representing the GUID id value for the record (on Form).
+    */
+    getEntityId: function () {
+        return Xrm.Page.data.entity.getId();
+    },
+    isFieldEmpty: function (fieldName) {
+        var field = Neuca.Crm.UiUtils.getField(fieldName);
+        if (field == null)
+            return true;
+        var value = field.getValue();
+        if (value == null || value.length <= 0 || (value.length > 0 && (value[0] == null || value[0].id == null))) {
+            return true;
+        }
+        return false;
+    },
+    disableField: function (attrName) {
+        Neuca.Crm.UiUtils.getField(attrName).controls.forEach(function (control, i) { control.setDisabled(true); });
+    },
+    enableField: function (attrName) {
+        Neuca.Crm.UiUtils.getField(attrName).controls.forEach(function (control, i) { control.setDisabled(false); });
+    },
+    bindCssToIframe: function (iframe) {
+        var childCtrl = Xrm.Page.ui.controls.get(iframe).getObject().contentWindow.document;
+        //copy css links
+        var cssLinks = document.getElementsByTagName('link');
+        var iframeHead = childCtrl.getElementsByTagName('head')[0];
+        for (var i = 0; i < cssLinks.length; i++) {
+            var item = cssLinks[i];
+            if (item.type === 'text/css') {
+                var cssNode = document.createElement('link');
+                cssNode.type = 'text/css';
+                cssNode.rel = item.rel;
+                cssNode.href = item.href;
+                iframeHead.appendChild(cssNode);
+            }
+        }
+    },
+    doNotSaveIfFieldIsEmpty: function (fieldName, pageContext) {
+        if (Neuca.Crm.UiUtils.isFieldEmpty(fieldName)) {
+            pageContext.getEventArgs().preventDefault();
+            Neuca.Crm.CustomForms.Alert.show("You must provide value for " + fieldName);
+            Neuca.Crm.UiUtils.setFocus(fieldName);
+            return false;
+        }
+        return true;
+    },
+    bindCrmValuesToForm: function (iframe, fields, crmData) {
+        var childCtrl = Xrm.Page.ui.controls.get(iframe).getObject().contentWindow.document;
+
+        for (var i = 0; i < fields.length; i++) {
+            var valueToSet = '';
+            var currFieldName = fields[i];
+            var currVal = crmData[currFieldName];
+            var typeOf = typeof (currVal);
+            if (currVal === null) {
+                valueToSet = '';
+            } else if (typeOf === 'object') {
+                valueToSet = currVal.Name;
+            } else if (typeOf === 'boolean') {
+                if (currVal)
+                    valueToSet = 'Yes';
+                else
+                    valueToSet = 'No';
+            } else {
+                valueToSet = currVal;
+            }
+            if (valueToSet == null) {
+                valueToSet = '';
+            }
+            var ctrlToSetValue = childCtrl.getElementById(currFieldName);
+            if (ctrlToSetValue != null) {
+                ctrlToSetValue.value = valueToSet;
+            }
+        }
+    },
+    setEntityFormUrlToField: function (entityName, entityGuid, destinationField) {
+        var link = Neuca.Crm.UiUtils.getEntityFormUrl(entityName, entityGuid);
+        Neuca.Crm.UiUtils.setValueToField(destinationField, link);
+    },
+
+    setLabel: function (fieldName, labelName) {
+        Neuca.Crm.UiUtils.getControl(fieldName).setLabel(labelName);
+    },
+
+    SetDefaultCurrency: function () {
+        var context = Xrm.Page.context;
+        var serverUrl = context.getServerUrl();
+        var ODataPath = serverUrl + "/XRMServices/2011/OrganizationData.svc";
+        var odataSelect = ODataPath + "/TransactionCurrencySet?$select=TransactionCurrencyId,CurrencyName";
+
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            datatype: "json",
+            url: odataSelect,
+            beforeSend: function (XMLHttpRequest) { XMLHttpRequest.setRequestHeader("Accept", "application/json"); },
+            success: function (data, textStatus, XmlHttpRequest) {
+                var myCurrency = data.d.results[0];
+                var idValue = eval('myCurrency.TransactionCurrencyId');
+                var textValue = eval('myCurrency.CurrencyName');
+                var thisEntityType = 'transactioncurrency';
+                Xrm.Page.getAttribute("transactioncurrencyid").setValue([{ id: idValue, name: textValue, entityType: thisEntityType }]);
+            },
+            error: function (XmlHttpRequest, textStatus, errorThrown) { alert('OData Select Failed: ' + odataSelect); }
+        });
+    },
+
+    setRestValue: function (attributeName, restValue) {
+        var uiUtils = Neuca.Crm.UiUtils
+            , __metadata = null
+            , isLookup = false
+            , isOptionSet = false
+            , isMoney = false;
+
+        var attribute = uiUtils.getField(attributeName);
+
+        if (restValue && restValue.__metadata) {
+            __metadata = restValue.__metadata;
+
+            isLookup = __metadata.type === 'Microsoft.Crm.Sdk.Data.Services.EntityReference';
+            isOptionSet = __metadata.type === 'Microsoft.Crm.Sdk.Data.Services.OptionSetValue';
+            isMoney = __metadata.type === 'Microsoft.Crm.Sdk.Data.Services.Money';
+        }
+
+        if (isLookup) {
+            if (restValue.Id)
+                uiUtils.setLookUpValueToField(attribute.getName(), restValue.Id, restValue.Name, restValue.LogicalName);
+            else attribute.setValue(null);
+        }
+        else if (isOptionSet || (isMoney && restValue.Value != null)) {
+            attribute.setValue(parseFloat(restValue.Value));
+        }
+        else if (isMoney && restValue.Value == null) {
+            attribute.setValue(restValue.Value);
+        }
+        else {
+            if (restValue === undefined)
+                restValue = null;
+            attribute.setValue(restValue);
+        }
+    }
+};
+
+if (typeof (Neuca.Crm.CustomForms) == "undefined") {
+    Neuca.Crm.CustomForms = {};
+}
+
+Neuca.Crm.CustomForms = {
+    showWindow: function (url, width, height, args, callback) {
+        args = args || {};
+        args.clientUrl = Xrm.Page.context.getClientUrl();
+        args.IS_OUTLOOK_CLIENT = window.IS_OUTLOOK_CLIENT;
+        Mscrm.XrmInternal.openDialog(url, { width: width, height: height }, args, null, callback);
+    },
+
+    configureCustomWindow: function () {
+        try {
+            if (window.external && window.external.HostEnabled && window.external.getDialogArguments) {
+                window.dialogArguments = window.external.getDialogArguments();
+            }
+        } catch (e) {
+        }
+        var args = getDialogArguments();
+        window.IS_OUTLOOK_CLIENT = args.IS_OUTLOOK_CLIENT;
+    },
+
+    Alert: {
+        show: function (message, callback) {
+            var callbackInternal = callback || null;
+            if (callback) {
+                callbackInternal = function (isConfirmed) {
+                    window.top.setTimeout(function () {
+                        callback(isConfirmed);
+                    }, 0);
+                };
+            }
+            if (message) {
+                message = (message + '').replace(/\n/g, '<br />');
+            }
+            var args = { message: message };
+            Neuca.Crm.CustomForms.showWindow('$webresource:neu_/HTML/dialogs/neu_alertwindow.htm', 500, 200, args, callbackInternal);
+        },
+        showError: function (message, detail, callback) {
+            var callbackInternal = callback || null;
+            if (callback) {
+                callbackInternal = function (isConfirmed) {
+                    window.top.setTimeout(function () {
+                        callback(isConfirmed);
+                    }, 0);
+                };
+            }
+            if (message) {
+                message = (message + '').replace(/\n/g, '<br />');
+            }
+            if (detail) {
+                detail = (detail + '').replace(/\n/g, '<br />');
+            }
+            var args = { message: message, detail: detail };
+            Neuca.Crm.CustomForms.showWindow('$webresource:neu_/HTML/dialogs/neu_errorwindow.htm', 500, 200, args, callbackInternal);
+        },
+        showServiceError: function (message, retrieveObject) {
+            Neuca.Crm.CustomForms.Alert.showError(message);
+        },
+        showServiceErrorWithResponseText: function (status, responseText) {
+            if (status == 500) {
+                var resp = JSON.parse(responseText);
+                if (resp.error != null && typeof resp.error !== 'undefined'
+                    && resp.error.message != null && typeof resp.error.message !== 'undefined') {
+                    Neuca.Crm.CustomForms.Alert.showError(resp.error.message.value, responseText);
+                }
+            } else {
+                Neuca.Crm.CustomForms.Alert.show(responseText);
+            }
+        }
+    },
+    Confirm: {
+        show: function (message, callback) {
+            if (message) {
+                message = message.replace(/\n/g, '<br />');
+            }
+            var args = { message: message };
+            var callbackInternal = callback || null;
+            if (callback) {
+                callbackInternal = function (isConfirmed) {
+                    window.top.setTimeout(function () {
+                        try {
+                            callback(isConfirmed);
+                        } catch (ex) {
+                            Neuca.Crm.CustomForms.Alert.show(ex);
+                        }
+                    }, 0);
+                };
+            }
+            Neuca.Crm.CustomForms.showWindow('$webresource:neu_/HTML/dialogs/neu_confirmwindow.htm', 500, 200, args, callbackInternal);
+        }
+    }
+};
+

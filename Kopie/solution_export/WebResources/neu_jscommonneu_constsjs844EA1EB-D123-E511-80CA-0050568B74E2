@@ -1,0 +1,3216 @@
+﻿if (typeof (Neuca) === "undefined") {
+    Neuca = {};
+}
+
+if (typeof (Neuca.Crm) === "undefined") {
+    Neuca.Crm = {};
+}
+
+if (typeof (Neuca.Crm.Consts) === "undefined") {
+    Neuca.Crm.Consts = {};
+}
+
+//Global OptionSets
+if (typeof (Neuca.Crm.Consts.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.OptionSets = {};
+}
+
+Neuca.Crm.Consts.OptionSets = {
+    WarehouseType: {
+        CENTRAL: 279660000,
+        LOCAL: 279660001
+    },
+
+    StatusType: {
+        AKTYWNY: 279660000,
+        NIEAKTYWNY: 279660001
+
+    },
+
+    AccountType: {
+        CLIENT: 279660000,
+        PAYER: 279660001,
+        DELIVERY_POINT: 279660002
+    },
+
+    Country: {
+        POLAND: 279660159
+    },
+
+    DeliveryPointType: {
+        PU: 279660018,
+        AP: 279660025,
+        SZ: 279660021
+    },
+
+    YesNoDontKnow: {
+        YES: 279660000,
+        NO: 279660001,
+        DONTKNOW: 279660002
+    },
+
+    ChannelType: {
+        EMAIL: 279660000,
+        PHONE: 279660001,
+        MAIL: 279660002,
+        MOBILE: 279660003,
+        FAX: 279660004,
+        FARMADA: 279660005,
+        COURIER: 279660006
+    },
+
+    MarketingProgramType: {
+        BENEFITS_FROM_NOVELTIES: 279660000,
+        MY_HEALTH: 279660001,
+        PROFIT_PLUS: 279660002,
+        NUMERICAL_DISTRIBUTION: 279660003,
+        PARTNER_PLUS: 279660004,
+        PARTNER: 279660005,
+        WORLD_OF_HEALTH_PARTNER: 279660006,
+        REGIONAL_MARKETING_PROGRAMS: 279660007,
+        WORLD_OF_HEALTH: 279660008,
+        BENEFITS_FROM_DISTRIBUTION: 279660009
+    },
+
+    PharmacyProgram: {
+        DATAFARM: 279660000,
+        FARMA: 279660001,
+        KAMSOFT: 279660002,
+        PRONET: 279660003,
+        TRADIS: 279660004,
+        KAMSOFT_OSOZ_EDI: 279660015,
+        KAMSOFT_TXT: 279660014,
+        ABONET: 279660005
+    },
+
+    AccountStrings: {
+        CLIENT: "Klient",
+        PAYER: "Płatnik",
+        DELIVERY_POINT: "Punkt dostaw"
+    },
+
+    ElectronicOfferType: {
+        PR_CUSTOMER_PRICELIST_PLUS_PROMOTIONS: 279660000,
+        PW_CUSTOMER_PRICELIST_PLUS_PROMOTIONS_PLUS_CONTRACT_CONDITIONS: 279660001
+    },
+
+    FranchisePharmacyYesNo: {
+        YES: "1",
+        NO: "0"
+    },
+
+    WarehouseOwnedPharmacyYesNo: {
+        YES: "1",
+        NO: "0"
+    },
+
+    RoundTheClockYesNo: {
+        YES: "1",
+        NO: "0"
+    },
+
+    NetPurchasePotentialValues: {
+        OVER_800: 279660020
+    },
+
+    YesNoNoInformation: {
+        YES: 279660000,
+        NO: 279660001,
+        NO_INFORMATION: 279660002
+    },
+
+    ProfitPlusVariant: {
+        PROFITPPLUS_BENEFIT: 279660000,
+        PROFITPPLUS_WITHOUT_BENEFIT: 279660001,
+        PROFITPPLUS_PREMIUM_BENEFIT: 279660002,
+        PROFITPPLUS_PREMIUM_WITHOUT_BENEFIT: 279660003,
+        NONE: 279660004
+    },
+
+    CargoReturnApproved: {
+        NO: 279660000,
+        YES: 279660001
+    },
+
+    RemovalServiceTerms: {
+        STANDARD: 279660000,
+        OTHER: 279660001
+    },
+
+    EinvoiceRange: {
+        ALL_PAYER_DELIVERY_POINTS: 279660000,
+        SELECTED_PAYER_DELIVERY_POINTS: 279660001
+    },
+
+    MedicineAndCorrectionInvoiceFormat: {
+        NO_FORMAT: 279660000,
+        PDF: 279660001,
+        XML: 279660003,
+        PDR: 279660002
+    },
+
+    EFusFormat: {
+        NO_FORMAT: 279660000,
+        PDF: 279660001
+    }
+};
+
+//FormKze-DeliveryPoint
+if (typeof (Neuca.Crm.Consts.NeuProcFormKzeDeliveryPoint) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormKzeDeliveryPoint = {
+        LogicalName: "neu_proc_formkzedeliverypoint",
+        DisplayName: "Wniosek KZE - Punkt dostaw"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormKzeDeliveryPoint.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormKzeDeliveryPoint.OptionSets = {};
+}
+
+Neuca.Crm.Consts.NeuProcFormKzeDeliveryPoint.Fields = {
+    ID: 'neu_proc_formkzedeliverypointid',
+    NAME: 'neu_name',
+    ACCOUNT: 'neu_accountid',
+    PHARMACY_PROGRAM: 'neu_pharmacyprogram',
+    PHARMACY_PROGRAM_LICENCE_NUMBER: 'neu_pharmacyprogramlicencenumber',
+    PARENT_FORM_KZE: 'neu_proc_formkzeid',
+    PHONE_ELECTRONIC_OFFER: 'neu_phoneelectronicoffer',
+    MOBILE_PHONE_ELECTRONIC_OFFER: 'neu_mobilephoneelectronicoffer',
+    EMAIL_ELECTRONIC_OFFER: 'neu_emailelectronicoffer'
+};
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormKzeDeliveryPoint.ErrorMessages) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormKzeDeliveryPoint.ErrorMessages = {
+        ERROR_PHARMACY_PROGRAM_LICENCE_NUMBER_IS_NOT_VALID: "Pole Numer licencji programu aptecznego powinno być 6-cyfrowe"
+    };
+}
+
+
+//FormKZE
+if (typeof (Neuca.Crm.Consts.ProcFormKZE) === "undefined") {
+    Neuca.Crm.Consts.ProcFormKZE = {
+        LogicalName: "neu_proc_formkze",
+        DisplayName: "Wniosek KZE"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.ProcFormKZE.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.ProcFormKZE.OptionSets = {};
+}
+
+Neuca.Crm.Consts.ProcFormKZE.Fields = {
+    NAME: 'neu_name',
+    ELECTRONIC_OFFER_TYPE: 'neu_electronicoffertype',
+    UMW_REBATE: 'neu_umwrebate',
+    AUTHOR: 'neu_author',
+    ACCOUNT: 'neu_accountid',
+    SALES_REPRESENTATION: 'neu_conf_salesrepresentationid',
+    ID: 'neu_proc_formkzeid',
+    ID_SCHEMA: 'neu_proc_formkzeId'
+};
+
+//NeuReqMovePayer
+if (typeof (Neuca.Crm.Consts.NeuReqMovePayer) === "undefined") {
+    Neuca.Crm.Consts.NeuReqMovePayer = {
+        LogicalName: "neu_req_movepayer",
+        DisplayName: "Przenieś płatnika"
+    };
+}
+
+//NeuReqUpdateDeliveryPoint
+if (typeof (Neuca.Crm.Consts.NeuReqUpdateDeliveryPoint) === "undefined") {
+    Neuca.Crm.Consts.NeuReqUpdateDeliveryPoint = {
+        LogicalName: "neu_req_updatedeliverypoint",
+        DisplayName: "Akualizacja punktu dostaw"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuReqUpdateDeliveryPoint.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuReqUpdateDeliveryPoint.OptionSets = {};
+}
+
+Neuca.Crm.Consts.NeuReqUpdateDeliveryPoint.Fields = {
+    NAME: 'neu_name',
+    DELIVERY_POINT_ID: 'neu_deliverypointid',
+    IS_UPDATE_PREFERRED_DELIVERY_HOURS: 'neu_isupdatepreferreddeliveryhours_bool',
+    IS_ROUND_THE_CLOCK: "neu_isroundtheclock_bool",
+    NET_PURCHASE_POTENTIAL_INTERVAL_DELIVERY_POINT: "neu_netpurchasepotentialintervaldeliverypoint",
+    IS_VALUE_NET_PURCHASE_POTENTIAL_ON_DP: "neu_isvaluenetpurchasepotentialondp_bool",
+    NET_PURCHASE_POTENTIAL_ON_DELIVERY_POINT: "neu_netpurchasepotentialondeliverypoint",
+    PREFERRED_DELIVERY_HOURS_AM: "neu_preferreddeliveryhoursam",
+    PREFERRED_DELIVERY_HOURS_PM: "neu_preferreddeliveryhourspm",
+    MOTIVATION_SYSTEM: "neu_ismotivationsystem_bool",
+    MOTIVATION_SYSTEM_TYPE_ACTIVE_RECOMMENDATION: "neu_ismotivationsystypeactiverecommendat_bool",
+    MOTIVATION_SYSTEM_TYPE_SWITCH: "neu_ismotivationsystemtypeswitch_bool",
+    MOTIVATION_SYSTEM_TYPE_RX_CHEAP_REPLACEMENT: "neu_ismotivationsystemtyperxcheapreplace_bool",
+    MOTIVATION_SYSTEM_TYPE_UPSELL_PRODUCT: "neu_ismotivationsystemtypeupsellproduct_bool",
+    MOTIVATION_SYSTEM_TYPE_SALE_KDW: "neu_ismotivationsystemtypesalekdw_bool",
+    MOTIVATION_SYSTEM_TYPE_GOALS_WORK: "neu_ismotivationsystemtypegoalswork_bool",
+    MOTIVATION_SYSTEM_TYPE_PATIENT_INTERVIEW: "neu_ismotivationsystemtypepatientintervi_bool",
+    OPEN_WORKING_HOUR_TO: 'neu_openworkinghourto',
+    OPEN_WORKING_HOUR_FROM: 'neu_openworkinghourfrom',
+    OPEN_SUNDAY_HOUR_TO: 'neu_opensundayhourto',
+    OPEN_SUNDAY_HOUR_FROM: 'neu_opensundayhourfrom',
+    OPEN_SATURDAY_HOUR_FROM: 'neu_opensaturdayhourfrom',
+    OPEN_SATURDAY_HOUR_TO: 'neu_opensaturdayhourto',
+    FRANCHISE_NAME: "neu_franchisename",
+    IS_FRANCHISE_PHARMACY: "neu_isfranchisepharmacy_bool",
+    REGON14: "neu_regon14"
+};
+
+Neuca.Crm.Consts.NeuReqUpdateDeliveryPoint.Labels = {
+    OPEN_WORKING_HOUR_TO: 'Godziny otwarcia - dni robocze (do)',//neu_openworkinghourto
+    OPEN_WORKING_HOUR_FROM: 'Godziny otwarcia - dni robocze (od)', //neu_openworkinghourfrom
+    OPEN_SUNDAY_HOUR_TO: 'Godziny otwarcia - niedziela (do)', //neu_opensundayhourto
+    OPEN_SUNDAY_HOUR_FROM: 'Godziny otwarcia - niedziela (od)', //neu_opensundayhourfrom
+    OPEN_SATURDAY_HOUR_FROM: 'Godziny otwarcia - sobota (od)', //neu_opensaturdayhourfrom
+    OPEN_SATURDAY_HOUR_TO: 'Godziny otwarcia - sobota (do)', //neu_opensaturdayhourto
+    PREFERRED_DELIVERY_HOURS_AM: 'Preferowana godzina dostaw (poranna)',
+    PREFERRED_DELIVERY_HOURS_PM: 'Preferowana godzina dostaw (popołudniowa)'
+};
+
+if (typeof (Neuca.Crm.Consts.NeuReqUpdateDeliveryPoint.ErrorMessages) === "undefined") {
+    Neuca.Crm.Consts.NeuReqUpdateDeliveryPoint.ErrorMessages = {
+        ERROR_REGON14_IS_NOT_VALID: "Pole Regon 14 powinno być 14-cyfrowe"
+    };
+};
+
+//NeuReqUpdateSalesRelation
+if (typeof (Neuca.Crm.Consts.NeuReqUpdateSalesRelation) === "undefined") {
+    Neuca.Crm.Consts.NeuReqUpdateSalesRelation = {
+        LogicalName: "neu_req_updatesalesrelation",
+        DisplayName: "Akualizacja relacji handlowej"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuReqUpdateSalesRelation.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuReqUpdateSalesRelation.OptionSets = {};
+}
+
+Neuca.Crm.Consts.NeuReqUpdateSalesRelation.Fields = {
+    NAME: 'neu_name',
+    SALESRELATION_ID: 'neu_salesrelationid',
+    IS_DEFAULT_FORM: 'neu_isdefaultform',
+    IS_RH_FORM: 'neu_isrhform'
+};
+
+//NeuReqChangeSalesMarket
+if (typeof (Neuca.Crm.Consts.NeuReqChangeSalesMarket) === "undefined") {
+    Neuca.Crm.Consts.NeuReqChangeSalesMarket = {
+        LogicalName: "neu_req_changesalesmarket",
+        DisplayName: "Zmien rynek sprzedaży"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuReqChangeSalesMarket.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuReqChangeSalesMarket.OptionSets = {};
+}
+
+Neuca.Crm.Consts.NeuReqChangeSalesMarket.Fields = {
+    NAME: 'neu_name',
+    TARGET_SALES_MARKET: 'neu_targetsalesmarketid',
+    TARGET_SALES_OFFICE: 'neu_targetsalesofficeid'
+};
+
+//ContactArea
+if (typeof (Neuca.Crm.Consts.ContactArea) === "undefined") {
+    Neuca.Crm.Consts.ContactArea = {
+        LogicalName: "neu_contactarea",
+        DisplayName: "Obszar kontaktu"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.ContactArea.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.ContactArea.OptionSets = {};
+}
+
+Neuca.Crm.Consts.ContactArea.ErrorMesssages = {
+    ERROR_CONTACT_AREA_TYPE_DOES_NOT_MEET_RELATED_AREA_CONDITIONS: "Pole 'Typ obszaru kontaktu' nie spełnia warunków zdefiniowanych przez pole 'Dotyczy obszaru'."
+};
+
+Neuca.Crm.Consts.ContactArea.OptionSets.RelatedArea = {
+    CLIENT: 279660000,
+    PAYER: 279660001,
+    DELIVERY_POINT: 279660002,
+    PURCHASE_GROUP: 279660003
+};
+
+Neuca.Crm.Consts.ContactArea.OptionSets.PreferredChannel = {
+    MAIL: 279660002,
+    FAX: 279660004,
+    FARMADA: 279660005,
+    COURIER: 279660006
+};
+
+Neuca.Crm.Consts.ContactArea.Fields = {
+    NAME: 'neu_name',
+    CONTACT_AREA_TYPE: 'neu_conf_contactareatypeid',
+    RELATED_AREA: 'neu_relatedarea',
+    ACCOUNT: 'neu_accountid',
+    PURCHASE_GROUP: "neu_purchasegroupid",
+    PREFERRED_CHANNEL: "neu_preferredchannel",
+    CONTACT: "neu_contactid",
+    MARKETING_RESEARCH: "neu_ismarketingresearch",
+    INVOICE: "neu_isinvoice",
+    DEBT_COLLECTION: "neu_isdebtcollection",
+    PAYMENTS: "neu_ispayments",
+    TRADE_OFFER: "neu_istradeoffer",
+    COMPLAINT: "neu_iscomplaint",
+    AGREEMENT: "neu_isagreement",
+    PRODUCT_REPROCESSING: "neu_isproductreprocessing",
+    PRODUCT_WITHDRAWAL: "neu_isproductwithdrawal",
+    ORDER_AND_SUPPORT: "neu_isordersandsupport",
+    MARKETING_PROGRAMME: "neu_ismarketingprogramme",
+    PHARMACY_PROGRAMME_CONFIGURATION: "neu_ispharmacyprogrammeconfiguration",
+    PURCHASE_GROUP_COORDINATOR: "neu_ispurchasegroupcoordinator",
+    DEFICITS: "neu_isdeficits",
+    CONTRACTS: "neu_iscontracts"
+};
+
+//ConfContactAreaType
+if (typeof (Neuca.Crm.Consts.ConfContactAreaType) === "undefined") {
+    Neuca.Crm.Consts.ConfContactAreaType = {
+        LogicalName: "neu_conf_contactareatype"
+    };
+}
+
+Neuca.Crm.Consts.ConfContactAreaType.Fields = {
+    ID: 'neu_conf_contactareatypeid',
+    NAME: 'neu_name',
+    PAYER_RELATED: 'neu_payerrelated',
+    CLIENT_RELATED: 'neu_clientrelated',
+    DELIVERY_POINT_RELATED: 'neu_deliverypointrelated',
+    PURCHASE_GROUP_RELATED: 'neu_purchasegrouprelated'
+};
+
+//NeuBankAccount
+if (typeof (Neuca.Crm.Consts.NeuBankAccount) === "undefined") {
+    Neuca.Crm.Consts.NeuBankAccount = {
+        LogicalName: "neu_bankaccount"
+    };
+}
+
+Neuca.Crm.Consts.NeuBankAccount.Fields = {
+    ACCOUNT_ID: 'neu_accountid',
+    BANK_ACCOUNT_NUMBER: 'neu_bankaccountnumber'
+};
+
+//PurchaseGroup
+if (typeof (Neuca.Crm.Consts.NeuPurchaseGroup) === "undefined") {
+    Neuca.Crm.Consts.NeuPurchaseGroup = {
+        LogicalName: "neu_purchasegroup"
+    };
+}
+
+Neuca.Crm.Consts.NeuPurchaseGroup.ErrorMessages = {
+    ERROR_SAP_CODE_IS_NOT_VALID: 'Podany Kod SAP nie jest poprawny'
+};
+
+Neuca.Crm.Consts.NeuPurchaseGroup.Fields = {
+    NAME: 'neu_name',
+    SAP_CODE: 'neu_sapcode',
+    GK_NEUCA_PURCHASE_GROUP_GUARDIAN_ID: 'neu_gkneucapurchasegroupguardianid'
+};
+
+//NeuConnectedTurnoverGroup
+if (typeof (Neuca.Crm.Consts.NeuConnectedTurnoverGroup) === "undefined") {
+    Neuca.Crm.Consts.NeuConnectedTurnoverGroup = {
+        LogicalName: "neu_connectedturnovergroup"
+    };
+}
+
+
+Neuca.Crm.Consts.NeuConnectedTurnoverGroup.Fields = {
+    ID: 'neu_connectedturnovergroupid',
+    NAME: 'neu_name',
+    SALES_REPRESENTATION_ID: 'neu_conf_salesrepresentationid',
+    BUSINESS_CONNECTION_ID: 'neu_businessconnectionid',
+    DAY_COUNTER: 'neu_daycounter'
+};
+
+//NeuConnectedTurnoverGroupSalesrelation
+if (typeof (Neuca.Crm.Consts.NeuConnectedTurnoverGroupSalesrelation) === "undefined") {
+    Neuca.Crm.Consts.NeuConnectedTurnoverGroupSalesrelation = {
+        LogicalName: "neu_connectedturnovergroupsalesrelation"
+    };
+}
+
+
+Neuca.Crm.Consts.NeuConnectedTurnoverGroupSalesrelation.Fields = {
+    ID: 'neu_connectedturnovergroupsalesrelationid',
+    NAME: 'neu_name',
+    CONNECTED_TURNOVER_GROUP_ID: 'neu_connectedturnovergroupid',
+    SALES_RELATION_ID: 'neu_salesrelationid',
+    CONNECTION_GROUP_DATE: 'neu_connectiongroupdate',
+    DISCONNECTION_GROUP_DATE: 'neu_disconnectiongroupdate'
+};
+
+//Team
+if (typeof (Neuca.Crm.Consts.Team) === "undefined") {
+    Neuca.Crm.Consts.Team = {
+        LogicalName: "team"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.Team.OptionSets) === 'undefined') {
+    Neuca.Crm.Consts.Team.OptionSets = {};
+}
+
+Neuca.Crm.Consts.Team.Fields = {
+    TEAM_TYPE: 'neu_teamtype'
+};
+
+Neuca.Crm.Consts.Team.OptionSets.TeamType = {
+    TELEMARKETERS_GROUP: 279660000,
+    PROCESSED: 279660001
+};
+
+
+//ConfWarehouse
+if (typeof (Neuca.Crm.Consts.ConfWarehouse) === "undefined") {
+    Neuca.Crm.Consts.ConfWarehouse = {
+        LogicalName: "neu_conf_warehouse"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.ConfWarehouse.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.ConfWarehouse.OptionSets = {};
+}
+
+Neuca.Crm.Consts.ConfWarehouse.Fields = {
+    ID: 'neu_conf_warehouseid',
+    CENTRAL_WAREHOUSE: 'neu_centralwarehouseid',
+    WAREHOUSE_TYPE: 'neu_warehousetype',
+    NAME: 'neu_name'
+};
+
+Neuca.Crm.Consts.ConfWarehouse.OptionSets.WarehouseType = Neuca.Crm.Consts.OptionSets.WarehouseType;
+
+//Account
+if (typeof (Neuca.Crm.Consts.Account) === "undefined") {
+    Neuca.Crm.Consts.Account = {
+        LogicalName: "account",
+        SchemaName: "Account"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.Account.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.Account.OptionSets = {};
+}
+
+Neuca.Crm.Consts.Account.ErrorMessages = {
+    ERROR_ACCOUNT_TYPE_DOES_NOT_MEET_RELATED_PARENT_ACCOUNT_TYPE: "Błędna próba powiazania kontrahentów nieodpowiednich typów",
+    ERROR_NIP_IS_NOT_VALID: 'Podany NIP nie jest poprawny',
+    ERROR_KRS_IS_NOT_VALID: 'Podany KRS nie jest poprawny',
+    ERROR_REGON_IS_NOT_VALID: 'Podany REGON nie jest poprawny',
+    ERROR_SAP_CODE_IS_NOT_VALID: 'Podany Kod SAP nie jest poprawny',
+    ERROR_HOUR_IS_IN_WRONG_FORMAT: 'Podany format godziny jest nieprawidłowy. Prawidłowy format to "gg:mm"',
+    ERROR_HOURS_WRONG_RANGE: 'niepoprawne zakresy godzin',
+    ERROR_INCORRECT_POTENTIAL_VALUE: 'różnica pomiędzy wartościami nie może być większa niż 30%',
+    ERROR_ERROR_ON_HOURS: 'Podane godziny są błędne',
+    ERROR_PHARMACY_PROGRAM_LICENCE_NUMBER_IS_NOT_VALID: "Pole Numer licencji programu aptecznego powinno być 6-cyfrowe",
+    ERROR_REGON14_IS_NOT_VALID: "Pole Regon 14 powinno być 14-cyfrowe"
+};
+
+Neuca.Crm.Consts.Account.Labels = {
+    OPEN_WORKING_HOUR_TO: 'Godziny otwarcia - dni robocze (do)',//neu_openworkinghourto
+    OPEN_WORKING_HOUR_FROM: 'Godziny otwarcia - dni robocze (od)', //neu_openworkinghourfrom
+    OPEN_SUNDAY_HOUR_TO: 'Godziny otwarcia - niedziela (do)', //neu_opensundayhourto
+    OPEN_SUNDAY_HOUR_FROM: 'Godziny otwarcia - niedziela (od)', //neu_opensundayhourfrom
+    OPEN_SATURDAY_HOUR_FROM: 'Godziny otwarcia - sobota (od)', //neu_opensaturdayhourfrom
+    OPEN_SATURDAY_HOUR_TO: 'Godziny otwarcia - sobota (do)', //neu_opensaturdayhourto
+    PREFERRED_DELIVERY_HOURS_AM: 'Preferowana godzina dostaw (poranna)',
+    PREFERRED_DELIVERY_HOURS_PM: 'Preferowana godzina dostaw (popołudniowa)'
+};
+
+
+Neuca.Crm.Consts.Account.Fields = {
+    NAME: "name",
+    NAME_SCHEMA: "Name",
+    ACCOUNT_TYPE: "neu_accounttype",
+    CUSTOMER_DELIVERY_POINT_ID: "neu_accountid",
+    IS_CLIENT_CENTRAL: "neu_isclientcentral",
+    //DELIVERY_POINT_TYPE: "neu_deliverypointtype",
+    KWA_ID: "neu_kwaid",
+    PHARMACEUTICAL_TYPE_ID: "neu_conf_pharmaceuticaltypeid",
+    BUSINESS_TYPE_ID: 'neu_conf_businesstypeid',
+    PARENT_ACCOUNT_ID: "parentaccountid",
+    PARENT_ACCOUNT_ID_SCHEMA: "ParentAccountId",
+    ID: "accountid",
+    IS_EXISTING_ON_MARKET: "neu_isexists",
+    STATUS_TYPE: "neu_status",
+    ACCOUNT_TYPE_ON_HEADER: "neu_accounttypeonribbon",
+    MOTIVATION_SYSTEM: "neu_ismotivationsystem",
+    MOTIVATION_SYSTEM_TYPE_ACTIVE_RECOMMENDATION: "neu_ismotivationsystypeactiverecommendation",
+    MOTIVATION_SYSTEM_TYPE_SWITCH: "neu_ismotivationsystemtypeswitch",
+    MOTIVATION_SYSTEM_TYPE_RX_CHEAP_REPLACEMENT: "neu_ismotivationsystemtyperxcheapreplacement",
+    MOTIVATION_SYSTEM_TYPE_UPSELL_PRODUCT: "neu_ismotivationsystemtypeupsellproduct",
+    MOTIVATION_SYSTEM_TYPE_SALE_KDW: "neu_ismotivationsystemtypesalekdw",
+    MOTIVATION_SYSTEM_TYPE_GOALS_WORK: "neu_ismotivationsystemtypegoalswork",
+    MOTIVATION_SYSTEM_TYPE_PATIENT_INTERVIEW: "neu_ismotivationsystemtypepatientinterview",
+    PLACERIGHTS: "neu_placerights",
+    NIP: 'neu_nip',
+    CUSTOMER_ID: 'neu_customerid',
+    SALES_REGION_ID: 'neu_conf_salesregionid',
+    PREFERRED_DELIVERY_HOURS_AM: "neu_preferreddeliveryhoursam",
+    PREFERRED_DELIVERY_HOURS_PM: "neu_preferreddeliveryhourspm",
+    IS_LOTUS: 'neu_islotus',
+    PAYER_ORDER_POINTS_NUMBER: 'neu_payerorderpointsnumber',
+    REGON: 'neu_regon',
+    KRS: 'neu_krs',
+    SAP_CODE: 'neu_sapcode',
+    AZ_CODE: 'neu_azcode',
+    IMS_AREA_ID: 'neu_imsareaid',
+    ADDRESS1_COUNTY: 'neu_address1_county',
+    ADDRESS1_PROVINCE: 'neu_address1_province',
+    ADDRESS1_POSTALCODE: 'neu_address1_postalcode',
+    SALES_OFFICE: 'neu_salesofficeid',
+    SALES_MARKET: 'neu_salesmarketid',
+    PRIMARY_SEGMENT: 'neu_primarysegmentid',
+    OPEN_WORKING_HOUR_TO: 'neu_openworkinghourto',
+    OPEN_WORKING_HOUR_FROM: 'neu_openworkinghourfrom',
+    OPEN_SUNDAY_HOUR_TO: 'neu_opensundayhourto',
+    OPEN_SUNDAY_HOUR_FROM: 'neu_opensundayhourfrom',
+    OPEN_SATURDAY_HOUR_FROM: 'neu_opensaturdayhourfrom',
+    OPEN_SATURDAY_HOUR_TO: 'neu_opensaturdayhourto',
+    IS_FOREIGN_RECIPIENT: 'neu_isforeignrecipient',
+    CODE: 'neu_code',
+    IS_MANUAL_UPDATE_MAIN_SALES_OFFCIE: 'neu_ismanualupdatemainsalesoffice',
+    IS_BUSINESS_CONNECTION: 'neu_isbusinessconnection',
+    BUSINESS_CONNECTION_SAP_CODE: 'neu_businessconnectionsapcode',
+    BUSINESS_CONNECTION_MANAGER_ID: 'neu_businessconnectionmanagerid',
+    SHORT_NAME: 'neu_shortname',
+    IS_CENTRAL_CHAIN: 'neu_iscentralchain',
+    IS_CONNECTION_CHARACTERISTIC_COMMON_MARKETING: 'neu_isconnectioncharacteristiccommonmarketing',
+    MARKETING_MEDIA_LEAFLETS: 'neu_ismarketingmedialeaflets',
+    MARKETING_MEDIA_NEWSPAPER: 'neu_marketingmedianewspaper',
+    MARKETING_MEDIA_OWN_OUT_DOOR_AD: 'neu_marketingmediaownoutdoorad',
+    MARKETING_MEDIA_PRESS_AD: 'neu_marketingmediapressad',
+    MARKETING_MEDIA_RADIO_AD: 'neu_marketingmediaradioad',
+    MARKETING_MEDIA_TELEVISION_AD: 'neu_marketingmediatelevisionad',
+    MAIN_SALES_MARKET: 'neu_mainsalesmarketid',
+    MAIN_SALES_OFFICE: 'neu_mainsalesofficeid',
+    MAIN_PRIMARY_SEGMENT: 'neu_mainprimarysegmentid',
+    TERRITORIAL_OFFICE: 'neu_territorialofficeid',
+    FINANCIAL_DOCUMENTATION_AVAILABLE: 'neu_isfinancialdocumentationavailable',
+    INITIAL_CAPITAL: 'neu_initialcapital',
+    PROFITABILITY_RATE: 'neu_profitabilityrate',
+    COMMITMENT_ROTATION_RATE: 'neu_commitmentrotationrate',
+    CONNECTION_CHARACTERISTIC_COMMON_NAME: 'neu_isconnectioncharacteristiccommonname',
+    CONNECTION_COMMON_NAME_PHARMACY: 'neu_connectioncommonnamepharmacy',
+    PREVIOUS_SAP_CODE: 'neu_previoussapcode',
+    SPECIALIZATION: "neu_specialization",
+    MAIN_PARTNERSHIP: "neu_mainpartnershipid",
+    MAIN_PARTNERSHIP_RH: "neu_mainpartnershiprhid",
+    IS_VALUE_NETPURCHASEPOTENTIAL_ON_CLIENT: "neu_isvaluenetpurchasepotentialonclient",
+    OKSN_1_ID: "neu_oksn1id",
+    OKSN_2_ID: "neu_oksn2id",
+    IS_FRANCHISE_PHARMACY: "neu_isfranchisepharmacy",
+    FRANCHISE_NAME: "neu_franchisename",
+    WAREHOUSE_OWNED_PHARMACY: "neu_warehouseownedpahrmacy",
+    WAREHOUSE_NAME: "neu_warehousename",
+    FULL_NAME: "neu_fullname",
+    KSEWD_VERSION: "neu_ksewdversion",
+    NET_PURCHASE_POTENTIAL_FROM_ON_CLIENT: "neu_netpurchasepotentialfromonclient",
+    NET_PURCHASE_POTENTIAL_TO_ON_CLIENT: "neu_netpurchasepotentialtoonclient",
+    NET_PURCHASE_POTENTIAL_ON_CLIENT: "neu_netpurchasepotentialonclient",
+    MAIN_SALES_OFFICE_WITHOUT_PRETIUM: "neu_mainsalesofficewithoutpretiumid",
+    MAIN_SALES_REPRESENTANT: "neu_mainsalesrepresentantid",
+    MAIN_SALES_REPRESENTANT_WITHOUT_PRETIUM: "neu_mainsalesrepresentantwithoutpretiumid",
+    ORDER_POINTS_NUMBER: "neu_orderpointsnumber",
+    IS_ROUND_THE_CLOCK: "neu_isroundtheclock",
+    NET_PURCHASE_POTENTIAL_VALUE: "neu_netpurchasepotentialvalue",
+    NET_PURCHASE_POTENTIAL: "neu_netpurchasepotential",
+    IS_PROFITPLUS_RECOMMENDED: "neu_isrecommendedtozyskplus",
+    LOYALITY: "neu_loyalty",
+    STRATEGIC_SEGMENT: "neu_strategicsegment",
+    NET_PURCHASE_POTENTIAL_INTERVAL_DELIVERY_POINT: "neu_netpurchasepotentialintervaldeliverypoint",
+    IS_VALUE_NET_PURCHASE_POTENTIAL_ON_DP: "neu_isvaluenetpurchasepotentialondp",
+    NET_PURCHASE_POTENTIAL_ON_DELIVERY_POINT: "neu_netpurchasepotentialondeliverypoint",
+    REGON14: "neu_regon14",
+    REGON: "neu_regon",
+    REGISTER_BOOK: "neu_registerbook",
+    COUNTRY: "neu_conf_countryid",
+
+    //AP PU
+    //GIF
+    GIF_CODE: "neu_gifcode",
+    GIF_DECISION_NUMBER: "neu_gifdecisionnumber",
+    PERMIT_WITH_DRAWALDATE: "neu_permitwithdrawaldate",
+
+    //Wskazniki
+    OTC_DRUGS_PERCENTAGE: "neu_otcdrugspercentage",
+    REFUND_DRUGS_PERCENTAGE: "neu_refunddrugspercentage",
+    CONTRACTED_DRUGS_PERCENTAGE: "neu_contracteddrugspercentage",
+    DEPARTAMENT_PERCENTAGE: "neu_departmentpercentage",
+
+    //Zezwolenia
+    PERMISSION_DATE: "neu_permissiondate",
+    EXPIRED_PERMISSION_DATE: "neu_expiredpermissiondate",
+
+    // CHARACTERISTIC
+    CONNECTION_CHARACTERISTIC_FAMILY: "neu_isconnectioncharacteristicfamily",
+    CONNECTION_CHARACTERISTIC_FRANCHISE_AGGREMENT: "neu_isconnectioncharacteristicfranchiseagreem",
+    CONNECTION_CHARACTERISTIC_OWNERSHIP: "neu_isconnectioncharacteristicownership",
+    CONNECTION_CHARACTERISTIC_OTHER: "neu_connectioncharacteristicother",
+    ONLINE_PHARMACY: "neu_isonlinepharmacy",
+    INCENTIVE_SYSTEM_FOR_TABLE: "neu_isincentivesystemfortable",
+    CONNECTION_CHARACTERISTIC_COMMON_PROMOTIONS: "neu_isconnectioncharacteristicpromotions",
+    SHARING_PRODUCER_ORDERS: "neu_issharingproducerorders",
+    CONNECTION_CHARACTERISTIC_COMMON_NEGOTIATIONS: "neu_isconnectioncharacteristicnegotiation",
+    CONNECTION_CHARACTERISTIC_COMMON_VISUALISATION: "neu_isconnectioncharacteristicvisualization",
+    IS_CHARACTERISTIC_SHARE_PRODUCER_ORDERS: "neu_ischaracteristicshareproducerorders",
+    PROMOTIONS_FOR_PATIENT: "neu_ispromotionsforpatient",
+    NEWSLETTER_FOR_PATIENT: "neu_isnewsletterforthepatient",
+    CATEGORIZATION: "neu_iscategorization",
+    MERCHENDISING: "neu_ismerchendising",
+    ADVERTISING: "neu_isadvertising",
+
+    //Delivery point details
+    // PERMISSION_DATE: 'neu_permissiondate',
+    PERMISSION_NUMBER: 'neu_permissionnumber',
+    PHARMACY_PROGRAM: 'neu_pharmacyprogram',
+    PHARMACY_PROGRAM_LICENCE_NUMBER: 'neu_pharmacyprogramlicencenumber',
+
+    IS_SHOW_PREFERENCES: 'neu_isshowpreferences',
+
+    //Telemarketing
+    IS_TELEMARKETING_INDIVIDUAL_SERVICE_PREF: 'neu_istelemarketingindividualservicepref',
+    IS_ELECTRONIC_ORDERS_CONFIRMATION_PREFERENCES: 'neu_iselectronicordersconfirmationpreferences',
+    IS_PRODUCER_ORDER_CONFIRMATION_PREFERENCES: 'neu_isproducerorderconfirmationpreferences',
+
+    //Transport
+    IS_CONTACT_LESS_DELIVERY_PREFERENCES: 'neu_iscontactlessdeliverypreferences',
+    IS_TRANSPORT_SERVICE_SATURDAY_AM_PREFERENCES: 'neu_istransportservicesaturdayampreferences',
+    IS_TRANSPORT_SERVICE_SATURDAY_PM_PREFERENCES: 'neu_istransportservicesaturdaypmpreferences',
+    IS_TRANSPORT_SERVICE_SUNDAY_PREFERENCES: 'neu_istransportservicesundaypreferences',
+    DAILY_DELIVERIES_NUMBER_PREFERENCES: 'neu_dailydeliveriesnumberpreferences',
+
+    //Logistics
+    METHOD_OF_PACKAGING_PREFERENCES: 'neu_methodofpackagingpreferences',
+    METHOD_TO_PLACE_THE_PREPARATIONS_PACK_PREFERENC: 'neu_methodtoplacethepreparationspackpref',
+
+    //Payer details
+    LEGAL_FORM: 'neu_legalform',
+
+    //E-invoice
+    EINVOICE_RANGE: 'neu_einvoicerange',
+    EINVOICE_FORMAT: 'neu_medicineandcorrectioninvoiceformat',
+    EFUS_FORMAT: 'neu_efusformat'
+
+};
+
+//Address
+if (typeof (Neuca.Crm.Consts.Address) === "undefined") {
+    Neuca.Crm.Consts.Address = {
+        LogicalName: "neu_address"
+    };
+}
+
+Neuca.Crm.Consts.Address.Fields = {
+    ID: "neu_addressid",
+    LOCALITY_ID: 'neu_conf_localityid',
+    POSTAL_CODE: 'neu_conf_postalcodeid',
+    NAME: 'neu_name',
+    COUNTRY: 'neu_country',
+    ACCOUNT: 'neu_accountid',
+    DATA_OUTSIDE_DICTIONARY: 'neu_manualenteredaddress',
+    STREET_ID: 'neu_streetid',
+    ADDRESSLINE1: 'neu_addressline1',
+    ADDRESSLINE2: 'neu_addressline2',
+    ADDRESSLINE3: 'neu_addressline3',
+    POSTAL_CODE_ID: 'neu_conf_postalcodeid',
+    IS_CENTRAL_TYPE: 'neu_iscentraltype'
+};
+
+//ConfLocality
+if (typeof (Neuca.Crm.Consts.ConfLocality) === "undefined") {
+    Neuca.Crm.Consts.ConfLocality = {
+        LogicalName: "neu_conf_locality"
+    };
+}
+
+Neuca.Crm.Consts.ConfLocality.Fields = {
+    ID: 'neu_conf_localityid',
+    NAME: 'neu_name',
+    COMMUNITY: 'neu_community',
+    COUNTY: 'neu_county',
+    PROVINCE: 'neu_province'
+};
+
+//ConfPostalcode
+if (typeof (Neuca.Crm.Consts.ConfPostalcode) === "undefined") {
+    Neuca.Crm.Consts.ConfPostalcode = {
+        LogicalName: "neu_conf_postalcode"
+    };
+}
+
+Neuca.Crm.Consts.ConfPostalcode.Fields = {
+    ID: "neu_conf_postalcodeid",
+    NAME: 'neu_name'
+};
+
+//ConfPostalcodeLocality
+if (typeof (Neuca.Crm.Consts.ConfPostalcodeLocality) === "undefined") {
+    Neuca.Crm.Consts.ConfPostalcodeLocality = {
+        LogicalName: "neu_conf_postalcodelocality"
+    };
+}
+
+Neuca.Crm.Consts.ConfPostalcodeLocality.Fields = {
+    ID: "neu_conf_postalcodelocalityid",
+    NAME: 'neu_name',
+    POSTAL_CODE: "neu_conf_postalcodeid",
+    LOCALITY: "neu_conf_localityid"
+};
+
+//BusinessConnection
+if (typeof (Neuca.Crm.Consts.BusinessConnection) === "undefined") {
+    Neuca.Crm.Consts.BusinessConnection = {
+        LogicalName: "neu_businessconnection"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.BusinessConnection.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.BusinessConnection.OptionSets = {};
+}
+
+Neuca.Crm.Consts.BusinessConnection.Fields = {
+    BUSINESS_CONNECTION_MANAGER: 'neu_businessconnectionmanagerid',
+    IS_CENTRAL_CHAIN: 'neu_iscentralchain',
+    MARKETING: 'neu_marketing',
+    MARKETING_DETAILS: 'neu_marketingdetails'
+};
+
+//AccountCompetitor
+if (typeof (Neuca.Crm.Consts.AccountCompetitor) === "undefined") {
+    Neuca.Crm.Consts.AccountCompetitor = {
+        LogicalName: "neu_accountcompetitor"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.AccountCompetitor.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.AccountCompetitor.OptionSets = {};
+}
+
+Neuca.Crm.Consts.AccountCompetitor.Fields = {
+    ACCOUNT1: 'neu_account1id',
+    ACCOUNT2: 'neu_account2id'
+};
+
+//EmployeeRole
+if (typeof (Neuca.Crm.Consts.EmployeeRole) === "undefined") {
+    Neuca.Crm.Consts.EmployeeRole = {
+        LogicalName: "neu_employeerole"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.EmployeeRole.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.EmployeeRole.OptionSets = {};
+}
+
+Neuca.Crm.Consts.EmployeeRole.Fields = {
+    DISPATCHER_LOCATION: "neu_dispatcherlocation",
+    OPERATION_AREA: "neu_operationarea",
+    EMPLOYEE_ROLE_TYPE: "neu_employeeroletype",
+    SALES_OFFICE: "neu_conf_salesofficeid",
+    ID: 'neu_employeeroleid',
+    SYSTEM_USER: "neu_systemuserid"
+};
+
+Neuca.Crm.Consts.EmployeeRole.OptionSets.EmployeeRoleType = {
+    RH: 279660000,
+    OKSN: 279660001,
+    KAM: 279660002,
+    //DISPATCHER: 279660003,
+    KWA: 279660003
+};
+
+//AddressRole
+if (typeof (Neuca.Crm.Consts.AddressRole) === "undefined") {
+    Neuca.Crm.Consts.AddressRole = {
+        LogicalName: "neu_addressrole",
+        DisplayName: "Rola lokalizacji"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.AddressRole.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.AddressRole.OptionSets = {};
+}
+
+Neuca.Crm.Consts.AddressRole.ErrorMesssages = {
+    ERROR_ADDRESS_ROLE_TYPE_DOES_NOT_MEET_ACCOUNT_TYPE_CONDITIONS:
+        "Pole 'Typ roli lokalizacji' nie spełnia warunków zdefiniowanych przez pole 'Dotyczy'."
+};
+
+Neuca.Crm.Consts.AddressRole.OptionSets.AccountType = {
+    CLIENT: 279660000,
+    PAYER: 279660001,
+    DELIVERY_POINT: 279660002
+};
+
+Neuca.Crm.Consts.AddressRole.Fields = {
+    NAME: 'neu_name',
+    ADDRESS_ROLE_TYPE: 'neu_conf_addresroletypeid',
+    ACCOUNT_TYPE: 'neu_accounttype',
+    ACCOUNT: 'neu_accountid',
+    ID: 'neu_addressroleid',
+    ADDRESS: 'neu_addressid'
+};
+
+//BankAccount
+if (typeof (Neuca.Crm.Consts.BankAccount) === "undefined") {
+    Neuca.Crm.Consts.BankAccount = {
+        LogicalName: "neu_bankaccount",
+        DisplayName: "Rachunek bankowy"
+    };
+}
+
+Neuca.Crm.Consts.BankAccount.ErrorMesssages = {
+    ERROR_BANK_ACCOUNT: "Błędny numer rachunku bankowego"
+};
+
+if (typeof (Neuca.Crm.Consts.BankAccount.Fields) === "undefined") {
+    Neuca.Crm.Consts.BankAccount.Fields = {
+        ACCOUNT: "neu_accountid",
+        ACCOUNT_SCHEMA_NAME: "neu_accountid",
+        NAME: "neu_name",
+        BANK_ACCOUNT_NUMBER: "neu_bankaccountnumber",
+        MAIN_BANK_ACCOUNT: "neu_mainbankaccount"
+    };
+}
+
+
+//AddressRoleType
+if (typeof (Neuca.Crm.Consts.ConfAddressRoleType) === "undefined") {
+    Neuca.Crm.Consts.ConfAddressRoleType = {
+        LogicalName: "neu_conf_addressroletype"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.ConfAddressRoleType.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.ConfAddressRoleType.OptionSets = {};
+}
+
+Neuca.Crm.Consts.ConfAddressRoleType.Fields = {
+    CLIENT_RELATED: 'neu_clientrelated',
+    PAYER_RELATED: 'neu_payerrelated',
+    DELIVERY_POINT_RELATED: 'neu_deliverypointrelated',
+    ID: 'neu_conf_addressroletypeid',
+    NAME: 'neu_name'
+};
+
+//MarketingProgram
+if (typeof (Neuca.Crm.Consts.NeuMarketingProgram) === "undefined") {
+    Neuca.Crm.Consts.NeuMarketingProgram = {
+        LogicalName: "neu_marketingprogram"
+    };
+}
+
+Neuca.Crm.Consts.NeuMarketingProgram.Fields = {
+    MARKETING_PROGRAM_GROUP: 'neu_marketingprogramgroup',
+    MARKETING_PROGRAM_TYPE: 'neu_marketingprogramtype',
+    COMPETITOR_MARKETING_PROGRAM: 'neu_competitormarketprogram',
+    COMPETITOR_MARKETING_PROGRAM_OTHER: 'neu_competitormarketprogramother',
+    START_DATE: 'neu_startdate',
+    END_DATE: 'neu_enddate',
+    OPERATING_SALES_REPRESENTATION: 'neu_conf_operatingsalesrepresentationid',
+    SALES_REPRESENTATION: 'neu_conf_salesrepresentationid',
+    DAILY_ORDER_SYSTEM: 'neu_dailyordersystem',
+    SIGNED_AGREEMENT: 'neu_issignedagreement',
+    INSTALLED_COMMUNICATOR: 'neu_isinstalledcommunicator',
+    PROFITPLUSSIGNEDAGREEMENT: 'neu_isprofitplussignedagreement',
+    SIGNED_TRADE_AGREEMENT: 'neu_issignedtradeagreement',
+    STOCK_REPLENISHMENT_STARTED: 'neu_isstockreplenishmentstarted',
+    STOCK_REPLENISHMENT_ENDED: 'neu_isstockreplenishmentended',
+    MATCHING_RECORDS: 'neu_ismatchingrecords',
+    PHARMACIST_BRAND_MATCHING_RECORDS: 'neu_ispharmacistbrandmatchingrecords',
+    AUTOMATIC_ORDERS_ON: 'neu_isautomaticorderson',
+    BENEFIT: 'neu_isbenefit',
+    PULSE_BALL: 'neu_ispulseball',
+    TRAINING_SWITCH: 'neu_istrainingswitch',
+    CONTRACT: 'neu_iscontract',
+    APTEO: 'neu_isapteo',
+    DAILY_ORDERS_SYSTEM_IMPLEMENTED: 'neu_isdailyordersystemimplemented',
+    PHARMACY_PRICE_POLICY_REPORTS_ISSUED: 'neu_ispharmacypricepolicyreportsissued',
+    PRICE_POLICY_IMPLEMENTED: 'neu_ispricepolicyimplemented',
+    INDIVIDUAL_PLANOGRAM_DELIVERED: 'neu_isindividualplanogramdelivered',
+    MARKETING_MATERIALS_SENT: 'neu_ismarketingmaterialssent',
+    CONTRACTS_AND_PROMOTIONS_ACCESS_GRANTED: 'neu_iscontractsandpromotionsaccessgranted',
+    OPERATING_MANUAL_DELIVERED: 'neu_isoperatingmanualdelivered',
+    MATCHED_RECORDS: 'neu_ismatchedrecords',
+    CONTRACT_AIMS_PASSED: 'neu_iscontractaimspassed',
+    BENEFITCARD_SYSTEM_IMPLEMENTED: 'neu_isbenefitcardsystemimplemented',
+    ADDITIONAL_SALARIES_SYSTEM_UP: 'neu_isadditionalsalariessystemup',
+    EMPLOYEE_TRAINING_PERFORMED: 'neu_isemployeestrainingperformed',
+    KS_OMNIPHARM_INSTALLED: 'neu_isksomnipharminstalled',
+    KSEWD_INSTALLED_AND_CONFIGURED_BY_KAMSOFT: 'neu_isksewdinstalledandconfiguredbykamsoft',
+    INTERNET_PORTAL_ACCESS_GRANTED: 'neu_isinternetportalaccessgranted',
+    OUTDOOR_VISUALIZATION_PERFORMED: 'neu_isoutdoorvisualizationperformed',
+    CATEGORY_SET_RECOMMENDATION_DELIVERED: 'neu_iscategorysetrecommendationdelivered',
+    TERRITORIAL_MAP_ASSIGNED: 'neu_isterritorialmapassigned'
+};
+
+if (typeof (Neuca.Crm.Consts.NeuMarketingProgram.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuMarketingProgram.OptionSets = {};
+}
+
+Neuca.Crm.Consts.NeuMarketingProgram.OptionSets.MarketingProgramGroup = {
+    NEUCA_MARKETING_PROGRAM: 279660000,
+    COMPETITOR_MARKETING_PROGRAM: 279660001
+};
+
+Neuca.Crm.Consts.NeuMarketingProgram.OptionSets.CompetitorMarketingProgram = {
+    OTHER: 279660100
+};
+
+//SalesCondition
+if (typeof (Neuca.Crm.Consts.SalesCondition) === "undefined") {
+    Neuca.Crm.Consts.SalesCondition = {
+        LogicalName: "neu_salescondition"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.SalesCondition.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.SalesCondition.OptionSets = {};
+}
+
+Neuca.Crm.Consts.SalesCondition.Fields = {
+    NAME: 'neu_name',
+    PRICELIST: 'neu_conf_pricelevelid',
+    DELAY_TOLERANCE_INDEX: 'neu_delaytoleranceindex',
+    SALES_RELATION: 'neu_salesrelationid',
+    DISCOUNT_CORRECTION_TYPE_TEXT: 'neu_discountcorrectiontypetext',
+    DISCOUNT_CORRECTION_TYPE: 'neu_discountcorrectiontype',
+    TURN_OVER_SETTLEMENT: 'neu_turnoversettlement',
+    TIME_LIMITED_SALES_CONDITION: 'neu_istimelimitedsalescondition',
+    TIME_LIMITED_SALES_CONDITION_DATE: 'neu_timelimitedsalesconditiondate',
+    EMPLOYEE_ROLER_ID: 'neu_employeerolerid'
+};
+
+Neuca.Crm.Consts.SalesCondition.OptionSets.DiscountCorrectionType = {
+    STANDARD: 279660000,
+    NOT_STANDARD: 279660001
+};
+
+Neuca.Crm.Consts.SalesCondition.OptionSets.TurnOverSettlement = {
+    TOTAL: 279660000,
+    CONTRACTUAL: 279660001
+};
+
+
+//SalesConditionURS
+if (typeof (Neuca.Crm.Consts.SalesConditionUrs) === "undefined") {
+    Neuca.Crm.Consts.SalesConditionUrs = {
+        LogicalName: "neu_proc_salesconditionurs"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.SalesConditionUrs.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.SalesConditionUrs.OptionSets = {};
+}
+
+Neuca.Crm.Consts.SalesConditionUrs.Fields = {
+    ID: 'neu_proc_salesconditionursId',
+    NAME: 'neu_name',
+    PRICELIST: 'neu_conf_pricelevelid',
+    DELAY_TOLERANCE_INDEX: 'neu_delaytoleranceindex',
+    DISCOUNT_CORRECTION_TYPE_TEXT: 'neu_discountcorrectiontypetext',
+    DISCOUNT_CORRECTION_TYPE: 'neu_discountcorrectiontype',
+    TURN_OVER_SETTLEMENT: 'neu_turnoversettlement',
+    IS_TIME_LIMITED_SALES_CONDITION: 'neu_istimelimitedsalescondition',
+    TIME_LIMITED_SALES_CONDITION_DATE: 'neu_timelimitedsalesconditiondate',
+    EMPLOYEE_ROLER_ID: 'neu_employeerolerid',
+    PROC_FORM_ID: 'neu_proc_formid',
+    COPY_DATA_FROM_SALES_RELATION_ID: 'neu_copydatafromsalesrelationid'
+};
+
+Neuca.Crm.Consts.SalesConditionUrs.OptionSets.DiscountCorrectionType = {
+    STANDARD: 279660000,
+    NOT_STANDARD: 279660001
+};
+
+Neuca.Crm.Consts.SalesConditionUrs.OptionSets.TurnOverSettlement = {
+    TOTAL: 279660000,
+    CONTRACTUAL: 279660001
+};
+
+
+//SalesConditionURH
+if (typeof (Neuca.Crm.Consts.SalesConditionUrh) === "undefined") {
+    Neuca.Crm.Consts.SalesConditionUrh = {
+        LogicalName: "neu_proc_salesconditionurh"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.SalesConditionUrh.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.SalesConditionUrh.OptionSets = {};
+}
+
+Neuca.Crm.Consts.SalesConditionUrh.Fields = {
+    NAME: 'neu_name',
+    PRICELIST: 'neu_conf_pricelevelid',
+    DELAY_TOLERANCE_INDEX: 'neu_delaytoleranceindex',
+    //SALES_RELATION: 'neu_salesrelationid',
+    DISCOUNT_CORRECTION_TYPE_TEXT: 'neu_discountcorrectiontypetext',
+    DISCOUNT_CORRECTION_TYPE: 'neu_discountcorrectiontype',
+    TURN_OVER_SETTLEMENT: 'neu_turnoversettlement',
+    IS_TIME_LIMITED_SALES_CONDITION: 'neu_istimelimitedsalescondition',
+    TIME_LIMITED_SALES_CONDITION_DATE: 'neu_timelimitedsalesconditiondate',
+    EMPLOYEE_ROLER_ID: 'neu_employeerolerid',
+    PROC_FORM_ID: 'neu_proc_formid',
+    COPY_DATA_FROM_SALES_RELATION_ID: 'neu_copydatafromsalesrelationid'
+};
+
+Neuca.Crm.Consts.SalesConditionUrh.OptionSets.DiscountCorrectionType = {
+    STANDARD: 279660000,
+    NOT_STANDARD: 279660001
+};
+
+Neuca.Crm.Consts.SalesConditionUrh.OptionSets.TurnOverSettlement = {
+    TOTAL: 279660000,
+    CONTRACTUAL: 279660001
+};
+
+//SalesConditionLine
+if (typeof (Neuca.Crm.Consts.NeuSalesConditionLine) === "undefined") {
+    Neuca.Crm.Consts.NeuSalesConditionLine = {
+        LogicalName: "neu_salesconditionline"
+    };
+}
+
+Neuca.Crm.Consts.NeuSalesConditionLine.Fields = {
+    DECLARED_TURN_OVER_TO: "neu_declaredturnoverto",
+    DECLARED_TURN_OVER_FROM: "neu_declaredturnoverfrom",
+    INVOICE_DISCOUNT_VALUE: "neu_invoicediscountvalue",
+    SALES_CONDITION: "neu_salesconditionid",
+    NON_INVOICE_DISCOUNT_VALUE: "neu_noninvoicediscountvalue",
+    DISCOUNT_SETTLEMENT_TYPE: "neu_discountsettlementtype",
+    DISCOUNT_PAYMENT_FORM: "neu_discountpaymentform",
+    TOTAL_TURN_OVER_TO: "neu_totalturnoverto",
+    DISCOUNT_SETTLEMENT: "neu_discountsettlement",
+    TOTAL_TURN_OVER_FROM: "neu_totalturnoverfrom",
+    IS_MAX_DECLARED_TURNOVER: "neu_ismaxdeclaredturnover"
+};
+
+if (typeof (Neuca.Crm.Consts.NeuSalesConditionLine.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuSalesConditionLine.OptionSets = {};
+}
+
+Neuca.Crm.Consts.NeuSalesConditionLine.OptionSets = {
+    DiscountType: {
+        DISCOUNT_ON_INVOICE: 279660000
+    },
+
+    DiscountForm: {
+        DISCOUNT_ON_INVOICE: 279660001
+    },
+    DiscountSettlement: {
+        ROTATION: 279660001
+    }
+};
+
+Neuca.Crm.Consts.NeuSalesConditionLine.ErrorMesssages = {
+    ERROR_INCORRECT_DISCOUNT_SETTLEMENT_TYPE_WHEN_NON_INVOICE_DISCOUNT_VALUE_IS_ZERO:
+        "W polu 'Typ rozliczenia rabatu' i 'Forma wypłaty rabatu' nie można ustawić wartości 'rabat na fakturze' jeżeli 'Rabat pozafakturowy - umowne (%)' jest różny od 0.",
+    ERROR_INCORRECT_DISCOUNT_PAYMENT_FORM_WHEN_DISCOUNT_VALUE_IS_NOT_EQUAL_DISCOUNT_ON_INVOICE:
+        "Jeżeli typ rozliczenia rabatu jest różny od rabatu na fakturze to forma wypłaty rabatu musi być różna od rabat na fakturze"
+
+};
+
+//SalesConditionLineURS
+if (typeof (Neuca.Crm.Consts.SalesConditionLineUrs) === "undefined") {
+    Neuca.Crm.Consts.SalesConditionLineUrs = {
+        LogicalName: "neu_proc_salesconditionlineurs"
+    };
+}
+
+Neuca.Crm.Consts.SalesConditionLineUrs.Fields = {
+    DECLARED_TURN_OVER_TO: "neu_declaredturnoverto",
+    DECLARED_TURN_OVER_FROM: "neu_declaredturnoverfrom",
+    INVOICE_DISCOUNT_VALUE: "neu_invoicediscountvalue",
+    SALES_CONDITION: "neu_salesconditionid",
+    NON_INVOICE_DISCOUNT_VALUE: "neu_noninvoicediscountvalue",
+    DISCOUNT_SETTLEMENT_TYPE: "neu_discountsettlementtype",
+    DISCOUNT_PAYMENT_FORM: "neu_discountpaymentform",
+    TOTAL_TURN_OVER_TO: "neu_totalturnoverto",
+    DISCOUNT_SETTLEMENT: "neu_discountsettlement",
+    TOTAL_TURN_OVER_FROM: "neu_totalturnoverfrom",
+    IS_MAX_DECLARED_TURNOVER: "neu_ismaxdeclaredturnover"
+};
+
+if (typeof (Neuca.Crm.Consts.SalesConditionLineUrs.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.SalesConditionLineUrs.OptionSets = {};
+}
+
+Neuca.Crm.Consts.SalesConditionLineUrs.OptionSets = {
+    DiscountType: {
+        DISCOUNT_ON_INVOICE: 279660000
+    },
+
+    DiscountForm: {
+        DISCOUNT_ON_INVOICE: 279660001
+    },
+
+    DiscountSettlement: {
+        ROTATION: 279660001
+    }
+};
+
+Neuca.Crm.Consts.SalesConditionLineUrs.ErrorMesssages = {
+    ERROR_INCORRECT_DISCOUNT_SETTLEMENT_TYPE_WHEN_NON_INVOICE_DISCOUNT_VALUE_IS_ZERO:
+        "W polu 'Typ rozliczenia rabatu' i 'Forma wypłaty rabatu' nie można ustawić wartości 'rabat na fakturze' jeżeli 'Rabat pozafakturowy - umowne (%)' jest różny od 0.",
+    ERROR_INCORRECT_DISCOUNT_PAYMENT_FORM_WHEN_DISCOUNT_VALUE_IS_NOT_EQUAL_DISCOUNT_ON_INVOICE:
+        "Jeżeli typ rozliczenia rabatu jest różny od rabatu na fakturze to forma wypłaty rabatu musi być różna od rabat na fakturze"
+};
+
+//SalesConditionLineURH
+if (typeof (Neuca.Crm.Consts.SalesConditionLineUrh) === "undefined") {
+    Neuca.Crm.Consts.SalesConditionLineUrh = {
+        LogicalName: "neu_proc_salesconditionlineurh"
+    };
+}
+
+Neuca.Crm.Consts.SalesConditionLineUrh.Fields = {
+    DECLARED_TURN_OVER_TO: "neu_declaredturnoverto",
+    DECLARED_TURN_OVER_FROM: "neu_declaredturnoverfrom",
+    INVOICE_DISCOUNT_VALUE: "neu_invoicediscountvalue",
+    SALES_CONDITION: "neu_salesconditionid",
+    NON_INVOICE_DISCOUNT_VALUE: "neu_noninvoicediscountvalue",
+    DISCOUNT_SETTLEMENT_TYPE: "neu_discountsettlementtype",
+    DISCOUNT_PAYMENT_FORM: "neu_discountpaymentform",
+    TOTAL_TURN_OVER_TO: "neu_totalturnoverto",
+    DISCOUNT_SETTLEMENT: "neu_discountsettlement",
+    TOTAL_TURN_OVER_FROM: "neu_totalturnoverfrom",
+    IS_MAX_DECLARED_TURNOVER: "neu_ismaxdeclaredturnover"
+};
+
+if (typeof (Neuca.Crm.Consts.SalesConditionLineUrh.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.SalesConditionLineUrh.OptionSets = {};
+}
+
+Neuca.Crm.Consts.SalesConditionLineUrh.OptionSets = {
+    DiscountType: {
+        DISCOUNT_ON_INVOICE: 279660000
+    },
+
+    DiscountForm: {
+        DISCOUNT_ON_INVOICE: 279660001
+    },
+    DiscountSettlement: {
+        ROTATION: 279660001
+    }
+};
+
+Neuca.Crm.Consts.SalesConditionLineUrh.ErrorMesssages = {
+    ERROR_INCORRECT_DISCOUNT_SETTLEMENT_TYPE_WHEN_NON_INVOICE_DISCOUNT_VALUE_IS_ZERO: "W polu 'Typ rozliczenia rabatu' i 'Forma wypłaty rabatu' nie można ustawić wartości 'rabat na fakturze' jeżeli 'Rabat pozafakturowy - umowne (%)' jest różny od 0.",
+    ERROR_INCORRECT_DISCOUNT_PAYMENT_FORM_WHEN_DISCOUNT_VALUE_IS_NOT_EQUAL_DISCOUNT_ON_INVOICE: "Jeżeli typ rozliczenia rabatu jest różny od rabatu na fakturze to forma wypłaty rabatu musi być różna od rabat na fakturze"
+
+};
+
+//SalesRelation
+if (typeof (Neuca.Crm.Consts.SalesRelation) === "undefined") {
+    Neuca.Crm.Consts.SalesRelation = {
+        LogicalName: "neu_salesrelation"
+    };
+}
+
+Neuca.Crm.Consts.SalesRelation.Fields = {
+    ACCOUNT: 'neu_accountid',
+    NAME: 'neu_name',
+    INFO_LINE_NUMBER: 'neu_infolinenumber',
+    SALES_REPRESENTATION: 'neu_salesrepresentationid',
+    CREATED_BY: 'createdby',
+    ID: 'neu_salesrelationid',
+    DELAYS_TOLERANCE: 'neu_delaystolerance',
+    VALIDITY_OF_DATE_FROM: 'neu_validityofdatefrom',
+    VALIDITY_OF_DATE_TO: 'neu_validityofdateto',
+    DELIVERY_POINT: "neu_accountid",
+    SHORT_FORM_LABEL_NAME_PARENTACCOUNT: "shortform_shortform_account_parentaccountid",
+    INVOICE_ADDITIONAL_COPIES: "neu_invoiceadditionalcopies",
+    INVOICE_PRINT_RETAIL_PRICES: "neu_isinvoiceprintretailprices",
+    INVOICE_PRINT_DISCOUNT: "neu_isinvoiceprintdiscount",
+    RETAIL_PRICE_BASE: "neu_retailpricecalculatingbasis",
+    INVOICE_MAX_LINE_NUMBER: "neu_invoicemaxlinenumber",
+    INVOICE_MAX_VALUE: "neu_invoicemaxvalue",
+    TOTAL_ORDERS: "neu_istotalorders",
+    PRIMARY_PAYMENT_TERM_PREF: "neu_primarypaymenttermpref",
+    ELECTRONIC_OFFER_TYPE: "neu_electronicoffertype",
+    IOM_DUMMY_DISCOUNT_UMW: "neu_iomdummydiscountumw",
+    IOM_START_DATE: "neu_iomstartdate",
+    REQ_EMPLOYEE_REPLACEMENT_ID: "neu_req_employeereplacementid",
+    TELEMARKETING: "neu_conf_telemarketingsectionid",
+    EMPLOYEE_ROLER_ID: 'neu_employeerolerid',
+    ADDRESS_DELIVERY_POINT_CITY: 'neu_addressdeliverypointcity',
+    IS_MAIN_PARTNERSHIP: "neu_ismainpartnership",
+    IS_MAIN_PARTNERSHIP_WITHOUT_PRETIUM: "neu_ismainpartnershipwithoutpretium"
+
+};
+
+Neuca.Crm.Consts.SalesRelation.ErrorMesssages = {
+    ERROR_DATE_FROM_IS_NOT_VALID: '(Data obowiązywania od) powinna być wcześniejsza niż (Data obowiązywania do)',
+    ERROR_DATE_TO_IS_NOT_VALID: '(Data obowiązywania do) powinna być późniejsza niż (Data obowiązywania od)'
+};
+
+Neuca.Crm.Consts.SalesRelation.OptionSets = {
+    ElectronicOfferType: {
+        PR_CUSTOMER_PRICELIST_PLUS_PROMOTIONS: 279660000,
+        CK: 279660002,
+        WK: 279660003,
+        OF: 279660004,
+        PW_CUSTOMER_PRICELIST_PLUS_PROMOTIONS_PLUS_CONTRACT_CONDITIONS: 279660001
+    }
+};
+
+//FinancialRelation
+if (typeof (Neuca.Crm.Consts.NeuFinancialRelation) === "undefined") {
+    Neuca.Crm.Consts.NeuFinancialRelation = {
+        LogicalName: "neu_financialrelation"
+    };
+}
+
+Neuca.Crm.Consts.NeuFinancialRelation.OptionSets = {
+    Statecode: {
+        ACTIVE: 0,
+        INACTIVE: 1
+    }
+};
+
+Neuca.Crm.Consts.NeuFinancialRelation.Fields = {
+    NAME: 'neu_name',
+    ID: 'neu_financialrelationid',
+    ACCOUNT_ID: 'neu_accountid',
+    STATECODE: 'statecode',
+    SALES_REPRESENTATION: 'neu_conf_salesrepresentationid',
+    IS_CREDIT_LOCK_PROTECTION: 'neu_iscreditlockprotection',
+    IS_CREDIT_LOCK: 'neu_iscreditlock',
+    CREDIT_LOCK_OPERATOR: 'neu_creditlockoperator',
+    CREDIT_LOCK_DATE: 'neu_creditlockdate',
+    CREDIT_LOCK_REASON: 'neu_creditlockreason',
+    CREDIT_LOCK_DAYS_NUMBER: 'neu_creditlockdaysnumber',
+    CREDIT_LOCK_DAYS_CRITERION: 'neu_creditlockdayscriterion',
+    IS_CREDIT_LOCK_PROTECTION_RESET: 'neu_iscreditlockprotectionreset',
+    IS_REPAYMENT_AGREEMENT: 'neu_isrepaymentagreement',
+    REPAYMENT_AGREEMENT_CONCERS: 'neu_repaymentagreementconcers',
+    REPAYMENT_AGREEMENT_TYPE: 'neu_repaymentagreementtype',
+    REPAYMENT_AGREEMENT_STATUS: 'neu_repaymentagreementstatus',
+    IS_REPAYMENT_AGREEMENT_AMORTIZATION: 'neu_isrepaymentagreementamortization',
+    REPAYMENT_AGREEMENT_VALUE: 'neu_repaymentagreementvalue',
+    REPAYMENT_AGREEMENT_SIGNING_DATE: 'neu_repaymentagreementsigningdate'
+};
+
+//ConfSalesRepresentation
+if (typeof (Neuca.Crm.Consts.ConfSalesRepresentation) === "undefined") {
+    Neuca.Crm.Consts.ConfSalesRepresentation = {
+        LogicalName: "neu_conf_salesrepresentation"
+    };
+}
+
+Neuca.Crm.Consts.ConfSalesRepresentation.Fields = {
+    ID: 'neu_conf_salesrepresentationid',
+    CODE: 'neu_code',
+    Name: 'neu_name'
+};
+
+Neuca.Crm.Consts.ConfSalesRepresentation.Codes = {
+    ACP: 'GKAC',
+    CERFARM_RZESZOW: 'GKCR'
+
+};
+
+
+//SalesCondRebateadjAboveMaxThresh
+
+if (typeof (Neuca.Crm.Consts.SalesCondRebateadjAboveMaxThresh) === "undefined") {
+    Neuca.Crm.Consts.SalesCondRebateadjAboveMaxThresh = {
+        LogicalName: "neu_salescondrebateadjabovemaxthresh"
+    };
+}
+
+Neuca.Crm.Consts.SalesCondRebateadjAboveMaxThresh.Fields = {
+    SALES_CONDITION_ID: 'neu_salesconditionid',
+    Name: 'neu_name',
+    DECLARED_TURNOVER_FROM: 'neu_declaredturnoverfrom',
+    DECLARED_TURNOVER_TO: 'neu_declaredturnoverto',
+    TOTAL_TURNOVER_FROM: 'neu_totalturnoverfrom',
+    TOTAL_TURNOVER_TO: 'neu_totalturnoverto',
+    TURNOVER_FROM: 'neu_turnoverfrom',
+    TURNOVER_TO: 'neu_turnoverto',
+    REBATE_ADJUSTMENT_PERCENTAGE: 'neu_rebateadjustmentpercentage',
+    IS_MAX_DECLARED_TURNOVER: 'neu_ismaxdeclaredturnover'
+};
+
+//SalesCondUrsRebateadjAboveMaxTh
+
+if (typeof (Neuca.Crm.Consts.ProcSalesCondUrsRebateadjAboveMaxTh) === "undefined") {
+    Neuca.Crm.Consts.ProcSalesCondUrsRebateadjAboveMaxTh = {
+        LogicalName: "neu_proc_salescondursrebateadjabovemaxth"
+    };
+}
+
+Neuca.Crm.Consts.ProcSalesCondUrsRebateadjAboveMaxTh.Fields = {
+    SALES_CONDITION_ID: 'neu_salesconditionid',
+    Name: 'neu_name',
+    DECLARED_TURNOVER_FROM: 'neu_declaredturnoverfrom',
+    DECLARED_TURNOVER_TO: 'neu_declaredturnoverto',
+    TOTAL_TURNOVER_FROM: 'neu_totalturnoverfrom',
+    TOTAL_TURNOVER_TO: 'neu_totalturnoverto',
+    TURNOVER_FROM: 'neu_turnoverfrom',
+    TURNOVER_TO: 'neu_turnoverto',
+    REBATE_ADJUSTMENT_PERCENTAGE: 'neu_rebateadjustmentpercentage',
+    IS_MAX_DECLARED_TURNOVER: "neu_ismaxdeclaredturnover"
+};
+
+//SalesCondUrhRebateadjAboveMaxTh
+
+if (typeof (Neuca.Crm.Consts.ProcSalesCondUrhRebateadjAboveMaxTh) === "undefined") {
+    Neuca.Crm.Consts.ProcSalesCondUrhRebateadjAboveMaxTh = {
+        LogicalName: "neu_proc_salescondurhrebateadjabovemaxth"
+    };
+}
+
+Neuca.Crm.Consts.ProcSalesCondUrhRebateadjAboveMaxTh.Fields = {
+    SALES_CONDITION_ID: 'neu_salesconditionid',
+    Name: 'neu_name',
+    DECLARED_TURNOVER_FROM: 'neu_declaredturnoverfrom',
+    DECLARED_TURNOVER_TO: 'neu_declaredturnoverto',
+    TOTAL_TURNOVER_FROM: 'neu_totalturnoverfrom',
+    TOTAL_TURNOVER_TO: 'neu_totalturnoverto',
+    TURNOVER_FROM: 'neu_turnoverfrom',
+    TURNOVER_TO: 'neu_turnoverto',
+    REBATE_ADJUSTMENT_PERCENTAGE: 'neu_rebateadjustmentpercentage',
+    IS_MAX_DECLARED_TURNOVER: "neu_ismaxdeclaredturnover"
+};
+
+// ConfSalesMarket
+if (typeof (Neuca.Crm.Consts.ConfSalesMarket) === "undefined") {
+    Neuca.Crm.Consts.ConfSalesMarket = {
+        LogicalName: "neu_conf_salesmarket"
+    };
+}
+
+Neuca.Crm.Consts.ConfSalesMarket.Fields = {
+    ID: 'neu_conf_salesmarketid',
+    CODE: 'neu_code'
+};
+
+Neuca.Crm.Consts.ConfSalesMarket.Codes = {
+    TRADITIONAL: 'RTR',
+    MODERN: 'RNO'
+};
+
+// ConfSalesOffice
+if (typeof (Neuca.Crm.Consts.ConfSalesOffice) === "undefined") {
+    Neuca.Crm.Consts.ConfSalesOffice = {
+        LogicalName: "neu_conf_salesoffice"
+    };
+}
+
+Neuca.Crm.Consts.ConfSalesOffice.Fields = {
+    ID: 'neu_conf_salesofficeid',
+    SALES_REGION: 'neu_conf_salesregionid',
+    NAME: 'neu_name',
+    CODE: 'neu_code'
+};
+
+// ConfSalesRegion
+if (typeof (Neuca.Crm.Consts.ConfSalesRegion) === "undefined") {
+    Neuca.Crm.Consts.ConfSalesRegion = {
+        LogicalName: "neu_conf_salesregion"
+    };
+}
+
+Neuca.Crm.Consts.ConfSalesRegion.Fields = {
+    ID: 'neu_conf_salesregionid',
+    SALES_MARKET: 'neu_conf_salesmarketid'
+};
+
+//Contact
+if (typeof (Neuca.Crm.Consts.Contact) === "undefined") {
+    Neuca.Crm.Consts.Contact = {
+        LogicalName: "contact",
+        SchemaName: "Contact"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.Contact.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.Contact.OptionSets = {};
+}
+
+Neuca.Crm.Consts.Contact.Fields = {
+    ID: 'contactid',
+    CONTACT_TYPE: 'neu_contacttype',
+    ACCOUNT_ID: 'neu_accountid',
+    FIRST_NAME: 'firstname',
+    LAST_NAME: 'lastname',
+    BIRTH_DATE: 'birthdate',
+    IS_PHARMACIST: 'neu_ispharmacist',
+    TELEPHONE_WORK: 'business2',
+    TELEPHONE_WORK_MOBILE: 'mobilephone',
+    TELEPHONE_PRIVATE: 'home2',
+    TELEPHONE_PRIVATE_MOBILE: 'telephone2',
+    SELECTED_MAIN_TELEPHONE: 'neu_selectedmaintelephone',
+    EMAIL: 'emailaddress1',
+    FAX: 'fax',
+    CUSTOMER_TYPE_CODE: 'customertypecode',
+    JOB_TITLE: 'jobtitle'
+};
+
+Neuca.Crm.Consts.Contact.Sections = {
+    PERSONAL_INFO: 'SECTION_PERSONALINFO',
+    NON_PERSONAL_INFO: 'SECTION_NOPERSONALINFO'
+};
+
+Neuca.Crm.Consts.Contact.OptionSets = {
+    ContactType: {
+        PERSONAL: 279660000,
+        NONPERSONAL: 279660001
+    },
+    SelectedMainTelephone: {
+        PHONE: 279660000,
+        MOBILE: 279660001,
+        PRIVATE_PHONE: 279660002,
+        PRIVATE_MOBILE: 279660003
+    },
+    CustomerTypeCode: {
+        INTERNAL: 279660000,
+        EXTERNAL: 279660001
+    },
+    MainTelephone: {
+        OPTION_TELEPHONE_HOME: 279660000,
+        OPTION_TELEPHONE_MOBILE: 279660001,
+        OPTION_TELEPHONE_HOME_PRIVATE: 279660002,
+        OPTION_TELEPHONE_MOBILE_PRIVATE: 279660003
+    }
+};
+
+//ProcWorkflowRequest
+if (typeof (Neuca.Crm.Consts.ProcWorkflowRequest) === "undefined") {
+    Neuca.Crm.Consts.ProcWorkflowRequest = {
+        LogicalName: 'neu_proc_workflowrequest'
+    };
+}
+/** @namespace */
+Neuca.Crm.Consts.ProcWorkflowRequest.Fields = {
+    NAME: 'neu_name',
+    ACTION_ENTITY_ID: 'neu_actionentityid',
+    DATE_CLOSE: 'neu_closedate',
+    DATE_START: 'neu_startdate',
+    DATE_DONE: 'neu_donedate',
+    PROCESS_FLOW_ID: 'neu_proc_processflowid',
+    RESULT: 'neu_result',
+    INFO: 'neu_info',
+    IGNORE: 'neu_ignore'
+};
+
+
+
+//ProcProcessFlow
+if (typeof (Neuca.Crm.Consts.ProcProcessFlow) === "undefined") {
+    Neuca.Crm.Consts.ProcProcessFlow = {
+        LogicalName: 'neu_proc_processflow'
+    };
+}
+/** @namespace */
+Neuca.Crm.Consts.ProcProcessFlow.Fields = {
+    NAME: 'neu_name',
+    DISPLAYNAME: 'neu_displayname',
+    ID: 'neu_proc_processflowid',
+    PROCES_GLOWNY_ID: 'neu_mainactionid',
+    STAN_PROCESU_ID: 'neu_proc_processstateid',
+    IGNORUJ_WALIDACJE: 'neu_isignorevalidations',
+    WIDOCZNY_NA_WNIOSKU: 'neu_isrelatedform',
+    WIDOCZNY_NA_ZADANIU_UZYTKOWNIKA: 'neu_isrelatedtask',
+    FG_COLOR: 'neu_fgcolor',
+    FG_COLOR_ACTIVE: 'neu_fgactivecolor',
+    BG_COLOR: 'neu_bgcolor',
+    BG_COLOR_ACTIVE: 'neu_bgactivecolor',
+    ICON: 'neu_icon',
+    MOZLIWOSC_KLONOWANIA: 'neu_isclonable'
+};
+
+//ProcProcessState
+if (typeof (Neuca.Crm.Consts.ProcProcessState) === "undefined") {
+    Neuca.Crm.Consts.ProcProcessState = {
+        LogicalName: 'neu_proc_processstate'
+    };
+};
+
+//ProcTeamProcessState
+if (typeof (Neuca.Crm.Consts.ProcTeamProcessState) === "undefined") {
+    Neuca.Crm.Consts.ProcTeamProcessState = {
+        LogicalName: 'neu_proc_teamprocessstate'
+    };
+}
+
+/** @namespace */
+Neuca.Crm.Consts.ProcProcessState.Fields = {
+    ID: 'neu_proc_processstateid',
+    NAME: 'neu_name',
+    DOSTEPNE_ANULOWANIE: 'neu_isavailablecancel',
+    DOSTEPNE_COFNIECIE_DO_AUTORA: 'neu_isavailablebacktoauthor',
+    DOSTEPNE_ODRZUCENIE: 'neu_isavailablereject',
+    PROCES_BIZNESOWY: 'neu_proc_businessprocessid',
+    IS_DEFAULT_PROCESS_STATE: 'neu_isdefaultprocessstate'
+};
+
+//COMMON BUSINESS PROCESS DOCUMENT
+if (typeof (Neuca.Crm.Consts.BusinessProcessDocument) === "undefined") {
+    Neuca.Crm.Consts.BusinessProcessDocument = {
+        Fields: {
+            STAN_PROCESU_ID: 'neu_proc_processstateid',
+            PRZEPLYW_DO_WYKONANIA_ID: 'neu_proc_processflowid'
+        }
+    };
+};
+
+//ProcWorkflowRequest
+if (typeof (Neuca.Crm.Consts.ProcBusinessProcess) === "undefined") {
+    Neuca.Crm.Consts.ProcBusinessProcess = {
+        LogicalName: 'neu_proc_businessprocess'
+    };
+}
+/** @namespace */
+Neuca.Crm.Consts.ProcBusinessProcess.Fields = {
+    ID: 'neu_proc_businessprocessid',
+    NAME: 'neu_name',
+    SYMBOL: 'neu_code',
+    DEFAULT_PROCESS_STATE: 'neu_defaultprocessstateid',
+    AUTHOR: 'neu_author',
+    REGARDING_OBJECT_ID: 'neu_regardingobjectid',
+    SUMMARY: 'neu_summary',
+    SALES_OFFICE: "neu_conf_authorsalesofficeid"
+};
+
+if (typeof (Neuca.Crm.Consts.ConfStreet) === "undefined") {
+    Neuca.Crm.Consts.ConfStreet = {
+        LogicalName: "neu_conf_street"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.ConfStreet.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.ConfStreet.OptionSets = {};
+}
+
+if (typeof (Neuca.Crm.Consts.ConfStreet.Fields) === "undefined") {
+    Neuca.Crm.Consts.ConfStreet.Fields = {
+        ID: 'neu_conf_streetId',
+        NAME: 'neu_name',
+        LOCALITY_ID: 'neu_city'
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.CityStreetPostalCode) === "undefined") {
+    Neuca.Crm.Consts.CityStreetPostalCode = {
+        LogicalName: "neu_citystreetpostalcode"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.CityStreetPostalCode.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.CityStreetPostalCode.OptionSets = {};
+}
+
+if (typeof (Neuca.Crm.Consts.CityStreetPostalCode.Fields) === "undefined") {
+    Neuca.Crm.Consts.CityStreetPostalCode.Fields = {
+        ID: 'neu_citystreetpostalcodeId',
+        LOCALITY_ID: 'neu_city',
+        POSTALCODE_ID: 'neu_postalcode',
+        STREET_ID: 'neu_street',
+        NEU_STREETNUMBERRANGE: 'neu_streetnumberrange'
+    };
+}
+
+// ProcGiveAwayTask
+if (typeof (Neuca.Crm.Consts.ProcGiveAwayTask) === "undefined") {
+    Neuca.Crm.Consts.ProcGiveAwayTask = {
+        LogicalName: 'neu_proc_giveawaytask'
+    };
+}
+
+// AssignTaskToMe
+if (typeof (Neuca.Crm.Consts.ProcAssignTaskToMe) === "undefined") {
+    Neuca.Crm.Consts.ProcAssignTaskToMe = {
+        LogicalName: 'neu_proc_assigntasktome'
+    };
+}
+
+// AssignEntityToMe
+if (typeof (Neuca.Crm.Consts.ProcAssignEntityToMe) === "undefined") {
+    Neuca.Crm.Consts.ProcAssignEntityToMe = {
+        LogicalName: 'neu_proc_assignentitytome'
+    };
+}
+
+// GetDefaultTransactionCurrency
+if (typeof (Neuca.Crm.Consts.GetDefaultTransactionCurrency) === "undefined") {
+    Neuca.Crm.Consts.GetDefaultTransactionCurrency = {
+        LogicalName: 'neu_getdefaulttransactioncurrency'
+    };
+}
+
+// CloneEntity
+if (typeof (Neuca.Crm.Consts.CloneEntity) === "undefined") {
+    Neuca.Crm.Consts.CloneEntity = {
+        LogicalName: 'neu_cloneentity'
+    };
+}
+
+// TaskKze
+if (typeof (Neuca.Crm.Consts.ProcTaskKze) === "undefined") {
+    Neuca.Crm.Consts.ProcTaskKze = {
+        LogicalName: 'neu_proc_taskkze'
+    };
+}
+
+//NeuProcTaskUrh
+if (typeof (Neuca.Crm.Consts.ProcTaskUrh) === "undefined") {
+    Neuca.Crm.Consts.ProcTaskUrh = {
+        LogicalName: "neu_proc_taskurh",
+        DisplayName: "Zadanie URH"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.ProcTaskUrh.Fields) === "undefined") {
+    Neuca.Crm.Consts.ProcTaskUrh.Fields = {
+        PAYER_SAPCODE: "neu_payersapcode",
+        DELIVERYPOINT_SAPCODE: "neu_deliverypointsapcode",
+        AZ_CODE: 'neu_azcode',
+        IMS_CODE: 'neu_imscode',
+        CLIENT_MAIN_SALES_OFFICE: 'neu_clientmainsalesofficeid',
+        PRIMARY_SEGMENT: "neu_primarysegmentid",
+        PROCESS_STATE: "neu_proc_processstateid",
+        REGARDING_OBJECT: "neu_regardingobjectid"
+    };
+}
+
+//NeuProcTaskLpd
+if (typeof (Neuca.Crm.Consts.NeuProcTaskLpd) === "undefined") {
+    Neuca.Crm.Consts.NeuProcTaskLpd = {
+        LogicalName: "neu_proc_tasklpd",
+        DisplayName: "Zadanie LPD"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcTaskLpd.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuProcTaskLpd.Fields = {
+        CARGO_RETURN_APPROVED: "neu_cargoreturnapproved",
+        REMOVAL_SERVICE_TERMS: "neu_removalserviceterms",
+        OTHER_REMOVAL_SERVICE_TERMS: "neu_otherremovalserviceterms",
+        PROCESS_STATE: "neu_proc_processstateid"
+    };
+}
+
+
+// TaskUrs
+if (typeof (Neuca.Crm.Consts.ProcTaskUrs) === "undefined") {
+    Neuca.Crm.Consts.ProcTaskUrs = {
+        LogicalName: 'neu_proc_taskurs'
+    };
+}
+
+
+
+if (typeof (Neuca.Crm.Consts.ProcTaskUrs.Fields) === "undefined") {
+    Neuca.Crm.Consts.ProcTaskUrs.Fields = {
+        CENTRAL_WAREHOUSE: 'neu_centralwarehouseid',
+        LOCAL_WAREHOUSE: 'neu_localwarehouseid',
+        PROCESS_STATE: "neu_proc_processstateid",
+        KRS: "neu_krs",
+        REGON: 'neu_regon',
+        REGON14: "neu_regon14",
+        REGISTER_BOOK: "neu_registerbook"
+    };
+}
+
+Neuca.Crm.Consts.ProcTaskUrs.ErrorMessages = {
+    ERROR_KRS_IS_NOT_VALID: 'Podany KRS nie jest poprawny',
+    ERROR_REGON_IS_NOT_VALID: 'Podany REGON nie jest poprawny',
+    ERROR_REGON14_IS_NOT_VALID: "Pole Regon 14 powinno być 14-cyfrowe"
+};
+
+//NeuProcTaskZlk
+if (typeof (Neuca.Crm.Consts.ProcTaskZlk) === "undefined") {
+    Neuca.Crm.Consts.ProcTaskZlk = {
+        LogicalName: "neu_proc_taskzlk",
+        DisplayName: "Zadanie ZLK"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.ProcTaskZlk.Fields) === "undefined") {
+    Neuca.Crm.Consts.ProcTaskZlk.Fields = {
+        DKK_OPINION: "neu_dkkopinion",
+        ACCEPTED_CREDIT_LIMIT: "neu_acceptedcreditlimit",
+        TIME_LIMIT: "neu_timelimit",
+        DATE_OF_CREDIT_LIMIT: "neu_dateofcreditlimit"
+    };
+}
+
+//NeuProcTaskZpb
+if (typeof (Neuca.Crm.Consts.NeuProcTaskZpb) === "undefined") {
+    Neuca.Crm.Consts.NeuProcTaskZpb = {
+        LogicalName: "neu_proc_taskzpb",
+        DisplayName: "Zadanie ZPB"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcTaskZpb.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuProcTaskZpb.Fields = {
+        FORM: "neu_regardingobjectid",
+        SAP_CODE: "neu_sapcode",
+        PROCESS_STATE: "neu_proc_processstateid",
+        POSTAL_CODE: "neu_central_postalcode",
+        COUNTY: "neu_central_county",
+        PROVINCE: "neu_central_province"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcTaskZwh) === "undefined") {
+    Neuca.Crm.Consts.NeuProcTaskZwh = {
+        LogicalName: "neu_proc_taskzwh",
+        DisplayName: "Zadanie ZWH"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcTaskZwh.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuProcTaskZwh.Fields = {
+        PAYMENT_DEADLINE_EXTENSION: 'neu_paymentdeadlineextension',
+        CHANGE_APPROVED_START_DATE: 'neu_changeapprovedstartdate',
+        AGREEMENT_REALIZATION_STATUS: 'neu_agreementrealizationstatus_zwh',
+        REGARDING_OBJECT: "neu_regardingobjectid",
+        PROCESS_STATE: "neu_proc_processstateid"
+    };
+}
+
+//NeuProcZwhZp
+if (typeof (Neuca.Crm.Consts.NeuProcTaskZwhZp) === "undefined") {
+    Neuca.Crm.Consts.NeuProcTaskZwhZp = {
+        LogicalName: "neu_proc_taskzwhzp",
+        DisplayName: "Zadanie ZWHZP"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcTaskZwhZp.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuProcTaskZwhZp.Fields = {
+        IS_DOCUMENT_REQUIRED: 'neu_isdocumentrequired',
+        AGREEMENT_REALIZATION_STATUS: 'neu_agreementrealizationstatus_zwhzp',
+        REGARDING_OBJECT: "neu_regardingobjectid",
+        PROCESS_STATE: "neu_proc_processstateid"
+    };
+}
+
+
+//NeuProcTask
+if (typeof (Neuca.Crm.Consts.NeuProcTaskCommon) === "undefined") {
+    Neuca.Crm.Consts.NeuProcTaskCommon = {
+        SYSTEM_USER_NAME: 'Crm System'
+    };
+}
+
+Neuca.Crm.Consts.NeuProcTaskCommon.Fields = {
+    OWNER: 'ownerid',
+    CREATED_BY: 'createdby',
+    PROCESS_STATE: "neu_proc_processstateid"
+};
+
+// RetrieveRhSalesOfficeDetails
+if (typeof (Neuca.Crm.Consts.RetrieveRhSalesOfficeDetails) === "undefined") {
+    Neuca.Crm.Consts.RetrieveRhSalesOfficeDetails = {
+        LogicalName: 'neu_retrieverhsalesofficedetails'
+    };
+}
+
+// RetrieveSalesOfficeDetails
+if (typeof (Neuca.Crm.Consts.RetrieveSalesOfficeDetails) === "undefined") {
+    Neuca.Crm.Consts.RetrieveSalesOfficeDetails = {
+        LogicalName: 'neu_retrievesalesofficedetails'
+    };
+}
+
+//NeuProcFormUrs
+if (typeof (Neuca.Crm.Consts.NeuProcFormUrs) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormUrs = {
+        LogicalName: "neu_proc_formurs",
+        DisplayName: "Wniosek URS"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormUrs.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormUrs.Fields = {
+        FORM_NUMBER: "neu_formnumber",
+        ID: "neu_proc_formursid",
+        ID_SCHEMA: "neu_proc_formursId",
+        AUTHOR: "neu_author",
+        DELIVERY_ID: 'neu_deliverypoint_neu_proc_formurs',
+        ELECTRONIC_ORDER_CONFIGURATION: "neu_iselectronicorderconfiguration",
+        SALES_MARKET: "neu_conf_authorsalesmarketid",
+        SALES_REGION: "neu_conf_authorsalesregionid",
+        SALES_OFFICE: "neu_conf_authorsalesofficeid",
+        DELIVERY_POINT: "neu_deliverypointid",
+        DELIVERY_POINT_FULL_NAME: "neu_deliverypointfullname",
+        PHARMACEUTICAL_TYPE_ID: "neu_conf_pharmaceuticaltypeid",
+        EMAIL_ELECTRONIC_OFFER: "neu_emailelectronicoffer",
+        KRS: "neu_krs",
+        REGON: "neu_regon",
+        DELIVERY_POINT_PERMISSION_NUMBER: "neu_deliverypointpermissionnumber",
+        DELIVERY_POINT_PERMISSION_DATE: "neu_permissiondate",
+        PHARMACY_PROGRAM: "neu_pharmacyprogram",
+        PHARMACY_PROGRAM_LICENSE_NUMBER: "neu_pharmacyprogramlicencenumber",
+        CENTRAL_WAREHOUSE: "neu_centralwarehouseid",
+        LOCAL_WAREHOUSE: "neu_localwarehouseid",
+        PAYER: "neu_payerid",
+        PAYER_NAME: "neu_payername",
+        PAYER_FULLNAME: "neu_payerfullname",
+        PAYER_LEGAL_FORM: "neu_legalform",
+        PAYER_KRS: "neu_krs",
+        PAYER_REGON: "neu_regon",
+        PAYER_FOREIGN_RECEIVER: "neu_isforeignreceiver",
+        PAYER_BANK_ACCOUNT_NUMBER: "neu_bankaccountnumber",
+        PAYER_BANK_ACCOUNT_NUMBER_ID: "neu_bankaccountnumberid",
+        CUSTOMER: "neu_customerid",
+        SALES_RELATION: "neu_salesrelationid",
+        SALES_RELATION_INVOICE_ADDITIONAL_COPIES: "neu_invoiceadditionalcopies",
+        SALES_RELATION_INVOICE_PRINT_RETAIL_PRICES: "neu_isinvoiceprintretailprices",
+        SALES_RELATION_INVOICE_PRINT_DISCOUNT: "neu_isinvoiceprintdiscount",
+        SALES_RELATION_RETAIL_PRICE_BASE: "neu_retailpricebase",
+        SALES_RELATION_INVOICE_MAX_LINE_NUMBER: "neu_invoicemaxlinenumber",
+        SALES_RELATION_INVOICE_MAX_VALUE: "neu_invoicemaxvalue",
+        SALES_RELATION_TOTAL_ORDERS: "neu_istotalorders",
+        SALES_RELATION_PRIMARY_PAYMENT_TERM_CUR: "neu_primarypaymenttermcur",
+        SALES_RELATION_MODEM_OFFERING: "neu_modemoffering",
+        SALES_RELATION_IOM_DUMMY_DISCOUNT_UMW: "neu_iomdummydiscountumw",
+        SALES_RELATION_IOM_START_DATE: "neu_iomstartdate",
+        SALES_RELATION_INFO_LINE_NUMBER: "neu_infolinenumber",
+        SALES_RELATION_CREDIT_LIMIT: "neu_creditlimit",
+        OWNER: "ownerid",
+        CREATEDON: "createdon",
+        CREATEDBY: "createdby",
+        MODIFIEDON: "modifiedon",
+        MODIFIEDBY: "modifiedby",
+        STATECODE: "statecode",
+        STATUSCODE: "statuscode",
+        TELEMARKETING: "neu_conf_telemarketingsectionid",
+        FORM_FLAG_REFRESH_FIELDS: "neu_formflagrefreshfields",
+        TRANSACTION_CURRENCY: "transactioncurrencyid",
+        TRANSACTION_CURRENCY_SCHEMA: "TransactionCurrencyId",
+        REGON14: "neu_regon14",
+        REGISTER_BOOK: "neu_registerbook",
+        PHONE_SUPPORT: "neu_phonesupport",
+        MOBILEPHONE_SUPPORT: "neu_mobilephonesupport",
+        EMAIL_SUPPORT: "neu_emailsupport",
+        SALES_CONDITION_CHANGE: "neu_salesconditionichange",
+        EINVOICE_RANGE: "neu_einvoicerange",
+        EINVOICE_FORMAT: "neu_medicineandcorrectioninvoiceformat",
+        EFUS_FORMAT: "neu_efusformat",
+        CREATED_BY_URH_ID: "neu_createdbyurhid"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormUrs.Form) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormUrs.Form = {};
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormUrs.Form.Default) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormUrs.Form.Default = {};
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormUrs.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormUrs.OptionSets = {};
+}
+
+Neuca.Crm.Consts.NeuProcFormUrs.OptionSets = {
+    ModemOffering: {
+        PW_PRICELIST_PROMOTIONS_CONTRACT_CONDITIONS: 279660001,
+        PR_PRICELIST_PROMOTIONS: 279660000
+    }
+};
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormUrs.ErrorMessages) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormUrs.ErrorMessages = {
+        ERROR_KRS_IS_NOT_VALID: 'Podany KRS nie jest poprawny',
+        ERROR_REGON_IS_NOT_VALID: 'Podany REGON nie jest poprawny',
+        ERROR_PHARMACY_PROGRAM_LICENCE_NUMBER_IS_NOT_VALID: "Pole Numer licencji programu aptecznego powinno być 6-cyfrowe",
+        ERROR_SAP_CODE_IS_NOT_VALID: 'Podany Kod SAP nie jest poprawny',
+        ERROR_REGON14_IS_NOT_VALID: "Pole Regon 14 powinno być 14-cyfrowe"
+    };
+}
+
+
+
+//NeuProcFormZpb
+if (typeof (Neuca.Crm.Consts.NeuProcFormZpb) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormZpb = {
+        LogicalName: "neu_proc_formzpb",
+        DisplayName: "Wniosek ZPB"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormZpb.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormZpb.Fields = {
+        ID: "neu_proc_formzpbid",
+        ID_SCHEMA: "neu_proc_formzpbId",
+        AUTHOR: "neu_author",
+        CUSTOMER: 'neu_customerid',
+        SALES_OFFICE: "neu_conf_authorsalesofficeid",
+        SALES_REGION: "neu_conf_authorsalesregionid",
+        SALES_MARKET: "neu_conf_authorsalesmarketid",
+        FORM_FLAG_REFRESH_FIELDS: "neu_formflagrefreshfields",
+        USE_EXISTING_LOCALITY: "neu_isuseexistinglocality",
+        CENTRAL_COUNTRY: "neu_central_countryid",
+        CENTRAL_ADDRESS: "neu_central_addressid",
+        MARKETING: "neu_iscommonmarketing",
+        IS_COMMON_NAME: "neu_isconnectioncharacteristiccommonname",
+        COMMON_NAME: "neu_commonname",
+        CHANGE_REASON: "neu_changereason",
+        CONNECTION_NAME: "neu_connectionname",
+        TYPE_FAMILY: "neu_istypefamily",
+        TYPE_FRANCHISE: "neu_istypefranchise",
+        TYPE_OWNERSHIP: "neu_istypeownership",
+        TYPE_OTHER: "neu_typeother",
+        ONLINE_PHARMACY: "neu_isonlinepharmacy",
+        MOTIVATING_SYSTEM: "neu_ismotivatingsystem",
+        CENTRAL_PROMOTION_MANAGEMENT: "neu_iscentralpromotionmanagement",
+        PRODUCER_ORDERS_SPLIT: "neu_isproducerorderssplit",
+        CENTRAL_PARTNERNSHIP_NEGOTIATIONS: "neu_iscentralparthershipnegotations",
+        MARKETING_FLYERS: "neu_ismarketingflyers",
+        VISUALISATION: "neu_isvisualisation",
+        MARKETING_CENTRAL_PATIENT_PROMOTIONS: "neu_ismarketingcentralpatientpromotions",
+        MARKETING_PATIENT_PAPER: "neu_ismarketingpatientpaper",
+        MARKETING_PRODUCT_CATEGORIZATION: "neu_ismarketingproductcategorization",
+        MARKETING_MERCHANDISING: "neu_ismarketingmerchandising",
+        MARKETING_COMMERCIAL: "neu_ismarketingcommercial",
+        DESCRIPTION: "neu_description",
+        SAP_CODE: "neu_sapcode",
+        OFFER_APP_CUSTOMER: "neu_offerappcustomerid"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormZpb.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormZpb.OptionSets = {};
+}
+
+
+Neuca.Crm.Consts.NeuProcFormZpb.OptionSets.ChangeReason = {
+    TYLKO_ZMIANA_CHARAKTERYSTYKI: 279660000,
+    ZMIANA_SKLADU_POWIAZANIA: 279660001,
+    UTWORZENIE_NOWEGO_POWIAZANIA: 279660003,
+    LIKWIDACJA_ISTNIEJACEGO_POWIAZANIA: 279660004
+};
+
+//NeuProcFormLpd
+if (typeof (Neuca.Crm.Consts.NeuProcFormLpd) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormLpd = {
+        LogicalName: "neu_proc_formlpd",
+        DisplayName: "Wniosek LPD"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormLpd.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormLpd.OptionSets = {};
+}
+
+Neuca.Crm.Consts.NeuProcFormLpd.OptionSets.FormType = {
+    WITH_CARGO_RETURN: 279660000,
+    WITHOUT_CARGO_RETURN: 279660001
+};
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormLpd.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormLpd.Fields = {
+        ID: "neu_proc_formlpdid",
+        SALES_OFFICE: "neu_conf_authorsalesofficeid",
+        SALES_REGION: "neu_conf_authorsalesregionid",
+        SALES_MARKET: "neu_conf_authorsalesmarketid",
+        FORM_FLAG_REFRESH_FIELDS: "neu_formflagrefreshfields",
+        CARGO_RETURN_APPROVED: "neu_cargoreturnapproved",
+        REMOVAL_SERVICE_TERMS: "neu_removalserviceterms",
+        OTHER_REMOVAL_SERVICE_TERMS: "neu_otherremovalserviceterms",
+        FORM_TYPE: "neu_formtype"
+    };
+}
+
+
+//NeuProcFormUrh
+if (typeof (Neuca.Crm.Consts.NeuProcFormUrh) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormUrh = {
+        LogicalName: "neu_proc_formurh",
+        DisplayName: "Wniosek URH",
+        SchemaName: "neu_proc_formurh"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormUrh.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormUrh.Fields = {
+        ID: "neu_proc_formurhid",
+        ID_SCHEMA: "neu_proc_formurhId",
+        OKSN_1_ID: "neu_oksn1id",
+        OKSN_2_ID: "neu_oksn2id",
+        BUSINESS_CONNECTION_MANAGER_ID: 'neu_businessconnectionmanagerid',
+        FORM_FLAG_REFRESH_FIELDS: "neu_formflagrefreshfields",
+        DELIVERYPOINT_COUNTRY_ID: "neu_deliverypoint_countryid",
+        PostalCodeId_DeliveryPoint: "neu_deliverypoint_conf_postalcodeid",
+        LocalityId_DeliveryPoint: "neu_deliverypoint_localityid",
+        StreetId_DeliveryPoint: "neu_deliverypoint_streetid",
+        Locality_DeliveryPoint: "neu_deliverypoint_locality",
+        County_DeliveryPoint: "neu_deliverypoint_county",
+        PostalCode_DeliveryPoint: "neu_deliverypoint_postalcode",
+        Street_DeliveryPoint: "neu_deliverypoint_street",
+        HouseNumber_DeliveryPoint: "neu_deliverypoint_housenumber",
+        ApartmentNumber_DeliveryPoint: "neu_deliverypoint_apartmentnumber",
+        PAYER_COUNTRY_ID: "neu_payer_countryid",
+        PAYER_MANUAL_ENTERED_ADDRESS: "neu_payer_manualenteredaddress",
+        PostalCodeId_Payer: "neu_payer_conf_postalcodeid",
+        LocalityId_Payer: "neu_payer_localityid",
+        StreetId_Payer: "neu_payer_streetid",
+        PAYER_LOCALITY: "neu_payer_locality",
+        PAYER_BANK_ACCOUNT_NUMBER_ID: "neu_bankaccountnumberid",
+        PAYER_COUNTY: "neu_payer_county",
+        PAYER_POSTALCODE: "neu_payer_postalcode",
+        PAYER_STREET: "neu_payer_street",
+        PAYER_HOUSENUMBER: "neu_payer_housenumber",
+        PAYER_APARTMENTNUMBER: "neu_payer_apartmentnumber",
+        IS_USE_EXISTING_DELIVERY_POINT: "neu_isuseexistingdeliverypoint",
+        IS_USE_EXISTING_PAYER: "neu_isuseexistingpayer",
+        PAYER_ACCOUNT_ID: "neu_payer_accountid",
+        PAYER_NAME: "neu_payername",
+        PAYER_SHORTEN_NAME: "neu_payershortenname",
+        IS_USE_EXISTING_CUSTOMER: "neu_isuseexistingcustomer",
+        CUSTOMER_ACCOUNT_ID: "neu_customer_accountid",
+        //CUSTOMER_NAME: "neu_customername",
+        //CUSTOMER_FULLNAME: "neu_clientfullname",
+        //CUSTOMER_SAPCODE: "neu_clientsapcode",
+        //CUSTOMER_SHORTEN_NAME: "neu_customershortenname",
+        NIP: "neu_nip",
+        KRS: "neu_krs",
+        REGON: "neu_regon",
+        IS_FOREIGN_RECIPIENT: "neu_isforeignreceiver",
+        PAYER_SAPCODE: "neu_payersapcode",
+        DELIVERYPOINT_SAPCODE: "neu_deliverypointsapcode",
+        AUTHOR: "neu_author",
+        SALES_OFFICE: "neu_conf_authorsalesofficeid",
+        SALES_REGION: "neu_conf_authorsalesregionid",
+        SALES_MARKET: "neu_conf_authorsalesmarketid",
+        REGARDING: "neu_regarding",
+        IS_RUNSALE: "neu_isrunsale",
+        IS_ELECTRONIC_ORDER_CONFIGURATION: "neu_iselectronicorderconfiguration",
+        INVOICE_ADDITIONAL_COPIES: "neu_invoiceadditionalcopies",
+        IS_INVOICE_PRINT_RETAIL_PRICES: "neu_isinvoiceprintretailprices",
+        IS_INVOICE_PRINT_DISCOUNT: "neu_isinvoiceprintdiscount",
+        RETAIL_PRICE_BASE: "neu_retailpricebase",
+        INVOICE_MAX_LINE_NUMBER: "neu_invoicemaxlinenumber",
+        INVOICE_MAX_VALUE: "neu_invoicemaxvalue",
+        IS_ORDERS_CONNECTING: "neu_isordersconnecting",
+        PRIMARY_PAYMENT_TERMCUR: "neu_primarypaymenttermcur",
+        MODEM_OFFERING: "neu_modemoffering",
+        IOM_DUMMY_DISCOUNT_UMW: "neu_iomdummydiscountumw",
+        BUSINESS_TYPE_ID: "neu_conf_businesstypeid",
+        IOM_START_DATE: "neu_iomstartdate",
+        PAYER_FULLNAME: "neu_payerfullname",
+        LEGAL_FORM: "neu_legalform",
+        BANK_ACCOUNT_NUMBER: "neu_bankaccountnumber",
+        DELIVERY_POINT_ACCOUNT_ID: "neu_deliverypoint_accountid",
+        DELIVERY_POINT_NAME: "neu_deliverypointname",
+        DELIVERY_POINT_SHORTEN_NAME: "neu_deliverypointshortenname",
+        DELIEVRY_POINT_FULLNAME: "neu_delievrypointfullname",
+        DELIVERY_POINT_SALES_MARKET: "neu_deliverypointsalesmarketid",
+        DELIVERY_POINT_SALES_REGION: "neu_deliverypointsalesregionid",
+        DELIVERY_POINT_SALES_OFFICE: "neu_deliverypointsalesofficeid",
+        PHARMACEUTICAL_TYPE_ID: "neu_conf_pharmaceuticaltypeid",
+        PERMISSION_NUMBER: "neu_permissionnumber",
+        PERMISSION_DATE: "neu_permissiondate",
+        PRIMARY_SEGMENT: "neu_primarysegmentid",
+        IMS_CODE: "neu_imscode",
+        AZ_CODE: "neu_azcode",
+        PHARMACY_PROGRAM: "neu_pharmacyprogram",
+        PHARMACY_PROGRAM_LICENCE_NUMBER: "neu_pharmacyprogramlicencenumber",
+        SUPPLIER1: "neu_supplier1id",
+        SUPPLIER2: "neu_supplier2id",
+        SUPPLIER3: "neu_supplier3id",
+        IS_WAREHOUSE_OWNED_PAHRMACY: "neu_iswarehouseownedpahrmacy",
+        WAREHOUSE_NAME: "neu_warehousename",
+        PREVIOUS_DELIVERY_POINT: "neu_previousaccountid",
+        SALES_REPRESENTATION: "neu_salesrepresentationid",
+        EMAIL_ELECTRONIC_OFFER: "neu_emailelectronicoffer",
+        REQUESTED_CREDIT_LIMIT: "neu_requestedcreditlimit",
+        INVOICE_FILE_FORMAT: "neu_invoicefileformat",
+        REGON14: "neu_regon14",
+        REGISTER_BOOK: "neu_registerbook",
+        PHONE_SUPPORT: "neu_phonesupport",
+        MOBILEPHONE_SUPPORT: "neu_mobilephonesupport",
+        EMAIL_SUPPORT: "neu_emailsupport",
+        PAYER_COUNTRY_ID: "neu_payer_countryid",
+        SALES_CONDITION_CHANGE: "neu_salesconditionichange",
+        EINVOICE_RANGE: 'neu_einvoicerange',
+        EINVOICE_FORMAT: 'neu_medicineandcorrectioninvoiceformat',
+        EFUS_FORMAT: 'neu_efusformat'
+    };
+}
+
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormUrh.Form) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormUrh.Form = {};
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormUrh.Form.Default) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormUrh.Form.Default = {};
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormUrh.ErrorMessages) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormUrh.ErrorMessages = {
+        ERROR_NIP_IS_NOT_VALID: 'Podany NIP nie jest poprawny',
+        ERROR_KRS_IS_NOT_VALID: 'Podany KRS nie jest poprawny',
+        ERROR_REGON_IS_NOT_VALID: 'Podany REGON nie jest poprawny',
+        ERROR_PHARMACY_PROGRAM_LICENCE_NUMBER_IS_NOT_VALID: "Pole Numer licencji programu aptecznego powinno być 6-cyfrowe",
+        ERROR_SAP_CODE_IS_NOT_VALID: 'Podany Kod SAP nie jest poprawny',
+        ERROR_REGON14_IS_NOT_VALID: "Pole Regon 14 powinno być 14-cyfrowe"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormUrh.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormUrh.OptionSets = {};
+}
+
+
+Neuca.Crm.Consts.NeuProcFormUrh.OptionSets.Regarding = {
+    EXISTING_LOCUM: 279660000,
+    NEW_LOCUM: 279660001,
+    LEGAL_FORM_CHANGE: 279660002
+};
+
+Neuca.Crm.Consts.NeuProcFormUrh.OptionSets.ModernOffering = {
+    PR_CLIENT_PROMOTIONS: 279660000,
+    PW_CLIENT_PROMOTIONS_CONDITIONS: 279660001
+};
+Neuca.Crm.Consts.NeuProcFormUrh.OptionSets.RetailPriceBase = {
+    PRICE_CC: 279660000
+};
+
+if (typeof (Neuca.Crm.Consts.SystemUser) === "undefined") {
+    Neuca.Crm.Consts.SystemUser = {
+        LogicalName: "systemuser",
+        DisplayName: "Użytkownik"
+    };
+}
+
+//NeuProcFormZlk
+if (typeof (Neuca.Crm.Consts.NeuProcFormZlk) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormZlk = {
+        LogicalName: "neu_proc_formzlk",
+        DisplayName: "Wniosek ZLK",
+        SchemaName: "neu_proc_formzlk"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormZlk.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormZlk.Fields = {
+        AUTHOR: "neu_author",
+        PAYER: 'neu_payer',
+        SALES_OFFICE: "neu_conf_authorsalesofficeid",
+        SALES_REGION: "neu_conf_authorsalesregionid",
+        SALES_MARKET: "neu_conf_authorsalesmarketid",
+        PROPOSED_CREDIT_LIMIT: "neu_proposedcreditlimit",
+        TIME_LIMIT: "neu_timelimit",
+        TIME_DATE_LIMIT: "neu_timedatelimit",
+        SALES_RELATIONSHIP_ID: 'neu_salesrelationshipid',
+        FINANCIAL_RELATIONSHIP_ID: 'neu_financialrelationshipid',
+        FORM_FLAG_REFRESH_FIELDS: "neu_formflagrefreshfields"
+    };
+}
+
+//NeuFinancialProtection
+if (typeof (Neuca.Crm.Consts.FinancialProtection) === "undefined") {
+    Neuca.Crm.Consts.FinancialProtection = {
+        LogicalName: "neu_financialprotection",
+        DisplayName: "Zabezpieczenie"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.FinancialProtection.Fields) === "undefined") {
+    Neuca.Crm.Consts.FinancialProtection.Fields = {
+        FINANCIAL_PROTECTION_TYPE: 'neu_financialprotectiontype',
+        FINANCIAL_PROTECTION_STATE: 'neu_financialprotectionstate',
+        MORTGAGE_SUBJECT: 'neu_mortgagesubject',
+        MORTGAGE_BENEFICIARY: 'neu_mortgagebeneficiary',
+        MORTGAGE_AMOUNT: 'neu_mortgageamount',
+        DKK_MORTGAGE_REGISTER_VALUE_RATING: 'neu_dkkmortgageregistervaluerating',
+        LOCATION_AND_CHARACTERISATION_PROPERTY_DATA: 'neu_locationandcharacterisationpropertydata',
+        OWNERDATA: 'neu_ownerdata',
+        MORTGAGE_REGISTER_DESCRIPTION: 'neu_mortgageregisterdescription',
+        MORTGAGE_REGISTER_NUMBER: 'neu_mortgageregisternumber',
+        BILL_ID_NUMBER: 'neu_billidnumber',
+        IS_AVAL: 'neu_isaval',
+        CLAIM_DATA: 'neu_claimdata',
+        ACCOUNT_ID: 'neu_accountid',
+        MORTGAGES_VALUE: 'neu_mortgagesvalue'
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.FinancialProtection.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.FinancialProtection.OptionSets = {};
+}
+
+Neuca.Crm.Consts.FinancialProtection.OptionSets.FinancialProtectionType = {
+    BILL_OF_SALE: 279660000,
+    WARRANTY: 279660001,
+    MORTGAGE: 279660002
+};
+
+if (typeof (Neuca.Crm.Consts.FinancialProtection.Sections) === "undefined") {
+    Neuca.Crm.Consts.FinancialProtection.Sections = {};
+}
+
+Neuca.Crm.Consts.FinancialProtection.Sections = {
+    MORTGAGE: 'SECTION_MORTGAGES'
+};
+
+
+//SalesCondRebateadjPharmacistBrand
+if (typeof (Neuca.Crm.Consts.SalesCondRebateadjPharmacistBrand) === "undefined") {
+    Neuca.Crm.Consts.SalesCondRebateadjPharmacistBrand = {
+        LogicalName: "neu_salescondrebateadjpharmacistbrand",
+        DisplayName: "Warunek handlowy - Korekty rabatu Marka Farmaceuty"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.SalesCondRebateadjPharmacistBrand.Fields) === "undefined") {
+    Neuca.Crm.Consts.SalesCondRebateadjPharmacistBrand.Fields = {
+        SALES_CONDITION_ID: 'neu_salesconditionid',
+        REBATE_ADJUSTMENT_PERCENTAGE: 'neu_rebateadjustmentpercentage',
+        DECLARED_TURNOVER_FROM: 'neu_declaredturnoverfrom',
+        DECLARED_TURNOVER_TO: 'neu_declaredturnoverto',
+        TOTAL_TURNOVER_FROM: 'neu_totalturnoverfrom',
+        TOTAL_TURNOVER_TO: 'neu_totalturnoverto',
+        TURNOVER_FROM: 'neu_turnoverfrom',
+        TURNOVER_TO: 'neu_turnoverto',
+        IS_MAX_DECLARED_TURNOVER: 'neu_ismaxdeclaredturnover'
+    };
+}
+
+//SalesCondUrsRebateadjPharmBrand
+if (typeof (Neuca.Crm.Consts.ProcSalesCondUrsRebateadjPharmBrand) === "undefined") {
+    Neuca.Crm.Consts.ProcSalesCondUrsRebateadjPharmBrand = {
+        LogicalName: "neu_proc_salescondursrebateadjpharmbrand",
+        DisplayName: "Warunek handlowy - Korekty rabatu Marka Farmaceuty URS"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.ProcSalesCondUrsRebateadjPharmBrand.Fields) === "undefined") {
+    Neuca.Crm.Consts.ProcSalesCondUrsRebateadjPharmBrand.Fields = {
+        SALES_CONDITION_ID: 'neu_salesconditionid',
+        REBATE_ADJUSTMENT_PERCENTAGE: 'neu_rebateadjustmentpercentage',
+        DECLARED_TURNOVER_FROM: 'neu_declaredturnoverfrom',
+        DECLARED_TURNOVER_TO: 'neu_declaredturnoverto',
+        TOTAL_TURNOVER_FROM: 'neu_totalturnoverfrom',
+        TOTAL_TURNOVER_TO: 'neu_totalturnoverto',
+        TURNOVER_FROM: 'neu_turnoverfrom',
+        TURNOVER_TO: 'neu_turnoverto',
+        IS_MAX_DECLARED_TURNOVER: "neu_ismaxdeclaredturnover"
+    };
+}
+
+//SalesCondUrhRebateadjPharmBrand
+if (typeof (Neuca.Crm.Consts.ProcSalesCondUrhRebateadjPharmBrand) === "undefined") {
+    Neuca.Crm.Consts.ProcSalesCondUrhRebateadjPharmBrand = {
+        LogicalName: "neu_proc_salescondurhrebateadjpharmbrand",
+        DisplayName: "Warunek handlowy - Korekty rabatu Marka Farmaceuty URS"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.ProcSalesCondUrhRebateadjPharmBrand.Fields) === "undefined") {
+    Neuca.Crm.Consts.ProcSalesCondUrhRebateadjPharmBrand.Fields = {
+        SALES_CONDITION_ID: 'neu_salesconditionid',
+        REBATE_ADJUSTMENT_PERCENTAGE: 'neu_rebateadjustmentpercentage',
+        DECLARED_TURNOVER_FROM: 'neu_declaredturnoverfrom',
+        DECLARED_TURNOVER_TO: 'neu_declaredturnoverto',
+        TOTAL_TURNOVER_FROM: 'neu_totalturnoverfrom',
+        TOTAL_TURNOVER_TO: 'neu_totalturnoverto',
+        TURNOVER_FROM: 'neu_turnoverfrom',
+        TURNOVER_TO: 'neu_turnoverto',
+        IS_MAX_DECLARED_TURNOVER: "neu_ismaxdeclaredturnover"
+    };
+}
+
+//ProcInterestCancellationZwh
+if (typeof (Neuca.Crm.Consts.ProcInterestCancellationZwh) === "undefined") {
+    Neuca.Crm.Consts.ProcInterestCancellationZwh = {
+        LogicalName: "neu_proc_interestcancellationzwh"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.ProcInterestCancellationZwh.Fields) === "undefined") {
+    Neuca.Crm.Consts.ProcInterestCancellationZwh.Fields = {
+        PAYER: "neu_payerid",
+        INTEREST_CANCELLATION_VALUE: "neu_interestcancellationvalue",
+        PROC_FORM_ID: "neu_proc_formid",
+        DEFINITION_CANCELLATION_CONDITION: "neu_definitioncancellationcondition",
+        INTEREST_CANCELLATION_DATE_FROM: "neu_interestcancellationdatefrom",
+        INTEREST_CANCELLATION_DATE_TO: "neu_interestcancellationdateto",
+        DETERMINED_TURNOVER: "neu_determinedturnover",
+        METHOD_OF_SETTLEMENT: "neu_methodofsettlement",
+        RANGE_ROTATION: "neu_rangerotation",
+        DESCRIPTION_CANCELLATION_CONDITION: "neu_descriptioncancellationcondition"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.ProcInterestCancellationZwh.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.ProcInterestCancellationZwh.OptionSets = {};
+}
+
+Neuca.Crm.Consts.ProcInterestCancellationZwh.OptionSets = {
+    DEFINITION_CANCELLATION_CONDITION: {
+        PARAMETRIC: 279660000,
+        TEXT: 279660001
+    }
+};
+
+//NeuRedemptionsCriterion
+if (typeof (Neuca.Crm.Consts.NeuRedemptionsCriterion) === "undefined") {
+    Neuca.Crm.Consts.NeuRedemptionsCriterion = {
+        LogicalName: "neu_redemptionscriterion"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuRedemptionsCriterion.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuRedemptionsCriterion.Fields = {
+        INTEREST_CANCELATION_ID: "neu_interestcancellationid",
+        DEFINITION_CANCELLATION_CONDITION: "neu_definitioncancellationcondition",
+        INTEREST_CANCELLATION_DATE_FROM: "neu_interestcancellationdatefrom",
+        INTEREST_CANCELLATION_DATE_TO: "neu_interestcancellationdateto",
+        DETERMINED_TURNOVER: "neu_determinedturnover",
+        METHOD_OF_SETTLEMENT: "neu_methodofsettlement",
+        RANGE_ROTATION: "neu_rangerotation",
+        DESCRIPTION_CANCELLATION_CONDITION: "neu_descriptioncancellationcondition"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuRedemptionsCriterion.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuRedemptionsCriterion.OptionSets = {};
+}
+
+Neuca.Crm.Consts.NeuRedemptionsCriterion.OptionSets = {
+    DEFINITION_CANCELLATION_CONDITION: {
+        PARAMETRIC: 279660000,
+        TEXT: 279660001
+    }
+};
+
+
+//NeuInterestCancellation
+if (typeof (Neuca.Crm.Consts.NeuInterestCancellation) === "undefined") {
+    Neuca.Crm.Consts.NeuInterestCancellation = {
+        LogicalName: "neu_interestcancellation"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuInterestCancellation.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuInterestCancellation.Fields = {
+        PAYER: "neu_payerid",
+        INTEREST_CANCELATION_VALUE: "neu_interestcancellationvalue",
+        DEFINITION_CANCELLATION_CONDITION: "neu_definitioncancellationcondition",
+        INTEREST_CANCELLATION_DATE_FROM: "neu_interestcancellationdatefrom",
+        INTEREST_CANCELLATION_DATE_TO: "neu_interestcancellationdateto",
+        DETERMINED_TURNOVER: "neu_determinedturnover",
+        METHOD_OF_SETTLEMENT: "neu_methodofsettlement",
+        RANGE_ROTATION: "neu_rangerotation",
+        DESCRIPTION_CANCELLATION_CONDITION: "neu_descriptioncancellationcondition"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuInterestCancellation.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuInterestCancellation.OptionSets = {};
+}
+
+Neuca.Crm.Consts.NeuInterestCancellation.OptionSets = {
+    DEFINITION_CANCELLATION_CONDITION: {
+        PARAMETRIC: 279660000,
+        TEXT: 279660001
+    }
+};
+
+if (typeof (Neuca.Crm.Consts.ProcSalesCondZwhRebateAdjPharmBrand) === "undefined") {
+    Neuca.Crm.Consts.ProcSalesCondZwhRebateAdjPharmBrand = {
+        LogicalName: "neu_proc_salescondzwhrebateadjpharmbrand"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.ProcSalesCondZwhRebateAdjPharmBrand.Fields) === "undefined") {
+    Neuca.Crm.Consts.ProcSalesCondZwhRebateAdjPharmBrand.Fields = {
+        SALES_CONDITION_ID: "neu_salesconditionid",
+        REBATE_ADJUSTMENT_PERCENTAGE: "neu_rebateadjustmentpercentage",
+        DECLARED_TURNOVER_FROM: "neu_declaredturnoverfrom",
+        DECLARED_TURNOVER_TO: "neu_declaredturnoverto",
+        TOTAL_TURNOVER_FROM: "neu_totalturnoverfrom",
+        TOTAL_TURNOVER_TO: "neu_totalturnoverto",
+        TURNOVER_FROM: 'neu_turnoverfrom',
+        TURNOVER_TO: 'neu_turnoverto',
+        IS_MAX_DECLARED_TURNOVER: "neu_ismaxdeclaredturnover"
+    };
+}
+
+
+//NeuProcFormZwh
+if (typeof (Neuca.Crm.Consts.NeuProcFormZwh) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormZwh = {
+        LogicalName: "neu_proc_formzwh",
+        DisplayName: "Wniosek ZWH",
+        SchemaName: "neu_proc_formzwh"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormZwh.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormZwh.Fields = {
+        ID: "neu_proc_formzwhid",
+        AUTHOR: "neu_author",
+        SALES_OFFICE: "neu_conf_authorsalesofficeid",
+        SALES_REGION: "neu_conf_authorsalesregionid",
+        SALES_MARKET: "neu_conf_authorsalesmarketid",
+        SALES_REPRESENTATION: "neu_conf_salesrepresentationid",
+        ISCANCELLATIONINTEREST: 'neu_iscancellationinterest',
+        //ISAGREEMENT: 'neu_isagreement',
+        AGREEMENTREALIZATIONSTATUS: 'neu_agreementrealizationstatus_zwh',
+        CUSTOMER: 'neu_customerid',
+        IS_SYSTEM_UPDATE_EXECUTED: 'neu_issystemupdateexecuted',
+        REASON: 'neu_reason'
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormZwh.Sections) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormZwh.Sections = {
+        SECTION_CANCELLATIONINTEREST: 'SECTION_CANCELLATIONINTEREST',
+        SECTION_CONNECTEDTURNOVERGROUPCHANGE: 'SECTION_CONNECTEDTURNOVERGROUPCHANGE'
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormZwh.Form) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormZwh.Form = {};
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormZwh.Form.Default) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormZwh.Form.Default = {};
+}
+
+//SalesCondZwhRebateAdjAboveMaxTh 
+if (typeof (Neuca.Crm.Consts.ProcSalesCondZwhRebateAdjAboveMaxTh) === "undefined") {
+    Neuca.Crm.Consts.ProcSalesCondZwhRebateAdjAboveMaxTh = {
+        LogicalName: "neu_proc_salescondzwhrebateadjabovemaxth"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.ProcSalesCondZwhRebateAdjAboveMaxTh.Fields) === "undefined") {
+    Neuca.Crm.Consts.ProcSalesCondZwhRebateAdjAboveMaxTh.Fields = {
+        SALES_CONDITION_ID: "neu_salesconditionid",
+        REBATE_ADJUSTMENT_PERCENTAGE: "neu_rebateadjustmentpercentage",
+        DECLARED_TURNOVER_FROM: "neu_declaredturnoverfrom",
+        DECLARED_TURNOVER_TO: "neu_declaredturnoverto",
+        TOTAL_TURNOVER_FROM: "neu_totalturnoverfrom",
+        TOTAL_TURNOVER_TO: "neu_totalturnoverto",
+        TURNOVER_FROM: 'neu_turnoverfrom',
+        TURNOVER_TO: 'neu_turnoverto',
+        IS_MAX_DECLARED_TURNOVER: "neu_ismaxdeclaredturnover"
+    };
+}
+
+//SalesConditionZwh
+if (typeof (Neuca.Crm.Consts.SalesConditionZwh) === "undefined") {
+    Neuca.Crm.Consts.SalesConditionZwh = {
+        LogicalName: "neu_proc_salesconditionzwh"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.SalesConditionZwh.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.SalesConditionZwh.OptionSets = {};
+}
+
+if (typeof (Neuca.Crm.Consts.SalesConditionZwh.Fields) === "undefined") {
+    Neuca.Crm.Consts.SalesConditionZwh.Fields = {
+        STATUSCODE: 'statuscode',
+        PROC_FORM_ID: 'neu_proc_formid',
+        PRICELIST: 'neu_conf_pricelevelid',
+        DELAY_TOLERANCE_INDEX: 'neu_delaytoleranceindex',
+        TURN_OVER_SETTLEMENT: "neu_turnoversettlement",
+        DISCOUNT_CORRECTION_TYPE: 'neu_discountcorrectiontype',
+        DISCOUNT_CORRECTION_TYPE_TEXT: 'neu_discountcorrectiontypetext',
+        IS_TIME_LIMITED_SALES_CONDITION: 'neu_istimelimitedsalescondition',
+        TIME_LIMITED_SALES_CONDITION_DATE: 'neu_timelimitedsalesconditiondate',
+        COPY_SALESRELATION_ZWH_DATA_DATE: 'neu_copysalesrelationzwhdatadate',
+        COPY_DATA_FROM_SALES_RELATION_ZWH_ID: 'neu_copydatafromsalesrelationzwhid'
+    };
+}
+
+Neuca.Crm.Consts.SalesConditionZwh.OptionSets.DiscountCorrectionType = {
+    STANDARD: 279660000,
+    NOT_STANDARD: 279660001
+};
+
+Neuca.Crm.Consts.SalesConditionZwh.OptionSets.TurnOverSettlement = {
+    TOTAL: 279660000,
+    CONTRACTUAL: 279660001
+};
+
+Neuca.Crm.Consts.SalesConditionZwh.OptionSets.Statuscode = {
+    ACTIVE_WORK: 1,
+    ACTIVE_APPROVED: 279660000,
+    INACTIVE: 2
+};
+
+
+//SalesContract
+if (typeof (Neuca.Crm.Consts.NeuSalesContract) === "undefined") {
+    Neuca.Crm.Consts.NeuSalesContract = {
+        LogicalName: "neu_salescontract"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuSalesContract.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuSalesContract.OptionSets = {};
+}
+
+if (typeof (Neuca.Crm.Consts.NeuSalesContract.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuSalesContract.Fields = {
+        ID: 'neu_salescontractid',
+        NAME: 'neu_name',
+        CONTRACT_TYPE: 'neu_contracttype',
+        STATE: 'neu_state',
+        SALES_REPRESENTATION_ID: 'neu_conf_salesrepresentationid',
+        ACCOUNT_ID: 'neu_accountid',
+        FINANCIAL_RELATION_ID: 'neu_financialrelationid',
+        DELIVERY_POINTS_NUMBER: 'neu_deliverypointsnumber',
+        VERSION_TRADE_CONTRACT: 'neu_versiontradecontract',
+        VERSION_PROFIT_PLUS_CONTRACT: 'neu_versionprofitpluscontract',
+        LOAN_CONTRACT_VERSION: 'neu_loancontractversion',
+        SIGNED_BY: 'neu_signedby',
+        CONTRACT_SIGN_DATE: 'neu_contractsigndate',
+        CONTRACT_CENTRAL_RECEIPT: 'neu_contractcentralreceipt',
+        ACCOUNTING_DATE: 'neu_accountingdate',
+        LAST_INSTALLMENT_DATE: 'neu_lastinstallmentdate',
+        FIRST_INSTALLMENT_DATE: 'neu_firstinstallmentdate',
+        CONTRACT_TERMINATION_DATE: 'neu_contractterminationdate',
+        ACTUAL_END_DATE: 'neu_actualenddate',
+        DATE_PLANNED_END_OF_CONTRACT: 'neu_dateplannedendofcontract',
+        DETAILED_SALES_CONDITION_DATE_FROM: 'neu_detailedsalesconditiondatefrom',
+        IS_SEASONAL_CORRECTION_DECLARATION_ROTATION: 'neu_isseasonalcorrectiondeclarationrotation',
+        DETAILED_SALES_CONDITION_DATE_TO: 'neu_detailedsalesconditiondateto',
+        DECLARED_MONTHLY_TURNOVER: 'neu_declaredmonthlyturnover',
+        DECLARED_PERIOD_TURNEVER: 'neu_declaredperiodturnever',
+        DECLARED_YEARLY_TURNOVER: 'neu_declaredyearlyturnover',
+        IS_YEAR_SETTLEMENT_ROTATION: 'neu_isyearsettlementrotation',
+        IS_CONTRACTED_CREDITLIMIT: 'neu_iscontractedcreditlimit',
+        TURNOVER_SETTLEMENT: 'neu_turnoversettlement',
+        IS_CONTRACTED_FINE: 'neu_iscontractedfine',
+        IS_UTILIZATION: 'neu_isutilization',
+        UTILIZATION_PAYMENT_CRITERIA: 'neu_utilizationpaymentcriteria',
+        UTILIZATION_START_DATE: 'neu_utilizationstartdate',
+        INTEREST_TYPE: 'neu_interesttype',
+        CONTRACTED_INTEREST_VALUE: 'neu_contractedinterestvalue',
+        CUSTOM_CONTRACT_RECORDS: 'neu_customcontractrecords',
+        PLANNED_TURNOVER_VALUE_INC: 'neu_plannedturnovervalueinc',
+        ACTUAL_TURNOVER_VALUE_INC: 'neu_actualturnovervalueinc',
+        SALES_CONTRACT_REALIZATION_PERCENTAGE_INC: 'neu_salescontractrealizationpercentageinc',
+        SALES_CONDITIONS_PLANNED_TURNOVER: 'neu_salesconditionsplannedturnover',
+        REMAINING_TURNOVER: 'neu_remainingturnover',
+        SZ_PAYMENT_VERSION: 'neu_szpaymentversion',
+        BOX_FILE_NUMBER: 'neu_boxfilenumber',
+        IS_PHARMACY_PAYMENT: 'neu_ispharmacypayment',
+        PHARMACY_PAYMENT_AMOUNT: 'neu_pharmacypaymentamount',
+        MARKETING_PROGRAM_CONDITION: 'neu_marketingprogramcondition',
+        MARKETING_PROGRAM_CONDITION_PERCENTAGE: 'neu_marketingprogramconditionpercentage',
+        MARKETING_PROGRAM_CONDITION_AMOUNT: 'neu_marketingprogramconditionamount',
+        LOAN_VALUE: 'neu_loanvalue',
+        LOAN_REASON: 'neu_loanreason',
+        PAYBACK_TYPE: 'neu_paybacktype',
+        NOMINAL_INTEREST: 'neu_nominalinterest',
+        PENAL_INTEREST: 'neu_penalinterest',
+        EINVOICE_ARRANGEMENT_VARIANT: 'neu_einvoicearrangementvariant',
+        EINVOICE_START_DATE: 'neu_einvoicestartdate',
+        EINVOICE_RANGE: 'neu_einvoicerange',
+        EINVOICE_FORMAT: 'neu_medicineandcorrectioninvoiceformat',
+        EFUS_FORMAT: 'neu_efusformat',
+        ORTOPEDIO_ARRANGEMENT_VARIANT: 'neu_ortopedioarrangementvariant',
+        PURCHASE_STATEMENT_PERCENTAGE: 'neu_purchasestatementpercentage'
+    };
+}
+
+Neuca.Crm.Consts.NeuSalesContract.OptionSets.ContractType = {
+    LOAN: 279660000,
+    COMMERCIAL: 279660001,
+    UTILIZATION: 279660002,
+    BENEFITSOFNEWS: 279660004,
+    BENEFITSOFDISTRIBUTION: 279660003,
+    NUMERICDISTRIBUTION: 279660005,
+    REGIONALMARKETINGPROGRAM: 279660006,
+    PARTNERPLUS: 279660007,
+    PARTNER: 279660008,
+    PROFITPLUS: 279660009,
+    MYHEALTH: 279660010,
+    WORLDHEALTHSTANDARD: 279660011,
+    WORLDHEALTHPARTNER: 279660012,
+    NEWPLAN: 279660013,
+    EINVOICE_ARRANGEMENT: 279660014,
+    ORTOPEDIO_ARRANGEMENT: 279660015,
+    IPRA_ARRANGEMENT: 279660016
+};
+
+Neuca.Crm.Consts.NeuSalesContract.OptionSets.State = {
+    IN_REALIZATION: 279660001,
+    IN_PERIOD_OF_NOTICE: 279660002
+};
+
+Neuca.Crm.Consts.NeuSalesContract.OptionSets.InterestType = {
+    CONTRACT: 279660000,
+    DEPARTAMENT: 279660001
+
+};
+
+Neuca.Crm.Consts.NeuSalesContract.OptionSets.MarketingProgramCondition = {
+    PERCENTAGEOFTURNOVER: 279660000,
+    TOTALTURNOVER: 279660001
+
+};
+
+if (typeof (Neuca.Crm.Consts.NeuDocumentType) === "undefined") {
+    Neuca.Crm.Consts.NeuDocumentType = {
+        LogicalName: "neu_documenttype",
+        DisplayName: "Typ dokumentu"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuDocumentType.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuDocumentType.Fields = {
+        URH: 'neu_urh',
+        URS: 'neu_urs',
+        ZLK: 'neu_zlk',
+        ZWH: 'neu_zwh',
+        ZWHZP: 'neu_zwhzp'
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuDocument) === "undefined") {
+    Neuca.Crm.Consts.NeuDocument = {
+        LogicalName: "neu_document",
+        DisplayName: "Dokument"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuDocument.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuDocument.Fields = {
+        NAME: "neu_name",
+        LINK: "neu_link",
+        URL: "neu_url",
+        AUTHOR_ID: 'neu_authorid',
+        DOCUMENT_TYPE_ID: 'neu_conf_documenttypeid',
+        PARENT_OBJECT_TYPE: 'neu_parentobjecttype',
+        ALFRESCO_DOCUMENT: 'neu_alfrescodocument',
+        ALFRESCO_FILENAME: 'neu_filename',
+        FILE_MIMETYPE: 'neu_filemimetype',
+        PARENT_ID: 'neu_parentid'
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuDocument.Sections) === "undefined") {
+    Neuca.Crm.Consts.NeuDocument.Sections = {
+        SECTION_ATTACHFILE: "SECTION_ATTACHFILE"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuDocument.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuDocument.OptionSets = {
+        ParentObject: {
+            PAYER: 279660000,
+            DELIVERY_POINT: 279660001,
+            SALESCONTRACT: 279660002,
+            FINANCIAL_PROTECTION: 279660003,
+            MORTGAGE: 279660004
+        }
+    };
+}
+
+//SalesConditionLineZWH
+if (typeof (Neuca.Crm.Consts.SalesConditionLineZwh) === "undefined") {
+    Neuca.Crm.Consts.SalesConditionLineZwh = {
+        LogicalName: "neu_proc_salesconditionlinezwh"
+    };
+}
+
+Neuca.Crm.Consts.SalesConditionLineZwh.Fields = {
+    DECLARED_TURN_OVER_TO: "neu_declaredturnoverto",
+    DECLARED_TURN_OVER_FROM: "neu_declaredturnoverfrom",
+    INVOICE_DISCOUNT_VALUE: "neu_invoicediscountvalue",
+    SALES_CONDITION: "neu_salesconditionid",
+    NON_INVOICE_DISCOUNT_VALUE: "neu_noninvoicediscountvalue",
+    DISCOUNT_SETTLEMENT_TYPE: "neu_discountsettlementtype",
+    DISCOUNT_PAYMENT_FORM: "neu_discountpaymentform",
+    TOTAL_TURN_OVER_TO: "neu_totalturnoverto",
+    DISCOUNT_SETTLEMENT: "neu_discountsettlement",
+    TOTAL_TURN_OVER_FROM: "neu_totalturnoverfrom",
+    IS_MAX_DECLARED_TURNOVER: "neu_ismaxdeclaredturnover"
+};
+
+if (typeof (Neuca.Crm.Consts.SalesConditionLineZwh.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.SalesConditionLineZwh.OptionSets = {};
+}
+
+Neuca.Crm.Consts.SalesConditionLineZwh.OptionSets = {
+    DiscountType: {
+        DISCOUNT_ON_INVOICE: 279660000
+    },
+
+    DiscountForm: {
+        DISCOUNT_ON_INVOICE: 279660001
+    },
+
+    DiscountSettlement: {
+        ROTATION: 279660001
+    }
+};
+
+Neuca.Crm.Consts.SalesConditionLineZwh.ErrorMesssages = {
+    ERROR_INCORRECT_DISCOUNT_SETTLEMENT_TYPE_WHEN_NON_INVOICE_DISCOUNT_VALUE_IS_ZERO: "W polu 'Typ rozliczenia rabatu' i 'Forma wypłaty rabatu' nie można ustawić wartości 'rabat na fakturze' jeżeli 'Rabat pozafakturowy - umowne (%)' jest różny od 0.",
+    ERROR_INCORRECT_DISCOUNT_PAYMENT_FORM_WHEN_DISCOUNT_VALUE_IS_NOT_EQUAL_DISCOUNT_ON_INVOICE: "Jeżeli typ rozliczenia rabatu jest różny od rabatu na fakturze to forma wypłaty rabatu musi być różna od rabat na fakturze"
+
+};
+
+
+//NeuProcSalesContractZwh
+if (typeof (Neuca.Crm.Consts.NeuProcSalesContractZwh) === "undefined") {
+    Neuca.Crm.Consts.NeuProcSalesContractZwh = {
+        LogicalName: "neu_proc_salescontractzwh"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcSalesContractZwh.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuProcSalesContractZwh.OptionSets = {};
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcSalesContractZwh.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuProcSalesContractZwh.Fields = {
+        NAME: 'neu_name',
+        FORM_ZWH_ID: 'neu_proc_formzwhid',
+        SALES_CONTRACT_TYPE: 'neu_salescontracttype',
+        SCOPE: 'neu_scope',
+        CONTRACT_SIGN_DATE: 'neu_contractsigndate',
+        IS_YEAR_SETTLEMENT_ROTATION: 'neu_isyearsettlementrotation',
+        CONTRACTED_FINE: 'neu_iscontractedfine',
+        UTILIZATION: 'neu_isutilization',
+        UTILIZATION_PAYMENT_CRITERIA: 'neu_utilizationpaymentcriteria',
+        CUSTOM_CONTRACT_RECORDS: 'neu_customcontractrecords',
+        PAYER_ID: 'neu_payerid',
+        FINANCIAL_RELATION_ID: 'neu_financialrelationid',
+        LOAN_CONTRACT_VERSION: 'neu_loancontractversion',
+        LOAN_VALUE: 'neu_loanvalue',
+        LOAN_REASON: 'neu_loanreason',
+        PAYBACK_TYPE: 'neu_paybacktype',
+        BANK_ACCOUNT_ID: 'neu_bankaccountid',
+        NOMINAL_INTEREST: 'neu_nominalinterest',
+        PENAL_INTEREST: 'neu_penalinterest',
+        CONTRACT_ANNEX: 'neu_contractannexid'
+
+    };
+}
+
+Neuca.Crm.Consts.NeuProcSalesContractZwh.OptionSets.SalesContractType = {
+    LOAN: 279660000,
+    COMMERCIAL: 279660001
+};
+
+Neuca.Crm.Consts.NeuProcSalesContractZwh.OptionSets.Scope = {
+    NEW_CONTRACT: 279660000,
+    ANNEX: 279660001
+
+};
+
+Neuca.Crm.Consts.NeuProcSalesContractZwh.OptionSets.InterestType = {
+    CONTRACT: 279660000
+
+};
+
+//SalesRelationZWH
+if (typeof (Neuca.Crm.Consts.NeuProcSalesRelationZwh) === "undefined") {
+    Neuca.Crm.Consts.NeuProcSalesRelationZwh = {
+        LogicalName: "neu_proc_salesrelationzwh"
+    };
+}
+
+Neuca.Crm.Consts.NeuProcSalesRelationZwh.Fields = {
+    ID: "neu_proc_salesrelationzwhid",
+    PROC_FORM_ID: "neu_proc_formzwhid",
+    SALES_RELATION: "neu_salesrelationid",
+    SALES_CONDITION_ZWH: "neu_proc_salesconditionzwhid"
+};
+
+//NeuSdPermissions
+if (typeof (Neuca.Crm.Consts.NeuSdPermissions) === "undefined") {
+    Neuca.Crm.Consts.NeuSdPermissions = {
+        LogicalName: "neu_sdpermissions"
+    };
+}
+
+Neuca.Crm.Consts.NeuSdPermissions.Fields = {
+    CONFIGURATION: "neu_configuration",
+    SYSTEM_USER_ID: "neu_systemuserid",
+    DOMAIN_NAME: "neu_domainname",
+    EMAIL_ADDRESS: "neu_emailaddress",
+    BUSINESS_UNIT_ID: "neu_businessunitid",
+    TOREALIZATION: "neu_istorealization",
+    ISUPDATEDATAFROMAD: "neu_isupdatedatafromad",
+    DISABLEDREASON: "neu_disabledreason",
+    USERSTATE: "neu_userstate",
+};
+if (typeof (Neuca.Crm.Consts.NeuSdPermissions.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuSdPermissions.OptionSets = {};
+}
+
+
+Neuca.Crm.Consts.NeuSdPermissions.OptionSets.Configuration = {
+    EXISTING_USER: 279660000,
+    NEW_USER: 279660001,
+
+};
+
+Neuca.Crm.Consts.NeuSdPermissions.OptionSets.UserState = {
+    Enabled: 279660000,
+    Disabled: 279660001,
+};
+
+
+//NeuSalesRelationSalesContract
+if (typeof (Neuca.Crm.Consts.NeuSalesRelationSalesContract) === "undefined") {
+    Neuca.Crm.Consts.NeuSalesRelationSalesContract = {
+        LogicalName: "neu_salesrelationsalescontract"
+    };
+}
+
+Neuca.Crm.Consts.NeuSalesRelationSalesContract.Fields = {
+    DISCONNECTION_DATE: "neu_disconnectiondate",
+    SALES_CONTRACT_ID: "neu_salescontractid",
+    SALES_RELATION_ID: "neu_salesrelationid",
+    JOIN_DATE: "neu_joindate",
+    IS_SEASONAL_CORRECTION_DECLARATION_ROTATION: "neu_isseasonalcorrectiondeclarationrotation"
+};
+
+//NeuAccountSalesContract
+if (typeof (Neuca.Crm.Consts.NeuAccountSalesContract) === "undefined") {
+    Neuca.Crm.Consts.NeuAccountSalesContract = {
+        LogicalName: "neu_accountsalescontract"
+    };
+}
+
+Neuca.Crm.Consts.NeuAccountSalesContract.Fields = {
+    SALES_CONTRACT_ID: "neu_salescontractid",
+    ACCOUNT_ID: "neu_accountid"
+};
+
+//ConfPharmaceuticalType
+if (typeof (Neuca.Crm.Consts.NeuConfPharmaceuticalType) === "undefined") {
+    Neuca.Crm.Consts.NeuConfPharmaceuticalType = {
+        LogicalName: "neu_conf_pharmaceuticaltype"
+    };
+}
+
+Neuca.Crm.Consts.NeuConfPharmaceuticalType.Fields = {
+    ID: 'neu_conf_pharmaceuticaltypeid',
+    NAME: 'neu_name',
+    SYMBOL: 'neu_code'
+};
+
+Neuca.Crm.Consts.NeuConfPharmaceuticalType.Codes = {
+    AP: 'AP',
+    PU: 'PU'
+};
+
+//NeuReqEmployeeReplacement
+if (typeof (Neuca.Crm.Consts.NeuReqEmployeeReplacement) === "undefined") {
+    Neuca.Crm.Consts.NeuReqEmployeeReplacement = {
+        LogicalName: "neu_req_employeereplacement"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuReqEmployeeReplacement.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuReqEmployeeReplacement.Fields = {
+        NAME: "neu_name",
+        CONFIGURATION_REPLACEMENT: "neu_configurationreplacement",
+        SAP_CODE_FILTER: "neu_sapcodefilter",
+        SALESREPRESENTATION_ID: "neu_conf_salesrepresentationid",
+        FROM: "neu_from",
+        TO: "neu_to",
+        EMPLOYEE_ID: "neu_employeeid",
+        DEPUTY_ID: "neu_deputyid",
+        ERROR_MESSAGES: "neu_errormessages"
+
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuReqEmployeeReplacement.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuReqEmployeeReplacement.OptionSets = {};
+}
+
+
+Neuca.Crm.Consts.NeuReqEmployeeReplacement.OptionSets.ConfigurationReplacement = {
+    FOR_ALL_SALES_RELATION: 279660000,
+    FOR_SELECTED_SALES_RELATION: 279660001
+};
+
+//NeuProcFormZwhZp
+if (typeof (Neuca.Crm.Consts.NeuProcFormZwhZp) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormZwhZp = {
+        LogicalName: "neu_proc_formzwhzp",
+        DisplayName: "Wniosek ZWHZP",
+        SchemaName: "neu_proc_formzwhzp"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormZwhZp.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormZwhZp.Fields = {
+        ID: "neu_proc_formzwhzpid",
+        AUTHOR: "neu_author",
+        SALES_OFFICE: "neu_conf_authorsalesofficeid",
+        SALES_REGION: "neu_conf_authorsalesregionid",
+        SALES_MARKET: "neu_conf_authorsalesmarketid",
+        FORMZWPZP_TYPE: "neu_formzwhzptype",
+        SALES_RELATION: "neu_salesrelationid",
+        PROFITPLUS_RECOMMENDED: "neu_isprofitplusrecommended",
+        CURRENT_PROFITPLUS_VARIANT: "neu_conf_currentprofitplusprogramvariantid",
+        PROFITPLUS_PROGRAM_VARIANT: "neu_conf_profitplusprogramvariantid",
+        CHANGE_STARTDATE: "neu_changestartdate",
+        DISCOUNT_PAYMENT_FORM: "neu_discountpaymentform",
+        DISCOUNT_RESALE_PHARMACISTBRAND: "neu_discountresalepharmacistbrand",
+        DISCOUNT_RESALE_OTHERS: "neu_discountresaleothers",
+        DISCOUNT_PURCHASE_PHARMACISTBRAND: "neu_discountpurchasepharmacistbrand",
+        DISCOUNT_PURCHASE_OTHERS: "neu_discountpurchaseothers",
+        ILC_CONTACT_PHARMACY_EMPLOYEE: "neu_ilccontactpharmacyemployee",
+        ILC_CONTACT_TELEPHONE_NUMBER: "neu_ilccontacttelephonenumber",
+        AGREEMENTREALIZATIONSTATUS: "neu_agreementrealizationstatus_zwhzp"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormZwhZp.Form) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormZwhZp.Form = {};
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormZwhZp.Form.Default) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormZwhZp.Form.Default = {};
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcFormZwhZp.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuProcFormZwhZp.OptionSets = {};
+}
+
+
+Neuca.Crm.Consts.NeuProcFormZwhZp.OptionSets.FormZwhZpType = {
+    ADD_TO_BENEFIT_PLUS: 279660000,
+    CHANGE_VARIANT_BENEFIT_PLUS: 279660001,
+    REMOVE_FROM_BENEFIT_PLUS: 279660002
+};
+
+//neu_conf_configuration
+if (typeof (Neuca.Crm.Consts.NeuConfConfiguration) === "undefined") {
+    Neuca.Crm.Consts.NeuConfConfiguration = {
+        LogicalName: "neu_conf_configuration",
+        DisplayName: "Konfiguracja (NEUCA)",
+        SchemaName: "neu_conf_configuration"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuConfConfiguration.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuConfConfiguration.Fields = {
+        ID: "neu_conf_configurationid",
+        KEY: "neu_key",
+        VALUE: "neu_value"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuConfConfiguration.Form) === "undefined") {
+    Neuca.Crm.Consts.NeuConfConfiguration.Form = {};
+}
+
+if (typeof (Neuca.Crm.Consts.NeuConfConfiguration.Form.Default) === "undefined") {
+    Neuca.Crm.Consts.NeuConfConfiguration.Form.Default = {};
+}
+
+//NeuSalesConditionZp
+if (typeof (Neuca.Crm.Consts.NeuSalesConditionZp) === "undefined") {
+    Neuca.Crm.Consts.NeuSalesConditionZp = {
+        LogicalName: "neu_salesconditionzp",
+        DisplayName: "Warunek handlowy Zysk+",
+        SchemaName: "neu_salesconditionzp"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuSalesConditionZp.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuSalesConditionZp.Fields = {
+        ID: "neu_salesconditionzpid",
+        AUTHOR: "neu_author",
+        SALES_RELATION: "neu_salesrelationid",
+        PROFITPLUS_PROGRAM_VARIANT: "neu_conf_profitplusprogramvariantid",
+        SALESCONDITION_STARTDATE: "neu_salesconditionstartdate",
+        SALESCONDITION_ENDDATE: "neu_salesconditionenddate",
+        DISCOUNT_PAYMENT_FORM: "neu_discountpaymentform",
+        DISCOUNT_RESALE_PHARMACISTBRAND: "neu_discountresalepharmacistbrand",
+        DISCOUNT_RESALE_OTHERS: "neu_discountresaleothers",
+        DISCOUNT_PURCHASE_PHARMACISTBRAND: "neu_discountpurchasepharmacistbrand",
+        DISCOUNT_PURCHASE_OTHERS: "neu_discountpurchaseothers"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuSalesConditionZp.Form) === "undefined") {
+    Neuca.Crm.Consts.NeuSalesConditionZp.Form = {};
+}
+
+if (typeof (Neuca.Crm.Consts.NeuSalesConditionZp.Form.Default) === "undefined") {
+    Neuca.Crm.Consts.NeuSalesConditionZp.Form.Default = {};
+}
+
+//NeuConfProfitPlusProgramVariant
+if (typeof (Neuca.Crm.Consts.NeuConfProfitPlusProgramVariant) === "undefined") {
+    Neuca.Crm.Consts.NeuConfProfitPlusProgramVariant = {
+        LogicalName: "neu_conf_profitplusprogramvariant",
+        DisplayName: "Wariant programu Zysk+",
+        SchemaName: "neu_conf_profitplusprogramvariant"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuConfProfitPlusProgramVariant.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuConfProfitPlusProgramVariant.Fields = {
+        ID: "neu_conf_profitplusprogramvariantid",
+        NAME: "neu_name",
+        CODE: "neu_code",
+        DESCRIPTION: "neu_description",
+        DISCOUNT_RESALE_PHARMACISTBRAND: "neu_discountresalepharmacistbrand",
+        DISCOUNT_RESALE_OTHERS: "neu_discountresaleothers",
+        DISCOUNT_PURCHASE_PHARMACISTBRAND: "neu_discountpurchasepharmacistbrand",
+        DISCOUNT_PURCHASE_OTHERS: "neu_discountpurchaseothers"
+
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuConfProfitPlusProgramVariant.Form) === "undefined") {
+    Neuca.Crm.Consts.NeuConfProfitPlusProgramVariant.Form = {};
+}
+
+if (typeof (Neuca.Crm.Consts.NeuConfProfitPlusProgramVariant.Form.Default) === "undefined") {
+    Neuca.Crm.Consts.NeuConfProfitPlusProgramVariant.Form.Default = {};
+}
+
+//NeuPreferredDeliveryHours
+if (typeof (Neuca.Crm.Consts.NeuPreferredDeliveryHours) === "undefined") {
+    Neuca.Crm.Consts.NeuPreferredDeliveryHours = {
+        LogicalName: "neu_preferreddeliveryhours ",
+        DisplayName: "Preferowane godziny dostaw",
+        SchemaName: "neu_preferreddeliveryhours "
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuPreferredDeliveryHours.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuPreferredDeliveryHours.Fields = {
+        MAIN_DELIVERY: "neu_maindelivery",
+        ADDITIONAL_DELIVERY: "neu_additionaldelivery"
+    };
+}
+
+//NeuReqUpdatePreferredDeliveryHours
+if (typeof (Neuca.Crm.Consts.NeuReqUpdatePreferredDeliveryHours) === "undefined") {
+    Neuca.Crm.Consts.NeuReqUpdatePreferredDeliveryHours = {
+        LogicalName: "neu_req_updatepreferreddeliveryhours",
+        DisplayName: "Aktualizacja preferowanych godzin dostaw",
+        SchemaName: "neu_req_updatepreferreddeliveryhours"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuReqUpdatePreferredDeliveryHours.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuReqUpdatePreferredDeliveryHours.Fields = {
+        MAIN_DELIVERY: "neu_maindelivery",
+        ADDITIONAL_DELIVERY: "neu_additionaldelivery"
+    };
+}
+
+//NeuProcRedemptionsCriterionZwh
+if (typeof (Neuca.Crm.Consts.NeuProcRedemptionsCriterionZwh) === "undefined") {
+    Neuca.Crm.Consts.NeuProcRedemptionsCriterionZwh = {
+        LogicalName: "neu_proc_redemptionscriterionzwh",
+        DisplayName: "Wniosek ZWH - Kryterium umorzenia odsetek",
+        SchemaName: "neu_proc_redemptionscriterionzwh "
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcRedemptionsCriterionZwh.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuProcRedemptionsCriterionZwh.Fields = {
+        DEFINITION_CANCELLATION_CONDITION: "neu_definitioncancellationcondition",
+        INTEREST_CANCELLATION_DATE_FROM: "neu_interestcancellationdatefrom",
+        INTEREST_CANCELLATION_DATE_TO: "neu_interestcancellationdateto",
+        DETERMINED_TURNOVER: "neu_determinedturnover",
+        METHOD_OF_SETTLEMENT: "neu_methodofsettlement",
+        RANGE_ROTATION: "neu_rangerotation",
+        DESCRIPTION_CANCELLATION_CONDITION: "neu_descriptioncancellationcondition"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuProcRedemptionsCriterionZwh.OptionSets) === "undefined") {
+    Neuca.Crm.Consts.NeuProcRedemptionsCriterionZwh.OptionSets = {};
+}
+
+Neuca.Crm.Consts.NeuProcRedemptionsCriterionZwh.OptionSets = {
+    DEFINITION_CANCELLATION_CONDITION: {
+        PARAMETRIC: 279660000,
+        TEXT: 279660001
+    }
+};
+
+//NeuReqUpdatePayer
+if (typeof (Neuca.Crm.Consts.NeuReqUpdatePayer) === "undefined") {
+    Neuca.Crm.Consts.NeuReqUpdatePayer = {
+        LogicalName: "neu_req_updatepayer",
+        DisplayName: "Aktualizacja płatnika",
+        SchemaName: "neu_req_updatepayer"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuReqUpdatePayer.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuReqUpdatePayer.Fields = {
+        PAYER_ID: "neu_payerid",
+        NIP: "neu_nip",
+        KRS: "neu_krs",
+        COUNTRY: "neu_conf_countryid",
+        REGON: "neu_regon"
+    };
+}
+
+//NeuReqUpdateClient
+if (typeof (Neuca.Crm.Consts.NeuReqUpdateClient) === "undefined") {
+    Neuca.Crm.Consts.NeuReqUpdateClient = {
+        LogicalName: "neu_req_updateclient",
+        DisplayName: "Aktualizacja klienta",
+        SchemaName: "neu_req_updateclient"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuReqUpdateClient.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuReqUpdateClient.Fields = {
+        CLIENT_ID: "neu_clientid",
+        NET_PURCHASE_POTENTIAL_FROM_ON_CLIENT: "neu_netpurchasepotentialfromonclient",
+        NET_PURCHASE_POTENTIAL_TO_ON_CLIENT: "neu_netpurchasepotentialtoonclient",
+        NET_PURCHASE_POTENTIAL_ON_CLIENT: "neu_netpurchasepotentialonclient",
+        IS_VALUE_NET_PURCHASE_POTENTIAL_ON_CLIENT: "neu_isvaluenetpurchasepotentialonclient"
+    };
+}
+//Email
+if (typeof (Neuca.Crm.Consts.Email) === "undefined") {
+    Neuca.Crm.Consts.Email = {
+        LogicalName: "email"
+    };
+}
+
+Neuca.Crm.Consts.Email.Fields = {
+    IS_CAMPAIGN_EMAIL: 'neu_iscampaignemail'
+};
+
+//NeuSalesContractRegistryZwh
+if (typeof (Neuca.Crm.Consts.NeuSalesContractRegistryZwh) === "undefined") {
+    Neuca.Crm.Consts.NeuSalesContractRegistryZwh = {
+        LogicalName: "neu_salescontractregistryzwh",
+        DisplayName: "Rejestr umów ZWH",
+        SchemaName: "neu_salescontractregistryzwh"
+    };
+}
+
+if (typeof (Neuca.Crm.Consts.NeuSalesContractRegistryZwh.Fields) === "undefined") {
+    Neuca.Crm.Consts.NeuSalesContractRegistryZwh.Fields = {
+
+    };
+}

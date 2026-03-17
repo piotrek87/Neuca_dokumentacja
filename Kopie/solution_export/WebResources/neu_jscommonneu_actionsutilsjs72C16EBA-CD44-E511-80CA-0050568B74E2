@@ -1,0 +1,985 @@
+/// <reference path="../neu_xrmservicetoolkit.js" />
+/// <reference path="../neu_xrmservicetoolkit.js.js" />
+/// <reference path="neu_consts.js" />
+if (typeof (Neuca) == "undefined") {
+    Neuca = {};
+}
+
+if (typeof (Neuca.Crm) == "undefined") {
+    Neuca.Crm = {};
+}
+
+/** @namespace */
+Neuca.Crm.ActionsUtils = {
+    AssignTaskToMe: function (taskId, logicalName) {
+        var that = Neuca.Crm.ActionsUtils;
+        return that.ExecuteTargetAction(taskId, logicalName, Neuca.Crm.Consts.ProcAssignTaskToMe.LogicalName);
+    },
+
+    AssignEntityToMe: function (entityId, logicalName) {
+        var that = Neuca.Crm.ActionsUtils;
+        return that.ExecuteTargetAction(entityId, logicalName, Neuca.Crm.Consts.ProcAssignEntityToMe.LogicalName);
+    },
+
+    GiveAwayTask: function (taskId, logicalName) {
+        var that = Neuca.Crm.ActionsUtils;
+        return that.ExecuteTargetAction(taskId, logicalName, Neuca.Crm.Consts.ProcGiveAwayTask.LogicalName);
+    },
+
+    Clone: function (entityId, entityName) {
+        var that = Neuca.Crm.ActionsUtils;
+        var response = that.ExecuteTargetAction(entityId, entityName, Neuca.Crm.Consts.CloneEntity.LogicalName);
+
+        if (response && response.Clone)
+            return response.Clone;
+        return null;
+    },
+
+    Convert: function (entityId, entityName, mappingType) {
+        var that = Neuca.Crm.ActionsUtils;
+        var response = that.ExecuteConvertAction(entityId, entityName, mappingType);
+
+        if (response && response.ConvertedEntity)
+            return response.ConvertedEntity;
+        return null;
+    },
+
+    ConvertMultiple: function (entities, conversionType) {
+        var that = Neuca.Crm.ActionsUtils;
+        var response = that.ExecuteConvertMultipleAction(entities, conversionType);
+
+        if (response && response.ConvertedEntities && response.ConvertedEntities.value)
+            return response.ConvertedEntities.value;
+        return null;
+    },
+
+    GetDefaultTransactionCurrency: function () {
+        var that = Neuca.Crm.ActionsUtils;
+        return that.ExecuteTargetAction(null, null, Neuca.Crm.Consts.GetDefaultTransactionCurrency.LogicalName);
+    },
+
+    UserHasPrivilege: function (userId, privilegeName) {
+        var that = Neuca.Crm.ActionsUtils;
+        var response = that.ExecuteUserHasPrivilegesAction(userId, privilegeName);
+        if (response && response.HasPrivilege)
+            return response.HasPrivilege.value;
+        return false;
+    },
+
+    CheckPermisions: function (permissionsType, targetId, targetName, userId) {
+        var that = Neuca.Crm.ActionsUtils;
+        var response = that.ExecuteCheckPermissionsAction(permissionsType, targetId, targetName, userId);
+        if (response && response.Result)
+            return response.Result.value;
+        return false;
+    },
+
+
+    ExecuteTargetAction: function (entityId, entityName, requestName) {
+        var that = Neuca.Crm.ActionsUtils;
+
+        var requestXML = ""
+        requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+        requestXML +=
+            "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>Target</b:key>";
+        requestXML += "            <b:value i:type=\"a:EntityReference\">";
+        requestXML += "              <a:Id>" + entityId + "</a:Id>";
+        requestXML += "              <a:LogicalName>" + entityName + "</a:LogicalName>";
+        requestXML += "              <a:Name i:nil=\"true\" />";
+        requestXML += "            </b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "        </a:Parameters>";
+        requestXML += "        <a:RequestId i:nil=\"true\" />";
+        requestXML += "        <a:RequestName>" + requestName + "</a:RequestName>";
+        requestXML += "      </request>";
+
+        try {
+            var response = XrmServiceToolkit.Soap.Execute(requestXML);
+            response = that.getResponseResults(response);
+            return response;
+        } catch (ex) { // Format Error
+            that.formatAndThrowEx(ex);
+        }
+    },
+
+    ExecuteConvertAction: function (entityId, entityName, mappingType) {
+        var that = Neuca.Crm.ActionsUtils;
+
+        var requestXML = ""
+        requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+        requestXML +=
+            "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>Target</b:key>";
+        requestXML += "            <b:value i:type=\"a:EntityReference\">";
+        requestXML += "              <a:Id>" + entityId + "</a:Id>";
+        requestXML += "              <a:LogicalName>" + entityName + "</a:LogicalName>";
+        requestXML += "              <a:Name i:nil=\"true\" />";
+        requestXML += "            </b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "             <b:key>MappingType</b:key>";
+        requestXML += "             <b:value i:type=\"c:int\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            mappingType +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "        </a:Parameters>";
+        requestXML += "        <a:RequestId i:nil=\"true\" />";
+        requestXML += "        <a:RequestName>neu_convertentity</a:RequestName>";
+        requestXML += "      </request>";
+
+        try {
+            var response = XrmServiceToolkit.Soap.Execute(requestXML);
+            response = that.getResponseResults(response);
+            return response;
+        } catch (ex) { // Format Error
+            that.formatAndThrowEx(ex);
+        }
+    },
+
+    ExecuteConvertMultipleAction: function (entities, convertionType) {
+        var that = Neuca.Crm.ActionsUtils;
+
+        var requestXML = ""
+        requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+        requestXML +=
+            "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>SourceEntities</b:key>";
+        requestXML += "            <b:value i:type=\"a:EntityCollection\">";
+        requestXML += "              <a:Entities>";
+        for (var i = 0; i < entities.length; i++) {
+            requestXML += "                <a:Entity>";
+            requestXML += "                  <a:Id>" + entities[i].Id + "</a:Id>";
+            requestXML +=
+                "                  <a:KeyAttributes xmlns:c=\"http://schemas.microsoft.com/xrm/7.1/Contracts\" />";
+            // ??
+            requestXML += "                  <a:LogicalName>" + entities[i].TypeName + "</a:LogicalName>";
+            requestXML += "                  <a:RelatedEntities />";
+            requestXML += "                  <a:RowVersion>1308124</a:RowVersion>"; // ?? - do czego to służy
+            requestXML += "                </a:Entity>";
+        }
+        requestXML += "              </a:Entities>";
+        requestXML += "            </b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "             <b:key>ConversionType</b:key>";
+        requestXML += "             <b:value i:type=\"c:int\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            convertionType +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "        </a:Parameters>";
+        requestXML += "        <a:RequestId i:nil=\"true\" />";
+        requestXML += "        <a:RequestName>neu_convertmultipleentities</a:RequestName>";
+        requestXML += "      </request>";
+
+        try {
+            var response = XrmServiceToolkit.Soap.Execute(requestXML);
+            response = that.getResponseResults(response);
+            return response;
+        } catch (ex) { // Format Error
+            that.formatAndThrowEx(ex);
+        }
+    },
+
+    //ExecuteRetrieveLocalitiesAction: function (province, startsWith, callback) {
+    //    var that = Neuca.Crm.ActionsUtils;
+
+    //    var requestXML = ""
+    //    requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+    //    requestXML += "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+    //    requestXML += "          <a:KeyValuePairOfstringanyType>";
+    //    requestXML += "            <b:key>province</b:key>";
+    //    requestXML += "            <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" + province + "</b:value>";
+    //    requestXML += "          </a:KeyValuePairOfstringanyType>";
+    //    requestXML += "          <a:KeyValuePairOfstringanyType>";
+    //    requestXML += "            <b:key>startswith</b:key>";
+    //    requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" + startsWith + "</b:value>";
+    //    requestXML += "          </a:KeyValuePairOfstringanyType>";
+    //    requestXML += "        </a:Parameters>";
+    //    requestXML += "        <a:RequestId i:nil=\"true\" />";
+    //    requestXML += "        <a:RequestName>neu_retrievelocalities</a:RequestName>";
+    //    requestXML += "      </request>";
+
+    //    var response = XrmServiceToolkit.Soap.Execute(requestXML, function (response) {
+    //        var responseText = XrmServiceToolkit.Soap.SelectSingleNodeText(response, "//b:value");
+    //        var localitiesArray = JSON.parse(responseText);
+    //        callback(localitiesArray);
+    //    });
+    //},
+
+    //ExecuteRetrieveStreetsAction: function (locality, startsWith, callback) {
+    //    var that = Neuca.Crm.ActionsUtils;
+
+    //    var requestXML = ""
+    //    requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+    //    requestXML += "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+    //    requestXML += "          <a:KeyValuePairOfstringanyType>";
+    //    requestXML += "            <b:key>locality</b:key>";
+    //    requestXML += "            <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" + locality + "</b:value>";
+    //    requestXML += "          </a:KeyValuePairOfstringanyType>";
+    //    requestXML += "          <a:KeyValuePairOfstringanyType>";
+    //    requestXML += "            <b:key>startswith</b:key>";
+    //    requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" + startsWith + "</b:value>";
+    //    requestXML += "          </a:KeyValuePairOfstringanyType>";
+    //    requestXML += "        </a:Parameters>";
+    //    requestXML += "        <a:RequestId i:nil=\"true\" />";
+    //    requestXML += "        <a:RequestName>neu_retrievestreets</a:RequestName>";
+    //    requestXML += "      </request>";
+
+    //    var response = XrmServiceToolkit.Soap.Execute(requestXML, function (response) {
+    //        var responseText = XrmServiceToolkit.Soap.SelectSingleNodeText(response, "//b:value");
+    //        var streetsArray = JSON.parse(responseText);
+    //        callback(streetsArray);
+    //    });
+    //},
+
+    //ExecuteRetrievePostalCode: function (localityId, streetId, houseNumber, callback) {
+    //    var that = Neuca.Crm.ActionsUtils;
+
+    //    var requestXML = ""
+    //    requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+    //    requestXML += "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+    //    requestXML += "          <a:KeyValuePairOfstringanyType>";
+    //    requestXML += "            <b:key>localityid</b:key>";
+    //    requestXML += "            <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" + localityId + "</b:value>";
+    //    requestXML += "          </a:KeyValuePairOfstringanyType>";
+    //    requestXML += "          <a:KeyValuePairOfstringanyType>";
+    //    requestXML += "            <b:key>streetid</b:key>";
+    //    requestXML += "            <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" + streetId + "</b:value>";
+    //    requestXML += "          </a:KeyValuePairOfstringanyType>";
+    //    requestXML += "          <a:KeyValuePairOfstringanyType>";
+    //    requestXML += "            <b:key>housenumber</b:key>";
+    //    requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" + houseNumber + "</b:value>";
+    //    requestXML += "          </a:KeyValuePairOfstringanyType>";
+    //    requestXML += "        </a:Parameters>";
+    //    requestXML += "        <a:RequestId i:nil=\"true\" />";
+    //    requestXML += "        <a:RequestName>neu_retrievepostalcode</a:RequestName>";
+    //    requestXML += "      </request>";
+
+    //    XrmServiceToolkit.Soap.Execute(requestXML, function (response) {
+    //        var responseText = XrmServiceToolkit.Soap.SelectSingleNodeText(response, "//b:value");
+    //        var postalCodeObject = JSON.parse(responseText);
+    //        callback(postalCodeObject);
+    //    });
+    //},
+
+    ExecuteGetFieldsForTaskByStateAction: function (processStateName) {
+        var that = Neuca.Crm.ActionsUtils;
+
+        var requestXML = ""
+        requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+        requestXML +=
+            "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>processStateName</b:key>";
+        requestXML += "            <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            processStateName +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "        </a:Parameters>";
+        requestXML += "        <a:RequestId i:nil=\"true\" />";
+        requestXML += "        <a:RequestName>neu_proc_getfieldsfortaskbystate</a:RequestName>";
+        requestXML += "      </request>";
+
+        try {
+            var response = XrmServiceToolkit.Soap.Execute(requestXML);
+            response = that.getResponseResults(response);
+            return response;
+        } catch (ex) { // Format Error
+            that.formatAndThrowEx(ex);
+        }
+    },
+
+    ExecuteGetDefaultTransactionCurrency: function () {
+        var that = Neuca.Crm.ActionsUtils;
+
+        var requestXML = ""
+        requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+        requestXML +=
+            "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+        requestXML += "        </a:Parameters>";
+        requestXML += "        <a:RequestId i:nil=\"true\" />";
+        requestXML += "        <a:RequestName>" +
+            Neuca.Crm.Consts.GetDefaultTransactionCurrency.LogicalName +
+            "</a:RequestName>";
+        requestXML += "      </request>";
+
+        try {
+            var response = XrmServiceToolkit.Soap.Execute(requestXML);
+            response = that.getResponseResults(response);
+            return response;
+        } catch (ex) { // Format Error
+            that.formatAndThrowEx(ex);
+        }
+    },
+
+    GetClientUrl: function () {
+        if (typeof Xrm.Page.context == "object") {
+            clientUrl = Xrm.Page.context.getClientUrl();
+        }
+        var ServicePath = "/XRMServices/2011/Organization.svc/web";
+        return clientUrl + ServicePath;
+    },
+
+    getResponseResults: function (xmlResponse) {
+        var xrmEntityCollection = function (items) {
+            this.value = items;
+            this.type = 'EntityCollection';
+        };
+
+        var results = XrmServiceToolkit.Soap.SelectSingleNode(xmlResponse, '//a:Results').childNodes;
+        var obj = {};
+
+        var getNodeText = function (node) {
+            if (typeof (node.text) != "undefined") {
+                return node.text;
+            } else {
+                return node.textContent;
+            }
+        }
+
+        for (var i = 0; i < results.length; i++) {
+            var tempParentNode = results[i];
+            // Establish the Key for the Attribute
+            var tempParentNodeChildNodes = tempParentNode.childNodes;
+            var sKey = XrmServiceToolkit.Soap
+                .SelectSingleNodeText(results[i], 'b:key');
+            // that.getXmlElements(results[i], 'b:key')[0].childNodes[0].nodeValue;            
+            var tempNode = XrmServiceToolkit.Soap.SelectSingleNode(results[i], 'b:value');
+
+            var sTypeItem = tempNode.attributes.getNamedItem('i:type')
+            var sType = null;
+            if (sTypeItem)
+                sType = getNodeText(sTypeItem);
+
+            if (sType === null) {
+                obj[sKey] = null;
+                continue;
+            }
+
+            switch (sType) {
+                case "a:OptionSetValue":
+                    var entOsv = {};
+                    entOsv.type = sType.replace('a:', '');
+                    entOsv.value = parseInt(getNodeText(tempNode));
+                    obj[sKey] = entOsv;
+                    break;
+
+                case "a:EntityReference":
+                    entRef = {};
+                    entRef.type = sType.replace('a:', '');
+                    var oChildNodes = tempNode.childNodes;
+                    entRef.id = getNodeText(oChildNodes[0]);
+                    entRef.logicalName = getNodeText(oChildNodes[1]);
+                    entRef.name = getNodeText(oChildNodes[2]);
+                    obj[sKey] = entRef;
+                    break;
+
+
+                case "a:EntityCollection":
+                    entRef = new xrmEntityCollection();
+                    entRef.type = sType.replace('a:', '');
+
+                    //get all party items....
+                    var items = [];
+                    var entities = tempNode.childNodes[0];
+
+                    for (var e = 0, lene = entities.childNodes.length; e < lene; e++) {
+                        var entity = entities.childNodes[e];
+                        var entityId = entity.childNodes[3];
+                        var entityLogicalName = entity.childNodes[4];
+
+                        var entityRef = {};
+                        entityRef.id = getNodeText(entityId);
+                        entityRef.logicalName = getNodeText(entityLogicalName);
+
+                        items[e] = entityRef;
+                    }
+
+                    //for (var y = 0, leny = partyNodes[0].childNodes.length; y < leny; y++) {
+                    //    var itemNodes = tempParentNode.childNodes[1].childNodes[0].childNodes[y].childNodes[0].childNodes;
+                    //    debugger;
+                    //    for (var z = 0, lenz = itemNodes.length; z < lenz; z++) {
+                    //        var itemNodeChildNodes = itemNodes[z].childNodes;
+                    //        var nodeText = getNodeText(itemNodeChildNodes[0]);
+
+                    //        //TODO: tutaj powinno być stworzenie atrybutu
+
+
+                    //        //if (nodeText === "partyid") {
+                    //        var itemRef = {};//new xrmEntityReference();
+                    //            itemRef.id = getNodeText(itemNodeChildNodes[1].childNodes[0]);
+                    //            itemRef.logicalName = getNodeText(itemNodeChildNodes[1].childNodes[1]);
+                    //            itemRef.name = getNodeText(itemNodeChildNodes[1].childNodes[2]);
+                    //            items[y] = itemRef;
+                    //            //
+                    //        //}
+                    //    }
+                    //}
+
+                    entRef.value = items;
+                    obj[sKey] = entRef;
+                    break;
+
+                case "a:Money":
+                    entCv = {};
+                    entCv.type = sType.replace('a:', '');
+                    entCv.value = parseFloat(getNodeText(tempNode));
+                    obj[sKey] = entCv;
+                    break;
+
+                default:
+                    entCv = {};
+                    entCv.type = sType.replace('c:', '').replace('a:', '');
+                    if (entCv.type === "int") {
+                        entCv.value = parseInt(getNodeText(tempNode));
+                    } else if (entCv.type === "decimal" || entCv.type === "double") {
+                        entCv.value = parseFloat(getNodeText(tempNode));
+                    } else if (entCv.type === "dateTime") {
+                        entCv.value = stringToDate(getNodeText(tempNode));
+                    } else if (entCv.type === "boolean") {
+                        entCv.value = (getNodeText(tempNode) === 'false') ? false : true;
+                    } else {
+                        entCv.value = getNodeText(tempNode);
+                    }
+                    obj[sKey] = entCv;
+                    break;
+            }
+        }
+
+        return obj;
+    },
+
+    formatAndThrowEx: function (ex) {
+        var text = Neuca.Crm.ActionsUtils.formatEx(ex);
+        throw text;
+    },
+
+    formatAndAlertEx: function (ex) {
+        var text = Neuca.Crm.ActionsUtils.formatEx(ex);
+        alert(text);
+    },
+
+    formatEx: function (ex) {
+        // Wytnij nagłówek z XrmServiceToolkit
+        var error = ex.toString();
+        var idx = error.indexOf('Message: ', 0);
+        if (idx > 0)
+            error = error.substr(idx + 9);
+
+        // Wytnij html
+        var div = document.createElement("div");
+        div.innerHTML = error;
+        var text = div.textContent || div.innerText || "";
+
+        return text;
+    },
+
+    ExecuteFindProvincesAction: function (startsWith, callback) {
+
+        var that = Neuca.Crm.ActionsUtils;
+
+        var requestXML = ""
+        requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+        requestXML +=
+            "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>StartsWith</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            startsWith +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "        </a:Parameters>";
+        requestXML += "        <a:RequestId i:nil=\"true\" />";
+        requestXML += "        <a:RequestName>neu_postalcodenumber_findprovince</a:RequestName>";
+        requestXML += "      </request>";
+
+        XrmServiceToolkit.Soap.Execute(requestXML,
+            function (response) {
+                var responseText = XrmServiceToolkit.Soap.SelectSingleNodeText(response, "//b:value");
+                var provincesArray = JSON.parse(responseText);
+                callback(provincesArray);
+            });
+    },
+
+    ExecuteFindDistrictsAction: function (startsWith, province, callback) {
+
+        var that = Neuca.Crm.ActionsUtils;
+
+        var requestXML = ""
+        requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+        requestXML +=
+            "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>StartsWith</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            startsWith +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>Province</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            province +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "        </a:Parameters>";
+        requestXML += "        <a:RequestId i:nil=\"true\" />";
+        requestXML += "        <a:RequestName>neu_postalcodenumber_finddistricts</a:RequestName>";
+        requestXML += "      </request>";
+
+        XrmServiceToolkit.Soap.Execute(requestXML,
+            function (response) {
+                var responseText = XrmServiceToolkit.Soap.SelectSingleNodeText(response, "//b:value");
+                var districtsArray = JSON.parse(responseText);
+                callback(districtsArray);
+            });
+    },
+
+    ExecuteFindCommunitiesAction: function (startsWith, province, district, callback) {
+
+        var that = Neuca.Crm.ActionsUtils;
+
+        var requestXML = ""
+        requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+        requestXML +=
+            "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>StartsWith</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            startsWith +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>Province</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            province +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>District</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            district +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "        </a:Parameters>";
+        requestXML += "        <a:RequestId i:nil=\"true\" />";
+        requestXML += "        <a:RequestName>neu_postalcodenumber_findcommunities</a:RequestName>";
+        requestXML += "      </request>";
+
+        XrmServiceToolkit.Soap.Execute(requestXML,
+            function (response) {
+                var responseText = XrmServiceToolkit.Soap.SelectSingleNodeText(response, "//b:value");
+                var communitiesArray = JSON.parse(responseText);
+                callback(communitiesArray);
+            });
+    },
+
+    ExecuteFindLocalitiesAction: function (startsWith, province, district, community, callback) {
+
+        var that = Neuca.Crm.ActionsUtils;
+
+        var requestXML = ""
+        requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+        requestXML +=
+            "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>StartsWith</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            startsWith +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>Province</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            province +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>District</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            district +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>Community</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            community +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "        </a:Parameters>";
+        requestXML += "        <a:RequestId i:nil=\"true\" />";
+        requestXML += "        <a:RequestName>neu_postalcodenumber_findlocalities</a:RequestName>";
+        requestXML += "      </request>";
+
+        XrmServiceToolkit.Soap.Execute(requestXML,
+            function (response) {
+                var responseText = XrmServiceToolkit.Soap.SelectSingleNodeText(response, "//b:value");
+                var optionsArray = JSON.parse(responseText);
+                callback(optionsArray);
+            });
+    },
+
+    ExecuteFindPostalCodesAction: function (startsWith, province, district, community, locality, street, callback) {
+
+        var that = Neuca.Crm.ActionsUtils;
+
+        var requestXML = ""
+        requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+        requestXML +=
+            "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>StartsWith</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            startsWith +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>Province</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            province +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>District</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            district +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>Community</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            community +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>Locality</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            locality +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>Street</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            street +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "        </a:Parameters>";
+        requestXML += "        <a:RequestId i:nil=\"true\" />";
+        requestXML += "        <a:RequestName>neu_postalcodenumber_findpostalcodes</a:RequestName>";
+        requestXML += "      </request>";
+
+        XrmServiceToolkit.Soap.Execute(requestXML,
+            function (response) {
+                var responseText = XrmServiceToolkit.Soap.SelectSingleNodeText(response, "//b:value");
+                var optionsArray = JSON.parse(responseText);
+                callback(optionsArray);
+            });
+    },
+
+    ExecuteFindStreetsAction: function (startsWith, province, locality, callback) {
+
+        var that = Neuca.Crm.ActionsUtils;
+
+        var requestXML = ""
+        requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+        requestXML +=
+            "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>StartsWith</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            startsWith +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>Province</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            province +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>Locality</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            locality +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+        requestXML += "        </a:Parameters>";
+        requestXML += "        <a:RequestId i:nil=\"true\" />";
+        requestXML += "        <a:RequestName>neu_postalcodenumber_findstreets</a:RequestName>";
+        requestXML += "      </request>";
+
+        XrmServiceToolkit.Soap.Execute(requestXML,
+            function (response) {
+                var responseText = XrmServiceToolkit.Soap.SelectSingleNodeText(response, "//b:value");
+                var optionsArray = JSON.parse(responseText);
+                callback(optionsArray);
+            });
+    },
+
+    ExecuteGetDocumentFromAlfrescoAction: function (alfrescoDocument) {
+
+        var that = Neuca.Crm.ActionsUtils;
+
+        var requestXML = ""
+        requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+        requestXML +=
+            "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>AlfrescoDocumentId</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            alfrescoDocument +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>"
+        requestXML += "        </a:Parameters>";
+        requestXML += "        <a:RequestId i:nil=\"true\" />";
+        requestXML += "        <a:RequestName>neu_getdocumentfromalfresco</a:RequestName>";
+        requestXML += "      </request>";
+
+        try {
+            var response = XrmServiceToolkit.Soap.Execute(requestXML);
+            return XrmServiceToolkit.Soap.SelectSingleNodeText(response, "//b:value");
+        } catch (ex) { // Format Error
+            that.formatAndThrowEx(ex);
+        }
+    },
+
+    ExecuteSaveDocumentToAlfrescoAction: function (documentName,
+        documentMimeType,
+        documentBody,
+        objectType,
+        parentReference,
+        parentType,
+        parentName,
+        parentAlfrescoFolderPath,
+        documentTypeReference) {
+
+        var that = Neuca.Crm.ActionsUtils;
+
+        var requestXML = ""
+        requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+        requestXML +=
+            "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>DocumentName</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            documentName +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>"
+
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>DocumentMimeType</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            documentMimeType +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>"
+
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>DocumentBody</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            documentBody +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>"
+
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>ObjectType</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            objectType +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>"
+
+        //requestXML += "          <a:KeyValuePairOfstringanyType>";
+        //requestXML += "            <b:key>ObjectReference</b:key>";
+        //requestXML += "            <b:value i:type=\"a:EntityReference\">";
+        //requestXML += "              <a:Id>" + objectReference + "</a:Id>";
+        //requestXML += "              <a:LogicalName>" + objectType + "</a:LogicalName>";
+        //requestXML += "              <a:Name i:nil=\"true\" />";
+        //requestXML += "            </b:value>";
+        //requestXML += "          </a:KeyValuePairOfstringanyType>"
+
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>ParentReference</b:key>";
+        requestXML += "            <b:value i:type=\"a:EntityReference\">";
+        requestXML += "              <a:Id>" + parentReference + "</a:Id>";
+        requestXML += "              <a:LogicalName>" + parentType + "</a:LogicalName>";
+        requestXML += "              <a:Name>" + parentName + "</a:Name>";
+        requestXML += "            </b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>"
+
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>ParentType</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            parentType +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>"
+
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>ParentAlfrescoFolderPath</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            parentAlfrescoFolderPath +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>"
+
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>DocumentTypeReference</b:key>";
+        requestXML += "            <b:value i:type=\"a:EntityReference\">";
+        requestXML += "              <a:Id>" + documentTypeReference + "</a:Id>";
+        requestXML += "              <a:LogicalName>neu_conf_documenttype</a:LogicalName>";
+        requestXML += "              <a:Name i:nil=\"true\" />";
+        requestXML += "            </b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>"
+
+        requestXML += "        </a:Parameters>";
+        requestXML += "        <a:RequestId i:nil=\"true\" />";
+        requestXML += "        <a:RequestName>neu_savedocumenttoalfresco</a:RequestName>";
+        requestXML += "      </request>";
+
+        try {
+            var response = XrmServiceToolkit.Soap.Execute(requestXML);
+            return Neuca.Crm.ActionsUtils.getResponseResults(response);
+        } catch (ex) { // Format Error
+            that.formatAndThrowEx(ex);
+        }
+    },
+    ////"prvCreatenew_SMS" - sample name
+    ExecuteUserHasPrivilegesAction: function (userId, privilegeName) {
+
+        var that = Neuca.Crm.ActionsUtils;
+
+        var requestXML = ""
+        requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+        requestXML +=
+            "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>UserReference</b:key>";
+        requestXML += "            <b:value i:type=\"a:EntityReference\">";
+        requestXML += "              <a:Id>" + userId + "</a:Id>";
+        requestXML += "              <a:LogicalName>systemuser</a:LogicalName>";
+        requestXML += "              <a:Name i:nil=\"true\" />";
+        requestXML += "            </b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>"
+
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "            <b:key>PrivilegeName</b:key>";
+        requestXML += "             <b:value i:type=\"c:string\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" +
+            privilegeName +
+            "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>"
+
+        requestXML += "        </a:Parameters>";
+        requestXML += "        <a:RequestId i:nil=\"true\" />";
+        requestXML += "        <a:RequestName>neu_userhasprivilege</a:RequestName>";
+        requestXML += "      </request>";
+
+        try {
+            var response = XrmServiceToolkit.Soap.Execute(requestXML);
+            response = that.getResponseResults(response);
+            return response;
+        } catch (ex) { // Format Error
+            that.formatAndThrowEx(ex);
+        }
+    },
+
+    ExecuteCheckPermissionsAction: function (permissionsType, targetId, targetName, userId) {
+        var that = Neuca.Crm.ActionsUtils;
+
+        var requestXML = ""
+        requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+        requestXML += "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+        requestXML += "          <a:KeyValuePairOfstringanyType>";
+        requestXML += "             <b:key>PermissionsType</b:key>";
+        requestXML += "             <b:value i:type=\"c:int\" xmlns:c=\"http://www.w3.org/2001/XMLSchema\">" + permissionsType + "</b:value>";
+        requestXML += "          </a:KeyValuePairOfstringanyType>";
+
+        if (targetId != null) {
+            requestXML += "          <a:KeyValuePairOfstringanyType>";
+            requestXML += "            <b:key>TargetRef</b:key>";
+            requestXML += "            <b:value i:type=\"a:EntityReference\">";
+            requestXML += "              <a:Id>" + targetId + "</a:Id>";
+            requestXML += "              <a:LogicalName>" + targetName + "</a:LogicalName>";
+            requestXML += "              <a:Name i:nil=\"true\" />";
+            requestXML += "            </b:value>";
+            requestXML += "          </a:KeyValuePairOfstringanyType>";
+        }
+
+        if (userId != null) {
+            requestXML += "          <a:KeyValuePairOfstringanyType>";
+            requestXML += "            <b:key>UserRef</b:key>";
+            requestXML += "            <b:value i:type=\"a:EntityReference\">";
+            requestXML += "              <a:Id>" + userId + "</a:Id>";
+            requestXML += "              <a:LogicalName>systemuser</a:LogicalName>";
+            requestXML += "              <a:Name i:nil=\"true\" />";
+            requestXML += "            </b:value>";
+            requestXML += "          </a:KeyValuePairOfstringanyType>"
+        }
+
+        requestXML += "        </a:Parameters>";
+        requestXML += "        <a:RequestId i:nil=\"true\" />";
+        requestXML += "        <a:RequestName>neu_checkpermissions</a:RequestName>";
+        requestXML += "      </request>";
+
+        try {
+            var response = XrmServiceToolkit.Soap.Execute(requestXML);
+            response = that.getResponseResults(response);
+            return response;
+        }
+        catch (ex) { // Format Error
+            that.formatAndThrowEx(ex);
+        }
+    },
+
+    ExecuteGetSalesRelationMainPartnershipAction: function (deliveryPointId) {
+        var that = Neuca.Crm.ActionsUtils;
+        //deliveryPointId = deliveryPointId.replace("{", "").replace("}", "");
+
+        var requestXML = ""
+        requestXML += "      <request xmlns:a=\"http://schemas.microsoft.com/xrm/2011/Contracts\">";
+        requestXML += "        <a:Parameters xmlns:b=\"http://schemas.datacontract.org/2004/07/System.Collections.Generic\">";
+
+        if (deliveryPointId != null) {
+            requestXML += "          <a:KeyValuePairOfstringanyType>";
+            requestXML += "            <b:key>DeliveryPointRef</b:key>";
+            requestXML += "            <b:value i:type=\"a:EntityReference\">";
+            requestXML += "              <a:Id>" + deliveryPointId + "</a:Id>";
+            requestXML += "              <a:LogicalName>" + Neuca.Crm.Consts.Account.LogicalName + "</a:LogicalName>";
+            requestXML += "              <a:Name i:nil=\"true\" />";
+            requestXML += "            </b:value>";
+            requestXML += "          </a:KeyValuePairOfstringanyType>";
+        }
+
+
+        requestXML += "        </a:Parameters>";
+        requestXML += "        <a:RequestId i:nil=\"true\" />";
+        requestXML += "        <a:RequestName>neu_getmainpartnershipsalesrelation</a:RequestName>";
+        requestXML += "      </request>";
+
+        try {
+            var response = XrmServiceToolkit.Soap.Execute(requestXML);
+            response = that.getResponseResults(response);
+            return response;
+        }
+        catch (ex) { // Format Error
+            that.formatAndThrowEx(ex);
+        }
+
+    },
+
+    openRecordInNewWindow: function (entityId, logicalName) {
+
+        var path = "main.aspx?etn=" + logicalName;
+        var clientUrl = Xrm.Page.context.getClientUrl();
+
+        path = path + "&pagetype=entityrecord&id=";
+
+        if (clientUrl != null && clientUrl != "" && entityId.replace("{", "").replace("}", "") != null) {
+
+            clientUrl = clientUrl + "/" + path;
+            clientUrl = clientUrl + entityId.replace("{", "").replace("}", "");
+            window.openStdWin(clientUrl);
+
+        }
+    }
+}

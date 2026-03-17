@@ -1,0 +1,1376 @@
+<ImportExportXml version="8.2.0028.0011" SolutionPackageVersion="8.2" languagecode="1045" generatedBy="OnPremise" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SolutionManifest>
+    <UniqueName>tabele_z_dokumentacji</UniqueName>
+    <LocalizedNames>
+      <LocalizedName description="tabele_z_dokumentacji" languagecode="1045" />
+    </LocalizedNames>
+    <Descriptions />
+    <Version>1.0.0.0</Version>
+    <Managed>0</Managed>
+    <Publisher>
+      <UniqueName>Xentivo</UniqueName>
+      <LocalizedNames>
+        <LocalizedName description="Xentivo Sp. z o.o." languagecode="1045" />
+      </LocalizedNames>
+      <Descriptions />
+      <EMailAddress>info@xentivo.pl</EMailAddress>
+      <SupportingWebsiteUrl>https://www.xentivo.pl</SupportingWebsiteUrl>
+      <CustomizationPrefix>neu</CustomizationPrefix>
+      <CustomizationOptionValuePrefix>10000</CustomizationOptionValuePrefix>
+      <Addresses>
+        <Address>
+          <AddressNumber>1</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City>Warszawa</City>
+          <County xsi:nil="true"></County>
+          <Country>Polska</Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1>Bakalarska 34</Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+        <Address>
+          <AddressNumber>2</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+      </Addresses>
+    </Publisher>
+    <RootComponents>
+      <RootComponent type="1" schemaName="email" behavior="1" />
+      <RootComponent type="1" schemaName="incident" behavior="2" />
+      <RootComponent type="1" schemaName="neu_application" behavior="2" />
+      <RootComponent type="1" schemaName="neu_asset" behavior="2" />
+      <RootComponent type="1" schemaName="neu_asset_brand_rebate_percentage" behavior="2" />
+      <RootComponent type="1" schemaName="neu_asset_discount_level" behavior="2" />
+      <RootComponent type="1" schemaName="neu_asset_rebate_percentage" behavior="2" />
+      <RootComponent type="1" schemaName="neu_asset_terms_of_business" behavior="2" />
+      <RootComponent type="1" schemaName="neu_calculator" behavior="2" />
+      <RootComponent type="1" schemaName="neu_conf_contractgenerator" behavior="2" />
+      <RootComponent type="1" schemaName="neu_conf_conversion" behavior="0" />
+      <RootComponent type="1" schemaName="neu_conf_criteriatemplate" behavior="0" />
+      <RootComponent type="1" schemaName="neu_conf_failurecause" behavior="0" />
+      <RootComponent type="1" schemaName="neu_conf_formchangematrix" behavior="0" />
+      <RootComponent type="1" schemaName="neu_conf_formdictionary" behavior="0" />
+      <RootComponent type="1" schemaName="neu_conf_opportunitytype" behavior="0" />
+      <RootComponent type="1" schemaName="neu_conf_tenderformchangematrix" behavior="0" />
+      <RootComponent type="1" schemaName="neu_contract" behavior="2" />
+      <RootComponent type="1" schemaName="neu_contractop" behavior="0" />
+      <RootComponent type="1" schemaName="neu_contracttenderbundle" behavior="0" />
+      <RootComponent type="1" schemaName="neu_document" behavior="0" />
+      <RootComponent type="1" schemaName="neu_drugformpharmindex" behavior="0" />
+      <RootComponent type="1" schemaName="neu_drugpharmindex" behavior="0" />
+      <RootComponent type="1" schemaName="neu_emailgroupdictionary" behavior="1" />
+      <RootComponent type="1" schemaName="neu_environmentvariables" behavior="0" />
+      <RootComponent type="1" schemaName="neu_formchangetemplate" behavior="0" />
+      <RootComponent type="1" schemaName="neu_individualgrowthaction" behavior="2" />
+      <RootComponent type="1" schemaName="neu_institution_receiver" behavior="0" />
+      <RootComponent type="1" schemaName="neu_listproducerpricelist" behavior="0" />
+      <RootComponent type="1" schemaName="neu_listtradeterms" behavior="0" />
+      <RootComponent type="1" schemaName="neu_listtradetermstenderproduct" behavior="0" />
+      <RootComponent type="1" schemaName="neu_mappedproduct" behavior="0" />
+      <RootComponent type="1" schemaName="neu_offeraccountgroup" behavior="2" />
+      <RootComponent type="1" schemaName="neu_offerasset" behavior="2" />
+      <RootComponent type="1" schemaName="neu_operation_createapplicationfromtno" behavior="2" />
+      <RootComponent type="1" schemaName="neu_opportunitydetails" behavior="2" />
+      <RootComponent type="1" schemaName="neu_opportunityprogramipra" behavior="2" />
+      <RootComponent type="1" schemaName="neu_opportunityprogrampartnerbpf" behavior="2" />
+      <RootComponent type="1" schemaName="neu_opportunity_neu_failurecause" behavior="0" />
+      <RootComponent type="1" schemaName="neu_payer" behavior="2" />
+      <RootComponent type="1" schemaName="neu_preferredproducer" behavior="0" />
+      <RootComponent type="1" schemaName="neu_producer" behavior="0" />
+      <RootComponent type="1" schemaName="neu_producerofproduct" behavior="0" />
+      <RootComponent type="1" schemaName="neu_producerpricelist" behavior="0" />
+      <RootComponent type="1" schemaName="neu_productpricemz" behavior="1" />
+      <RootComponent type="1" schemaName="neu_purchasegroup" behavior="2" />
+      <RootComponent type="1" schemaName="neu_quote" behavior="0" />
+      <RootComponent type="1" schemaName="neu_quotebundle" behavior="0" />
+      <RootComponent type="1" schemaName="neu_quotedetail" behavior="0" />
+      <RootComponent type="1" schemaName="neu_quotedetailaddressing" behavior="0" />
+      <RootComponent type="1" schemaName="neu_quote_institution_receiver" behavior="0" />
+      <RootComponent type="1" schemaName="neu_receiver" behavior="0" />
+      <RootComponent type="1" schemaName="neu_robposition" behavior="2" />
+      <RootComponent type="1" schemaName="neu_template" behavior="0" />
+      <RootComponent type="1" schemaName="neu_templatecriterion" behavior="0" />
+      <RootComponent type="1" schemaName="neu_tenderbundle" behavior="0" />
+      <RootComponent type="1" schemaName="neu_tenderproduct" behavior="0" />
+      <RootComponent type="1" schemaName="neu_tenderstructure" behavior="0" />
+      <RootComponent type="1" schemaName="neu_tradeterms" behavior="0" />
+      <RootComponent type="1" schemaName="neu_valuation" behavior="2" />
+      <RootComponent type="1" schemaName="opportunity" behavior="2" />
+      <RootComponent type="1" schemaName="product" behavior="1" />
+      <RootComponent type="20" id="{3aadd479-f479-ed11-8110-0050568b2423}" behavior="0" />
+      <RootComponent type="20" id="{745de274-ef79-ed11-8110-0050568b2423}" behavior="0" />
+      <RootComponent type="20" id="{7bce8c79-f279-ed11-8110-0050568b2423}" behavior="0" />
+      <RootComponent type="20" id="{d654d17c-e6b4-ec11-810f-0050568b106b}" behavior="0" />
+      <RootComponent type="29" id="{a1ed4c27-bc53-47e0-976c-ffb9fe4cdeff}" behavior="0" />
+      <RootComponent type="29" id="{bcb69ff3-aceb-4dfa-b46b-9f6022a1a192}" behavior="0" />
+      <RootComponent type="29" id="{d8bc6ba6-86ce-405e-b6fc-e6104a1ebad0}" behavior="0" />
+      <RootComponent type="60" id="{066d9f71-d9d5-42ec-a8ee-3dd95c98d1aa}" />
+      <RootComponent type="60" id="{0d1e47ff-12b2-4f53-9090-bee951b98cb4}" />
+      <RootComponent type="60" id="{39cd08cb-6e32-4ad0-98ae-8f2019b9e33b}" />
+      <RootComponent type="60" id="{ba97ddcc-aa0e-4896-887a-4278b6668af9}" />
+      <RootComponent type="60" id="{e787f52f-ce51-418c-8f58-2d1b20365533}" />
+      <RootComponent type="61" schemaName="mag_/js/alert.js" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/angular/common/uploaddropzone/index.html" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/angular/CreateContractOpApp/index.html" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/angular/NeuAmoditDocuments/index.html" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/html/neu_opportunityTenderGetListProducerPriceListPriceToZPZKPosition.html" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/html/opportunitiesTenderGenerateQuoteButton.html" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/html/opportunityMapPrefProducer.html" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/html/opportunitySetPreviousStatus.html" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/html/opportunityTender.html" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/html/opportunityTenderCopyPrefProducersButton.html" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/html/opportunityTenderFormChangeTemplateSaveButton.html" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/html/opportunityTenderGenerateZPZKButton.html" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/html/opportunityTenderResetCalculateButton.html" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/html/opportunityTenderRestoreResultMapperButton.html" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/html/overheadpercentPropagationButton.html" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/images/neu_contractop_16.png" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/images/neu_contractop_32.png" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/js/common/neu_actionsutils.js" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/js/common/neu_consts.js" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/js/common/neu_uiutils.js" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/js/controllers/neu_cc_modelvisibilitycontroller.js" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/js/email.js" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/js/entities/models/neu_cc_email_model.js" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/js/entities/neu_cc_email.js" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/js/entities/opportunity.js" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/js/entities/product.js" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/js/jquery.js" behavior="0" />
+      <RootComponent type="61" schemaName="neu_/js/xrmservicetoolkit.js" behavior="0" />
+      <RootComponent type="61" schemaName="neu_attachments_subgrid.js" behavior="0" />
+      <RootComponent type="61" schemaName="neu_opportunitytenderusercheck.js" behavior="0" />
+    </RootComponents>
+    <MissingDependencies>
+      <MissingDependency>
+        <Required key="0" type="1" schemaName="neu_client" displayName="Klient" solution="Active" />
+        <Dependent key="1" type="2" schemaName="neu_clientcodecalculated" displayName="Kod CRM Klienta" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="0" type="1" schemaName="neu_client" displayName="Klient" solution="Active" />
+        <Dependent key="2" type="60" displayName="Informacje" parentDisplayName="Beneficjent" id="{79441509-fbea-4de0-a9bc-b3cf49952205}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="0" type="1" schemaName="neu_client" displayName="Klient" solution="Active" />
+        <Dependent key="3" type="2" schemaName="neu_clientsapcodecalculated" displayName="Kod SAP Klienta" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="0" type="1" schemaName="neu_client" displayName="Klient" solution="Active" />
+        <Dependent key="4" type="2" schemaName="neu_mainclientrep" displayName="Reprezentant główny klienta" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="0" type="1" schemaName="neu_client" displayName="Klient" solution="Active" />
+        <Dependent key="5" type="10" schemaName="neu_neu_client_neu_receiver" displayName="neu_neu_client_neu_receiver" parentSchemaName="neu_receiver" parentDisplayName="Beneficjent" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="0" type="1" schemaName="neu_client" displayName="Klient" solution="Active" />
+        <Dependent key="6" type="10" schemaName="neu_neu_client_neu_contractop_clientid" displayName="neu_neu_client_neu_contractop_clientid" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="7" type="1" schemaName="neu_offer" displayName="Oferta" solution="Active" />
+        <Dependent key="8" type="10" schemaName="neu_neu_offer_neu_tenderbundle_quoteState" displayName="neu_neu_offer_neu_tenderbundle_quoteState" parentSchemaName="neu_tenderbundle" parentDisplayName="Pakiet" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="9" type="1" schemaName="neu_activesubstancepharmindex" displayName="Substancja czynna" solution="Active" />
+        <Dependent key="10" type="60" displayName="Informacje" parentDisplayName="DrugPharmindex" id="{ac8943fe-3357-4f4b-a9d2-790e0485ec51}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="11" type="1" schemaName="neu_conf_salesoffice" displayName="Biuro sprzedaży" solution="Active" />
+        <Dependent key="12" type="10" schemaName="neu_neu_conf_salesoffice_neu_contractop_conf_salesofficeid" displayName="neu_neu_conf_salesoffice_neu_contractop_conf_salesofficeid" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="13" type="1" schemaName="neu_conf_nonpharmacycontractopversion" displayName="Wersja umowy OP" solution="Active" />
+        <Dependent key="14" type="26" schemaName="Umowa Lecznictwa - aktywne wersje" displayName="Umowa Lecznictwa - aktywne wersje" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" id="{1eef11ee-fc69-eb11-80f5-0050568b1204}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="13" type="1" schemaName="neu_conf_nonpharmacycontractopversion" displayName="Wersja umowy OP" solution="Active" />
+        <Dependent key="15" type="60" displayName="Informacje" parentDisplayName="Umowy Lecznictwo" id="{f4df8ede-f4d4-43b1-ad9a-946b6eb410f9}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="13" type="1" schemaName="neu_conf_nonpharmacycontractopversion" displayName="Wersja umowy OP" solution="Active" />
+        <Dependent key="16" type="60" displayName="Przetargi szpitalne" parentDisplayName="Umowy Lecznictwo" id="{2982b14a-0ca1-4c11-b7d1-d2ae679f8ddd}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="17" type="1" schemaName="neu_conf_tasktemplate" displayName="Szablon zadania" solution="Active" />
+        <Dependent key="18" type="1" schemaName="neu_conf_opportunitytype" displayName="Typ zmiany oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="19" type="1" schemaName="neu_conf_configuration" displayName="Konfiguracja" solution="Active" />
+        <Dependent key="18" type="1" schemaName="neu_conf_opportunitytype" displayName="Typ zmiany oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="13" type="1" schemaName="neu_conf_nonpharmacycontractopversion" displayName="Wersja umowy OP" solution="Active" />
+        <Dependent key="20" type="1" schemaName="neu_contractop" displayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="21" type="1" schemaName="neu_kalkulatorzpdemo" displayName="Kalkulator ZP demo" solution="Active" />
+        <Dependent key="22" type="1" schemaName="neu_producer" displayName="Producent" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="23" type="1" schemaName="neu_localaddition" displayName="Dokładka lokalna" solution="Active" />
+        <Dependent key="22" type="1" schemaName="neu_producer" displayName="Producent" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="24" type="1" schemaName="neu_amoditdocument" displayName="Amodit Dokument" solution="Active" />
+        <Dependent key="20" type="1" schemaName="neu_contractop" displayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="19" type="1" schemaName="neu_conf_configuration" displayName="Konfiguracja" solution="Active" />
+        <Dependent key="20" type="1" schemaName="neu_contractop" displayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="25" type="1" schemaName="neu_productpricemz" displayName="Ceny urzędowe MZ" solution="Active" />
+        <Dependent key="25" type="1" schemaName="neu_productpricemz" displayName="Ceny urzędowe MZ" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="26" type="1" schemaName="neu_emailgroupdictionary" displayName="Słowniki grup adresów email" solution="Active" />
+        <Dependent key="26" type="1" schemaName="neu_emailgroupdictionary" displayName="Słowniki grup adresów email" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="27" type="1" schemaName="neu_asset" displayName="Element oferty" solution="Active" />
+        <Dependent key="27" type="1" schemaName="neu_asset" displayName="Element oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="28" type="1" schemaName="neu_offerasset" displayName="Element negocjacji" solution="Active" />
+        <Dependent key="28" type="1" schemaName="neu_offerasset" displayName="Element negocjacji" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="29" type="1" schemaName="neu_opportunityprogrampartnerbpf" displayName="Pozyskanie do programu Partner / Partner+" solution="Active" />
+        <Dependent key="29" type="1" schemaName="neu_opportunityprogrampartnerbpf" displayName="Pozyskanie do programu Partner / Partner+" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="30" type="1" schemaName="neu_opportunityprogramipra" displayName="Pozyskanie do programu IPRA" solution="Active" />
+        <Dependent key="30" type="1" schemaName="neu_opportunityprogramipra" displayName="Pozyskanie do programu IPRA" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="31" type="1" schemaName="neu_application" displayName="Wniosek" solution="Active" />
+        <Dependent key="31" type="1" schemaName="neu_application" displayName="Wniosek" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="32" type="1" schemaName="neu_conf_contractgenerator" displayName="Generator umowy" solution="Active" />
+        <Dependent key="32" type="1" schemaName="neu_conf_contractgenerator" displayName="Generator umowy" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="33" type="1" schemaName="neu_contract" displayName="Umowa" solution="Active" />
+        <Dependent key="33" type="1" schemaName="neu_contract" displayName="Umowa" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="34" type="1" schemaName="neu_operation_createapplicationfromtno" displayName="Operacja tworzenia wniosku z TNO" solution="Active" />
+        <Dependent key="34" type="1" schemaName="neu_operation_createapplicationfromtno" displayName="Operacja tworzenia wniosku z TNO" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="35" type="1" schemaName="neu_offeraccountgroup" displayName="Zestaw Aptek Oferty" solution="Active" />
+        <Dependent key="35" type="1" schemaName="neu_offeraccountgroup" displayName="Zestaw Aptek Oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="36" type="1" schemaName="neu_robposition" displayName="Pozycja ROB" solution="Active" />
+        <Dependent key="36" type="1" schemaName="neu_robposition" displayName="Pozycja ROB" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="37" type="1" schemaName="neu_individualgrowthaction" displayName="Indywidualna akcja wzrostowa" solution="Active" />
+        <Dependent key="37" type="1" schemaName="neu_individualgrowthaction" displayName="Indywidualna akcja wzrostowa" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="38" type="1" schemaName="neu_asset_terms_of_business" displayName="Konfiguracja liczenia rabatów" solution="Active" />
+        <Dependent key="38" type="1" schemaName="neu_asset_terms_of_business" displayName="Konfiguracja liczenia rabatów" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="39" type="1" schemaName="neu_asset_discount_level" displayName="Poziom rabatowania" solution="Active" />
+        <Dependent key="39" type="1" schemaName="neu_asset_discount_level" displayName="Poziom rabatowania" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="40" type="1" schemaName="neu_asset_brand_rebate_percentage" displayName="Rabat marki farmaceuty" solution="Active" />
+        <Dependent key="40" type="1" schemaName="neu_asset_brand_rebate_percentage" displayName="Rabat marki farmaceuty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="41" type="1" schemaName="neu_asset_rebate_percentage" displayName="Rabat próg MAX" solution="Active" />
+        <Dependent key="41" type="1" schemaName="neu_asset_rebate_percentage" displayName="Rabat próg MAX" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="42" type="1" schemaName="neu_opportunitydetails" displayName="Szczegóły zmiany oferty" solution="Active" />
+        <Dependent key="42" type="1" schemaName="neu_opportunitydetails" displayName="Szczegóły zmiany oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="43" type="1" schemaName="neu_calculator" displayName="Calculator" solution="Active" />
+        <Dependent key="43" type="1" schemaName="neu_calculator" displayName="Calculator" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="44" type="1" schemaName="neu_valuation" displayName="Wycena" solution="Active" />
+        <Dependent key="44" type="1" schemaName="neu_valuation" displayName="Wycena" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="45" type="1" schemaName="neu_purchasegroup" displayName="Grupa zakupowa" solution="Active" />
+        <Dependent key="45" type="1" schemaName="neu_purchasegroup" displayName="Grupa zakupowa" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="46" type="1" schemaName="neu_payer" displayName="Płatnik" solution="Active" />
+        <Dependent key="46" type="1" schemaName="neu_payer" displayName="Płatnik" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="47" type="2" schemaName="neu_name" displayName="Nazwa" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" />
+        <Dependent key="48" type="26" schemaName="Płatnik - widok wyszukiwania" displayName="Płatnik - widok wyszukiwania" parentSchemaName="neu_payer" parentDisplayName="Płatnik" id="{df7a75ed-076d-4bd0-9dd4-ee7c38730919}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="47" type="2" schemaName="neu_name" displayName="Nazwa" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" />
+        <Dependent key="49" type="10" schemaName="neu_neu_payer_neu_receiver" displayName="neu_neu_payer_neu_receiver" parentSchemaName="neu_receiver" parentDisplayName="Beneficjent" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="47" type="2" schemaName="neu_name" displayName="Nazwa" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" />
+        <Dependent key="50" type="10" schemaName="neu_neu_payer_neu_quote" displayName="neu_neu_payer_neu_quote" parentSchemaName="neu_quote" parentDisplayName="Oferta cenowa" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="47" type="2" schemaName="neu_name" displayName="Nazwa" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" />
+        <Dependent key="51" type="10" schemaName="neu_neu_payer_opportunity_purchasegrouppayer" displayName="neu_neu_payer_opportunity_purchasegrouppayer" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="47" type="2" schemaName="neu_name" displayName="Nazwa" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" />
+        <Dependent key="52" type="10" schemaName="neu_neu_payer_neu_contractop_payerorganiser" displayName="neu_neu_payer_neu_contractop_payerorganiser" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="47" type="2" schemaName="neu_name" displayName="Nazwa" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" />
+        <Dependent key="53" type="10" schemaName="neu_neu_payer_opportunity" displayName="neu_neu_payer_opportunity" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="54" type="2" schemaName="neu_offerid" displayName="Oferta" parentSchemaName="neu_offer" parentDisplayName="Oferta" solution="Active" />
+        <Dependent key="8" type="10" schemaName="neu_neu_offer_neu_tenderbundle_quoteState" displayName="neu_neu_offer_neu_tenderbundle_quoteState" parentSchemaName="neu_tenderbundle" parentDisplayName="Pakiet" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="58" type="2" schemaName="neu_payerid" displayName="Płatnik" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" />
+        <Dependent key="49" type="10" schemaName="neu_neu_payer_neu_receiver" displayName="neu_neu_payer_neu_receiver" parentSchemaName="neu_receiver" parentDisplayName="Beneficjent" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="58" type="2" schemaName="neu_payerid" displayName="Płatnik" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" />
+        <Dependent key="50" type="10" schemaName="neu_neu_payer_neu_quote" displayName="neu_neu_payer_neu_quote" parentSchemaName="neu_quote" parentDisplayName="Oferta cenowa" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="58" type="2" schemaName="neu_payerid" displayName="Płatnik" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" />
+        <Dependent key="53" type="10" schemaName="neu_neu_payer_opportunity" displayName="neu_neu_payer_opportunity" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="58" type="2" schemaName="neu_payerid" displayName="Płatnik" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" />
+        <Dependent key="52" type="10" schemaName="neu_neu_payer_neu_contractop_payerorganiser" displayName="neu_neu_payer_neu_contractop_payerorganiser" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="58" type="2" schemaName="neu_payerid" displayName="Płatnik" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" />
+        <Dependent key="48" type="26" schemaName="Płatnik - widok wyszukiwania" displayName="Płatnik - widok wyszukiwania" parentSchemaName="neu_payer" parentDisplayName="Płatnik" id="{df7a75ed-076d-4bd0-9dd4-ee7c38730919}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="59" type="2" schemaName="neu_sapcode" displayName="Kod SAP" parentSchemaName="account" parentDisplayName="Punkt sprzedaży" solution="Active" />
+        <Dependent key="60" type="26" schemaName="Aktywne Beneficjencji" displayName="Aktywne Beneficjencji" parentSchemaName="neu_receiver" parentDisplayName="Beneficjent" id="{f75710cd-0809-4f38-9937-b2686fce25e2}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="61" type="2" schemaName="neu_nip" displayName="NIP" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" />
+        <Dependent key="48" type="26" schemaName="Płatnik - widok wyszukiwania" displayName="Płatnik - widok wyszukiwania" parentSchemaName="neu_payer" parentDisplayName="Płatnik" id="{df7a75ed-076d-4bd0-9dd4-ee7c38730919}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="64" type="2" schemaName="neu_contractopid" displayName="Umowa" parentSchemaName="neu_conf_nonpharmacycontractopversion" parentDisplayName="Wersja umowy OP" solution="Active" />
+        <Dependent key="14" type="26" schemaName="Umowa Lecznictwa - aktywne wersje" displayName="Umowa Lecznictwa - aktywne wersje" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" id="{1eef11ee-fc69-eb11-80f5-0050568b1204}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="65" type="2" schemaName="neu_code" displayName="Kod klienta CRM (tekst)" parentSchemaName="neu_client" parentDisplayName="Klient" solution="Active" />
+        <Dependent key="1" type="2" schemaName="neu_clientcodecalculated" displayName="Kod CRM Klienta" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="66" type="2" schemaName="neu_ownerastext" displayName="Właściciel (tekst)" parentSchemaName="neu_client" parentDisplayName="Klient" solution="Active" />
+        <Dependent key="4" type="2" schemaName="neu_mainclientrep" displayName="Reprezentant główny klienta" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="67" type="2" schemaName="neu_purchasegroupid" displayName="Grupa zakupowa" parentSchemaName="neu_purchasegroup" parentDisplayName="Grupa zakupowa" solution="Active" />
+        <Dependent key="68" type="10" schemaName="neu_neu_purchasegroup_neu_quote" displayName="neu_neu_purchasegroup_neu_quote" parentSchemaName="neu_quote" parentDisplayName="Oferta cenowa" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="67" type="2" schemaName="neu_purchasegroupid" displayName="Grupa zakupowa" parentSchemaName="neu_purchasegroup" parentDisplayName="Grupa zakupowa" solution="Active" />
+        <Dependent key="69" type="10" schemaName="neu_neu_purchasegroup_opportunity_organizerid" displayName="neu_neu_purchasegroup_opportunity_organizerid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="67" type="2" schemaName="neu_purchasegroupid" displayName="Grupa zakupowa" parentSchemaName="neu_purchasegroup" parentDisplayName="Grupa zakupowa" solution="Active" />
+        <Dependent key="70" type="26" schemaName="Grupa zakupowa - widok wyszukiwania" displayName="Grupa zakupowa - widok wyszukiwania" parentSchemaName="neu_purchasegroup" parentDisplayName="Grupa zakupowa" id="{b841ca52-785a-407f-95cc-912efa66eff6}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="67" type="2" schemaName="neu_purchasegroupid" displayName="Grupa zakupowa" parentSchemaName="neu_purchasegroup" parentDisplayName="Grupa zakupowa" solution="Active" />
+        <Dependent key="71" type="10" schemaName="neu_neu_purchasegroup_neu_contractop_purchasegroupid" displayName="neu_neu_purchasegroup_neu_contractop_purchasegroupid" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="72" type="2" schemaName="neu_name" displayName="Nazwa" parentSchemaName="neu_purchasegroup" parentDisplayName="Grupa zakupowa" solution="Active" />
+        <Dependent key="71" type="10" schemaName="neu_neu_purchasegroup_neu_contractop_purchasegroupid" displayName="neu_neu_purchasegroup_neu_contractop_purchasegroupid" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="72" type="2" schemaName="neu_name" displayName="Nazwa" parentSchemaName="neu_purchasegroup" parentDisplayName="Grupa zakupowa" solution="Active" />
+        <Dependent key="68" type="10" schemaName="neu_neu_purchasegroup_neu_quote" displayName="neu_neu_purchasegroup_neu_quote" parentSchemaName="neu_quote" parentDisplayName="Oferta cenowa" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="72" type="2" schemaName="neu_name" displayName="Nazwa" parentSchemaName="neu_purchasegroup" parentDisplayName="Grupa zakupowa" solution="Active" />
+        <Dependent key="70" type="26" schemaName="Grupa zakupowa - widok wyszukiwania" displayName="Grupa zakupowa - widok wyszukiwania" parentSchemaName="neu_purchasegroup" parentDisplayName="Grupa zakupowa" id="{b841ca52-785a-407f-95cc-912efa66eff6}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="72" type="2" schemaName="neu_name" displayName="Nazwa" parentSchemaName="neu_purchasegroup" parentDisplayName="Grupa zakupowa" solution="Active" />
+        <Dependent key="69" type="10" schemaName="neu_neu_purchasegroup_opportunity_organizerid" displayName="neu_neu_purchasegroup_opportunity_organizerid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="72" type="2" schemaName="neu_name" displayName="Nazwa" parentSchemaName="neu_purchasegroup" parentDisplayName="Grupa zakupowa" solution="Active" />
+        <Dependent key="73" type="10" schemaName="neu_neu_purchasegroup_opportunity" displayName="neu_neu_purchasegroup_opportunity" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="74" type="2" schemaName="neu_sapcode" displayName="Kod SAP" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" />
+        <Dependent key="48" type="26" schemaName="Płatnik - widok wyszukiwania" displayName="Płatnik - widok wyszukiwania" parentSchemaName="neu_payer" parentDisplayName="Płatnik" id="{df7a75ed-076d-4bd0-9dd4-ee7c38730919}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="75" type="2" schemaName="neu_sapcode" displayName="Kod SAP" parentSchemaName="neu_client" parentDisplayName="Klient" solution="Active" />
+        <Dependent key="3" type="2" schemaName="neu_clientsapcodecalculated" displayName="Kod SAP Klienta" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="76" type="2" schemaName="neu_sapcode" displayName="Kod SAP" parentSchemaName="neu_purchasegroup" parentDisplayName="Grupa zakupowa" solution="Active" />
+        <Dependent key="70" type="26" schemaName="Grupa zakupowa - widok wyszukiwania" displayName="Grupa zakupowa - widok wyszukiwania" parentSchemaName="neu_purchasegroup" parentDisplayName="Grupa zakupowa" id="{b841ca52-785a-407f-95cc-912efa66eff6}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="77" type="2" schemaName="statecode" displayName="Stan" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" />
+        <Dependent key="48" type="26" schemaName="Płatnik - widok wyszukiwania" displayName="Płatnik - widok wyszukiwania" parentSchemaName="neu_payer" parentDisplayName="Płatnik" id="{df7a75ed-076d-4bd0-9dd4-ee7c38730919}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="78" type="2" schemaName="neu_conf_salesofficeid" displayName="Biuro sprzedaży" parentSchemaName="neu_conf_salesoffice" parentDisplayName="Biuro sprzedaży" solution="Active" />
+        <Dependent key="12" type="10" schemaName="neu_neu_conf_salesoffice_neu_contractop_conf_salesofficeid" displayName="neu_neu_conf_salesoffice_neu_contractop_conf_salesofficeid" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="79" type="2" schemaName="neu_name" displayName="Nazwa" parentSchemaName="neu_offer" parentDisplayName="Oferta" solution="Active" />
+        <Dependent key="8" type="10" schemaName="neu_neu_offer_neu_tenderbundle_quoteState" displayName="neu_neu_offer_neu_tenderbundle_quoteState" parentSchemaName="neu_tenderbundle" parentDisplayName="Pakiet" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="80" type="2" schemaName="neu_address_city" displayName="Miasto" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" />
+        <Dependent key="48" type="26" schemaName="Płatnik - widok wyszukiwania" displayName="Płatnik - widok wyszukiwania" parentSchemaName="neu_payer" parentDisplayName="Płatnik" id="{df7a75ed-076d-4bd0-9dd4-ee7c38730919}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="81" type="2" schemaName="neu_name" displayName="Nazwa" parentSchemaName="neu_client" parentDisplayName="Klient" solution="Active" />
+        <Dependent key="5" type="10" schemaName="neu_neu_client_neu_receiver" displayName="neu_neu_client_neu_receiver" parentSchemaName="neu_receiver" parentDisplayName="Beneficjent" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="81" type="2" schemaName="neu_name" displayName="Nazwa" parentSchemaName="neu_client" parentDisplayName="Klient" solution="Active" />
+        <Dependent key="6" type="10" schemaName="neu_neu_client_neu_contractop_clientid" displayName="neu_neu_client_neu_contractop_clientid" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="83" type="2" schemaName="neu_clientid" displayName="Klient" parentSchemaName="neu_client" parentDisplayName="Klient" solution="Active" />
+        <Dependent key="5" type="10" schemaName="neu_neu_client_neu_receiver" displayName="neu_neu_client_neu_receiver" parentSchemaName="neu_receiver" parentDisplayName="Beneficjent" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="83" type="2" schemaName="neu_clientid" displayName="Klient" parentSchemaName="neu_client" parentDisplayName="Klient" solution="Active" />
+        <Dependent key="4" type="2" schemaName="neu_mainclientrep" displayName="Reprezentant główny klienta" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="83" type="2" schemaName="neu_clientid" displayName="Klient" parentSchemaName="neu_client" parentDisplayName="Klient" solution="Active" />
+        <Dependent key="6" type="10" schemaName="neu_neu_client_neu_contractop_clientid" displayName="neu_neu_client_neu_contractop_clientid" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="83" type="2" schemaName="neu_clientid" displayName="Klient" parentSchemaName="neu_client" parentDisplayName="Klient" solution="Active" />
+        <Dependent key="1" type="2" schemaName="neu_clientcodecalculated" displayName="Kod CRM Klienta" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="83" type="2" schemaName="neu_clientid" displayName="Klient" parentSchemaName="neu_client" parentDisplayName="Klient" solution="Active" />
+        <Dependent key="3" type="2" schemaName="neu_clientsapcodecalculated" displayName="Kod SAP Klienta" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="84" type="2" schemaName="neu_name" displayName="Nazwa" parentSchemaName="neu_conf_salesoffice" parentDisplayName="Biuro sprzedaży" solution="Active" />
+        <Dependent key="12" type="10" schemaName="neu_neu_conf_salesoffice_neu_contractop_conf_salesofficeid" displayName="neu_neu_conf_salesoffice_neu_contractop_conf_salesofficeid" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="85" type="2" schemaName="neu_contractversionstatus" displayName="Status wersji umowy" parentSchemaName="neu_conf_nonpharmacycontractopversion" parentDisplayName="Wersja umowy OP" solution="Active" />
+        <Dependent key="14" type="26" schemaName="Umowa Lecznictwa - aktywne wersje" displayName="Umowa Lecznictwa - aktywne wersje" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" id="{1eef11ee-fc69-eb11-80f5-0050568b1204}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="87" type="2" schemaName="statecode" displayName="Stan" parentSchemaName="neu_purchasegroup" parentDisplayName="Grupa zakupowa" solution="Active" />
+        <Dependent key="70" type="26" schemaName="Grupa zakupowa - widok wyszukiwania" displayName="Grupa zakupowa - widok wyszukiwania" parentSchemaName="neu_purchasegroup" parentDisplayName="Grupa zakupowa" id="{b841ca52-785a-407f-95cc-912efa66eff6}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="88" type="10" schemaName="neu_neu_client_opportunity_organizerid" displayName="neu_neu_client_opportunity_organizerid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="89" type="2" schemaName="neu_organizerclientid" displayName="Organizator Przetargu - Klient" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="90" type="10" schemaName="neu_neu_incidenttask_email_incidenttaskid" displayName="neu_neu_incidenttask_email_incidenttaskid" parentSchemaName="email" parentDisplayName="Wiadomość e-mail" solution="Active" />
+        <Dependent key="91" type="2" schemaName="neu_incidenttaskid" displayName="Zadanie sprawy" parentSchemaName="email" parentDisplayName="Wiadomość e-mail" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="92" type="10" schemaName="neu_systemuser_opportunity_representativeid" displayName="neu_systemuser_opportunity_representativeid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="93" type="2" schemaName="neu_representativeid" displayName="xxxReprezentant" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="92" type="10" schemaName="neu_systemuser_opportunity_representativeid" displayName="neu_systemuser_opportunity_representativeid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="56" type="10" schemaName="neu_systemuser_opportunity_authorid" displayName="neu_systemuser_opportunity_authorid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="94" type="10" schemaName="neu_neu_kalkulatorzpdemo_product" displayName="neu_neu_kalkulatorzpdemo_product" parentSchemaName="product" parentDisplayName="Produkt SAP" solution="Active" />
+        <Dependent key="95" type="2" schemaName="neu_neu_kalkulatorzpdemo_productid" displayName="neu_kalkulatorzpdemo_product" parentSchemaName="product" parentDisplayName="Produkt SAP" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="56" type="10" schemaName="neu_systemuser_opportunity_authorid" displayName="neu_systemuser_opportunity_authorid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="56" type="10" schemaName="neu_systemuser_opportunity_authorid" displayName="neu_systemuser_opportunity_authorid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="56" type="10" schemaName="neu_systemuser_opportunity_authorid" displayName="neu_systemuser_opportunity_authorid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="96" type="2" schemaName="neu_authoruserortext" displayName="Autor" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="56" type="10" schemaName="neu_systemuser_opportunity_authorid" displayName="neu_systemuser_opportunity_authorid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="97" type="2" schemaName="neu_authorid" displayName="Autor (Użytkownik)" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="98" type="10" schemaName="neu_neu_valuation_opportunity_currentvaluationid" displayName="neu_neu_valuation_opportunity_currentvaluationid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="99" type="2" schemaName="neu_currentvaluationid" displayName="Aktualna wycena" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="100" type="10" schemaName="neu_neu_conf_programvariant_opportunity_conf_programvariantid" displayName="neu_neu_conf_programvariant_opportunity_conf_programvariantid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="101" type="2" schemaName="neu_conf_programvariantid" displayName="Wariant programu Partner i Partner Plus" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="102" type="10" schemaName="neu_neu_producer_product_producerid" displayName="neu_neu_producer_product_producerid" parentSchemaName="product" parentDisplayName="Produkt SAP" solution="Active" />
+        <Dependent key="63" type="10" schemaName="neu_neu_producer_product" displayName="neu_neu_producer_product" parentSchemaName="product" parentDisplayName="Produkt SAP" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="102" type="10" schemaName="neu_neu_producer_product_producerid" displayName="neu_neu_producer_product_producerid" parentSchemaName="product" parentDisplayName="Produkt SAP" solution="Active" />
+        <Dependent key="103" type="2" schemaName="neu_producerid" displayName="Producent" parentSchemaName="product" parentDisplayName="Produkt SAP" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="104" type="10" schemaName="neu_neu_conf_salesoffice_opportunity_salesofficeid" displayName="neu_neu_conf_salesoffice_opportunity_salesofficeid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="105" type="2" schemaName="neu_salesofficeid" displayName="Biuro" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="106" type="10" schemaName="neu_neu_application_opportunity_applicationid" displayName="neu_neu_application_opportunity_applicationid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="107" type="2" schemaName="neu_applicationid" displayName="Wniosek" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="108" type="10" schemaName="neu_neu_conf_specialcampaigntypes_opportunity_conf_specialcampaigntypeid" displayName="neu_neu_conf_specialcampaigntypes_opportunity_conf_specialcampaigntypeid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="109" type="2" schemaName="neu_conf_specialcampaigntypeid" displayName="Kampania specjalna" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="110" type="10" schemaName="neu_client_opportunity_clientid" displayName="neu_client_opportunity_clientid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="3" type="2" schemaName="neu_clientsapcodecalculated" displayName="Kod SAP Klienta" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="110" type="10" schemaName="neu_client_opportunity_clientid" displayName="neu_client_opportunity_clientid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="111" type="2" schemaName="neu_clientid" displayName="Klient (powiązanie)" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="110" type="10" schemaName="neu_client_opportunity_clientid" displayName="neu_client_opportunity_clientid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="4" type="2" schemaName="neu_mainclientrep" displayName="Reprezentant główny klienta" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="110" type="10" schemaName="neu_client_opportunity_clientid" displayName="neu_client_opportunity_clientid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="1" type="2" schemaName="neu_clientcodecalculated" displayName="Kod CRM Klienta" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="112" type="10" schemaName="neu_neu_receiver_opportunity_purchasegroupmainclientid" displayName="neu_neu_receiver_opportunity_purchasegroupmainclientid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="113" type="2" schemaName="neu_purchasegroupmainclientid" displayName="Organizator z grupy zakupowej" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="114" type="10" schemaName="neu_neu_producer_opportunity_producerid" displayName="neu_neu_producer_opportunity_producerid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="115" type="2" schemaName="neu_producerid" displayName="xxProducent" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="69" type="10" schemaName="neu_neu_purchasegroup_opportunity_organizerid" displayName="neu_neu_purchasegroup_opportunity_organizerid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="69" type="10" schemaName="neu_neu_purchasegroup_opportunity_organizerid" displayName="neu_neu_purchasegroup_opportunity_organizerid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="69" type="10" schemaName="neu_neu_purchasegroup_opportunity_organizerid" displayName="neu_neu_purchasegroup_opportunity_organizerid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="116" type="2" schemaName="neu_organizergroupid" displayName="Organizator Przetargu - Grupa Zakupowa" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="117" type="10" schemaName="neu_contact_opportunity_contactpersonid" displayName="neu_contact_opportunity_contactpersonid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="118" type="2" schemaName="neu_contactpersonid" displayName="Osoba kontaktowa" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="119" type="10" schemaName="neu_systemuser_opportunity_kwaid" displayName="neu_systemuser_opportunity_kwaid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="120" type="2" schemaName="neu_kwaid" displayName="KWA" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="119" type="10" schemaName="neu_systemuser_opportunity_kwaid" displayName="neu_systemuser_opportunity_kwaid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="56" type="10" schemaName="neu_systemuser_opportunity_authorid" displayName="neu_systemuser_opportunity_authorid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="121" type="10" schemaName="neu_neu_opportunitydetails_opportunity_opportunitydetailsid" displayName="neu_neu_opportunitydetails_opportunity_opportunitydetailsid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="122" type="2" schemaName="neu_opportunitydetailsid" displayName="Szczegóły zmiany oferty" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="123" type="10" schemaName="neu_neu_conf_salesrepresentation_opportunity_Przedstawicielstwohandlowe" displayName="neu_neu_conf_salesrepresentation_opportunity_Przedstawicielstwohandlowe" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="124" type="2" schemaName="neu_conf_salesrepresentation" displayName="Przedstawicielstwo handlowe" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="125" type="10" schemaName="neu_appointment_opportunity_appointmentid" displayName="neu_appointment_opportunity_appointmentid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="126" type="2" schemaName="neu_appointmentid" displayName="Wizyta" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="127" type="10" schemaName="neu_campaign_email_campaignid" displayName="neu_campaign_email_campaignid" parentSchemaName="email" parentDisplayName="Wiadomość e-mail" solution="Active" />
+        <Dependent key="128" type="2" schemaName="neu_campaignid" displayName="Kampania" parentSchemaName="email" parentDisplayName="Wiadomość e-mail" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="129" type="10" schemaName="neu_account_opportunity_tech_accountid" displayName="neu_account_opportunity_tech_accountid" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" solution="Active" />
+        <Dependent key="130" type="2" schemaName="neu_tech_accountid" displayName="Punkt sprzedaży" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="131" type="10" schemaName="neu_neu_produktykalkulatorazp_product" displayName="neu_neu_produktykalkulatorazp_product" parentSchemaName="product" parentDisplayName="Produkt SAP" solution="Active" />
+        <Dependent key="132" type="2" schemaName="neu_produktykalkulatorazpid" displayName="Produkty Kalkulatora ZP" parentSchemaName="product" parentDisplayName="Produkt SAP" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="133" type="9" schemaName="neu_overheadpercentsourcelov" displayName="Pochodzenie narzutu na pozycji" solution="Active" />
+        <Dependent key="134" type="2" schemaName="neu_overheadpercentsource" displayName="Pochodzenie narzutu %" parentSchemaName="neu_tenderproduct" parentDisplayName="Produkt Przetargu" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="135" type="9" schemaName="neu_productrouteofadministration" displayName="Drogi podania leków" solution="Active" />
+        <Dependent key="136" type="2" schemaName="neu_routeofadministration" displayName="Droga podania" parentSchemaName="product" parentDisplayName="Produkt SAP" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="137" type="9" schemaName="neu_documentacceptancestatus" displayName="Status akceptacji dokumentu" solution="Active" />
+        <Dependent key="138" type="2" schemaName="neu_letterofintentstatus" displayName="Status akceptacji listu intencyjnego" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="137" type="9" schemaName="neu_documentacceptancestatus" displayName="Status akceptacji dokumentu" solution="Active" />
+        <Dependent key="139" type="2" schemaName="neu_contractstatus" displayName="Status akceptacji umowy" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="140" type="9" schemaName="neu_margingroupset" displayName="Grupa marżowa" solution="Active" />
+        <Dependent key="141" type="2" schemaName="neu_margingroup" displayName="Grupa marżowa" parentSchemaName="neu_tenderproduct" parentDisplayName="Produkt Przetargu" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="140" type="9" schemaName="neu_margingroupset" displayName="Grupa marżowa" solution="Active" />
+        <Dependent key="142" type="2" schemaName="neu_margingroup" displayName="Grupa marżowa" parentSchemaName="product" parentDisplayName="Produkt SAP" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="143" type="9" schemaName="neu_programfield" displayName="Typ programu aptecznego" solution="Active" />
+        <Dependent key="144" type="2" schemaName="neu_programfield" displayName="Typ programu" parentSchemaName="neu_conf_opportunitytype" parentDisplayName="Typ zmiany oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="145" type="9" schemaName="neu_nonpharmacycontractopaction" displayName="Działanie na umowie OP" solution="Active" />
+        <Dependent key="146" type="2" schemaName="neu_action" displayName="Działanie" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="147" type="9" schemaName="neu_vat" displayName="Stawka VAT" solution="Active" />
+        <Dependent key="148" type="2" schemaName="neu_vatrate" displayName="VAT (%)" parentSchemaName="neu_quotedetail" parentDisplayName="Produkt oferty cenowej" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="147" type="9" schemaName="neu_vat" displayName="Stawka VAT" solution="Active" />
+        <Dependent key="149" type="2" schemaName="neu_vatrate" displayName="VAT (%)" parentSchemaName="neu_mappedproduct" parentDisplayName="Produkt Dopasowany" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="147" type="9" schemaName="neu_vat" displayName="Stawka VAT" solution="Active" />
+        <Dependent key="150" type="2" schemaName="neu_vatrate" displayName="VAT (%)" parentSchemaName="neu_tenderproduct" parentDisplayName="Produkt Przetargu" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="147" type="9" schemaName="neu_vat" displayName="Stawka VAT" solution="Active" />
+        <Dependent key="151" type="2" schemaName="neu_vatrate" displayName="VAT (%)" parentSchemaName="product" parentDisplayName="Produkt SAP" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="152" type="9" schemaName="neu_statusnegocjacji" displayName="Status negocjacji" solution="Active" />
+        <Dependent key="153" type="2" schemaName="neu_negotiationstatus" displayName="Status negocjacji" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="154" type="9" schemaName="neu_typeofcalculation" displayName="Metody Kalkulacji" solution="Active" />
+        <Dependent key="155" type="2" schemaName="neu_typeofcalculation" displayName="Metoda kalkulacji" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="156" type="9" schemaName="neu_overheadpercenttenderbundlesourcelov" displayName="Pochodzenie narzutu na pakiecie" solution="Active" />
+        <Dependent key="157" type="2" schemaName="neu_overheadpercentsource" displayName="Pochodzenie narzutu %" parentSchemaName="neu_tenderbundle" parentDisplayName="Pakiet" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="158" type="9" schemaName="neu_orderingmethodtype" displayName="Sposób zamawiania" solution="Active" />
+        <Dependent key="159" type="2" schemaName="neu_orderingmethod" displayName="Sposób zamawiania" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="158" type="9" schemaName="neu_orderingmethodtype" displayName="Sposób zamawiania" solution="Active" />
+        <Dependent key="160" type="2" schemaName="neu_orderingmethod" displayName="Sposób zamawiania" parentSchemaName="neu_quote" parentDisplayName="Oferta cenowa" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="161" type="9" schemaName="neu_settlementmethodtype" displayName="Sposób rozliczania" solution="Active" />
+        <Dependent key="162" type="2" schemaName="neu_settlementmethod" displayName="Sposób rozliczania" parentSchemaName="neu_tenderproduct" parentDisplayName="Produkt Przetargu" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="161" type="9" schemaName="neu_settlementmethodtype" displayName="Sposób rozliczania" solution="Active" />
+        <Dependent key="163" type="2" schemaName="neu_settlementmethod" displayName="Sposób rozliczania" parentSchemaName="neu_listtradeterms" parentDisplayName="Pozycja ZPZK" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="161" type="9" schemaName="neu_settlementmethodtype" displayName="Sposób rozliczania" solution="Active" />
+        <Dependent key="164" type="2" schemaName="neu_settlementmethod" displayName="Sposób rozliczania" parentSchemaName="neu_producer" parentDisplayName="Producent" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="161" type="9" schemaName="neu_settlementmethodtype" displayName="Sposób rozliczania" solution="Active" />
+        <Dependent key="165" type="2" schemaName="neu_settlementmethod" displayName="Sposób rozliczania" parentSchemaName="neu_quotedetail" parentDisplayName="Produkt oferty cenowej" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="161" type="9" schemaName="neu_settlementmethodtype" displayName="Sposób rozliczania" solution="Active" />
+        <Dependent key="166" type="2" schemaName="neu_settlementmethod" displayName="Sposób rozliczania" parentSchemaName="neu_mappedproduct" parentDisplayName="Produkt Dopasowany" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="167" type="9" schemaName="neu_packagingcalculatemethod" displayName="Przeliczanie opakowań" solution="Active" />
+        <Dependent key="168" type="2" schemaName="neu_packagingcalculatemethod" displayName="Sposób przeliczania wielkości opakowań" parentSchemaName="neu_tenderproduct" parentDisplayName="Produkt Przetargu" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="167" type="9" schemaName="neu_packagingcalculatemethod" displayName="Przeliczanie opakowań" solution="Active" />
+        <Dependent key="169" type="2" schemaName="neu_packagingcalculatemethod" displayName="Sposób przeliczania wielkości opakowań" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="170" type="9" schemaName="neu_calculator_orderstatuses" displayName="Status zamówienia - Kalkulator" solution="Active" />
+        <Dependent key="171" type="2" schemaName="neu_calculator_orderstatus" displayName="Status zamówienia" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="172" type="9" schemaName="neu_medicalspecialization" displayName="Specjalizacja lekarska" solution="Active" />
+        <Dependent key="173" type="2" schemaName="neu_medicalspecialization" displayName="Specjalizacja medyczna" parentSchemaName="product" parentDisplayName="Produkt SAP" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="174" type="9" schemaName="neu_offerstatustno" displayName="Status oferty TNO" solution="Active" />
+        <Dependent key="175" type="2" schemaName="neu_offerstatustno" displayName="Status oferty TNO" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="176" type="9" schemaName="neu_activityreturnstatus" displayName="Status zwrotny działania" solution="Active" />
+        <Dependent key="177" type="2" schemaName="neu_mailstatus" displayName="Status zwrotny" parentSchemaName="email" parentDisplayName="Wiadomość e-mail" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="178" type="9" schemaName="neu_contracttypeop" displayName="Rodzaj umowy OP" solution="Active" />
+        <Dependent key="179" type="2" schemaName="neu_contracttype" displayName="Rodzaj umowy" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="180" type="9" schemaName="neu_valuecontroltype" displayName="Kontrola wartości" solution="Active" />
+        <Dependent key="181" type="2" schemaName="neu_valuecontrol" displayName="Kontrola wartości" parentSchemaName="neu_quote" parentDisplayName="Oferta cenowa" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="180" type="9" schemaName="neu_valuecontroltype" displayName="Kontrola wartości" solution="Active" />
+        <Dependent key="182" type="2" schemaName="neu_valuecontrol" displayName="Kontrola wartości" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="183" type="9" schemaName="neu_offernotificationlevel" displayName="Poziom powiadomień dla oferty" solution="Active" />
+        <Dependent key="184" type="2" schemaName="neu_notificationlevel" displayName="Po uruchomieniu oferty" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="185" type="9" schemaName="neu_opportunitytype" displayName="Typ zmiany oferty" solution="Active" />
+        <Dependent key="186" type="2" schemaName="neu_type" displayName="Typ" parentSchemaName="neu_conf_opportunitytype" parentDisplayName="Typ zmiany oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="185" type="9" schemaName="neu_opportunitytype" displayName="Typ zmiany oferty" solution="Active" />
+        <Dependent key="187" type="2" schemaName="neu_opportunitytype" displayName="Typ zmiany oferty" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="188" type="9" schemaName="neu_zmianasposobuopakowania" displayName="Zmiana opakowania" solution="Active" />
+        <Dependent key="189" type="2" schemaName="neu_packagingchangemethod" displayName="Reguła zmiany wielkości opakowania" parentSchemaName="neu_tenderproduct" parentDisplayName="Produkt Przetargu" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="188" type="9" schemaName="neu_zmianasposobuopakowania" displayName="Zmiana opakowania" solution="Active" />
+        <Dependent key="190" type="2" schemaName="neu_packagingchangemethod" displayName="Reguła zmiany wielkości opakowania" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="191" type="9" schemaName="neu_tendercontracttype" displayName="Rodzaj umowy przetargowej" solution="Active" />
+        <Dependent key="192" type="2" schemaName="neu_contracttype" displayName="Rodzaj umowy" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="191" type="9" schemaName="neu_tendercontracttype" displayName="Rodzaj umowy przetargowej" solution="Active" />
+        <Dependent key="193" type="2" schemaName="neu_contracttype" displayName="Rodzaj umowy" parentSchemaName="neu_tenderproduct" parentDisplayName="Produkt Przetargu" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="191" type="9" schemaName="neu_tendercontracttype" displayName="Rodzaj umowy przetargowej" solution="Active" />
+        <Dependent key="194" type="2" schemaName="neu_contracttype" displayName="Rodzaj umowy" parentSchemaName="neu_tenderbundle" parentDisplayName="Pakiet" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="195" type="9" schemaName="neu_valuationemailtype" displayName="Typ email wyceny" solution="Active" />
+        <Dependent key="196" type="2" schemaName="neu_valuationemailtype" displayName="Typ email wyceny" parentSchemaName="email" parentDisplayName="Wiadomość e-mail" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="197" type="9" schemaName="neu_contractopstate" displayName="Stan umowy OP" solution="Active" />
+        <Dependent key="198" type="2" schemaName="neu_contractstate" displayName="Stan umowy" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="199" type="9" schemaName="neu_supplystatusset" displayName="Status zaopatrzenia" solution="Active" />
+        <Dependent key="200" type="2" schemaName="neu_supplystatusname" displayName="Nazwa statusu zaopatrzenia" parentSchemaName="neu_tenderproduct" parentDisplayName="Produkt Przetargu" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="199" type="9" schemaName="neu_supplystatusset" displayName="Status zaopatrzenia" solution="Active" />
+        <Dependent key="201" type="2" schemaName="neu_supplystatusname" displayName="Nazwa statusu zaopatrzenia" parentSchemaName="product" parentDisplayName="Produkt SAP" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="199" type="9" schemaName="neu_supplystatusset" displayName="Status zaopatrzenia" solution="Active" />
+        <Dependent key="202" type="2" schemaName="neu_supplystatusname" displayName="Nazwa statusu zaopatrzenia" parentSchemaName="neu_mappedproduct" parentDisplayName="Produkt Dopasowany" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="203" type="9" schemaName="neu_statusreasontno" displayName="Przyczyna stanu oferty TNO" solution="Active" />
+        <Dependent key="204" type="2" schemaName="neu_statusreasontno" displayName="Powód" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="205" type="9" schemaName="neu_producerpricelisttype" displayName="Typ cennika producenta" solution="Active" />
+        <Dependent key="206" type="2" schemaName="neu_typ" displayName="Typ" parentSchemaName="neu_producerpricelist" parentDisplayName="Cennik producenta" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="207" type="9" schemaName="neu_calculator_valuationstatus" displayName="Status wyceny - Kalkulator" solution="Active" />
+        <Dependent key="208" type="2" schemaName="neu_calcualtor_valuationstatus" displayName="Status wyceny" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="209" type="9" schemaName="neu_productpharmaceuticalgroup" displayName="Grupa farmaceutyczna" solution="Active" />
+        <Dependent key="210" type="2" schemaName="neu_pharmaceuticalgroup" displayName="Grupa farmaceutyczna" parentSchemaName="product" parentDisplayName="Produkt SAP" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="209" type="9" schemaName="neu_productpharmaceuticalgroup" displayName="Grupa farmaceutyczna" solution="Active" />
+        <Dependent key="211" type="2" schemaName="neu_pharmaceuticalgroup" displayName="Grupa farmaceutyczna" parentSchemaName="neu_tenderproduct" parentDisplayName="Produkt Przetargu" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="212" type="9" schemaName="neu_yesno" displayName="Tak/Nie" solution="Active" />
+        <Dependent key="213" type="2" schemaName="neu_paidlease" displayName="Dzierżawa płatna" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="212" type="9" schemaName="neu_yesno" displayName="Tak/Nie" solution="Active" />
+        <Dependent key="214" type="2" schemaName="neu_paidlease" displayName="Dzierżawa płatna" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="212" type="9" schemaName="neu_yesno" displayName="Tak/Nie" solution="Active" />
+        <Dependent key="215" type="2" schemaName="neu_freelease" displayName="Dzierżawa niepłatna" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="212" type="9" schemaName="neu_yesno" displayName="Tak/Nie" solution="Active" />
+        <Dependent key="216" type="2" schemaName="neu_freelease" displayName="Dzierżawa niepłatna" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="217" type="9" schemaName="neu_tenderbundlestate" displayName="Status Pakietu" solution="Active" />
+        <Dependent key="218" type="2" schemaName="neu_state" displayName="Status" parentSchemaName="neu_tenderbundle" parentDisplayName="Pakiet" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="217" type="9" schemaName="neu_tenderbundlestate" displayName="Status Pakietu" solution="Active" />
+        <Dependent key="219" type="2" schemaName="neu_stateprevious" displayName="Poprzedni Status Pakietu" parentSchemaName="neu_tenderbundle" parentDisplayName="Pakiet" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="217" type="9" schemaName="neu_tenderbundlestate" displayName="Status Pakietu" solution="Active" />
+        <Dependent key="220" type="2" schemaName="neu_statuspre" displayName="Poprzedni status" parentSchemaName="neu_tenderbundle" parentDisplayName="Pakiet" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="221" type="9" schemaName="neu_booloptions" displayName="BoolOptions" solution="Active" />
+        <Dependent key="222" type="2" schemaName="neu_isonsales" displayName="Dostępny w sprzedaży" parentSchemaName="product" parentDisplayName="Produkt SAP" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="223" type="9" schemaName="neu_typedrug" displayName="Typ leku" solution="Active" />
+        <Dependent key="224" type="2" schemaName="neu_typedrug" displayName="Typ" parentSchemaName="neu_drugformpharmindex" parentDisplayName="DrugForm Pharmindex" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="223" type="9" schemaName="neu_typedrug" displayName="Typ leku" solution="Active" />
+        <Dependent key="225" type="2" schemaName="neu_typedrug" displayName="Typ" parentSchemaName="neu_mappedproduct" parentDisplayName="Produkt Dopasowany" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="223" type="9" schemaName="neu_typedrug" displayName="Typ leku" solution="Active" />
+        <Dependent key="226" type="2" schemaName="neu_typedrug" displayName="Typ" parentSchemaName="neu_tenderproduct" parentDisplayName="Produkt Przetargu" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="227" type="10" schemaName="neu_neu_producer_contact" displayName="neu_neu_producer_contact" parentSchemaName="contact" parentDisplayName="Kontakt" solution="Active" />
+        <Dependent key="228" type="60" displayName="Producent sprzedazowy" parentDisplayName="Producent" id="{f70271e7-7a86-4d11-bb5e-ea0ac4fa3c99}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="229" type="10" schemaName="neu_neu_client_account_client" displayName="neu_neu_client_account_client" parentSchemaName="account" parentDisplayName="Punkt sprzedaży" solution="Active" />
+        <Dependent key="2" type="60" displayName="Informacje" parentDisplayName="Beneficjent" id="{79441509-fbea-4de0-a9bc-b3cf49952205}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="46" type="1" schemaName="neu_payer" displayName="Płatnik" solution="Active" />
+        <Dependent key="230" type="10" schemaName="neu_neu_contractop_neu_payer" displayName="neu_neu_contractop_neu_payer" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="9" type="1" schemaName="neu_activesubstancepharmindex" displayName="Substancja czynna" solution="Active" />
+        <Dependent key="231" type="10" schemaName="neu_neu_drugpharmindex_neu_activesubstance" displayName="neu_neu_drugpharmindex_neu_activesubstance" parentSchemaName="neu_drugpharmindex" parentDisplayName="DrugPharmindex" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="42" type="1" schemaName="neu_opportunitydetails" displayName="Szczegóły zmiany oferty" solution="Active" />
+        <Dependent key="232" type="10" schemaName="neu_opportunity_neu_opportunitydetails_opportunityid" displayName="neu_opportunity_neu_opportunitydetails_opportunityid" parentSchemaName="neu_opportunitydetails" parentDisplayName="Szczegóły zmiany oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="38" type="1" schemaName="neu_asset_terms_of_business" displayName="Konfiguracja liczenia rabatów" solution="Active" />
+        <Dependent key="233" type="10" schemaName="neu_opportunity_neu_asset_terms_of_business_opportunityid" displayName="neu_opportunity_neu_asset_terms_of_business_opportunityid" parentSchemaName="neu_asset_terms_of_business" parentDisplayName="Konfiguracja liczenia rabatów" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="46" type="1" schemaName="neu_payer" displayName="Płatnik" solution="Active" />
+        <Dependent key="50" type="10" schemaName="neu_neu_payer_neu_quote" displayName="neu_neu_payer_neu_quote" parentSchemaName="neu_quote" parentDisplayName="Oferta cenowa" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="46" type="1" schemaName="neu_payer" displayName="Płatnik" solution="Active" />
+        <Dependent key="51" type="10" schemaName="neu_neu_payer_opportunity_purchasegrouppayer" displayName="neu_neu_payer_opportunity_purchasegrouppayer" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="27" type="1" schemaName="neu_asset" displayName="Element oferty" solution="Active" />
+        <Dependent key="234" type="10" schemaName="neu_opportunity_neu_asset_opportunityid" displayName="neu_opportunity_neu_asset_opportunityid" parentSchemaName="neu_asset" parentDisplayName="Element oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="46" type="1" schemaName="neu_payer" displayName="Płatnik" solution="Active" />
+        <Dependent key="53" type="10" schemaName="neu_neu_payer_opportunity" displayName="neu_neu_payer_opportunity" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="45" type="1" schemaName="neu_purchasegroup" displayName="Grupa zakupowa" solution="Active" />
+        <Dependent key="71" type="10" schemaName="neu_neu_purchasegroup_neu_contractop_purchasegroupid" displayName="neu_neu_purchasegroup_neu_contractop_purchasegroupid" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="39" type="1" schemaName="neu_asset_discount_level" displayName="Poziom rabatowania" solution="Active" />
+        <Dependent key="235" type="10" schemaName="neu_opportunity_neu_asset_discount_level_opportunityid" displayName="neu_opportunity_neu_asset_discount_level_opportunityid" parentSchemaName="neu_asset_discount_level" parentDisplayName="Poziom rabatowania" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="30" type="1" schemaName="neu_opportunityprogramipra" displayName="Pozyskanie do programu IPRA" solution="Active" />
+        <Dependent key="236" type="10" schemaName="bpf_opportunity_neu_opportunityprogramipra" displayName="bpf_opportunity_neu_opportunityprogramipra" parentSchemaName="neu_opportunityprogramipra" parentDisplayName="Pozyskanie do programu IPRA" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="33" type="1" schemaName="neu_contract" displayName="Umowa" solution="Active" />
+        <Dependent key="237" type="10" schemaName="neu_opportunity_neu_contract_opportunityid" displayName="neu_opportunity_neu_contract_opportunityid" parentSchemaName="neu_contract" parentDisplayName="Umowa" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="40" type="1" schemaName="neu_asset_brand_rebate_percentage" displayName="Rabat marki farmaceuty" solution="Active" />
+        <Dependent key="238" type="10" schemaName="neu_opportunity_neu_asset_brand_rebate_percentage_opportunityid" displayName="neu_opportunity_neu_asset_brand_rebate_percentage_opportunityid" parentSchemaName="neu_asset_brand_rebate_percentage" parentDisplayName="Rabat marki farmaceuty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="44" type="1" schemaName="neu_valuation" displayName="Wycena" solution="Active" />
+        <Dependent key="239" type="10" schemaName="neu_opportunity_neu_valuation_opportunityid" displayName="neu_opportunity_neu_valuation_opportunityid" parentSchemaName="neu_valuation" parentDisplayName="Wycena" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="46" type="1" schemaName="neu_payer" displayName="Płatnik" solution="Active" />
+        <Dependent key="49" type="10" schemaName="neu_neu_payer_neu_receiver" displayName="neu_neu_payer_neu_receiver" parentSchemaName="neu_receiver" parentDisplayName="Beneficjent" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="32" type="1" schemaName="neu_conf_contractgenerator" displayName="Generator umowy" solution="Active" />
+        <Dependent key="240" type="10" schemaName="neu_opportunity_neu_conf_contractgenerator_opportunityid" displayName="neu_opportunity_neu_conf_contractgenerator_opportunityid" parentSchemaName="neu_conf_contractgenerator" parentDisplayName="Generator umowy" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="28" type="1" schemaName="neu_offerasset" displayName="Element negocjacji" solution="Active" />
+        <Dependent key="241" type="10" schemaName="neu_opportunity_neu_offerasset_opportunityid" displayName="neu_opportunity_neu_offerasset_opportunityid" parentSchemaName="neu_offerasset" parentDisplayName="Element negocjacji" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="45" type="1" schemaName="neu_purchasegroup" displayName="Grupa zakupowa" solution="Active" />
+        <Dependent key="73" type="10" schemaName="neu_neu_purchasegroup_opportunity" displayName="neu_neu_purchasegroup_opportunity" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="29" type="1" schemaName="neu_opportunityprogrampartnerbpf" displayName="Pozyskanie do programu Partner / Partner+" solution="Active" />
+        <Dependent key="242" type="10" schemaName="bpf_opportunity_neu_opportunityprogrampartnerbpf" displayName="bpf_opportunity_neu_opportunityprogrampartnerbpf" parentSchemaName="neu_opportunityprogrampartnerbpf" parentDisplayName="Pozyskanie do programu Partner / Partner+" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="31" type="1" schemaName="neu_application" displayName="Wniosek" solution="Active" />
+        <Dependent key="243" type="10" schemaName="neu_opportunity_neu_application_opportunityid" displayName="neu_opportunity_neu_application_opportunityid" parentSchemaName="neu_application" parentDisplayName="Wniosek" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="37" type="1" schemaName="neu_individualgrowthaction" displayName="Indywidualna akcja wzrostowa" solution="Active" />
+        <Dependent key="244" type="10" schemaName="neu_opportunity_neu_individualgrowthaction_opportunityid" displayName="neu_opportunity_neu_individualgrowthaction_opportunityid" parentSchemaName="neu_individualgrowthaction" parentDisplayName="Indywidualna akcja wzrostowa" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="46" type="1" schemaName="neu_payer" displayName="Płatnik" solution="Active" />
+        <Dependent key="52" type="10" schemaName="neu_neu_payer_neu_contractop_payerorganiser" displayName="neu_neu_payer_neu_contractop_payerorganiser" parentSchemaName="neu_contractop" parentDisplayName="Umowy Lecznictwo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="41" type="1" schemaName="neu_asset_rebate_percentage" displayName="Rabat próg MAX" solution="Active" />
+        <Dependent key="245" type="10" schemaName="neu_opportunity_neu_asset_rebate_percentage_opportunityid" displayName="neu_opportunity_neu_asset_rebate_percentage_opportunityid" parentSchemaName="neu_asset_rebate_percentage" parentDisplayName="Rabat próg MAX" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="36" type="1" schemaName="neu_robposition" displayName="Pozycja ROB" solution="Active" />
+        <Dependent key="246" type="10" schemaName="neu_opportunity_neu_robposition_opportunityid" displayName="neu_opportunity_neu_robposition_opportunityid" parentSchemaName="neu_robposition" parentDisplayName="Pozycja ROB" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="43" type="1" schemaName="neu_calculator" displayName="Calculator" solution="Active" />
+        <Dependent key="247" type="10" schemaName="bpf_opportunity_neu_calculator" displayName="bpf_opportunity_neu_calculator" parentSchemaName="neu_calculator" parentDisplayName="Calculator" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="35" type="1" schemaName="neu_offeraccountgroup" displayName="Zestaw Aptek Oferty" solution="Active" />
+        <Dependent key="248" type="10" schemaName="neu_opportunity_neu_offeraccountgroup" displayName="neu_opportunity_neu_offeraccountgroup" parentSchemaName="neu_offeraccountgroup" parentDisplayName="Zestaw Aptek Oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="46" type="1" schemaName="neu_payer" displayName="Płatnik" solution="Active" />
+        <Dependent key="249" type="10" schemaName="neu_opportunity_neu_payer" displayName="neu_opportunity_neu_payer" parentSchemaName="opportunity" parentDisplayName="Zmiana oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="45" type="1" schemaName="neu_purchasegroup" displayName="Grupa zakupowa" solution="Active" />
+        <Dependent key="68" type="10" schemaName="neu_neu_purchasegroup_neu_quote" displayName="neu_neu_purchasegroup_neu_quote" parentSchemaName="neu_quote" parentDisplayName="Oferta cenowa" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="34" type="1" schemaName="neu_operation_createapplicationfromtno" displayName="Operacja tworzenia wniosku z TNO" solution="Active" />
+        <Dependent key="250" type="10" schemaName="neu_opportunity_neu_operation_createapplicationfromtno_opportunityid" displayName="neu_opportunity_neu_operation_createapplicationfromtno_opportunityid" parentSchemaName="neu_operation_createapplicationfromtno" parentDisplayName="Operacja tworzenia wniosku z TNO" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="251" type="26" schemaName="Klienci pozaapteczni" displayName="Klienci pozaapteczni" parentSchemaName="neu_client" parentDisplayName="Klient" solution="Active" id="{67985269-8259-eb11-80f5-0050568b1204}" />
+        <Dependent key="16" type="60" displayName="Przetargi szpitalne" parentDisplayName="Umowy Lecznictwo" id="{2982b14a-0ca1-4c11-b7d1-d2ae679f8ddd}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="251" type="26" schemaName="Klienci pozaapteczni" displayName="Klienci pozaapteczni" parentSchemaName="neu_client" parentDisplayName="Klient" solution="Active" id="{67985269-8259-eb11-80f5-0050568b1204}" />
+        <Dependent key="15" type="60" displayName="Informacje" parentDisplayName="Umowy Lecznictwo" id="{f4df8ede-f4d4-43b1-ad9a-946b6eb410f9}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="252" type="26" schemaName="Historia wersji na Umowie Lecznictwa" displayName="Historia wersji na Umowie Lecznictwa" parentSchemaName="neu_conf_nonpharmacycontractopversion" parentDisplayName="Wersja umowy OP" solution="Active" id="{18ee71e1-257c-eb11-80f7-0050568b1204}" />
+        <Dependent key="16" type="60" displayName="Przetargi szpitalne" parentDisplayName="Umowy Lecznictwo" id="{2982b14a-0ca1-4c11-b7d1-d2ae679f8ddd}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="252" type="26" schemaName="Historia wersji na Umowie Lecznictwa" displayName="Historia wersji na Umowie Lecznictwa" parentSchemaName="neu_conf_nonpharmacycontractopversion" parentDisplayName="Wersja umowy OP" solution="Active" id="{18ee71e1-257c-eb11-80f7-0050568b1204}" />
+        <Dependent key="15" type="60" displayName="Informacje" parentDisplayName="Umowy Lecznictwo" id="{f4df8ede-f4d4-43b1-ad9a-946b6eb410f9}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="253" type="26" schemaName="Aktywne Punkty sprzedaży" displayName="Aktywne Punkty sprzedaży" parentSchemaName="account" parentDisplayName="Punkt sprzedaży" solution="Active" id="{0494844a-8cee-e911-80df-005056b04c7a}" />
+        <Dependent key="16" type="60" displayName="Przetargi szpitalne" parentDisplayName="Umowy Lecznictwo" id="{2982b14a-0ca1-4c11-b7d1-d2ae679f8ddd}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="253" type="26" schemaName="Aktywne Punkty sprzedaży" displayName="Aktywne Punkty sprzedaży" parentSchemaName="account" parentDisplayName="Punkt sprzedaży" solution="Active" id="{0494844a-8cee-e911-80df-005056b04c7a}" />
+        <Dependent key="15" type="60" displayName="Informacje" parentDisplayName="Umowy Lecznictwo" id="{f4df8ede-f4d4-43b1-ad9a-946b6eb410f9}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="254" type="26" schemaName="Aktywne Wersje umów lecznictwa" displayName="Aktywne Wersje umów lecznictwa" parentSchemaName="neu_conf_nonpharmacycontractopversion" parentDisplayName="Wersja umowy OP" solution="Active" id="{515a170b-4fa2-44ee-9896-50a4094a9bce}" />
+        <Dependent key="15" type="60" displayName="Informacje" parentDisplayName="Umowy Lecznictwo" id="{f4df8ede-f4d4-43b1-ad9a-946b6eb410f9}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="254" type="26" schemaName="Aktywne Wersje umów lecznictwa" displayName="Aktywne Wersje umów lecznictwa" parentSchemaName="neu_conf_nonpharmacycontractopversion" parentDisplayName="Wersja umowy OP" solution="Active" id="{515a170b-4fa2-44ee-9896-50a4094a9bce}" />
+        <Dependent key="16" type="60" displayName="Przetargi szpitalne" parentDisplayName="Umowy Lecznictwo" id="{2982b14a-0ca1-4c11-b7d1-d2ae679f8ddd}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="255" type="26" schemaName="Płatnicy na umowie OP" displayName="Płatnicy na umowie OP" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" id="{ad1c22b8-c355-eb11-80f5-0050568b1204}" />
+        <Dependent key="16" type="60" displayName="Przetargi szpitalne" parentDisplayName="Umowy Lecznictwo" id="{2982b14a-0ca1-4c11-b7d1-d2ae679f8ddd}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="255" type="26" schemaName="Płatnicy na umowie OP" displayName="Płatnicy na umowie OP" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" id="{ad1c22b8-c355-eb11-80f5-0050568b1204}" />
+        <Dependent key="15" type="60" displayName="Informacje" parentDisplayName="Umowy Lecznictwo" id="{f4df8ede-f4d4-43b1-ad9a-946b6eb410f9}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="256" type="26" schemaName="Aktywni Płatnicy - widok podstawowy" displayName="Aktywni Płatnicy - widok podstawowy" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" id="{999186d0-bcc2-4626-bb95-4337a7f3a92b}" />
+        <Dependent key="15" type="60" displayName="Informacje" parentDisplayName="Umowy Lecznictwo" id="{f4df8ede-f4d4-43b1-ad9a-946b6eb410f9}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="256" type="26" schemaName="Aktywni Płatnicy - widok podstawowy" displayName="Aktywni Płatnicy - widok podstawowy" parentSchemaName="neu_payer" parentDisplayName="Płatnik" solution="Active" id="{999186d0-bcc2-4626-bb95-4337a7f3a92b}" />
+        <Dependent key="16" type="60" displayName="Przetargi szpitalne" parentDisplayName="Umowy Lecznictwo" id="{2982b14a-0ca1-4c11-b7d1-d2ae679f8ddd}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="257" type="26" schemaName="Apteki klienta" displayName="Apteki klienta" parentSchemaName="account" parentDisplayName="Punkt sprzedaży" solution="Active" id="{cf780073-8113-ea11-80e5-0050568b1204}" />
+        <Dependent key="16" type="60" displayName="Przetargi szpitalne" parentDisplayName="Umowy Lecznictwo" id="{2982b14a-0ca1-4c11-b7d1-d2ae679f8ddd}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="257" type="26" schemaName="Apteki klienta" displayName="Apteki klienta" parentSchemaName="account" parentDisplayName="Punkt sprzedaży" solution="Active" id="{cf780073-8113-ea11-80e5-0050568b1204}" />
+        <Dependent key="15" type="60" displayName="Informacje" parentDisplayName="Umowy Lecznictwo" id="{f4df8ede-f4d4-43b1-ad9a-946b6eb410f9}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="258" type="26" schemaName="Biuro sprzedaży - Obszar lecznictwa otwartego lub zamkniętego" displayName="Biuro sprzedaży - Obszar lecznictwa otwartego lub zamkniętego" parentSchemaName="neu_conf_salesoffice" parentDisplayName="Biuro sprzedaży" solution="Active" id="{8aa057a7-f35b-eb11-80f5-0050568b1204}" />
+        <Dependent key="15" type="60" displayName="Informacje" parentDisplayName="Umowy Lecznictwo" id="{f4df8ede-f4d4-43b1-ad9a-946b6eb410f9}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="258" type="26" schemaName="Biuro sprzedaży - Obszar lecznictwa otwartego lub zamkniętego" displayName="Biuro sprzedaży - Obszar lecznictwa otwartego lub zamkniętego" parentSchemaName="neu_conf_salesoffice" parentDisplayName="Biuro sprzedaży" solution="Active" id="{8aa057a7-f35b-eb11-80f5-0050568b1204}" />
+        <Dependent key="16" type="60" displayName="Przetargi szpitalne" parentDisplayName="Umowy Lecznictwo" id="{2982b14a-0ca1-4c11-b7d1-d2ae679f8ddd}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="259" type="26" schemaName="Aktywne Substancje czynne" displayName="Aktywne Substancje czynne" parentSchemaName="neu_activesubstancepharmindex" parentDisplayName="Substancja czynna" solution="Active" id="{72fffae7-c5e2-46a9-804a-82f680db8ff7}" />
+        <Dependent key="10" type="60" displayName="Informacje" parentDisplayName="DrugPharmindex" id="{ac8943fe-3357-4f4b-a9d2-790e0485ec51}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="260" type="60" displayName="Płatnik Quick View" parentDisplayName="Płatnik" solution="Active" id="{4ba3c103-7034-4a43-a4f1-0466b8c6b067}" />
+        <Dependent key="16" type="60" displayName="Przetargi szpitalne" parentDisplayName="Umowy Lecznictwo" id="{2982b14a-0ca1-4c11-b7d1-d2ae679f8ddd}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="261" type="61" schemaName="neu_/html/neu_tenderBundleResetCalculateButton.html" displayName="neu_/html/neu_tenderBundleResetCalculateButton.html" solution="Active" />
+        <Dependent key="262" type="60" displayName="Informacje" parentDisplayName="Pakiet" id="{6fd2c95b-ea93-4097-bad6-b6757415f6a6}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="263" type="61" schemaName="neu_offerelement_32px.png" displayName="neu_offerelement_32px.png" solution="Active" />
+        <Dependent key="27" type="1" schemaName="neu_asset" displayName="Element oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="264" type="61" schemaName="neu_jquery.js" displayName="neu_jquery.js" solution="Active" />
+        <Dependent key="265" type="60" displayName="Informacje" parentDisplayName="Szablon zmiany postaci" id="{10dd81bd-1e3e-4ce8-9b30-8db525e516db}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="264" type="61" schemaName="neu_jquery.js" displayName="neu_jquery.js" solution="Active" />
+        <Dependent key="266" type="60" displayName="Informacje" parentDisplayName="Oferta cenowa" id="{71d7fe39-0b26-4d04-833e-108003917741}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="267" type="61" schemaName="neu_/html/neu_tenderBundleResporeMapperResults.html" displayName="neu_/html/neu_tenderBundleResporeMapperResults.html" solution="Active" />
+        <Dependent key="262" type="60" displayName="Informacje" parentDisplayName="Pakiet" id="{6fd2c95b-ea93-4097-bad6-b6757415f6a6}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="268" type="61" schemaName="new_neu_payer_16.png" displayName="new_neu_payer_16.png" solution="Active" />
+        <Dependent key="46" type="1" schemaName="neu_payer" displayName="Płatnik" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="269" type="61" schemaName="neu_/js/entities/neu_tenderproduct.js" displayName="neu_/js/entities/neu_tenderproduct.js" solution="Active" />
+        <Dependent key="270" type="60" displayName="Informacje" parentDisplayName="Produkt Przetargu" id="{493e81d3-d4cb-487f-9f23-53a61bc6ddba}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="271" type="61" schemaName="neu_/html/neu_tenderproductOverHeadAutomateButton.html" displayName="neu_/html/neu_tenderproductOverHeadAutomateButton.html" solution="Active" />
+        <Dependent key="270" type="60" displayName="Informacje" parentDisplayName="Produkt Przetargu" id="{493e81d3-d4cb-487f-9f23-53a61bc6ddba}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="272" type="61" schemaName="neu_/js/entities/neu_receiver.js" displayName="neu_/js/entities/neu_receiver.js" solution="Active" />
+        <Dependent key="2" type="60" displayName="Informacje" parentDisplayName="Beneficjent" id="{79441509-fbea-4de0-a9bc-b3cf49952205}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="273" type="61" schemaName="neu_/html/neu_tenderbundleSetPreviousStatus.html" displayName="neu_/html/neu_tenderbundleSetPreviousStatus.html" solution="Active" />
+        <Dependent key="262" type="60" displayName="Informacje" parentDisplayName="Pakiet" id="{6fd2c95b-ea93-4097-bad6-b6757415f6a6}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="274" type="61" schemaName="neu_DocGenerator_32px" displayName="neu_DocGenerator_32px" solution="Active" />
+        <Dependent key="32" type="1" schemaName="neu_conf_contractgenerator" displayName="Generator umowy" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="275" type="61" schemaName="neu_/html/neu_tenderproductOverHeadProducerButton.html" displayName="neu_/html/neu_tenderproductOverHeadProducerButton.html" solution="Active" />
+        <Dependent key="270" type="60" displayName="Informacje" parentDisplayName="Produkt Przetargu" id="{493e81d3-d4cb-487f-9f23-53a61bc6ddba}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="276" type="61" schemaName="neu_/html/neu_tenderstructure_stopImport.html" displayName="neu_/html/neu_tenderstructure_stopImport.html" solution="Active" />
+        <Dependent key="277" type="60" displayName="Informacje" parentDisplayName="Struktura Przetargu" id="{49eae151-fd34-49e1-80f3-29dbd0d6cfb0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="278" type="61" schemaName="neu_/html/tenderBundleCalculateButton.html" displayName="neu_/html/tenderBundleCalculateButton.html" solution="Active" />
+        <Dependent key="262" type="60" displayName="Informacje" parentDisplayName="Pakiet" id="{6fd2c95b-ea93-4097-bad6-b6757415f6a6}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="279" type="61" schemaName="neu_/html/neu_conf_conversion_sync.html" displayName="neu_/html/neu_conf_conversion_sync.html" solution="Active" />
+        <Dependent key="280" type="60" displayName="Informacje" parentDisplayName="Słownik Zamian" id="{ab443991-8336-4a86-a46f-35d13469f8f7}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="281" type="61" schemaName="neu_/html/neu_tenderstructure_runImport.html" displayName="neu_/html/neu_tenderstructure_runImport.html" solution="Active" />
+        <Dependent key="277" type="60" displayName="Informacje" parentDisplayName="Struktura Przetargu" id="{49eae151-fd34-49e1-80f3-29dbd0d6cfb0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="282" type="61" schemaName="neu_/html/neu_tenderproduct_AISubstance.html" displayName="neu_/html/neu_tenderproduct_AISubstance.html" solution="Active" />
+        <Dependent key="270" type="60" displayName="Informacje" parentDisplayName="Produkt Przetargu" id="{493e81d3-d4cb-487f-9f23-53a61bc6ddba}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="283" type="61" schemaName="new_asset_16px.png" displayName="new_asset_16px.png" solution="Active" />
+        <Dependent key="28" type="1" schemaName="neu_offerasset" displayName="Element negocjacji" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="283" type="61" schemaName="new_asset_16px.png" displayName="new_asset_16px.png" solution="Active" />
+        <Dependent key="27" type="1" schemaName="neu_asset" displayName="Element oferty" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="284" type="61" schemaName="neu_/js/neu_contractop.js" displayName="neu_/js/neu_contractop.js" solution="Active" />
+        <Dependent key="15" type="60" displayName="Informacje" parentDisplayName="Umowy Lecznictwo" id="{f4df8ede-f4d4-43b1-ad9a-946b6eb410f9}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="284" type="61" schemaName="neu_/js/neu_contractop.js" displayName="neu_/js/neu_contractop.js" solution="Active" />
+        <Dependent key="16" type="60" displayName="Przetargi szpitalne" parentDisplayName="Umowy Lecznictwo" id="{2982b14a-0ca1-4c11-b7d1-d2ae679f8ddd}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="285" type="61" schemaName="neu_/html/neu_WonCalculationButtonReset.html" displayName="neu_/html/neu_WonCalculationButtonReset.html" solution="Active" />
+        <Dependent key="266" type="60" displayName="Informacje" parentDisplayName="Oferta cenowa" id="{71d7fe39-0b26-4d04-833e-108003917741}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="286" type="61" schemaName="neu_/js/entities/neu_quote.js" displayName="neu_/js/entities/neu_quote.js" solution="Active" />
+        <Dependent key="266" type="60" displayName="Informacje" parentDisplayName="Oferta cenowa" id="{71d7fe39-0b26-4d04-833e-108003917741}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="287" type="61" schemaName="neu_/html/neu_producer_createEmail.html" displayName="neu_/html/neu_producer_createEmail.html" solution="Active" />
+        <Dependent key="228" type="60" displayName="Producent sprzedazowy" parentDisplayName="Producent" id="{f70271e7-7a86-4d11-bb5e-ea0ac4fa3c99}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="288" type="61" schemaName="neu_/js/entities/neu_templatecriterion.js" displayName="neu_/js/entities/neu_templatecriterion.js" solution="Active" />
+        <Dependent key="289" type="60" displayName="Informacje" parentDisplayName="Kryteria Szablonu" id="{eee65a17-ac5c-4093-97c2-e76d0bf245f4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="290" type="61" schemaName="neu_/js/entities/neu_listtradeterms.js" displayName="neu_/js/entities/neu_listtradeterms.js" solution="Active" />
+        <Dependent key="291" type="60" displayName="Informacje" parentDisplayName="Pozycja ZPZK" id="{11817dd3-c476-4da5-8aba-73e6fa9832cf}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="292" type="61" schemaName="neu_/html/neu_tenderstructure_runMapper.html" displayName="neu_/html/neu_tenderstructure_runMapper.html" solution="Active" />
+        <Dependent key="277" type="60" displayName="Informacje" parentDisplayName="Struktura Przetargu" id="{49eae151-fd34-49e1-80f3-29dbd0d6cfb0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="293" type="61" schemaName="neu_/js/neu_contractop_przetargiszpitalne.js" displayName="neu_/js/neu_contractop_przetargiszpitalne.js" solution="Active" />
+        <Dependent key="16" type="60" displayName="Przetargi szpitalne" parentDisplayName="Umowy Lecznictwo" id="{2982b14a-0ca1-4c11-b7d1-d2ae679f8ddd}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="294" type="61" schemaName="neu_/js/entities/neu_tradeterms.js" displayName="neu_/js/entities/neu_tradeterms.js" solution="Active" />
+        <Dependent key="295" type="60" displayName="Informacje" parentDisplayName="ZPZK" id="{b9479c29-7452-4ded-ae86-d6a89012dfe5}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="296" type="61" schemaName="neu_/html/neu_tenderproductaddPositionZPZK.html" displayName="neu_/html/neu_tenderproductaddPositionZPZK.html" solution="Active" />
+        <Dependent key="270" type="60" displayName="Informacje" parentDisplayName="Produkt Przetargu" id="{493e81d3-d4cb-487f-9f23-53a61bc6ddba}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="297" type="61" schemaName="neu_/html/neu_mappedproductClearType.html" displayName="neu_/html/neu_mappedproductClearType.html" solution="Active" />
+        <Dependent key="298" type="60" displayName="Informacje" parentDisplayName="Produkt Dopasowany" id="{7ea8385a-aa4a-4e23-b2e1-fe5f0156eae4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="299" type="61" schemaName="neu_/html/neu_quoteSendToAcceptButton.html" displayName="neu_/html/neu_quoteSendToAcceptButton.html" solution="Active" />
+        <Dependent key="266" type="60" displayName="Informacje" parentDisplayName="Oferta cenowa" id="{71d7fe39-0b26-4d04-833e-108003917741}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="300" type="61" schemaName="neu_/html/neu_mappedproduct_indexZero.html" displayName="neu_/html/neu_mappedproduct_indexZero.html" solution="Active" />
+        <Dependent key="298" type="60" displayName="Informacje" parentDisplayName="Produkt Dopasowany" id="{7ea8385a-aa4a-4e23-b2e1-fe5f0156eae4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="301" type="61" schemaName="new_4meeting_32px.png" displayName="new_4meeting_32px.png" solution="Active" />
+        <Dependent key="28" type="1" schemaName="neu_offerasset" displayName="Element negocjacji" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="302" type="61" schemaName="neu_/html/tenderproduct_reCalculate.html" displayName="neu_/html/tenderproduct_reCalculate.html" solution="Active" />
+        <Dependent key="270" type="60" displayName="Informacje" parentDisplayName="Produkt Przetargu" id="{493e81d3-d4cb-487f-9f23-53a61bc6ddba}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="303" type="61" schemaName="neu_/js/entities/neu_formchangetemplate.js" displayName="neu_/js/entities/neu_formchangetemplate.js" solution="Active" />
+        <Dependent key="265" type="60" displayName="Informacje" parentDisplayName="Szablon zmiany postaci" id="{10dd81bd-1e3e-4ce8-9b30-8db525e516db}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="304" type="61" schemaName="new_/html/neu_tenderstructure_template.html" displayName="new_/html/neu_tenderstructure_template.html" solution="Active" />
+        <Dependent key="305" type="60" displayName="Informacje - kopia" parentDisplayName="Struktura Przetargu" id="{30b077b2-3e67-4a10-8fb3-78f4cc3a74f4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="304" type="61" schemaName="new_/html/neu_tenderstructure_template.html" displayName="new_/html/neu_tenderstructure_template.html" solution="Active" />
+        <Dependent key="277" type="60" displayName="Informacje" parentDisplayName="Struktura Przetargu" id="{49eae151-fd34-49e1-80f3-29dbd0d6cfb0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="306" type="61" schemaName="neu_/html/neu_tenderstructure_stopMapper.html" displayName="neu_/html/neu_tenderstructure_stopMapper.html" solution="Active" />
+        <Dependent key="277" type="60" displayName="Informacje" parentDisplayName="Struktura Przetargu" id="{49eae151-fd34-49e1-80f3-29dbd0d6cfb0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="307" type="61" schemaName="neu_/html/neu_tenderBundleOverHeadAutomateButton.html" displayName="neu_/html/neu_tenderBundleOverHeadAutomateButton.html" solution="Active" />
+        <Dependent key="262" type="60" displayName="Informacje" parentDisplayName="Pakiet" id="{6fd2c95b-ea93-4097-bad6-b6757415f6a6}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="308" type="61" schemaName="neu_/js/entities/neu_producer.js" displayName="neu_/js/entities/neu_producer.js" solution="Active" />
+        <Dependent key="228" type="60" displayName="Producent sprzedazowy" parentDisplayName="Producent" id="{f70271e7-7a86-4d11-bb5e-ea0ac4fa3c99}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="309" type="61" schemaName="neu_Agreement_16px" displayName="neu_Agreement_16px" solution="Active" />
+        <Dependent key="33" type="1" schemaName="neu_contract" displayName="Umowa" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="310" type="61" schemaName="neu_/html/neu_quoteGenerateCsv.html" displayName="neu_/html/neu_quoteGenerateCsv.html" solution="Active" />
+        <Dependent key="266" type="60" displayName="Informacje" parentDisplayName="Oferta cenowa" id="{71d7fe39-0b26-4d04-833e-108003917741}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="311" type="61" schemaName="neu_/html/neu_quoteGenerateXls.html" displayName="neu_/html/neu_quoteGenerateXls.html" solution="Active" />
+        <Dependent key="266" type="60" displayName="Informacje" parentDisplayName="Oferta cenowa" id="{71d7fe39-0b26-4d04-833e-108003917741}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="312" type="61" schemaName="neu_/js/entities/neu_contracttenderbundle.js" displayName="neu_/js/entities/neu_contracttenderbundle.js" solution="Active" />
+        <Dependent key="313" type="60" displayName="Informacje" parentDisplayName="Umowa w pakiecie" id="{9920ef55-03ab-4c49-bb92-f89ada4fd080}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="314" type="61" schemaName="neu_/html/neu_quoteConfirmRejectAcceptButtonn.html" displayName="neu_/html/neu_quoteConfirmRejectAcceptButtonn.html" solution="Active" />
+        <Dependent key="266" type="60" displayName="Informacje" parentDisplayName="Oferta cenowa" id="{71d7fe39-0b26-4d04-833e-108003917741}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="315" type="61" schemaName="neu_/html/neu_tenderbundle_overheadpercentPropagationButton.html" displayName="neu_/html/neu_tenderbundle_overheadpercentPropagationButton.html" solution="Active" />
+        <Dependent key="262" type="60" displayName="Informacje" parentDisplayName="Pakiet" id="{6fd2c95b-ea93-4097-bad6-b6757415f6a6}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="316" type="61" schemaName="neu_/js/ribbons/neu_contractop_nonpharmacyarea_ribbon.js" displayName="neu_/js/ribbons/neu_contractop_nonpharmacyarea_ribbon.js" solution="Active" />
+        <Dependent key="317" type="50" schemaName="neu_contractop:RibbonDiffXml" parentSchemaName="ribboncustomization" parentDisplayName="Wstążki aplikacji" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="318" type="61" schemaName="neu_/html/neu_tradeterms_createEmailTemplate" displayName="neu_/html/neu_tradeterms_createEmailTemplate" solution="Active" />
+        <Dependent key="295" type="60" displayName="Informacje" parentDisplayName="ZPZK" id="{b9479c29-7452-4ded-ae86-d6a89012dfe5}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="319" type="61" schemaName="neu_/js/neu_conf_formchangematrix.js" displayName="neu_/js/neu_conf_formchangematrix.js" solution="Active" />
+        <Dependent key="320" type="60" displayName="Informacje" parentDisplayName="Matryca Zmian Postaci" id="{c4fef19e-1794-4a7a-8660-87076d248ebf}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="321" type="61" schemaName="new_neu_payer_32.png" displayName="new_neu_payer_32.png" solution="Active" />
+        <Dependent key="46" type="1" schemaName="neu_payer" displayName="Płatnik" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="322" type="61" schemaName="neu_/html/neu_mappedproductaddPositionZPZK.html" displayName="neu_/html/neu_mappedproductaddPositionZPZK.html" solution="Active" />
+        <Dependent key="298" type="60" displayName="Informacje" parentDisplayName="Produkt Dopasowany" id="{7ea8385a-aa4a-4e23-b2e1-fe5f0156eae4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="323" type="61" schemaName="neu_/html/neu_tradeterms_generateCsv.html" displayName="neu_/html/neu_tradeterms_generateCsv.html" solution="Active" />
+        <Dependent key="295" type="60" displayName="Informacje" parentDisplayName="ZPZK" id="{b9479c29-7452-4ded-ae86-d6a89012dfe5}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="324" type="61" schemaName="neu_DocGenerator_16px" displayName="neu_DocGenerator_16px" solution="Active" />
+        <Dependent key="32" type="1" schemaName="neu_conf_contractgenerator" displayName="Generator umowy" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="325" type="61" schemaName="neu_/html/neu_WonCalculationButton.html" displayName="neu_/html/neu_WonCalculationButton.html" solution="Active" />
+        <Dependent key="266" type="60" displayName="Informacje" parentDisplayName="Oferta cenowa" id="{71d7fe39-0b26-4d04-833e-108003917741}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="326" type="61" schemaName="neu_/js/neu_preferproducer.js" displayName="neu_/js/neu_preferproducer.js" solution="Active" />
+        <Dependent key="327" type="60" displayName="Informacje" parentDisplayName="Producent Preferowany" id="{8e8be3c4-c1cf-4ea4-957a-feaf19b9bbbd}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="328" type="61" schemaName="neu_/js/entities/neu_tenderbundle.js" displayName="neu_/js/entities/neu_tenderbundle.js" solution="Active" />
+        <Dependent key="262" type="60" displayName="Informacje" parentDisplayName="Pakiet" id="{6fd2c95b-ea93-4097-bad6-b6757415f6a6}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="329" type="61" schemaName="neu_tenderproduct_calc_notification.js" displayName="neu_tenderproduct_calc_notification.js" solution="Active" />
+        <Dependent key="270" type="60" displayName="Informacje" parentDisplayName="Produkt Przetargu" id="{493e81d3-d4cb-487f-9f23-53a61bc6ddba}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="330" type="61" schemaName="neu_/js/entities/neu_mappedproduct.js" displayName="neu_/js/entities/neu_mappedproduct.js" solution="Active" />
+        <Dependent key="298" type="60" displayName="Informacje" parentDisplayName="Produkt Dopasowany" id="{7ea8385a-aa4a-4e23-b2e1-fe5f0156eae4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="331" type="61" schemaName="neu_/html/neu_quoteActivateButton.html" displayName="neu_/html/neu_quoteActivateButton.html" solution="Active" />
+        <Dependent key="266" type="60" displayName="Informacje" parentDisplayName="Oferta cenowa" id="{71d7fe39-0b26-4d04-833e-108003917741}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="332" type="61" schemaName="neu_tenderstructure_calc_notification.js" displayName="neu_tenderstructure_calc_notification.js" solution="Active" />
+        <Dependent key="277" type="60" displayName="Informacje" parentDisplayName="Struktura Przetargu" id="{49eae151-fd34-49e1-80f3-29dbd0d6cfb0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="333" type="61" schemaName="neu_/html/neu_tenderstructure_stopCalculations.html" displayName="neu_/html/neu_tenderstructure_stopCalculations.html" solution="Active" />
+        <Dependent key="277" type="60" displayName="Informacje" parentDisplayName="Struktura Przetargu" id="{49eae151-fd34-49e1-80f3-29dbd0d6cfb0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="334" type="61" schemaName="neu_/html/tenderBundleRemapProducerButton" displayName="neu_/html/tenderBundleRemapProducerButton" solution="Active" />
+        <Dependent key="262" type="60" displayName="Informacje" parentDisplayName="Pakiet" id="{6fd2c95b-ea93-4097-bad6-b6757415f6a6}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="335" type="61" schemaName="neu_/html/neu_mappedproductCalc" displayName="neu_/html/neu_mappedproductCalc" solution="Active" />
+        <Dependent key="298" type="60" displayName="Informacje" parentDisplayName="Produkt Dopasowany" id="{7ea8385a-aa4a-4e23-b2e1-fe5f0156eae4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="336" type="61" schemaName="neu_/img/application_32.png" displayName="neu_/img/application_32.png" solution="Active" />
+        <Dependent key="31" type="1" schemaName="neu_application" displayName="Wniosek" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="337" type="61" schemaName="neu_/html/neu_tenderstructure_deleteMappedProducts.html" displayName="neu_/html/neu_tenderstructure_deleteMappedProducts.html" solution="Active" />
+        <Dependent key="277" type="60" displayName="Informacje" parentDisplayName="Struktura Przetargu" id="{49eae151-fd34-49e1-80f3-29dbd0d6cfb0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="338" type="61" schemaName="neu_Agreement_32px" displayName="neu_Agreement_32px" solution="Active" />
+        <Dependent key="33" type="1" schemaName="neu_contract" displayName="Umowa" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="339" type="61" schemaName="neu_/html/neu_tenderproduct_runMapper.html" displayName="neu_/html/neu_tenderproduct_runMapper.html" solution="Active" />
+        <Dependent key="270" type="60" displayName="Informacje" parentDisplayName="Produkt Przetargu" id="{493e81d3-d4cb-487f-9f23-53a61bc6ddba}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="340" type="61" schemaName="neu_/html/neu_tenderstructure_deletePakietsNew.html" displayName="neu_/html/neu_tenderstructure_deletePakietsNew.html" solution="Active" />
+        <Dependent key="277" type="60" displayName="Informacje" parentDisplayName="Struktura Przetargu" id="{49eae151-fd34-49e1-80f3-29dbd0d6cfb0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="341" type="61" schemaName="neu_/js/entities/neu_tenderstructure.js" displayName="neu_/js/entities/neu_tenderstructure.js" solution="Active" />
+        <Dependent key="277" type="60" displayName="Informacje" parentDisplayName="Struktura Przetargu" id="{49eae151-fd34-49e1-80f3-29dbd0d6cfb0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="341" type="61" schemaName="neu_/js/entities/neu_tenderstructure.js" displayName="neu_/js/entities/neu_tenderstructure.js" solution="Active" />
+        <Dependent key="305" type="60" displayName="Informacje - kopia" parentDisplayName="Struktura Przetargu" id="{30b077b2-3e67-4a10-8fb3-78f4cc3a74f4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="342" type="61" schemaName="neu_/img/application_16.png" displayName="neu_/img/application_16.png" solution="Active" />
+        <Dependent key="31" type="1" schemaName="neu_application" displayName="Wniosek" />
+      </MissingDependency>
+    </MissingDependencies>
+  </SolutionManifest>
+</ImportExportXml>

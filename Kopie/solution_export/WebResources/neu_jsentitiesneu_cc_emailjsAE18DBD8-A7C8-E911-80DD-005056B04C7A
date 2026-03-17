@@ -1,0 +1,104 @@
+/// <reference path="../common/neu_consts.js" />
+/// <reference path="../common/neu_uiutils.js" />
+/// <reference path="../neu_xrmservicetoolkit.js" />
+
+var SelectedMainTelephonOptions = {};
+
+if (typeof (Neuca) == "undefined") {
+    Neuca = {};
+}
+
+if (typeof (Neuca.Crm) == "undefined") {
+    Neuca.Crm = {};
+}
+
+if (typeof (Neuca.Crm) == "undefined") {
+    Neuca.Crm = {};
+}
+
+if (typeof (Neuca.Crm.Email) == "undefined") {
+    Neuca.Crm.Email = {};
+};
+
+if (typeof (Neuca.Crm.Email.Form) == "undefined") {
+    Neuca.Crm.Email.Form = {
+        visibilityController: null
+    };
+};
+
+if (typeof (Neuca.Crm.Email.Form.Main) == "undefined") {
+    Neuca.Crm.Email.Form.Main = {};
+};
+
+
+Neuca.Crm.Email.Form.Main = {
+    Tabs: {
+        TAB_EMAIL: "TAB_EMAIL",
+        TAB_TECHNICAL_INFORMATION: "TAB_TECHNICAL_INFORMATION"
+
+    },
+
+    Sections: {
+        SECTION_RECIPIENT_INFORMATION: "SECTION_RECIPIENT_INFORMATION",
+        SECTION_EMAIL_DESCRIPTION: "SECTION_EMAIL_DESCRIPTION",
+        SECTION_MARKETING: "SECTION_MARKETING",
+
+        SECTION_TECHNICAL_INFORMATION: "SECTION_TECHNICAL_INFORMATION",
+
+    },
+
+    VisibleRules: {
+        sectionMarketingVisibleRule: function() {
+            var fields = Neuca.Crm.Consts.Email.Fields,
+                uiutils = Neuca.Crm.UiUtils,
+                isCampaignEmail = uiutils.getValue(fields.IS_CAMPAIGN_EMAIL);
+
+            if (isCampaignEmail && isCampaignEmail == true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    },
+
+    RequiredRules: {
+    },
+
+    EnableRules: {
+    },
+
+    Handlers: {
+        onLoad: function() {
+            var form = Neuca.Crm.Email.Form,
+                methods = form.Main.Methods,
+                uiutils = Neuca.Crm.UiUtils;
+
+            form.visibilityController = new Neuca.Crm.ModelVisibilityController(new Neuca.Crm.Email.Model.Form.Main());
+            form.visibilityController.update();
+            methods.hideSystemUserOnEmailFields();
+        },
+
+        isCampaignEmailOnChange: function() {
+            form = Neuca.Crm.Email.Form;
+            form.visibilityController.update();
+        }
+    },
+
+    Methods: {
+        hideSystemUserOnEmailFields: function () {
+            var methods = Neuca.Crm.Email.Form.Main.Methods;
+
+            methods.hideSystemUserOnEmailField("to");
+            methods.hideSystemUserOnEmailField("cc");
+            methods.hideSystemUserOnEmailField("bcc");
+        },
+
+        hideSystemUserOnEmailField: function(fieldName) {
+            Xrm.Page.getControl(fieldName).addPreSearch(function() {
+                Xrm.Page.getControl(fieldName)
+                    .getAttribute().setLookupTypes(["account", 
+                        "neu_client", "contact", "equipment", "lead", "entitlement"]);
+            });
+        }
+    }
+}

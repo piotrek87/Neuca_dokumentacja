@@ -1,0 +1,214 @@
+function getUserAccessLevel() {
+    // console.log(executionContext)
+    /*
+     * 1 - blokada wszystkiego
+     * 2 - brak blokad + nie wszystkie statusy
+     * 3 - brak blokad + wszystkie statusy
+     */
+
+    var entityName = parent.Xrm.Page.data.entity.getEntityName();//opportunity
+
+    var tenderId = "";
+
+    if (entityName == "opportunity") {
+        tenderId = parent.Xrm.Page.data.entity.getId();
+    } else if (parent.Xrm.Page.getAttribute("neu_tenderid").getValue() != null) {
+        tenderId = parent.Xrm.Page.getAttribute("neu_tenderid").getValue()[0].id
+    }
+    if (tenderId == "") { // po naciśnięciu nowego rekordu pozwalamy wypełnić 
+        return 2;
+    }
+    tenderId = tenderId.replace(/[{ }]/g, "");
+
+    var currentuserid = Xrm.Page.context.getUserId();
+
+    var roles = [];
+    roles[0] = "[CRM] Administrator biznesowy";
+    roles[1] = "[CRM] Menadżer";
+    roles[2] = "Administrator systemu";
+
+    var rolesFullSatus = ["[CRM] Administrator biznesowy"];
+
+    function currentUserHasSecurityRole(roles) {
+        var fetchXml =
+            "<fetch mapping='logical'>" +
+            "<entity name='systemuser'>" +
+            "<attribute name='systemuserid' />" +
+            "<filter type='and'>" +
+            "<condition attribute='systemuserid' operator='eq-userid' />" +
+            "</filter>" +
+            "<link-entity name='systemuserroles' from='systemuserid' to='systemuserid' visible='false' intersect='true'>" +
+            "<link-entity name='role' from='roleid' to='roleid' alias='r'>" +
+            "<filter type='or'>";
+        for (var i = 0; i < roles.length; i++) {
+            fetchXml += "<condition attribute='name' operator='eq' value='" + roles[i] + "' />";
+        }
+        fetchXml += "            </filter>" +
+            "</link-entity>" +
+            "</link-entity>" +
+            "</entity>" +
+            "</fetch>";
+        //debugger;
+        var modifiedFetchXml = fetchXml.replace("&", "&amp;");
+        var users = ExecuteFetch(modifiedFetchXml, "systemusers");
+        if (users > 0)
+            return true;
+        else
+            return false;
+    }
+    function ExecuteFetch(originalFetch, entityname) {
+        var count = 0;
+        var fetch = encodeURI(originalFetch);
+
+        var serverURL = Xrm.Page.context.getClientUrl();
+        var Query = entityname + "?fetchXml=" + fetch;
+        var req = new XMLHttpRequest();
+        req.open("GET", serverURL + "/api/data/v8.2/" + Query, false);
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        req.setRequestHeader("OData-MaxVersion", "4.0");
+        req.setRequestHeader("OData-Version", "4.0");
+        req.onreadystatechange = function () {
+            if (this.readyState == 4 /* complete */) {
+                req.onreadystatechange = null;
+                if (this.status == 200) {
+                    var data = JSON.parse(this.response);
+                    if (data != null) {
+                        count = data.value.length;
+                    }
+                }
+                else {
+                    var error = JSON.parse(this.response).error;
+                    alert("ExecuteFetch error (opportunitytenderusercheck): " +error.message);
+                }
+            }
+        };
+        req.send();
+        return count;
+    };
+    if (currentUserHasSecurityRole(rolesFullSatus)) {
+        return 3;
+    }
+    if (currentUserHasSecurityRole(roles)) {
+        return 2;
+    }
+    function checkIsTenderUser(tenderId) {
+        var returnValue = 1;
+        var userexecuting;
+        var usersupporting;
+        var useraccepting;
+
+        var neu_opportunity_neu_state = {
+            279660000: 'nowy',
+            279660001: 'nie przystępujemy',
+            279660002: 'w analizie',
+            279660003: 'w przygotowaniu',
+            279660004: 'złożony',
+            279660005: 'aktywowany warunkowo w SAP',
+            279660006: 'wygrany',
+            279660007: 'wygrany częściowo',
+            279660008: 'wysłany do SAP',
+            279660009: 'wysłany częściowo do SAP',
+            279660010: 'błąd aktywacji w SAP',
+            279660011: 'aktywowany w SAP',
+            279660012: 'aktywowany częściowo w SAP',
+            279660013: 'przegrany',
+            279660014: 'unieważniony',
+            279660015: 'odrzucony'
+        };
+
+        function getStatusName(statusNumber) {
+            return neu_opportunity_neu_state[statusNumber] || null;
+        }
+
+        var req = new XMLHttpRequest();
+        req.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/opportunities(" + tenderId.toUpperCase() + ")?$select=neu_state,_neu_useracceptingid_value,_neu_userexecutingid_value,_neu_usersupportingid_value", false);
+        req.setRequestHeader("OData-MaxVersion", "4.0");
+        req.setRequestHeader("OData-Version", "4.0");
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        req.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                req.onreadystatechange = null;
+                if (this.status === 200) {
+                    var result = JSON.parse(this.response);
+                    var _neu_useracceptingid_value = result["_neu_useracceptingid_value"];
+                    var _neu_userexecutingid_value = result["_neu_userexecutingid_value"];
+                    var _neu_usersupportingid_value = result["_neu_usersupportingid_value"];
+                    var status = result["neu_state"];
+
+                    userexecuting = _neu_userexecutingid_value == null ? null : "{" + _neu_userexecutingid_value.toUpperCase() + "}";
+
+                    usersupporting = _neu_usersupportingid_value == null ? null : "{" + _neu_usersupportingid_value.toUpperCase() + "}";
+
+                    useraccepting = _neu_useracceptingid_value == null ? null : "{" + _neu_useracceptingid_value.toUpperCase() + "}";
+
+                    userexecuting = userexecuting == currentuserid;
+                    usersupporting = usersupporting == currentuserid;
+                    useraccepting = useraccepting == currentuserid;
+
+                    var statusBlockFields = false;
+                    var oneOfUsers = userexecuting || usersupporting || useraccepting;
+
+                    if (status != 279660000/*nowy*/ && status != 279660002/*w analizie*/ && status != 279660003/*w przygotowaniu*/) {
+                        statusBlockFields = true;
+                    }
+                    var enableFields = [];
+
+                    function hideButtonsAndLinks() {
+                        window.parent.$(".ms-crm-contextButton, .openAssociatedGridViewImageButton").each(function () {
+                            if ($(this).closest("#GRID_DOCUMENTS_span, #GRID_CONTRACTTOP_span").length === 0) {
+                                $(this).hide();
+                            }
+                        });
+
+                        window.parent.$("tr").on('mouseover', '.ms-crm-List-DeleteContainer-Div', function () {
+                            if ($(this).closest("#GRID_DOCUMENTS_span, #GRID_CONTRACTTOP_span").length === 0) {
+                                $(this).parent().remove();
+                            }
+                        });
+
+                        window.parent.$("#deleteLink,#attachButton,#deleteAttachmentLink").each(function () {
+                            $(this).attr("onclick", 'alert("Funkcja niedostępna z powodu braku uprawnień.")');
+                        });
+                    }
+
+                    if (oneOfUsers && !statusBlockFields) { returnValue = 2; }
+                    else if (!oneOfUsers) {
+                        window.parent.Xrm.Page.ui.clearFormNotification("1");
+                        window.parent.Xrm.Page.ui.setFormNotification("Niektóre pola mogą być zablokowane ze względu na uprawnienia użytkownika.", "ERROR", "1");
+                        parent.Xrm.Page.ui.controls.forEach(function (x) { if (x && enableFields.indexOf(x.getName()) < 0 && x.getDisabled) { x.setDisabled(true); } });
+
+                        hideButtonsAndLinks();
+                        returnValue = 1;
+                    }
+                    else if (statusBlockFields) {
+                        window.parent.Xrm.Page.ui.clearFormNotification("1");
+                        window.parent.Xrm.Page.ui.setFormNotification("Niektóre pola mogą być zablokowane z powodu statusu przetargu: " + getStatusName(status), "ERROR", "1");
+
+                        enableFields.push('neu_ischecked', 'neu_iscorrectmappeditem', 'neu_iscorrectcalculateditem', 'neu_lost');
+
+                        if (entityName == "opportunity" || entityName == "neu_tenderbundle" || entityName == "neu_tenderproduct") { enableFields.push('neu_state') }
+                        if (entityName == "opportunity") { enableFields.push('neu_sapcode') };
+
+                        parent.Xrm.Page.ui.controls.forEach(function (x) { if (x && enableFields.indexOf(x.getName()) < 0 && x.getDisabled) { x.setDisabled(true); } });
+
+                        hideButtonsAndLinks();
+                        returnValue = 1;
+                    }
+                }
+                else {
+                    Xrm.Utility.alertDialog("Opportunity read error ('opportunitytenderusercheck'): " +this.statusText);
+                }
+            }
+        };
+        req.send();
+
+        if ((userexecuting || usersupporting) && entityName == "neu_tenderbundle") {
+            window.parent.$(".ms-crm-contextButton").show();
+            window.parent.$(".openAssociatedGridViewImageButton").show();
+        }
+        return returnValue;
+    }
+    return checkIsTenderUser(tenderId);
+}

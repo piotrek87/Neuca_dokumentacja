@@ -1,0 +1,1039 @@
+========== POLA NA FORMULARZACH (solution - customizations.xml) ==========
+
+Encje z formularzami: 41. Lacznie pol na formularzach (unikalne per encja): 1261.
+
+  [Email] (33 pol): actualdurationminutes, actualend, actualstart, bcc, cc, createdby, createdon, description, directioncode, from, modifiedby, modifiedon, neu_campaignactivitysubject, neu_customerid, neu_externalsystemstatus, neu_fromemail, neu_id, neu_includedattachmentsids, neu_iscampaignemail, neu_logdescription, neu_mailstatus, neu_taskid, ownerid, prioritycode, regardingobjectid, scheduledend, scheduledstart, senton, statecode, statuscode, subject, submittedby, to
+  [neu_conf_conversion] (9 pol): createdon, modifiedon, neu_applies, neu_name, neu_replacefrom, neu_replaceto, ownerid, statecode, statuscode
+  [neu_conf_criteriatemplate] (6 pol): createdon, neu_name, neu_systemname, ownerid, statecode, statuscode
+  [neu_conf_failurecause] (5 pol): createdon, neu_name, ownerid, statecode, statuscode
+  [neu_conf_formchangematrix] (13 pol): createdby, createdon, modifiedby, modifiedon, neu_formfrom, neu_formfromvalue, neu_formto, neu_formtovalue, neu_name, neu_neu_formchangetemplateidid, ownerid, statecode, statuscode
+  [neu_conf_formdictionary] (5 pol): createdon, neu_name, ownerid, statecode, statuscode
+  [neu_conf_opportunitytype] (11 pol): createdon, neu_defaultstageid, neu_isvisibleonaccount, neu_isvisibleonclient, neu_name, neu_programfield, neu_type, neu_workflowid, ownerid, statecode, statuscode
+  [neu_conf_tenderformchangematrix] (10 pol): createdby, createdon, modifiedby, modifiedon, neu_formchancematrix, neu_name, neu_opportunityid, ownerid, statecode, statuscode
+  [neu_contractop] (92 pol): createdby, createdon, modifiedby, modifiedon, neu_action, neu_actualenddate, neu_allowspriceindexation, neu_amountbrutto, neu_amountnetto, neu_annexedcontractopid, neu_annexgrossvalue, neu_annexnetvalue, neu_annexnumber, neu_annexreceivedate, neu_annexsenddate, neu_bothsidessignaturedate, neu_cancelcontractbyclient, neu_cancelcontractbyclientcondition, neu_cancelcontractbyneuca, neu_cancelcontractbyneucacondition, neu_clientid, neu_conf_salesofficeid, neu_contractdatefrom, neu_contractdateto, neu_contractestimatedturnover, neu_contractgrossvalue, neu_contractmontlyrealizationpercentagedec, neu_contractmontlyrealizationvalue, neu_contractnetvalue, neu_contractnumber, neu_contractnumbercrm, neu_contractrealizationpercentage, neu_contractrealizationvalue, neu_contractreceiptdate, neu_contractsigndate, neu_contractstate, neu_contractterminationdate, neu_contracttype, neu_dateofsubstantiveacceptence, neu_deliveryform, neu_description, neu_finepaymentdate, neu_fordelay, neu_fordelaycondition, neu_formofconcludingacontract, neu_fortherescue, neu_freelease, neu_institutionreceivercity, neu_institutionreceivername, neu_institutionreceiverstreet, neu_isannex, neu_isneucagroupvatannex, neu_ispriceassizeincreasingchange, neu_ispriceassizeloweringchange, neu_isstateupdate, neu_issubstituteoriginalprice, neu_legaldecision, neu_legaldecisiondate, neu_name, neu_newcito, neu_nip, neu_nocomplaintconsideration, neu_nocomplaintconsiderationcondition, neu_noorder, neu_noordercondition, neu_opportunityid, neu_ordercompletiontime, neu_other, neu_othercondition, neu_paidlease, neu_payerorganiser, neu_paymentreffer, neu_paymentsettlementtime, neu_paymetrefferother, neu_personresponsible, neu_presaledate, neu_priceindexationfrequency, neu_priceindexationgraceperiod, neu_priceindexationpercent, neu_producerid, neu_purchasegroupcode, neu_purchasegroupid, neu_representativename1, neu_representativename2, neu_sapcode, neu_sendtoclient, neu_sendtoclientdate, neu_substantiveacceptence, neu_tenderoffernumber, ownerid, statecode, statuscode
+  [neu_contracttenderbundle] (9 pol): createdon, neu_contracttopid, neu_name, neu_receiverid, neu_tenderbundleid, neu_tenderid, ownerid, statecode, statuscode
+  [neu_document] (17 pol): createdby, createdon, modifiedby, modifiedon, neu_bruttovalue, neu_contractpenaltiesdescription, neu_ischangeprice, neu_ischangepriceaneks, neu_name, neu_nettovalue, neu_number, neu_opportunityid, neu_receiverid, neu_type, ownerid, statecode, statuscode
+  [neu_drugformpharmindex] (25 pol): createdon, neu_activesubstancecsioz, neu_bloz7, neu_dosage, neu_drug, neu_ean, neu_excipients, neu_form, neu_formstandardized, neu_fullname, neu_id, neu_import, neu_importd, neu_isnarcpsych, neu_isreimbursed, neu_modified, neu_package, neu_regnr, neu_routes, neu_shortname, neu_status, neu_typedrug, ownerid, statecode, statuscode
+  [neu_drugpharmindex] (15 pol): createdon, neu_activesubstancecsioz, neu_composition, neu_csioz, neu_id, neu_idprod, neu_modified, neu_name, neu_notes, neu_prodname, neu_producerid, neu_status, ownerid, statecode, statuscode
+  [neu_emailgroupdictionary] (2 pol): emailaddress, neu_name
+  [neu_environmentvariables] (9 pol): createdon, emailaddress, neu_comment, neu_name, neu_queue, neu_value, ownerid, statecode, statuscode
+  [neu_formchangetemplate] (5 pol): createdon, neu_name, ownerid, statecode, statuscode
+  [neu_institution_receiver] (10 pol): createdon, neu_name, neu_outputquantity, neu_receiverid, neu_tenderid, neu_tenderproductid, neu_unitamount, ownerid, statecode, statuscode
+  [neu_listproducerpricelist] (9 pol): createdon, neu_name, neu_price, neu_producerpricelistid, neu_productid, neu_saleslimit, ownerid, statecode, statuscode
+  [neu_listtradeterms] (16 pol): createdon, neu_amount, neu_code, neu_eancode, neu_issenttosap, neu_name, neu_productid, neu_saleslimit, neu_settlementmethod, neu_tenderid, neu_tenderproductid, neu_tradetermsid, neu_unitamount, ownerid, statecode, statuscode
+  [neu_listtradetermstenderproduct] (9 pol): createdon, neu_listtradetermsid, neu_mappedproductid, neu_name, neu_tenderid, neu_unitamount, ownerid, statecode, statuscode
+  [neu_mappedproduct] (134 pol): createdby, createdon, modifiedby, modifiedon, neu_acceptdescription, neu_activesubstance, neu_bloz12code, neu_bloz7code, neu_budgetsale, neu_budgetsalebruttosap, neu_budgetsalesap, neu_calcflag, neu_caltulationtype, neu_code, neu_costofbasicterm, neu_costofdelays, neu_costzach, neu_csioz, neu_dosage, neu_dosagefromexcel, neu_eancode, neu_eanfromexcel, neu_form, neu_formfromexcel, neu_infodrugprogram, neu_infopriceassize, neu_inforss, neu_infotenderpriceassize, neu_infotenderpricewholesale, neu_interestincome, neu_isaccept, neu_isactiveinpharmindex, neu_isdrugprogram, neu_isexcludedfromdiscount, neu_isgeneratepositionzpzk, neu_isinactiveproductsap, neu_isoherheadpercentchanged, neu_ispriceprevious, neu_ispricingperitem, neu_isproblem, neu_isproducermwir, neu_isspecializedcontractnfz, neu_istradetermslastyear, neu_istradetermssalelimit, neu_istradingadmissiondateinterm, neu_istradingadmissionstate, neu_lastpricezpzk, neu_lastzpzkdate, neu_lost, neu_marginadjustmentswithinvoicecontract, neu_marginbrutto, neu_marginbruttopercent, neu_marginbruttosap, neu_margincontractual, neu_margincontractualpercent, neu_name, neu_namefromexcel, neu_nameinternational, neu_nametrade, neu_noncontractualinvoicebenefits, neu_overheadadjustment, neu_overheadpercent, neu_packageforcalc, neu_packaging, neu_packagingcalculatemethod, neu_packagingfromexcel, neu_packagingqty, neu_packagingqtychange, neu_packagingset, neu_percentbenefitforzach, neu_perfectdosage, neu_priceassize, neu_pricedrugprogramlimit, neu_priceperunit, neu_priceperunitcalcmethod, neu_priceperunitnew, neu_pricepreviouszpzk, neu_pricepurchase, neu_pricepurchaseafterdiscounts, neu_pricepurchaseafterriseestimated, neu_pricepurchasemwir, neu_pricepurchaseunit, neu_pricerss, neu_priceselling, neu_pricesellingbrutto, neu_pricesellingmwir, neu_pricespecialafterrise, neu_pricespecialpurchase, neu_pricespecialpurchaseunit, neu_pricetrade, neu_pricetradeafterrise, neu_pricetraderisedate, neu_pricewholesalemaximum, neu_pricewholesalezccg, neu_problemdescription, neu_productid, neu_productpharmindexid, neu_profitonsale, neu_profitonsalemaximum, neu_quantityfromexcel, neu_routeofadministration, neu_salesproducerid, neu_samepriceflag, neu_sapcode, neu_sapfromexcel, neu_settlementmethod, neu_stockfinancing, neu_stockfinancingdays, neu_stockfinancingpercent, neu_supplystatus, neu_tenderid, neu_tenderproductid, neu_tenderstructureid, neu_termbenefits, neu_termbenefitsdays, neu_termbenefitspercent, neu_tradingadmissiondate, neu_tradingadmissionnumber, neu_type, neu_typedrug, neu_unit, neu_unitamount, neu_unitamountchange, neu_unitamountfromexcel, neu_unitamountproblem, neu_unitamountsap, neu_unitdifferencepricespecialvspurchase, neu_unitfromexcel, neu_unitnoncontractualbenefits, neu_vatrate, neu_zeroindexflag, ownerid, statecode, statuscode
+  [neu_opportunity_neu_failurecause] (7 pol): createdon, neu_description, neu_failurecause, neu_name, ownerid, statecode, statuscode
+  [neu_preferredproducer] (10 pol): createdon, neu_name, neu_opportunityid, neu_prioritycode, neu_producerid, neu_producersapid, neu_tenderbundleid, ownerid, statecode, statuscode
+  [neu_producer] (23 pol): createdby, createdon, emailaddress, modifiedby, modifiedon, neu_city, neu_contactid, neu_country, neu_createemailflag, neu_fax, neu_isproducerofproduct, neu_istenderzpzkproducer, neu_name, neu_note, neu_overheadpercentpreferred, neu_phone, neu_postalcode, neu_sapcode, neu_settlementmethod, neu_street, ownerid, statecode, statuscode
+  [neu_producerofproduct] (28 pol): createdby, createdon, modifiedby, modifiedon, neu_adress_city, neu_adress_district, neu_adress_line1, neu_adress_line2, neu_adress_line3, neu_adress_postalcode, neu_adress_province, neu_agent, neu_contactid, neu_country, neu_description, neu_email, neu_fax, neu_isownproducer, neu_name, neu_pharmindexid, neu_phone, neu_producersapid, neu_sapcode, neu_state, neu_type, ownerid, statecode, statuscode
+  [neu_producerpricelist] (10 pol): createdon, neu_name, neu_producerid, neu_quotenumber, neu_typ, neu_validitydatefrom, neu_validitydateto, ownerid, statecode, statuscode
+  [neu_productpricemz] (9 pol): createdby, createdon, modifiedby, modifiedon, neu_eancode, neu_priceassize, neu_pricedrugprogramlimit, neu_pricewholesalemaximum, ownerid
+  [neu_quote] (61 pol): createdby, createdon, modifiedby, modifiedon, neu_activatequoteflag, neu_cito, neu_clientsapcode, neu_contractnumber, neu_contractualpenalties, neu_deliveryhours, neu_exporterrormessage, neu_isgenerateaddressingforxls, neu_ispzpforquote, neu_lifesaving, neu_name, neu_orderingmethod, neu_overhead, neu_overheadpercent, neu_overheadpercentsap, neu_overheadpercentsapwon, neu_overheadpercentwon, neu_overheadsap, neu_overheadsapwon, neu_overheadwon, neu_paymentcondition, neu_procedurenumer, neu_purchasegroupsapcode, neu_statecodeforquote, neu_statesccept, neu_tenderid, neu_tenderpayerid, neu_tenderpurchasegroupid, neu_tenderstructureid, neu_totalamountbrutto, neu_totalamountbruttowon, neu_totalamountnetto, neu_totalamountnettowon, neu_totalbudgetsalenettosap, neu_totalbudgetsalenettosapwon, neu_totalbudgetsalesap, neu_totalbudgetsalesapwon, neu_totalmarginbrutto, neu_totalmarginbruttopercent, neu_totalmarginbruttopercentsap, neu_totalmarginbruttopercentsapwon, neu_totalmarginbruttopercentwon, neu_totalmarginbruttosap, neu_totalmarginbruttosapwon, neu_totalmarginbruttowon, neu_totalquantitysap, neu_totalquantitysapwon, neu_useracceptingid, neu_userexecutingid, neu_usersupportingid, neu_validfrom, neu_validto, neu_valuecontrol, neu_wonoffercalcflag, ownerid, statecode, statuscode
+  [neu_quote_institution_receiver] (9 pol): createdon, neu_institution_receiverid, neu_name, neu_quotedetailid, neu_receiverid, neu_unitamount, ownerid, statecode, statuscode
+  [neu_quotebundle] (19 pol): createdon, neu_contractopid, neu_name, neu_number, neu_overheadpercent, neu_quoteid, neu_tenderbundleid, neu_totalamountbrutto, neu_totalamountnetto, neu_totalbudgetsale, neu_totalmarginbrutto, neu_totalmarginbruttopercent, neu_totaloverheadadjustment, neu_totalquantity, neu_validitydatefrom, neu_validitydateto, ownerid, statecode, statuscode
+  [neu_quotedetail] (58 pol): createdby, createdon, modifiedby, modifiedon, neu_budgetsale, neu_casesignfromproducer, neu_code, neu_contractopid, neu_dosage, neu_eancode, neu_form, neu_isaccept, neu_ispricingperitem, neu_issenttosap, neu_istradetermssalelimit, neu_lost, neu_lpsap, neu_marginbruttopercent, neu_name, neu_nametrade, neu_ordinalnumberfromtenderproduct, neu_outputrownum, neu_outputsheet, neu_overheadadjustment, neu_overheadpercent, neu_packaging, neu_packagingcalculatemethod, neu_priceperunit, neu_priceperunitcalcmethod, neu_pricepurchase, neu_pricepurchaseafterdiscounts, neu_priceselling, neu_pricesellingbrutto, neu_pricespecialpurchase, neu_priceunit, neu_producername, neu_productid, neu_quotebundleid, neu_quotedetailmainid, neu_quoteid, neu_rejectioncausedescription, neu_salesproducerid, neu_sapcodetxt, neu_settlementmethod, neu_tenderbundleid, neu_tenderid, neu_tenderproductid, neu_tradingadmissionnumber, neu_type, neu_unit, neu_unitamount, neu_unitamountsap, neu_validitydatefrom, neu_validitydateto, neu_vatrate, ownerid, statecode, statuscode
+  [neu_quotedetailaddressing] (5 pol): createdon, neu_cell, ownerid, statecode, statuscode
+  [neu_receiver] (13 pol): createdby, createdon, modifiedby, modifiedon, neu_accountid, neu_name, neu_namefromexcel, neu_opportunityid, neu_payerid, neu_tendersapcode, ownerid, statecode, statuscode
+  [neu_template] (6 pol): createdon, neu_name, neu_template_data, ownerid, statecode, statuscode
+  [neu_templatecriterion] (10 pol): createdon, modifiedon, neu_criteriaid, neu_name, neu_systemname, neu_templatecriterion_value, neu_type, ownerid, statecode, statuscode
+  [neu_tenderbundle] (82 pol): createdby, createdon, modifiedby, modifiedon, neu_annoucementdate, neu_budgetsalebruttosap, neu_calcflag, neu_cito, neu_contracttype, neu_daysofvalidquote, neu_deliveryhours, neu_deliveryopeningdate, neu_documentid, neu_durationinmonths, neu_durationinmonthschange, neu_iscalculateproducer, neu_isdeliveryonsaturday, neu_isonetimedelivery, neu_isoverheadvalidation, neu_isrecalcvalidation, neu_isrestoremapper, neu_itemsamountinbundle, neu_lifesaving, neu_name, neu_number, neu_onetimedeliverydate, neu_openingdate, neu_outputsheet, neu_overheadflag, neu_overheadpercent, neu_overheadpercentsource, neu_parentbundleid, neu_paymentdeadline, neu_pricetooverheadcalc, neu_pricetooverheadcalcsap, neu_rejectioncause, neu_rejectioncausedescription, neu_releasedate, neu_state, neu_statechangeddate, neu_stateprefferproducer, neu_statepreflag, neu_statuspre, neu_tenderbundlenumber, neu_tenderid, neu_tenderstructureid, neu_totalamountbrutto, neu_totalamountnetto, neu_totalbasictermcosts, neu_totalbasictermcostspercent, neu_totalbudgetsale, neu_totalbudgetsalesap, neu_totalcontractualbenefits, neu_totalcontractualbenefitspercent, neu_totalcontractualmargin, neu_totalcontractualmarginpercent, neu_totaldelaycosts, neu_totaldelaycostspercent, neu_totalfinancinginventories, neu_totalfinancinginventoriespercent, neu_totalinterestincome, neu_totalinterestincomepercent, neu_totalmarginadjustment, neu_totalmarginadjustmentpercent, neu_totalmarginbrutto, neu_totalmarginbruttopercent, neu_totalmarginbruttosap, neu_totaloverheadadjustment, neu_totalprofitonsale, neu_totalprofitonsalespercent, neu_totalquantity, neu_totalquantitysap, neu_totaltermbenefits, neu_totaltermbenefitspercent, neu_totalzachcost, neu_totalzachcostpercent, neu_validitydatefrom, neu_validitydateto, neu_validitydays, ownerid, statecode, statuscode
+  [neu_tenderproduct] (155 pol): createdby, createdon, modifiedby, modifiedon, neu_acceptdescription, neu_activesubstance, neu_bloz12code, neu_bloz7code, neu_budgetsale, neu_budgetsalebruttosap, neu_budgetsalesap, neu_calcflag, neu_caltulationtype, neu_checkedbyid, neu_checkeddate, neu_code, neu_contracttype, neu_costofbasicterm, neu_costofdelays, neu_costzach, neu_csioz, neu_dosage, neu_dosagefromexcel, neu_eancode, neu_eanfromexcel, neu_form, neu_formfromexcel, neu_infodrugprogram, neu_infopriceassize, neu_inforss, neu_infotenderpriceassize, neu_infotenderpricewholesale, neu_interestincome, neu_isaccept, neu_isactiveinpharmindex, neu_iscalcofmappedproductinprogress, neu_ischecked, neu_iscorrectcalculateditem, neu_iscorrectmappeditem, neu_isdatachange, neu_isdrugprogram, neu_isexcludedfromdiscount, neu_isformchangeconsent, neu_isgeneratepositionzpzk, neu_isinactiveproductsap, neu_ismultipliedinbundles, neu_ispricingperitem, neu_isproblem, neu_isproducermwir, neu_isremap, neu_isspecializedcontractnfz, neu_issubstitutesconsent, neu_istradename, neu_istradetermslastyear, neu_istradetermssalelimit, neu_istradingadmissionstatus, neu_lastcalctime, neu_lastpricezpzk, neu_lastzpzkdate, neu_marginadjustmentswithinvoicecontract, neu_marginbrutto, neu_marginbruttopercent, neu_marginbruttosap, neu_margincontractual, neu_margincontractualpercent, neu_name, neu_namefromexcel, neu_nameinternational, neu_nametrade, neu_noncontractualinvoicebenefits, neu_note, neu_numberinbundlefromxls, neu_numberofmappedproducts, neu_outputrownum, neu_outputsheet, neu_overheadadjustment, neu_overheadpercent, neu_overheadpercentsource, neu_packageforcalc, neu_packagefromexcel, neu_packaging, neu_packagingcalculatemethod, neu_packagingchangemethod, neu_packagingchangemethodvalue_x, neu_packagingqty, neu_packagingqtychange, neu_packagingset, neu_percentbenefitforzach, neu_priceassize, neu_pricedrugprogramlimit, neu_priceperunit, neu_priceperunitcalcmethod, neu_pricepreviouszpzk, neu_pricepurchase, neu_pricepurchaseafterdiscounts, neu_pricepurchaseafterriseestimated, neu_pricepurchasemwir, neu_pricepurchaseunit, neu_pricerss, neu_priceselling, neu_pricesellingbrutto, neu_pricesellingmwir, neu_pricespecialafterrise, neu_pricespecialpurchase, neu_pricespecialpurchaseunit, neu_pricetooverheadcalc, neu_pricetooverheadcalcsap, neu_pricetrade, neu_pricetradeafterrise, neu_pricetraderisedate, neu_pricetradeterms, neu_pricewholesalemaximum, neu_pricewholesalezccg, neu_problemdescription, neu_productid, neu_profitonsale, neu_profitonsalemaximum, neu_quantityfromexcel, neu_rejectioncausedescription, neu_routeofadministration, neu_salesproducerid, neu_samepriceflag, neu_sapcode, neu_sapfromexcel, neu_settlementmethod, neu_state, neu_statepre, neu_stockfinancing, neu_stockfinancingdays, neu_stockfinancingpercent, neu_supplystatus, neu_tenderbundleid, neu_tenderid, neu_tenderstructureid, neu_termbenefits, neu_termbenefitsdays, neu_termbenefitspercent, neu_tradetermssalelimit, neu_tradingadmissiondate, neu_tradingadmissionnumber, neu_typedrug, neu_unit, neu_unitamount, neu_unitamountchange, neu_unitamountfromxls, neu_unitamountproblem, neu_unitamountsap, neu_unitdifferencepricespecialvspurchase, neu_unitfromexcel, neu_unitnoncontractualbenefits, neu_vatrate, neu_zeroindexflag, ownerid, statecode, statuscode
+  [neu_tenderstructure] (25 pol): createdby, createdon, modifiedby, modifiedon, neu_checkeditems, neu_checkeditemspercentge, neu_correctmappeditemsamount, neu_correctmappeditemspercentage, neu_errorlog, neu_errortxt, neu_importerprocesscode, neu_itemsamount, neu_mappeditemsamount, neu_mappeditemspercentage, neu_mapperprocesscode, neu_name, neu_pluginlist, neu_processeditempspercentage, neu_processeditemsamount, neu_statecode, neu_templateid, neu_tenderid, ownerid, statecode, statuscode
+  [neu_tradeterms] (29 pol): createdby, createdon, modifiedby, modifiedon, neu_bagindate, neu_caltulationtype, neu_code, neu_deliveryopeningdate, neu_description, neu_emailflag, neu_emailtoproducerstate, neu_enddate, neu_generatecsvflag, neu_isdrugavailability, neu_isinfosent, neu_ispricestability, neu_istradetermsconditions, neu_name, neu_overheadpercentpreferred, neu_producersapid, neu_salesoffice, neu_settlementmethod, neu_status, neu_tendercontractpenalty, neu_tenderid, neu_tenderstatus, ownerid, statecode, statuscode
+  [Opportunity] (145 pol): createdby, createdon, estimatedvalue, isrevenuesystemcalculated, modifiedby, modifiedon, name, neu_additionaldocuments, neu_annoucementdate, neu_annualcostofcapital, neu_bipnnumber, neu_budgetsalebruttosap, neu_calcflag, neu_caltulationtype, neu_casesignfromorganizer, neu_casesignfromproducer, neu_cash, neu_changespharmindex, neu_changessap, neu_cito, neu_conf_opportunitytypeid, neu_contracttype, neu_contractualpenalties, neu_daysofvalidquote, neu_deliveriespermonth, neu_deliveryhours, neu_deliveryopeningdate, neu_durationinmonths, neu_durationinmonthschange, neu_euthreshold, neu_expecteddelay, neu_freelease, neu_indexzeroamount, neu_ischeckprice, neu_isclinicaltests, neu_iscollectiveinvoice, neu_iscombiningorders, neu_iscopyprefferedproducer, neu_isdeliveryonsaturday, neu_isdrugprogram, neu_isequalizepriceassize, neu_isequalizepricewholesale, neu_isformchangeconsent, neu_isgeneratequote, neu_isgeneratequotevalidation, neu_isgeneratezpzkproducer, neu_isonetimedelivery, neu_isoverheadvalidation, neu_ispriceexchange, neu_ispricingperitem, neu_isrecalcvalidation, neu_issentemailonwonevent, neu_issimplified, neu_issubstitutesconsent, neu_istradename, neu_lifesaving, neu_logisticscosts, neu_logisticscostspercent, neu_negotiationassetschanged, neu_numberofquotes, neu_onetimedeliverydate, neu_openingdate, neu_orderingmethod, neu_overheadflag, neu_overheadpercent, neu_packagingcalculatemethod, neu_packagingchangemethod, neu_packagingchangemethodvalue_x, neu_paidlease, neu_payerorganizerid, neu_personnelcosts, neu_personnelcostspercent, neu_priceperunitcalcmethod, neu_pricetooverheadcalc, neu_pricetooverheadcalcsap, neu_procedurenumber, neu_procedurenumberurl, neu_proceduretype, neu_profitnetto, neu_profitonsalesnetto, neu_profitonsalesnettopercent, neu_purchasegroupid, neu_purchasegrouppayer, neu_pzp, neu_rejectioncause, neu_rejectioncausedescription, neu_releasedate, neu_salesdepartment, neu_salesoffice, neu_sapcode, neu_state, neu_statepre, neu_stateprefferproducer, neu_statepreflag, neu_tax, neu_taxpercent, neu_templatesaveflag, neu_tenderpaymentperiod, neu_tenderreferential, neu_tendervalidityterm, neu_totalamountbrutto, neu_totalbasictermcosts, neu_totalbasictermcostspercent, neu_totalbudgetsale, neu_totalbudgetsalesap, neu_totalcontractualbenefits, neu_totalcontractualbenefitspercent, neu_totalcontractualmargin, neu_totalcontractualmarginpercent, neu_totaldelaycosts, neu_totaldelaycostspercent, neu_totalfinancinginventories, neu_totalfinancinginventoriespercent, neu_totalinterestincome, neu_totalinterestincomepercent, neu_totalmarginadjustment, neu_totalmarginadjustmentpercent, neu_totalmarginbrutto, neu_totalmarginbruttopercent, neu_totalmarginbruttosap, neu_totalprofitonsale, neu_totalprofitonsalespercent, neu_totalquantity, neu_totalquantitysap, neu_totaltermbenefits, neu_totaltermbenefitspercent, neu_totalzachcost, neu_totalzachcostpercent, neu_transportcosts, neu_transportcostspercent, neu_useracceptingid, neu_userexecutingid, neu_usersupportingid, neu_validitydatefrom, neu_validitydateto, neu_validitydays, neu_valuecontrol, neu_vindicationservice, neu_vindicationservicepercent, ownerid, pricelevelid, statecode, statuscode, totalamount, transactioncurrencyid
+  [Product] (113 pol): defaultuomid, defaultuomscheduleid, description, iskit, name, neu_activematerial, neu_alternativename, neu_attestation, neu_attestationdate, neu_bazylcode, neu_bloz12code, neu_bloz7code, neu_calculatorindicator, neu_caltulationtypehospital, neu_caltulationtypezoz, neu_cogs, neu_contractualinvoicebenefit, neu_costzach, neu_datezpzkhospital, neu_datezpzkzoz, neu_dosage, neu_eancode, neu_equivalentproductid, neu_estimatedmarginpercent, neu_externalproductnumber, neu_financing, neu_financingcostbudget, neu_financingcostpercent, neu_financingzachpercent, neu_grouppharmaceutical, neu_isactivematerial, neu_isavailablefordeficitsorders, neu_isavailablefortendersstandardorders, neu_isdrugprogram, neu_isexcludedbyname, neu_isexcludedfordeficitsorders, neu_isindexzero, neu_isonsales, neu_isproducermwir, neu_isreinbursed, neu_isroblem, neu_isspecializedcontractnfz, neu_istraidingadmissionstatus, neu_mainproductid, neu_marginadjustment, neu_margingroup, neu_marginindicator, neu_medicalspecialization, neu_moleculename, neu_nameinternational, neu_nametrade, neu_noncontractualinvoicebenefit, neu_noncontractualinvoicebenefits, neu_noncontractualinvoicebenefitssp, neu_onlistprofitmax, neu_packagesize, neu_packagingset, neu_pastperiodscontractualbenefits, neu_percentbenefitforzach, neu_percentfinancingzach, neu_percenttermbenefitzach, neu_pharmaceuticalgroup, neu_pharmaceuticalproducersapid, neu_priceafterdiscountmwir, neu_pricehospitaldepartment, neu_pricepreviouszpzk, neu_pricepurchase, neu_pricepurchasemwir, neu_pricerss, neu_pricesellingmwir, neu_pricetrade, neu_pricetradeafterrise, neu_pricetradeafterrisemax, neu_pricetradebeforerise, neu_pricetradebeforerisemax, neu_pricetraderisedate, neu_pricetraderisedatemax, neu_pricetraderisepercent, neu_pricewholesalemaximum, neu_pricewholesalezccg, neu_pricezachmwir, neu_pricezpzkhospital, neu_pricezpzkzoz, neu_problemdescription, neu_routeofadministration, neu_saleproducersapid, neu_salequantity, neu_salesproducerid, neu_salesproducername, neu_salesproducersapid, neu_sampleform, neu_supplyproducername, neu_supplyproducersapid, neu_supplystatusid, neu_supplystatusname, neu_supplystatusvalidfrom, neu_supplystatusvalidto, neu_termbenefits, neu_termbenefitzach, neu_unitamount, neu_valuezach, neu_vatrate, parentproductid, price, pricelevelid, productnumber, productstructure, producttypecode, quantitydecimal, statecode, subjectid, validfromdate, validtodate
+
+
+========== POLA W PLUGINACH (repo - Indeks_pluginow_encja_pole.csv) ==========
+
+Encje z pluginami: 15. Lacznie pol w pluginach: 19.
+
+  [neu_campaign] (2 pol): neu_finishtaskdeadline (SetFinishTaskDeadlineAction); neu_campaingidentifier (CreateIdentifierForCampaignAction)
+  [neu_campaigntaskhistory] (1 pol): neu_name (SetNameAction)
+  [neu_contractop] (1 pol): neu_action (GetAnnexedContractDataAction)
+  [neu_conversationokpm] (2 pol): statuscode (SetStatusAction); statecode (SetStatusAction)
+  [neu_feedback] (1 pol): neu_ismoderated (SetModeratorDataAction)
+  [neu_incidenttask] (2 pol): neu_queueid (PreTaskCreateSetStatusAndQueueIdAction); neu_incidenttaskstatus (PreTaskCreateSetStatusAndQueueIdAction)
+  [neu_licence] (1 pol): neu_licencestatus (DeactivateLicenceIfOtherActivatedAction)
+  [neu_mappedproduct] (1 pol): neu_productid (CheckAndReplaceProductFromOMSAction)
+  [neu_offerasset] (1 pol): ownerid (SetOwnerFromOpportunity)
+  [neu_oltask] (1 pol): statuscode (CompleteCampaignAction)
+  [neu_specialdeploymenttask] (1 pol): neu_tasktype (AddContractToRefundNeucaTaskAction)
+  [neu_survey] (1 pol): statuscode (StartSingleOccurrenceSurveyDeactivatorJobAction)
+  [opportunity] (2 pol): neu_contractstatus (CreatePharmaceuticalProgramsAssetsOnContractStatusAcceptanceAction); name (SetNameForCalculationAction)
+  [product] (1 pol): producttypecode (CreateSampleProductPriceLevelAction)
+  [salesorder] (1 pol): neu_salesgeneralordertype (SetSamplePriceLevel)
+
+
+========== POLA W JAVASCRIPT (repo - getAttribute) ==========
+
+Pliki JS (bez .min) z getAttribute: 321. Lacznie odwolan do pol: 2100.
+
+-- Per plik:
+  app\Neuca.Crm.Magellan.Hangfire.Web\obj\Release\Package\PackageTmp\Scripts\jquery-3.3.1.slim.js
+    pola: class, classname, disabled, href, id, lang, type, value, xml:lang
+  app\Neuca.Crm.Magellan.Hangfire.Web\Scripts\jquery-3.3.1.js
+    pola: class, classname, disabled, href, id, lang, type, value, xml:lang
+  app\Neuca.Crm.Magellan.Hangfire.Web\Scripts\jquery-3.3.1.slim.js
+    pola: class, classname, disabled, href, id, lang, type, value, xml:lang
+  app\Neuca.Crm.Magellan.WebResources\AngularApps\CompetitorsAnalysis\src\core\services\XRM\ribbons\neu_cc_incidentribbon.js
+    pola: statecode
+  app\Neuca.Crm.Magellan.WebResources\dist\common\ContractOpFormHelper.js
+    pola: neu_contractstate, neu_purchasegroupid
+  app\Neuca.Crm.Magellan.WebResources\dist\common\CrmLookupDialog.js
+    pola: src
+  app\Neuca.Crm.Magellan.WebResources\dist\common\NeuApplicationHelper.js
+    pola: neu_applicationcategory, neu_ispartialoffer, neu_opportunityid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\account_bok.js
+    pola: neu_area, neu_client, neu_code, neu_conf_pharmaceuticaltypeid, neu_payerid, neu_pharmacymarket, neu_sapcode
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\account_medicalarea.js
+    pola: neu_client, neu_commonclientformedicalandpatientarea, neu_payerid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\account.js
+    pola: createdon, neu_area, neu_client, neu_conf_pharmaceuticaltypeid, neu_isinipra, neu_isinpartner, neu_isinpartnerplus, neu_payerid, neu_pharmacymarket, neu_pharmacyprogram, neu_pharmacyprogramlicencenumber
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\appointment.js
+    pola: modifiedon, neu_conf_appointmenttypeid, neu_customermoodid, neu_notification, regardingobjectid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\campaignactivity.js
+    pola: neu_involved, neu_involvement_description
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\contact_cc.js
+    pola: business2, emailaddress1, firstname, home2, lastname, mobilephone, neu_contacttype, neu_selectedmaintelephone, telephone2
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\contact_quickform.js
+    pola: business2, emailaddress1, home2, lastname, mobilephone, neu_selectedmaintelephone, telephone2
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\contact.js
+    pola: business2, emailaddress1, home2, mobilephone, neu_emailrodoconsent, neu_isrodoconsent, neu_job, neu_medicalspecialization, neu_phonerodoconsent, neu_rodoconsentdate, neu_selectedmaintelephone, neu_visitrodoconsent, neu_withdrawalrodoconsent, telephone2
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\email.js
+    pola: bcc, cc, createdon, regardingobjectid, subject, to
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\incident.js
+    pola: caseorigincode, customerid, modifiedon, neu_clientid, neu_internaldescription, neu_origincontact, neu_payerid, neu_sapcodeverified, neu_stageslakpiid, ownerid, statecode, subjectid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\list.js
+    pola: neu_sapcode
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_activitytemplate.js
+    pola: createdon, neu_isforselectediok
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_affiliateprogramsandvariants.js
+    pola: neu_accountid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_application.js
+    pola: modifiedon, neu_accountarea, neu_accountid, neu_applicationcategory, neu_applicationdata, neu_author, neu_clientid, neu_commodityreturn, neu_conf_flowmodelid, neu_conf_salesrepresentationid, neu_delivery_afternoon, neu_delivery_customerrelationshipimpact, neu_delivery_customerrelationshipimpact_other, neu_delivery_morning, neu_delivery_other, neu_iomsetup, neu_isjoinfranchise, neu_isneworexistingchain, neu_ispartialoffer, neu_negotiationassetschanged, neu_offerisvalid, neu_opportunityid, neu_parentapplicationid, neu_retailpricebase, neu_searchappisvalid, neu_setsalesoffiefromzipcode, neu_termsofbusinesschanged, neu_termsofbusinessimplementationdate, ownerid, statecode, statuscode
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_applicationautonumbering.js
+    pola: neu_applicationcategory, neu_relatedentityname
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_businessrelation.js
+    pola: neu_accountid, neu_enddate, neu_startdate
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_campaign_nonpharmacyarea.js
+    pola: neu_campaigncompletion, neu_campaignstartdate, neu_createfor, neu_hospital, neu_ischildcampaign, neu_oltaskgeneratingstatus, neu_zoz, statuscode
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_campaign.js
+    pola: neu_parent_campaign
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_campaigntask.js
+    pola: neu_campaignid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_campaigntaskhistory_quickform.js
+    pola: neu_campaigntaskaction, neu_nextcontactdate
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_campaigntaskhistory.js
+    pola: neu_campaigntaskaction, neu_nextcontactdate
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_changeareaoperation.js
+    pola: neu_clientarea, neu_clientcity, neu_clientid, neu_clientline1, neu_clientline2, neu_clientline3, neu_clientmarket, neu_clientpostalcode, neu_clientsalesofficeid, neu_clientsapcode, neu_designatedkwa, neu_designatepf, neu_designatesystemuser, neu_destinationarea, neu_destinationmarket, neu_destinationsalesofficeid, neu_destinationsystemuserid, neu_positionid, neu_rulekslz, neu_statuscode
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_changeareaoperationaccount.js
+    pola: neu_changeareaoperationid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_client.js
+    pola: createdon, neu_address_city, neu_address_county, neu_address_line1, neu_address_line2, neu_address_line3, neu_address_postalcode, neu_centralaccountid, neu_conf_countryid, neu_isjointmarketing, neu_isonlinepharmacy, neu_ispharmacycommonnameforpatients, neu_pharmacycommonnameforpatients
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_clientconnection.js
+    pola: neu_client1id, neu_client2id
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_clientspecialdeployment.js
+    pola: neu_cooperationtype, neu_origin, neu_specialdeploymenttype, statecode
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_communication_application.js
+    pola: createdon, neu_acquisitionprogramservice, neu_customerbenefits, neu_customermessageproposal, neu_datefrom, neu_dateto, neu_description, neu_education, neu_externalrevenue, neu_implementinglegalrequirements, neu_numerics, neu_other, neu_sale, statuscode
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_communication_channel_owners.js
+    pola: neu_communication_channel_typeid, neu_isactioncoordination
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_communication_channel.js
+    pola: createdon, neu_all_programs, neu_area_clinical_trials, neu_area_closed_health_care, neu_area_independent_pharmacies, neu_area_independent_sales_points, neu_area_medical_stores, neu_area_network_pharmacies, neu_area_network_sales_points, neu_area_open_health_care, neu_area_wholesalers, neu_communication_applicationid, neu_communication_channel_ownersid, neu_confirmationstatus, neu_customermessageproposaltype, neu_is_potentialscoring_high, neu_is_potentialscoring_low, neu_is_potentialscoring_medium, neu_is_program_ipra, neu_is_program_partner, neu_is_program_partnerplus, neu_is_program_rpm, neu_is_program_synoptisplus, neu_is_retention_discontinuation, neu_is_retention_expanding, neu_is_retention_extinguishing, neu_is_retention_maintaining, neu_is_retention_maximizing_cooperation, neu_is_retention_negative_fluctuation, neu_is_retention_positive_fluctuation, neu_is_retention_reducing, neu_is_retention_strengthening, neu_messagetocustomer, neu_outside_programs, neu_pharmacymarket, neu_realizationconfirmation, neu_recipient_group, neu_salesofficeid, oid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_competitor_quickform.js
+    pola: neu_competitoraccountid, neu_name, neu_sapcode
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_conf_attribute.js
+    pola: neu_attributecategoryid, neu_attributetypeid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_conf_contractgenerator.js
+    pola: neu_accountid, neu_aptelinescope, neu_conf_salesrepresentationid, neu_contractid, neu_contractype, neu_efusformat, neu_flag_contractdeclaredmonthlyturnover, neu_flag_correctionivoicesettlementtype, neu_flag_discountcorrectiontype, neu_flag_isanyinterestcancellation, neu_flag_isanyloancontracts, neu_flag_isanypartnerplusposition, neu_flag_isanypartnerposition, neu_flag_isanyutilization, neu_flag_isanyzwhrebatespharmbrand, neu_flag_iscommonalert, neu_flag_iscontractedfineforsalescontract, neu_flag_isdeclaredinterest, neu_flag_periodofreturn, neu_flag_turnoverfrompharmbrand, neu_flag_turnoversettlement, neu_invoicescope, neu_ismonthettlementrotation, neu_isneuca, neu_loancontractid, neu_medicineandcorrectioninvoiceformat, neu_name, neu_opportunityid, neu_paybacktype, neu_payerid, neu_paymenttype, neu_utilizationpaymentpercentage
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_conf_contractrelations.js
+    pola: neu_contractid, neu_relatedcontractid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_conf_offerconfiguration.js
+    pola: neu_isclient, neu_ispayer, neu_ispharmacy
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_conf_operationmanagecontactconnection.js
+    pola: neu_accountid, neu_conf_connectionroleid, neu_conf_warehouseid, neu_connectionid, neu_contactcustomertypecode, neu_contactemailaddress1, neu_contactid, neu_contactlastname, neu_contacttelephone1, neu_contacttelephone2, neu_contacttype, neu_franchiseid, neu_isnewcontact, neu_medicalfacilityid, neu_neu_contacttelephone3, neu_neu_contacttelephone4, neu_relatedrecordtype, neu_selectedmainphone
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_conf_rolepermission.js
+    pola: neu_appliedconnectionroleid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_conf_survey.js
+    pola: neu_accountslistid, neu_contactslistid, neu_expected_result_on_parent, neu_ismandatory, neu_parentconfsurveyid, neu_place, neu_reccurencytype, neu_regardsto, neu_userslistid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_contract_quickform.js
+    pola: neu_action, neu_annexed_neu_contractid, neu_applicationid, neu_isutilization, neu_paymenttype, neu_utilizationpaymentpercentage
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_contract.js
+    pola: createdon, modifiedon, neu_clientid, neu_contracttype, neu_crm2015id, neu_iscontractedfine, neu_ispharmacypayment, neu_isutilization, neu_name, neu_payerid, neu_paymenttype
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_contractaccount_quickform.js
+    pola: neu_contractid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_contractop_przetargiszpitalne.js
+    pola: neu_clientid, neu_conf_salesofficeid, neu_opportunityid, neu_purchasegroupid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_contractop.js
+    pola: neu_annexedcontractopid, neu_annexnumber, neu_cancelcontractbyclient, neu_cancelcontractbyneuca, neu_contractnumber, neu_contracttype, neu_fordelay, neu_nocomplaintconsideration, neu_noorder, neu_other
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_customermood_subgrid.js
+    pola: from, to
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_customermood.js
+    pola: neu_accountid, neu_appointmentid, neu_clientid, neu_incidentid, neu_phonecallid, neu_taskid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_deliverypactivitydefined.js
+    pola: neu_establishmentdatemonth, neu_establishmentdateyear
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_feedback.js
+    pola: neu_source
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_incidenttask_quickform.js
+    pola: description, neu_conf_incidenttasktypeid, neu_conf_warehouseid, neu_contactid, neu_customerid, neu_customersapcode, neu_incidentid, neu_incidentstage, neu_pfarmacyofferid, neu_producer, neu_taskincidentdescritpion, subject
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_incidenttask.js
+    pola: neu_conf_incidenttasktypeid, neu_contactid, neu_customerid, neu_customersapcode, neu_flowtaskid, neu_incidentid, neu_incidentstage, neu_taskincidentdescritpion, subject, to
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_indicator.js
+    pola: neu_typeofindicatorid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_licence.js
+    pola: neu_accountid, neu_address_city, neu_address_countryid, neu_address_county, neu_address_line1, neu_address_line2, neu_address_line3, neu_address_postalcode, neu_address_province, neu_code, neu_customerid, neu_fullname, neu_gifcode, neu_licencestatus, neu_name, neu_nip, neu_payerid, neu_permissionnumber, neu_regon, neu_sapcode
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_listtradeterms.js
+    pola: neu_issenttosap
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_mappedproduct.js
+    pola: neu_acceptdescription, neu_calcflag, neu_infodrugprogram, neu_infopriceassize, neu_inforss, neu_infotenderpriceassize, neu_infotenderpricewholesale, neu_isaccept, neu_isdrugprogram, neu_isgeneratepositionzpzk, neu_isoherheadpercentchanged, neu_ispricingperitem, neu_isproblem, neu_isproducermwir, neu_name, neu_overheadadjustment, neu_overheadpercent, neu_priceassize, neu_pricedrugprogramlimit, neu_pricepurchaseafterdiscounts, neu_pricepurchasemwir, neu_pricerss, neu_priceselling, neu_pricesellingmwir, neu_pricewholesalemaximum, neu_productid, neu_sapcode, neu_tenderid, neu_tenderproductid, neu_tenderstructureid, neu_type, neu_zeroindexflag
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_medicalfacility_account.js
+    pola: neu_distributionid, neu_medicalfacility_distributionid, neu_medicalfacilityid, neu_servicetypeid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_medicalfacility_distribution.js
+    pola: neu_distributionid, neu_servicetypeid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_medicalfacility.js
+    pola: neu_address_postalcode, neu_address_province
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_newfeedback.js
+    pola: neu_authorid, neu_regardingaccount, neu_regardingclient, neu_regardingid, ownerid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_offerasset_quickform.js
+    pola: neu_accountid, neu_applicationid, neu_assettype, neu_clientid, neu_conf_offerconfigurationgroupid, neu_conf_offerconfigurationid, neu_isallpayers, neu_iscopyfromanotheraccount, neu_iscrosssalesrep, neu_isgroupconfiguration, neu_offeraccountgroupid, neu_opportunityid, neu_payerid, neu_sourceaccountid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_oltask.js
+    pola: neu_accountid, neu_leadid, neu_type
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_operation_newconnection_quickform.js
+    pola: defaultviewid, neu_conf_connectionroleid, neu_enddate
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_opportunity_przetarg.js
+    pola: name, neu_annoucementdate, neu_calcflag, neu_caltulationtype, neu_cash, neu_conf_opportunitytypeid, neu_daysofvalidquote, neu_durationinmonths, neu_durationinmonthschange, neu_ischeckprice, neu_isclinicaltests, neu_iscollectiveinvoice, neu_iscombiningorders, neu_iscopyprefferedproducer, neu_isdrugprogram, neu_isequalizepriceassize, neu_isequalizepricewholesale, neu_isformchangeconsent, neu_isgeneratequotevalidation, neu_isgeneratezpzkproducer, neu_isonetimedelivery, neu_isoverheadvalidation, neu_isrecalcvalidation, neu_issimplified, neu_openingdate, neu_overheadflag, neu_packagingcalculatemethod, neu_packagingchangemethod, neu_packagingchangemethodvalue_x, neu_proceduretype, neu_purchasegroupid, neu_pzp, neu_releasedate, neu_salesdepartment, neu_salesoffice, neu_sapcode, neu_state, neu_stateprefferproducer, neu_statepreflag, neu_tenderpaymentperiod, neu_tenderreferential, neu_tendervalidityterm, neu_validitydatefrom, neu_validitydateto, neu_valuecontrol
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_opportunity.js
+    pola: neu_acquiredfinancialdocuments, neu_clientid, neu_clientsapcode, neu_conf_opportunitytypeid, neu_conf_salesrepresentation, neu_individualactionimplementationdate, neu_isofferassetsimportfinished, neu_ispharmacyinterestedinrebranding, neu_negotiationassetschanged, neu_offerstatustno, neu_reasonforlackoffinancialdocuments, neu_termsofbusinessimplementationdate, ownerid, src, statuscode
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_packagemissing.js
+    pola: neu_accountid, neu_centralwarehouse, neu_centralwarehousecode, neu_flowtaskid, neu_localwarehouse, neu_localwarehousecode, neu_locationtype, neu_queuecontactid, neu_requiredinformation, neu_sapnumber, neu_solutionlocation
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_pharmacyattribute.js
+    pola: neu_conf_pharmacyattributecategoryid, neu_type
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_pharmacyprograms.js
+    pola: neu_contractstatus, neu_letterofintentstatus
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_processtask.js
+    pola: neu_businessstatus, ownerid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_producer.js
+    pola: emailaddress, neu_createemailflag
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_promotion.js
+    pola: neu_isforselectedaccounts
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_quote.js
+    pola: neu_activatequoteflag, neu_exporterrormessage, neu_isgenerateaddressingforxls, neu_statecodeforquote, neu_statesccept, neu_tenderid, neu_tenderstructureid, neu_useracceptingid, neu_userexecutingid, neu_usersupportingid, neu_validfrom, neu_validto, neu_wonoffercalcflag
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_receiver.js
+    pola: neu_opportunityid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_receiversgroup.js
+    pola: neu_iscalculatinggroup, neu_lastmodificationofgroup
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_replacement.js
+    pola: neu_appliestoaccountconnections, neu_from, neu_includehours, neu_processingtime, neu_to
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_sdpermission.js
+    pola: neu_businessunitid, neu_configuration, neu_disabledreason, neu_domainname, neu_systemuserid, neu_userstate
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_specialdeployment.js
+    pola: createdon, modifiedon, neu_cooperationtype, neu_customeracceptedhempmedicinepharmacyterms, neu_customerplacedorder, neu_deploymenttype, neu_doescustomerwantexpositor, neu_dried, neu_extracts, neu_hascustomerpurchasedpackage, neu_isacquisitiontask, neu_lossreason, neu_newisinterested, neu_specialdeploymentdisinterestreasonid, neu_specialdeploymenttype, neu_standtype, neu_termsrejectionreason, statuscode
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_specialdeploymenttask.js
+    pola: neu_cooperationtype, neu_customeracceptedhempmedicinepharmacyterms, neu_customerplacedorder, neu_doescustomerwantexpositor, neu_dried, neu_extracts, neu_guidesentdate, neu_hascustomerpurchasedpackage, neu_iscbdstarterkit, neu_iscertificatedelivered, neu_isdiplomarequired, neu_iseducationalguide, neu_isincontinenceprojectacceptedbycustomer, neu_isleasedelivered, neu_isleaserequired, neu_ispossent, neu_isreimbursementcontractsigned, neu_isstockshipmentsent, neu_lossreason, neu_newisinterested, neu_nfzservicecode, neu_pharmacybankaccountnumber, neu_pharmacyemail, neu_pharmacyphonenumber, neu_pointperson, neu_pointpersoncontactnumber, neu_posmaterials, neu_possentdate, neu_prefferedcontacthours, neu_specialdeploymentdisinterestreasonid, neu_specialdeploymenttype, neu_standsentdate, neu_standtype, neu_stocksentdate, neu_tasktype, neu_termsrejectionreason
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_specialization.js
+    pola: neu_iscontracted, neu_medicalfacility_accountid, neu_medicalfacility_distributionid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_substantive_verification.js
+    pola: neu_areaid, neu_name
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_templatecriterion.js
+    pola: neu_criteriaid, neu_name, neu_systemname, neu_type
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_tenderbundle.js
+    pola: createdon, neu_calcflag, neu_durationinmonths, neu_durationinmonthschange, neu_isonetimedelivery, neu_isoverheadvalidation, neu_isrecalcvalidation, neu_itemsamountinbundle, neu_openingdate, neu_overheadflag, neu_overheadpercent, neu_overheadpercentsource, neu_releasedate, neu_state, neu_stateprefferproducer, neu_statepreflag, neu_tenderid, neu_validitydatefrom, neu_validitydateto
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_tenderproduct_calc_notification.js
+    pola: neu_calcflag, neu_tenderstructureid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_tenderproduct_runMapper.js
+    pola: neu_tenderbundleid, neu_tenderstructureid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_tenderproduct.js
+    pola: modifiedon, neu_acceptdescription, neu_calcflag, neu_infodrugprogram, neu_infopriceassize, neu_inforss, neu_infotenderpriceassize, neu_infotenderpricewholesale, neu_isaccept, neu_ischecked, neu_isdrugprogram, neu_isgeneratepositionzpzk, neu_ispricingperitem, neu_isproblem, neu_isproducermwir, neu_name, neu_numberofmappedproducts, neu_overheadadjustment, neu_overheadpercent, neu_overheadpercentsource, neu_packagingcalculatemethod, neu_packagingchangemethod, neu_packagingchangemethodvalue_x, neu_priceassize, neu_pricedrugprogramlimit, neu_pricepurchaseafterdiscounts, neu_pricepurchasemwir, neu_pricerss, neu_priceselling, neu_pricesellingmwir, neu_pricewholesalemaximum, neu_productid, neu_state, neu_tenderbundleid, neu_tenderid, neu_tenderstructureid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_tenderproducts.js
+    pola: neu_tenderstructureid
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_tenderstructure_calc_notification.js
+    pola: neu_statecode
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_tenderstructure.js
+    pola: neu_importerprocesscode, neu_mapperprocesscode, neu_statecode
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_tradeterms.js
+    pola: neu_bagindate, neu_emailflag, neu_enddate, neu_generatecsvflag, neu_status
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\neu_users_list.js
+    pola: neu_type
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\phonecall.js
+    pola: directioncode, from, neu_accountid, neu_contactid, neu_customermoodid, neu_customersapcode, neu_iscontactfilter, neu_notification, neu_selectedmaintelephone, neu_taskid, phonenumber, regardingobjectid, statuscode, subject, to
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\product.js
+    pola: neu_eancode, neu_isroblem, productnumber
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\quote.js
+    pola: neu_statecode
+  app\Neuca.Crm.Magellan.WebResources\dist\Entities\task.js
+    pola: createdby, neu_channel, neu_createdfromentityname, neu_customermoodid, neu_notification, neu_source, ownerid, prioritycode, regardingobjectid
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\CreateOpportunityPanel.js
+    pola: neu_opportunityid, neu_searchappisvalid
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\DownloadActivityTemplate.js
+    pola: neu_accountid
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\IncidentTaskButtons.js
+    pola: neu_sdrequesturl, neu_sdresolutionurl
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\neu_activitypanelviewmodel.js
+    pola: customerid, stageid
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\neu_addressform.js
+    pola: statecode
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\neu_campaignfilterbuttons.js
+    pola: neu_active, neu_activeendangered, neu_activetorecover, neu_createfor, neu_lost, neu_oltaskgeneratingstatus, neu_ownfacility, neu_publicprocurementlawbool, neu_terminated
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\neu_clientSpecialDeploymentProgramEdit.js
+    pola: neu_account, neu_specialdeployment, neu_specialdeploymenttype, neu_type, ownerid
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\neu_communicationChannelApplicationCommentsGridButtonsHandler.js
+    pola: neu_communication_applicationid, neu_communication_channel_ownersid, neu_name
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\neu_medicalfacility_account_checkbox.js
+    pola: neu_accountid
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\neu_phonecontactsearchopen.js
+    pola: neu_contactid, neu_iscontactfilter
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\neu_responsiblePharmacists.js
+    pola: neu_responsiblepharmacists, neu_specialdeploymentid
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\neu_servicedeskresolution.js
+    pola: neu_sdresolution
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\neu_summaryCountOfAccountOfClient.js
+    pola: neu_area, neu_client, neu_clientid, neu_deliverypointcount, neu_franchisecount, neu_ipracount, neu_partnerboxcount, neu_partnercount, neu_partnerpluscount, neu_pharmacycount, neu_pharmacymarket, neu_rpmcount, neu_synoptispluscount
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\OpportunityContractButtonsHandler.js
+    pola: neu_opportunityid
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\PhoneCallButtons.js
+    pola: directioncode, neu_confclosereasonid, neu_connectionid, neu_errormessage, statuscode
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\SurveyBuilder.js
+    pola: neu_surveybody
+  app\Neuca.Crm.Magellan.WebResources\dist\IFrame\SurveyResult.js
+    pola: neu_conf_surveyid, neu_result
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\account_ribbon.js
+    pola: name, neu_code, neu_sapcode
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_account_neu_dedicatedpricelist_ribbon.js
+    pola: neu_extend_pricelist
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_affiliateprogramsandvariants_ribbon.js
+    pola: neu_accountid, neu_assetid, neu_name, neu_variantexitdate
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_application_ribbon.js
+    pola: neu_accountarea, neu_applicationcategory, neu_applicationdata, neu_commodityreturn, neu_conf_salesrepresentationid, neu_error, neu_firstdeliveryamount, neu_firstdeliveryplanneddate, neu_flowid, neu_invoicefileformat, neu_iomsetup, neu_isapprovallevelprocessingfinished, neu_ispartialoffer, neu_issendprocessingfinished, neu_issplitprocessingfinished, neu_name, neu_offerisvalid, neu_opportunityid, neu_searchappisvalid, neu_sentapplicationdata, neu_termsofbusinesschanged, neu_termsofbusinessimplementationdate, ownerid, statecode, statuscode
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_campaign_nonpharmacyarea_ribbon.js
+    pola: neu_campaigncategory, neu_campaigncompletion, neu_campaignenddate, neu_campaignstartdate, neu_campaigntarget, neu_campaigntype, neu_cancelreason, neu_clientbenefit, neu_closurereason, neu_createfor, neu_finishrequiredpercentage, neu_finishtaskdeadline, neu_ischildcampaign, neu_parentcampaignid, neu_strategictarget, neu_taskdescription, statecode, statuscode
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_campaigntask_ribbon.js
+    pola: statecode
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_changeareaoperation_ribbon.js
+    pola: neu_error, neu_statuscode
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_client_ribbon.js
+    pola: neu_crmcode, neu_name, neu_sapcode
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_communication_application_ribbon.js
+    pola: neu_customerbenefits, neu_customermessageproposal, neu_datefrom, neu_dateto, neu_description, neu_istemplate, statuscode
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_communication_channel_ribbon.js
+    pola: neu_confirmationstatus, neu_realizationconfirmation
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_contractop_nonpharmacyarea_ribbon.js
+    pola: neu_contracttype
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_feedback_ribbon.js
+    pola: neu_isinbir
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_importtasks_ribbon.js
+    pola: neu_status
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_incidenttask_ribbon.js
+    pola: statuscode
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_licence_ribbon.js
+    pola: neu_accountid, neu_address_city, neu_address_community, neu_address_county, neu_address_line1, neu_address_line2, neu_address_line3, neu_address_postalcode, neu_address_province, neu_code, neu_datefrom, neu_dateto, neu_fullname, neu_gifcode, neu_licencestatus, neu_name, neu_nip, neu_payerid, neu_permissionnumber, neu_regon, neu_sapcode, neu_sourcelicenceid
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_medicalfacility_account_ribbon.js
+    pola: statecode
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_medicalfacility_distribution_ribbon.js
+    pola: statecode
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_medicalfacility_ribbon.js
+    pola: statecode
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_noncampaigntask_ribbon.js
+    pola: statecode
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_opportunity_ribbon.js
+    pola: name, neu_conf_salesrepresentation, neu_currentvaluationid, neu_dateofferstart, neu_error, neu_individualactionimplementationdate, neu_offerisvalid, neu_offerstatustno, neu_termsofbusinessimplementationdate, statuscode
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_packagemissing_ribbon.js
+    pola: neu_flowtaskid, neu_issendingtoflow, neu_locationtype, statuscode
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_payer_ribbon.js
+    pola: neu_name
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_processtask_ribbon.js
+    pola: createdby, neu_businessstatus, neu_buttonconfig, ownerid, statuscode
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_receiversgroup_ribbon.js
+    pola: neu_calculatedautomatically, neu_name
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_sdpermission_ribbon.js
+    pola: neu_istorealization
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_specialdeploymenttask_ribbon.js
+    pola: neu_cooperationtype, neu_customeracceptedhempmedicinepharmacyterms, neu_customerplacedorder, neu_doescustomerwantexpositor, neu_dried, neu_extracts, neu_guidesentdate, neu_isdiplomarequired, neu_iseducationalguide, neu_isleaserequired, neu_ispharmacyskuadded, neu_ispossent, neu_isstockshipmentsent, neu_newisinterested, neu_nfzapplicationdate, neu_nfzservicecode, neu_pointperson, neu_pointpersoncontactnumber, neu_possentdate, neu_prefferedcontacthours, neu_refundstartdate, neu_specialdeploymentdisinterestreasonid, neu_specialdeploymenttype, neu_standsentdate, neu_standtype, neu_stocksentdate, neu_taskholdreason, neu_taskrealizationdate, neu_taskrejectionreason, neu_tasktype, neu_termsrejectionreason, statuscode
+  app\Neuca.Crm.Magellan.WebResources\dist\Ribbons\neu_specialization_ribbon.js
+    pola: statecode
+  app\Neuca.Crm.Magellan.WebResources\neu_\angular\customermood\main.js
+    pola: aria-hidden, data-cell-index, data-date-index, data-kendo-chart, group-index, href, index, kendo-no-bullet, kendo-split-index, neu_mood, role, tabindex
+  app\Neuca.Crm.Magellan.WebResources\neu_\angular\feedback\main.js
+    pola: aria-hidden, data-cell-index, data-date-index, data-kendo-chart, group-index, href, index, kendo-no-bullet, kendo-split-index, modifiedon, role, tabindex
+  app\Neuca.Crm.Magellan.WebResources\neu_\angular\main.js
+    pola: aria-colindex, aria-hidden, aria-label, aria-rowindex, colspan, createdon, data-cell-index, data-date-index, data-index, data-kendo-chart, data-kendo-grid-item-index, data-timelist-index, data-timelist-item-index, group-index, href, index, kendo-no-bullet, kendo-split-index, role, src, style, tabindex
+  app\Neuca.Crm.Magellan.WebResources\neu_\angular\swot\main.js
+    pola: aria-hidden, data-cell-index, data-date-index, data-kendo-chart, group-index, href, index, kendo-no-bullet, kendo-split-index, role, tabindex
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\account_bok.js
+    pola: neu_area, neu_client, neu_code, neu_conf_pharmaceuticaltypeid, neu_payerid, neu_pharmacymarket, neu_sapcode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\account_medicalarea.js
+    pola: neu_client, neu_commonclientformedicalandpatientarea, neu_payerid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\account.js
+    pola: createdon, neu_area, neu_client, neu_conf_pharmaceuticaltypeid, neu_isinipra, neu_isinpartner, neu_isinpartnerplus, neu_payerid, neu_pharmacymarket, neu_pharmacyprogram, neu_pharmacyprogramlicencenumber
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\appointment.js
+    pola: modifiedon, neu_conf_appointmenttypeid, neu_customermoodid, neu_notification, regardingobjectid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\campaignactivity.js
+    pola: neu_involved, neu_involvement_description
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\common\angular.js
+    pola: checked, class, data-ng-csp, disabled, href, innerhtml, ng-cloak, ng-csp, open, readonly, selected, type, value
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\common\neu_uiutils.js
+    pola: transactioncurrencyid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\contact_cc.js
+    pola: business2, emailaddress1, firstname, home2, lastname, mobilephone, neu_contacttype, neu_selectedmaintelephone, telephone2
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\contact_quickform.js
+    pola: business2, emailaddress1, home2, lastname, mobilephone, neu_selectedmaintelephone, telephone2
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\contact.js
+    pola: business2, emailaddress1, home2, mobilephone, neu_emailrodoconsent, neu_isrodoconsent, neu_job, neu_medicalspecialization, neu_phonerodoconsent, neu_rodoconsentdate, neu_selectedmaintelephone, neu_visitrodoconsent, neu_withdrawalrodoconsent, telephone2
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\dw_documentswizard.js
+    pola: class, classname, data-bind, disabled, href, id, lang, params, type, value, xml:lang
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\email.js
+    pola: bcc, cc, createdon, regardingobjectid, subject, to
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_application.js
+    pola: modifiedon, neu_accountarea, neu_accountid, neu_applicationcategory, neu_applicationdata, neu_author, neu_clientid, neu_commodityreturn, neu_conf_flowmodelid, neu_conf_salesrepresentationid, neu_delivery_afternoon, neu_delivery_customerrelationshipimpact, neu_delivery_customerrelationshipimpact_other, neu_delivery_morning, neu_delivery_other, neu_iomsetup, neu_isjoinfranchise, neu_isneworexistingchain, neu_ispartialoffer, neu_negotiationassetschanged, neu_offerisvalid, neu_opportunityid, neu_parentapplicationid, neu_retailpricebase, neu_searchappisvalid, neu_setsalesoffiefromzipcode, neu_termsofbusinesschanged, neu_termsofbusinessimplementationdate, ownerid, statecode, statuscode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_cc_email.js
+    pola: neu_taskid, regardingobjectid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_cc_incident.js
+    pola: kbarticleid, neu_internaldescription, subjectid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_cc_notes.js
+    pola: neu_name
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_cc_phonecall.js
+    pola: to
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_cc_sdpermission.js
+    pola: neu_businessunitid, neu_configuration, neu_disabledreason, neu_domainname, neu_systemuserid, neu_userstate
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_cc_task.js
+    pola: createdby
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_changeareaoperation.js
+    pola: neu_clientarea, neu_clientcity, neu_clientid, neu_clientline1, neu_clientline2, neu_clientline3, neu_clientmarket, neu_clientpostalcode, neu_clientsalesofficeid, neu_clientsapcode, neu_designatedkwa, neu_designatepf, neu_designatesystemuser, neu_destinationarea, neu_destinationmarket, neu_destinationsalesofficeid, neu_destinationsystemuserid, neu_positionid, neu_rulekslz, neu_statuscode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_changeareaoperationaccount.js
+    pola: neu_changeareaoperationid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_communication_application.js
+    pola: createdon, neu_acquisitionprogramservice, neu_customerbenefits, neu_customermessageproposal, neu_datefrom, neu_dateto, neu_description, neu_education, neu_externalrevenue, neu_implementinglegalrequirements, neu_numerics, neu_other, neu_sale, statuscode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_communication_channel_owners.js
+    pola: neu_communication_channel_typeid, neu_isactioncoordination
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_communication_channel.js
+    pola: createdon, neu_all_programs, neu_area_clinical_trials, neu_area_closed_health_care, neu_area_independent_pharmacies, neu_area_independent_sales_points, neu_area_medical_stores, neu_area_network_pharmacies, neu_area_network_sales_points, neu_area_open_health_care, neu_area_wholesalers, neu_communication_applicationid, neu_communication_channel_ownersid, neu_confirmationstatus, neu_customermessageproposaltype, neu_is_potentialscoring_high, neu_is_potentialscoring_low, neu_is_potentialscoring_medium, neu_is_program_ipra, neu_is_program_partner, neu_is_program_partnerplus, neu_is_program_rpm, neu_is_program_synoptisplus, neu_is_retention_discontinuation, neu_is_retention_expanding, neu_is_retention_extinguishing, neu_is_retention_maintaining, neu_is_retention_maximizing_cooperation, neu_is_retention_negative_fluctuation, neu_is_retention_positive_fluctuation, neu_is_retention_reducing, neu_is_retention_strengthening, neu_messagetocustomer, neu_outside_programs, neu_pharmacymarket, neu_realizationconfirmation, neu_recipient_group, neu_salesofficeid, oid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_conf_survey.js
+    pola: neu_accountslistid, neu_contactslistid, neu_expected_result_on_parent, neu_ismandatory, neu_parentconfsurveyid, neu_place, neu_reccurencytype, neu_regardsto, neu_userslistid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_medicalfacility.js
+    pola: neu_address_postalcode, neu_address_province
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_processtask.js
+    pola: neu_businessstatus, ownerid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_receiversgroup.js
+    pola: neu_iscalculatinggroup, neu_lastmodificationofgroup
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\entities\neu_substantive_verification.js
+    pola: neu_areaid, neu_name
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\CreateOpportunityPanel.js
+    pola: neu_opportunityid, neu_searchappisvalid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\DownloadActivityTemplate.js
+    pola: neu_accountid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\IncidentTaskButtons.js
+    pola: neu_sdrequesturl, neu_sdresolutionurl
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\neu_activitypanelviewmodel.js
+    pola: customerid, data-bind, params, stageid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\neu_addressform.js
+    pola: statecode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\neu_campaignfilterbuttons.js
+    pola: neu_active, neu_activeendangered, neu_activetorecover, neu_createfor, neu_lost, neu_oltaskgeneratingstatus, neu_ownfacility, neu_publicprocurementlawbool, neu_terminated
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\neu_clientSpecialDeploymentProgramEdit.js
+    pola: neu_account, neu_specialdeployment, neu_specialdeploymenttype, neu_type, ownerid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\neu_communicationChannelApplicationCommentsGridButtonsHandler.js
+    pola: neu_communication_applicationid, neu_communication_channel_ownersid, neu_name
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\neu_medicalfacility_account_checkbox.js
+    pola: neu_accountid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\neu_phonecontactsearchopen.js
+    pola: neu_contactid, neu_iscontactfilter
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\neu_responsiblePharmacists.js
+    pola: neu_responsiblepharmacists, neu_specialdeploymentid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\neu_segmentationsummaryviewmodel.js
+    pola: data-bind, params
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\neu_servicedeskresolution.js
+    pola: neu_sdresolution
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\neu_summaryCountOfAccountOfClient.js
+    pola: neu_area, neu_client, neu_clientid, neu_deliverypointcount, neu_franchisecount, neu_ipracount, neu_partnerboxcount, neu_partnercount, neu_partnerpluscount, neu_pharmacycount, neu_pharmacymarket, neu_rpmcount, neu_synoptispluscount
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\opportunitycontractbuttonshandler.js
+    pola: neu_applicationcategory, neu_ispartialoffer, neu_opportunityid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\PhoneCallButtons.js
+    pola: directioncode, neu_confclosereasonid, neu_connectionid, neu_errormessage, statuscode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\surveybuilder.js
+    pola: neu_surveybody
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframe\surveyresult.js
+    pola: neu_conf_surveyid, neu_result
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframes\neu_cc_accountlastincidentsgrid.js
+    pola: description, name, neu_accountid, neu_customersapcode, neu_name, regardingobjectid, subject
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframes\neu_cc_contactarea_grid_controller.js
+    pola: createdon, customerid, kbarticleid, name, neu_clientid, neu_conf_salesofficeid, neu_payerid, regardingobjectid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframes\neu_cc_phonecallactions.js
+    pola: regardingobjectid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\iframes\neu_cc_subjectsearch.js
+    pola: caseorigincode, neu_categorydictionaryvalue, statecode, subjectid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\incident.js
+    pola: caseorigincode, customerid, modifiedon, neu_clientid, neu_internaldescription, neu_origincontact, neu_payerid, neu_sapcodeverified, neu_stageslakpiid, ownerid, statecode, subjectid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\list.js
+    pola: neu_sapcode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_activitytemplate.js
+    pola: createdon, neu_isforselectediok
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_applicationautonumbering.js
+    pola: neu_applicationcategory, neu_relatedentityname
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_businessrelation.js
+    pola: neu_accountid, neu_enddate, neu_startdate
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_campaign_nonpharmacyarea.js
+    pola: neu_campaigncompletion, neu_campaignstartdate, neu_createfor, neu_hospital, neu_ischildcampaign, neu_oltaskgeneratingstatus, neu_zoz, statuscode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_campaign.js
+    pola: neu_parent_campaign
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_campaigntask.js
+    pola: neu_campaignid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_campaigntaskhistory_quickform.js
+    pola: neu_campaigntaskaction, neu_nextcontactdate
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_campaigntaskhistory.js
+    pola: neu_campaigntaskaction, neu_nextcontactdate
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_client.js
+    pola: createdon, neu_address_city, neu_address_county, neu_address_line1, neu_address_line2, neu_address_line3, neu_address_postalcode, neu_centralaccountid, neu_conf_countryid, neu_isjointmarketing, neu_isonlinepharmacy, neu_ispharmacycommonnameforpatients, neu_pharmacycommonnameforpatients
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_clientspecialdeployment.js
+    pola: neu_cooperationtype, neu_origin, neu_specialdeploymenttype, statecode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_competitor_quickform.js
+    pola: neu_competitoraccountid, neu_name, neu_sapcode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_conf_attribute.js
+    pola: neu_attributecategoryid, neu_attributetypeid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_conf_contractgenerator.js
+    pola: neu_accountid, neu_aptelinescope, neu_conf_salesrepresentationid, neu_contractid, neu_contractype, neu_efusformat, neu_flag_contractdeclaredmonthlyturnover, neu_flag_correctionivoicesettlementtype, neu_flag_discountcorrectiontype, neu_flag_isanyinterestcancellation, neu_flag_isanyloancontracts, neu_flag_isanypartnerplusposition, neu_flag_isanypartnerposition, neu_flag_isanyutilization, neu_flag_isanyzwhrebatespharmbrand, neu_flag_iscommonalert, neu_flag_iscontractedfineforsalescontract, neu_flag_isdeclaredinterest, neu_flag_periodofreturn, neu_flag_turnoverfrompharmbrand, neu_flag_turnoversettlement, neu_invoicescope, neu_ismonthettlementrotation, neu_isneuca, neu_loancontractid, neu_medicineandcorrectioninvoiceformat, neu_name, neu_opportunityid, neu_paybacktype, neu_payerid, neu_paymenttype, neu_utilizationpaymentpercentage
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_conf_contractrelations.js
+    pola: neu_contractid, neu_relatedcontractid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_conf_offerconfiguration.js
+    pola: neu_isclient, neu_ispayer, neu_ispharmacy
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_conf_operationmanagecontactconnection.js
+    pola: neu_accountid, neu_conf_connectionroleid, neu_conf_warehouseid, neu_connectionid, neu_contactcustomertypecode, neu_contactemailaddress1, neu_contactid, neu_contactlastname, neu_contacttelephone1, neu_contacttelephone2, neu_contacttype, neu_franchiseid, neu_isnewcontact, neu_medicalfacilityid, neu_neu_contacttelephone3, neu_neu_contacttelephone4, neu_relatedrecordtype, neu_selectedmainphone
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_conf_rolepermission.js
+    pola: neu_appliedconnectionroleid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_conf_survey.js
+    pola: neu_accountslistid, neu_contactslistid, neu_expected_result_on_parent, neu_ismandatory, neu_parentconfsurveyid, neu_place, neu_reccurencytype, neu_regardsto, neu_userslistid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_contract_quickform.js
+    pola: neu_action, neu_annexed_neu_contractid, neu_applicationid, neu_isutilization, neu_paymenttype, neu_utilizationpaymentpercentage
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_contract.js
+    pola: createdon, modifiedon, neu_clientid, neu_contracttype, neu_crm2015id, neu_iscontractedfine, neu_ispharmacypayment, neu_isutilization, neu_name, neu_payerid, neu_paymenttype
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_contractaccount_quickform.js
+    pola: neu_contractid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_contractop_przetargiszpitalne.js
+    pola: neu_clientid, neu_conf_salesofficeid, neu_opportunityid, neu_purchasegroupid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_contractop.js
+    pola: neu_annexedcontractopid, neu_annexnumber, neu_cancelcontractbyclient, neu_cancelcontractbyneuca, neu_contractnumber, neu_contracttype, neu_fordelay, neu_nocomplaintconsideration, neu_noorder, neu_other
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_customermood_subgrid.js
+    pola: from, to
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_customermood.js
+    pola: neu_accountid, neu_appointmentid, neu_clientid, neu_incidentid, neu_phonecallid, neu_taskid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_deliverypactivitydefined.js
+    pola: neu_establishmentdatemonth, neu_establishmentdateyear
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_feedback_ribbon.js
+    pola: neu_isinbir
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_feedback.js
+    pola: neu_source
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_incidenttask_quickform.js
+    pola: description, neu_conf_incidenttasktypeid, neu_conf_warehouseid, neu_contactid, neu_customerid, neu_customersapcode, neu_incidentid, neu_incidentstage, neu_pfarmacyofferid, neu_producer, neu_taskincidentdescritpion, subject
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_incidenttask.js
+    pola: neu_conf_incidenttasktypeid, neu_contactid, neu_customerid, neu_customersapcode, neu_flowtaskid, neu_incidentid, neu_incidentstage, neu_taskincidentdescritpion, subject, to
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_indicator.js
+    pola: neu_typeofindicatorid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_jquery.js
+    pola: class, classid, classname, disabled, href, id, lang, style, type, value, xml:lang
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_jqueryui.js
+    pola: data-event, data-handler, data-month, data-year
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_knockout.js
+    pola: data-bind, params
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_licence_ribbon.js
+    pola: neu_accountid, neu_address_city, neu_address_community, neu_address_county, neu_address_line1, neu_address_line2, neu_address_line3, neu_address_postalcode, neu_address_province, neu_code, neu_datefrom, neu_dateto, neu_fullname, neu_gifcode, neu_licencestatus, neu_name, neu_nip, neu_payerid, neu_permissionnumber, neu_regon, neu_sapcode, neu_sourcelicenceid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_licence.js
+    pola: neu_accountid, neu_address_city, neu_address_countryid, neu_address_county, neu_address_line1, neu_address_line2, neu_address_line3, neu_address_postalcode, neu_address_province, neu_code, neu_customerid, neu_fullname, neu_gifcode, neu_licencestatus, neu_name, neu_nip, neu_payerid, neu_permissionnumber, neu_regon, neu_sapcode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_listtradeterms.js
+    pola: neu_issenttosap
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_mappedproduct.js
+    pola: neu_acceptdescription, neu_calcflag, neu_infodrugprogram, neu_infopriceassize, neu_inforss, neu_infotenderpriceassize, neu_infotenderpricewholesale, neu_isaccept, neu_isdrugprogram, neu_isgeneratepositionzpzk, neu_isoherheadpercentchanged, neu_ispricingperitem, neu_isproblem, neu_isproducermwir, neu_name, neu_overheadadjustment, neu_overheadpercent, neu_priceassize, neu_pricedrugprogramlimit, neu_pricepurchaseafterdiscounts, neu_pricepurchasemwir, neu_pricerss, neu_priceselling, neu_pricesellingmwir, neu_pricewholesalemaximum, neu_productid, neu_sapcode, neu_tenderid, neu_tenderproductid, neu_tenderstructureid, neu_type, neu_zeroindexflag
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_medicalfacility_account.js
+    pola: neu_distributionid, neu_medicalfacility_distributionid, neu_medicalfacilityid, neu_servicetypeid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_medicalfacility_distribution.js
+    pola: neu_distributionid, neu_servicetypeid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_newfeedback.js
+    pola: neu_authorid, neu_regardingaccount, neu_regardingclient, neu_regardingid, ownerid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_offerasset_quickform.js
+    pola: neu_accountid, neu_applicationid, neu_assettype, neu_clientid, neu_conf_offerconfigurationgroupid, neu_conf_offerconfigurationid, neu_isallpayers, neu_iscopyfromanotheraccount, neu_iscrosssalesrep, neu_isgroupconfiguration, neu_offeraccountgroupid, neu_opportunityid, neu_payerid, neu_sourceaccountid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_oltask.js
+    pola: neu_accountid, neu_leadid, neu_type
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_operation_newconnection_quickform.js
+    pola: defaultviewid, neu_conf_connectionroleid, neu_enddate
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_opportunity_przetarg.js
+    pola: name, neu_annoucementdate, neu_calcflag, neu_caltulationtype, neu_cash, neu_conf_opportunitytypeid, neu_daysofvalidquote, neu_durationinmonths, neu_durationinmonthschange, neu_ischeckprice, neu_isclinicaltests, neu_iscollectiveinvoice, neu_iscombiningorders, neu_iscopyprefferedproducer, neu_isdrugprogram, neu_isequalizepriceassize, neu_isequalizepricewholesale, neu_isformchangeconsent, neu_isgeneratequotevalidation, neu_isgeneratezpzkproducer, neu_isonetimedelivery, neu_isoverheadvalidation, neu_isrecalcvalidation, neu_issimplified, neu_openingdate, neu_overheadflag, neu_packagingcalculatemethod, neu_packagingchangemethod, neu_packagingchangemethodvalue_x, neu_proceduretype, neu_purchasegroupid, neu_pzp, neu_releasedate, neu_salesdepartment, neu_salesoffice, neu_sapcode, neu_state, neu_stateprefferproducer, neu_statepreflag, neu_tenderpaymentperiod, neu_tenderreferential, neu_tendervalidityterm, neu_validitydatefrom, neu_validitydateto, neu_valuecontrol
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_opportunity.js
+    pola: neu_acquiredfinancialdocuments, neu_clientid, neu_clientsapcode, neu_conf_opportunitytypeid, neu_conf_salesrepresentation, neu_individualactionimplementationdate, neu_isofferassetsimportfinished, neu_ispharmacyinterestedinrebranding, neu_negotiationassetschanged, neu_offerstatustno, neu_reasonforlackoffinancialdocuments, neu_termsofbusinessimplementationdate, ownerid, src, statuscode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_opportunitytenderusercheck.js
+    pola: neu_tenderid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_packagemissing.js
+    pola: neu_accountid, neu_centralwarehouse, neu_centralwarehousecode, neu_flowtaskid, neu_localwarehouse, neu_localwarehousecode, neu_locationtype, neu_queuecontactid, neu_requiredinformation, neu_sapnumber, neu_solutionlocation
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_pharmacyattribute.js
+    pola: neu_conf_pharmacyattributecategoryid, neu_type
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_pharmacyprograms.js
+    pola: neu_contractstatus, neu_letterofintentstatus
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_producer.js
+    pola: emailaddress, neu_createemailflag
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_promotion.js
+    pola: neu_isforselectedaccounts
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_quote.js
+    pola: neu_activatequoteflag, neu_exporterrormessage, neu_isgenerateaddressingforxls, neu_statecodeforquote, neu_statesccept, neu_tenderid, neu_tenderstructureid, neu_useracceptingid, neu_userexecutingid, neu_usersupportingid, neu_validfrom, neu_validto, neu_wonoffercalcflag
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_receiver.js
+    pola: neu_opportunityid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_replacement.js
+    pola: neu_appliestoaccountconnections, neu_from, neu_includehours, neu_processingtime, neu_to
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_sdpermission_ribbon.js
+    pola: neu_istorealization
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_sdpermission.js
+    pola: neu_businessunitid, neu_configuration, neu_disabledreason, neu_domainname, neu_systemuserid, neu_userstate
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_specialdeployment.js
+    pola: createdon, modifiedon, neu_cooperationtype, neu_customeracceptedhempmedicinepharmacyterms, neu_customerplacedorder, neu_deploymenttype, neu_doescustomerwantexpositor, neu_dried, neu_extracts, neu_hascustomerpurchasedpackage, neu_isacquisitiontask, neu_lossreason, neu_newisinterested, neu_specialdeploymentdisinterestreasonid, neu_specialdeploymenttype, neu_standtype, neu_termsrejectionreason, statuscode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_specialdeploymenttask.js
+    pola: neu_cooperationtype, neu_customeracceptedhempmedicinepharmacyterms, neu_customerplacedorder, neu_doescustomerwantexpositor, neu_dried, neu_extracts, neu_guidesentdate, neu_hascustomerpurchasedpackage, neu_iscbdstarterkit, neu_iscertificatedelivered, neu_isdiplomarequired, neu_iseducationalguide, neu_isincontinenceprojectacceptedbycustomer, neu_isleasedelivered, neu_isleaserequired, neu_ispossent, neu_isreimbursementcontractsigned, neu_isstockshipmentsent, neu_lossreason, neu_newisinterested, neu_nfzservicecode, neu_pharmacybankaccountnumber, neu_pharmacyemail, neu_pharmacyphonenumber, neu_pointperson, neu_pointpersoncontactnumber, neu_posmaterials, neu_possentdate, neu_prefferedcontacthours, neu_specialdeploymentdisinterestreasonid, neu_specialdeploymenttype, neu_standsentdate, neu_standtype, neu_stocksentdate, neu_tasktype, neu_termsrejectionreason
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_specialization.js
+    pola: neu_iscontracted, neu_medicalfacility_accountid, neu_medicalfacility_distributionid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_templatecriterion.js
+    pola: neu_criteriaid, neu_name, neu_systemname, neu_type
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_tenderbundle.js
+    pola: createdon, neu_calcflag, neu_durationinmonths, neu_durationinmonthschange, neu_isonetimedelivery, neu_isoverheadvalidation, neu_isrecalcvalidation, neu_itemsamountinbundle, neu_openingdate, neu_overheadflag, neu_overheadpercent, neu_overheadpercentsource, neu_releasedate, neu_state, neu_stateprefferproducer, neu_statepreflag, neu_tenderid, neu_validitydatefrom, neu_validitydateto
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_tenderproduct_calc_notification.js
+    pola: neu_calcflag, neu_tenderstructureid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_tenderproduct.js
+    pola: modifiedon, neu_acceptdescription, neu_calcflag, neu_infodrugprogram, neu_infopriceassize, neu_inforss, neu_infotenderpriceassize, neu_infotenderpricewholesale, neu_isaccept, neu_ischecked, neu_isdrugprogram, neu_isgeneratepositionzpzk, neu_ispricingperitem, neu_isproblem, neu_isproducermwir, neu_name, neu_numberofmappedproducts, neu_overheadadjustment, neu_overheadpercent, neu_overheadpercentsource, neu_packagingcalculatemethod, neu_packagingchangemethod, neu_packagingchangemethodvalue_x, neu_priceassize, neu_pricedrugprogramlimit, neu_pricepurchaseafterdiscounts, neu_pricepurchasemwir, neu_pricerss, neu_priceselling, neu_pricesellingmwir, neu_pricewholesalemaximum, neu_productid, neu_state, neu_tenderbundleid, neu_tenderid, neu_tenderstructureid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_tenderstructure_calc_notification.js
+    pola: neu_statecode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_tenderstructure.js
+    pola: neu_importerprocesscode, neu_mapperprocesscode, neu_statecode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_tradeterms.js
+    pola: neu_bagindate, neu_emailflag, neu_enddate, neu_generatecsvflag, neu_status
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\neu_users_list.js
+    pola: neu_type
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\phonecall.js
+    pola: directioncode, from, neu_accountid, neu_contactid, neu_customermoodid, neu_customersapcode, neu_iscontactfilter, neu_notification, neu_selectedmaintelephone, neu_taskid, phonenumber, regardingobjectid, statuscode, subject, to
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\product.js
+    pola: neu_eancode, neu_isroblem, productnumber
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\account_ribbon.js
+    pola: name, neu_code, neu_contractstate, neu_purchasegroupid, neu_sapcode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_account_neu_dedicatedpricelist_ribbon.js
+    pola: neu_extend_pricelist
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_affiliateprogramsandvariants_ribbon.js
+    pola: neu_accountid, neu_assetid, neu_name, neu_variantexitdate
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_application_ribbon.js
+    pola: neu_accountarea, neu_applicationcategory, neu_applicationdata, neu_commodityreturn, neu_conf_salesrepresentationid, neu_error, neu_firstdeliveryamount, neu_firstdeliveryplanneddate, neu_flowid, neu_invoicefileformat, neu_iomsetup, neu_isapprovallevelprocessingfinished, neu_ispartialoffer, neu_issendprocessingfinished, neu_issplitprocessingfinished, neu_name, neu_offerisvalid, neu_opportunityid, neu_searchappisvalid, neu_sentapplicationdata, neu_termsofbusinesschanged, neu_termsofbusinessimplementationdate, ownerid, statecode, statuscode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_campaign_nonpharmacyarea_ribbon.js
+    pola: neu_campaigncategory, neu_campaigncompletion, neu_campaignenddate, neu_campaignstartdate, neu_campaigntarget, neu_campaigntype, neu_cancelreason, neu_clientbenefit, neu_closurereason, neu_createfor, neu_finishrequiredpercentage, neu_finishtaskdeadline, neu_ischildcampaign, neu_parentcampaignid, neu_strategictarget, neu_taskdescription, statecode, statuscode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_campaigntask_ribbon.js
+    pola: statecode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_cc_incidentribbon.js
+    pola: statecode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_changeareaoperation_ribbon.js
+    pola: neu_error, neu_statuscode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_client_ribbon.js
+    pola: neu_crmcode, neu_name, neu_sapcode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_communication_application_ribbon.js
+    pola: neu_customerbenefits, neu_customermessageproposal, neu_datefrom, neu_dateto, neu_description, neu_istemplate, statuscode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_communication_channel_ribbon.js
+    pola: neu_confirmationstatus, neu_realizationconfirmation
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_contractop_nonpharmacyarea_ribbon.js
+    pola: neu_contracttype
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_importtasks_ribbon.js
+    pola: neu_status
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_incidenttask_ribbon.js
+    pola: statuscode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_medicalfacility_account_ribbon.js
+    pola: statecode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_medicalfacility_distribution_ribbon.js
+    pola: statecode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_medicalfacility_ribbon.js
+    pola: statecode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_noncampaigntask_ribbon.js
+    pola: statecode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_opportunity_ribbon.js
+    pola: name, neu_conf_salesrepresentation, neu_currentvaluationid, neu_dateofferstart, neu_error, neu_individualactionimplementationdate, neu_offerisvalid, neu_offerstatustno, neu_termsofbusinessimplementationdate, statuscode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_packagemissing_ribbon.js
+    pola: neu_flowtaskid, neu_issendingtoflow, neu_locationtype, statuscode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_payer_ribbon.js
+    pola: neu_contractstate, neu_name, neu_purchasegroupid
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_processtask_ribbon.js
+    pola: createdby, neu_businessstatus, neu_buttonconfig, ownerid, statuscode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_receiversgroup_ribbon.js
+    pola: neu_calculatedautomatically, neu_name
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_specialdeploymenttask_ribbon.js
+    pola: neu_cooperationtype, neu_customeracceptedhempmedicinepharmacyterms, neu_customerplacedorder, neu_doescustomerwantexpositor, neu_dried, neu_extracts, neu_guidesentdate, neu_isdiplomarequired, neu_iseducationalguide, neu_isleaserequired, neu_ispharmacyskuadded, neu_ispossent, neu_isstockshipmentsent, neu_newisinterested, neu_nfzapplicationdate, neu_nfzservicecode, neu_pointperson, neu_pointpersoncontactnumber, neu_possentdate, neu_prefferedcontacthours, neu_refundstartdate, neu_specialdeploymentdisinterestreasonid, neu_specialdeploymenttype, neu_standsentdate, neu_standtype, neu_stocksentdate, neu_taskholdreason, neu_taskrealizationdate, neu_taskrejectionreason, neu_tasktype, neu_termsrejectionreason, statuscode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\ribbons\neu_specialization_ribbon.js
+    pola: statecode
+  app\Neuca.Crm.Magellan.WebResources\neu_\js\task.js
+    pola: createdby, neu_channel, neu_createdfromentityname, neu_customermoodid, neu_notification, neu_source, ownerid, prioritycode, regardingobjectid
+  app\Neuca.Crm.Magellan.WebResources\node_modules\bootstrap\dist\js\bootstrap.bundle.js
+    pola: aria-pressed, data-content, data-interval, data-original-title, data-parent, data-slide-to, data-target, href, role, title, x-placement
+  app\Neuca.Crm.Magellan.WebResources\node_modules\bootstrap\dist\js\bootstrap.js
+    pola: aria-pressed, data-content, data-interval, data-original-title, data-parent, data-slide-to, data-target, href, role, title, x-placement
+  app\Neuca.Crm.Magellan.WebResources\node_modules\bootstrap\js\dist\button.js
+    pola: aria-pressed
+  app\Neuca.Crm.Magellan.WebResources\node_modules\bootstrap\js\dist\carousel.js
+    pola: data-interval, data-slide-to
+  app\Neuca.Crm.Magellan.WebResources\node_modules\bootstrap\js\dist\collapse.js
+    pola: data-parent
+  app\Neuca.Crm.Magellan.WebResources\node_modules\bootstrap\js\dist\popover.js
+    pola: data-content
+  app\Neuca.Crm.Magellan.WebResources\node_modules\bootstrap\js\dist\tab.js
+    pola: role
+  app\Neuca.Crm.Magellan.WebResources\node_modules\bootstrap\js\dist\tooltip.js
+    pola: data-original-title, title, x-placement
+  app\Neuca.Crm.Magellan.WebResources\node_modules\bootstrap\js\dist\util.js
+    pola: data-target, href
+  app\Neuca.Crm.Magellan.WebResources\node_modules\bootstrap\js\src\button.js
+    pola: aria-pressed
+  app\Neuca.Crm.Magellan.WebResources\node_modules\bootstrap\js\src\carousel.js
+    pola: data-interval, data-slide-to
+  app\Neuca.Crm.Magellan.WebResources\node_modules\bootstrap\js\src\collapse.js
+    pola: data-parent
+  app\Neuca.Crm.Magellan.WebResources\node_modules\bootstrap\js\src\popover.js
+    pola: data-content
+  app\Neuca.Crm.Magellan.WebResources\node_modules\bootstrap\js\src\tab.js
+    pola: role
+  app\Neuca.Crm.Magellan.WebResources\node_modules\bootstrap\js\src\tooltip.js
+    pola: data-original-title, title, x-placement
+  app\Neuca.Crm.Magellan.WebResources\node_modules\bootstrap\js\src\util.js
+    pola: data-target, href
+  app\Neuca.Crm.Magellan.WebResources\node_modules\eslint\lib\cli-engine\formatters\html.js
+    pola: data-group
+  app\Neuca.Crm.Magellan.WebResources\node_modules\jquery\dist\jquery.js
+    pola: class, id, lang, nonce, type, value, xml:lang
+  app\Neuca.Crm.Magellan.WebResources\node_modules\jquery\dist\jquery.slim.js
+    pola: class, id, lang, nonce, type, value, xml:lang
+  app\Neuca.Crm.Magellan.WebResources\node_modules\jquery\src\attributes\classes.js
+    pola: class
+  app\Neuca.Crm.Magellan.WebResources\node_modules\jquery\src\attributes\val.js
+    pola: value
+  app\Neuca.Crm.Magellan.WebResources\node_modules\jquery\src\manipulation.js
+    pola: nonce, type
+  app\Neuca.Crm.Magellan.WebResources\node_modules\jquery\src\selector.js
+    pola: class, id, lang, type, xml:lang
+  app\Neuca.Crm.Magellan.WebResources\node_modules\mute-stream\coverage\lcov-report\sorter.js
+    pola: data-col, data-nosort, data-type, data-value
+  app\Neuca.Crm.Magellan.WebResources\node_modules\unique-filename\coverage\sorter.js
+    pola: data-col, data-nosort, data-type, data-value
+  app\Neuca.Crm.Magellan.WebResources\Scripts\knockout-3.4.1.debug.js
+    pola: params
+  app\Neuca.Crm.Magellan.WebResources\Scripts\knockout-3.4.1.js
+    pola: data-bind, params
+
+-- Zgrupowane wg encji (z nazwy pliku):
+  [account]: neu_sapcode, neu_purchasegroupid, neu_isinpartnerplus, neu_pharmacyprogramlicencenumber, neu_code, name, neu_area, neu_conf_pharmaceuticaltypeid, neu_client, neu_pharmacymarket, neu_contractstate, createdon, neu_payerid, neu_pharmacyprogram, neu_isinpartner, neu_isinipra
+  [account_bok]: neu_conf_pharmaceuticaltypeid, neu_client, neu_pharmacymarket, neu_area, neu_sapcode, neu_code, neu_payerid
+  [account_medicalarea]: neu_client, neu_payerid, neu_commonclientformedicalandpatientarea
+  [angular]: open, innerhtml, href, checked, selected, class, data-ng-csp, disabled, ng-csp, ng-cloak, readonly, type, value
+  [appointment]: modifiedon, neu_conf_appointmenttypeid, neu_notification, neu_customermoodid, regardingobjectid
+  [bootstrap]: href, data-interval, x-placement, title, data-content, data-slide-to, data-original-title, data-parent, data-target, role, aria-pressed
+  [bootstrap.bundle]: href, data-interval, x-placement, title, data-content, data-slide-to, data-original-title, data-parent, data-target, role, aria-pressed
+  [button]: aria-pressed
+  [campaignactivity]: neu_involvement_description, neu_involved
+  [carousel]: data-interval, data-slide-to
+  [classes]: class
+  [collapse]: data-parent
+  [contact]: neu_selectedmaintelephone, emailaddress1, mobilephone, neu_medicalspecialization, neu_rodoconsentdate, home2, neu_emailrodoconsent, neu_withdrawalrodoconsent, neu_job, neu_visitrodoconsent, neu_isrodoconsent, neu_phonerodoconsent, telephone2, business2
+  [contact_cc]: business2, lastname, telephone2, neu_selectedmaintelephone, neu_contacttype, mobilephone, firstname, home2, emailaddress1
+  [contact_quickform]: business2, lastname, telephone2, neu_selectedmaintelephone, mobilephone, home2, emailaddress1
+  [ContractOpFormHelper]: neu_contractstate, neu_purchasegroupid
+  [CreateOpportunityPanel]: neu_opportunityid, neu_searchappisvalid
+  [CrmLookupDialog]: src
+  [DownloadActivityTemplate]: neu_accountid
+  [dw_documentswizard]: href, value, type, id, xml:lang, disabled, class, data-bind, lang, params, classname
+  [email]: to, createdon, cc, regardingobjectid, subject, bcc
+  [html]: data-group
+  [incident]: neu_origincontact, ownerid, neu_internaldescription, neu_sapcodeverified, neu_stageslakpiid, neu_clientid, statecode, customerid, subjectid, caseorigincode, neu_payerid, modifiedon
+  [IncidentTaskButtons]: neu_sdrequesturl, neu_sdresolutionurl
+  [jquery]: value, type, id, xml:lang, class, lang, nonce
+  [jquery-3.3.1]: href, value, type, xml:lang, disabled, id, lang, class, classname
+  [jquery-3.3.1.slim]: href, value, type, xml:lang, disabled, id, lang, class, classname
+  [jquery.slim]: value, type, id, xml:lang, class, lang, nonce
+  [knockout-3.4.1]: params, data-bind
+  [knockout-3.4.1.debug]: params
+  [list]: neu_sapcode
+  [main]: kendo-no-bullet, aria-label, aria-hidden, aria-rowindex, neu_mood, style, href, data-kendo-grid-item-index, src, data-index, data-kendo-chart, kendo-split-index, data-timelist-item-index, data-timelist-index, group-index, tabindex, role, data-date-index, index, createdon, modifiedon, aria-colindex, colspan, data-cell-index
+  [manipulation]: nonce, type
+  [neu_account_neu_dedicatedpricelist]: neu_extend_pricelist
+  [neu_activitypanelviewmodel]: params, stageid, customerid, data-bind
+  [neu_activitytemplate]: neu_isforselectediok, createdon
+  [neu_addressform]: statecode
+  [neu_affiliateprogramsandvariants]: neu_assetid, neu_name, neu_accountid, neu_variantexitdate
+  [neu_application]: neu_opportunityid, neu_ispartialoffer, neu_name, neu_error, neu_accountid, statecode, neu_firstdeliveryamount, neu_delivery_afternoon, neu_firstdeliveryplanneddate, neu_termsofbusinesschanged, neu_conf_flowmodelid, neu_setsalesoffiefromzipcode, ownerid, neu_applicationdata, neu_searchappisvalid, statuscode, neu_termsofbusinessimplementationdate, neu_commodityreturn, neu_issplitprocessingfinished, neu_invoicefileformat, neu_delivery_morning, neu_author, neu_isapprovallevelprocessingfinished, neu_offerisvalid, neu_clientid, modifiedon, neu_sentapplicationdata, neu_retailpricebase, neu_delivery_customerrelationshipimpact_other, neu_negotiationassetschanged, neu_applicationcategory, neu_accountarea, neu_flowid, neu_isjoinfranchise, neu_conf_salesrepresentationid, neu_iomsetup, neu_parentapplicationid, neu_isneworexistingchain, neu_issendprocessingfinished, neu_delivery_customerrelationshipimpact, neu_delivery_other
+  [neu_applicationautonumbering]: neu_applicationcategory, neu_relatedentityname
+  [neu_businessrelation]: neu_enddate, neu_startdate, neu_accountid
+  [neu_campaign]: neu_parent_campaign
+  [neu_campaign_nonpharmacyarea]: neu_zoz, neu_campaignstartdate, neu_campaigncompletion, neu_campaigncategory, neu_ischildcampaign, neu_cancelreason, neu_oltaskgeneratingstatus, neu_campaignenddate, neu_campaigntarget, neu_finishtaskdeadline, neu_clientbenefit, neu_closurereason, neu_parentcampaignid, statecode, neu_createfor, neu_campaigntype, neu_finishrequiredpercentage, statuscode, neu_strategictarget, neu_hospital, neu_taskdescription
+  [neu_campaignfilterbuttons]: neu_createfor, neu_lost, neu_terminated, neu_activeendangered, neu_activetorecover, neu_ownfacility, neu_active, neu_publicprocurementlawbool, neu_oltaskgeneratingstatus
+  [neu_campaigntask]: statecode, neu_campaignid
+  [neu_campaigntaskhistory]: neu_campaigntaskaction, neu_nextcontactdate
+  [neu_campaigntaskhistory_quickform]: neu_campaigntaskaction, neu_nextcontactdate
+  [neu_cc_accountlastincidentsgrid]: name, description, neu_name, subject, neu_accountid, neu_customersapcode, regardingobjectid
+  [neu_cc_contactarea_grid_controller]: name, createdon, customerid, neu_conf_salesofficeid, neu_clientid, regardingobjectid, neu_payerid, kbarticleid
+  [neu_cc_email]: regardingobjectid, neu_taskid
+  [neu_cc_incident]: kbarticleid, subjectid, neu_internaldescription
+  [neu_cc_incidentribbon]: statecode
+  [neu_cc_notes]: neu_name
+  [neu_cc_phonecall]: to
+  [neu_cc_phonecallactions]: regardingobjectid
+  [neu_cc_sdpermission]: neu_configuration, neu_businessunitid, neu_domainname, neu_systemuserid, neu_userstate, neu_disabledreason
+  [neu_cc_subjectsearch]: caseorigincode, neu_categorydictionaryvalue, statecode, subjectid
+  [neu_cc_task]: createdby
+  [neu_changeareaoperation]: neu_clientsapcode, neu_designatepf, neu_clientline2, neu_error, neu_destinationsystemuserid, neu_clientmarket, neu_clientpostalcode, neu_destinationmarket, neu_rulekslz, neu_destinationsalesofficeid, neu_destinationarea, neu_positionid, neu_clientline3, neu_clientid, neu_clientarea, neu_clientcity, neu_clientline1, neu_clientsalesofficeid, neu_statuscode, neu_designatedkwa, neu_designatesystemuser
+  [neu_changeareaoperationaccount]: neu_changeareaoperationid
+  [neu_client]: neu_sapcode, neu_conf_countryid, neu_address_line2, neu_crmcode, neu_ispharmacycommonnameforpatients, neu_centralaccountid, neu_address_line1, neu_isonlinepharmacy, neu_name, neu_address_county, neu_address_city, neu_isjointmarketing, createdon, neu_pharmacycommonnameforpatients, neu_address_postalcode, neu_address_line3
+  [neu_clientconnection]: neu_client2id, neu_client1id
+  [neu_clientspecialdeployment]: neu_cooperationtype, statecode, neu_specialdeploymenttype, neu_origin
+  [neu_clientSpecialDeploymentProgramEdit]: neu_specialdeployment, neu_specialdeploymenttype, neu_account, neu_type, ownerid
+  [neu_communication_application]: neu_other, neu_numerics, neu_implementinglegalrequirements, neu_customermessageproposal, neu_istemplate, neu_acquisitionprogramservice, neu_education, neu_sale, neu_customerbenefits, neu_datefrom, statuscode, neu_externalrevenue, neu_description, neu_dateto, createdon
+  [neu_communication_channel]: neu_is_retention_reducing, neu_is_potentialscoring_high, neu_is_retention_discontinuation, neu_is_program_partner, neu_area_network_sales_points, neu_outside_programs, neu_area_clinical_trials, neu_is_program_synoptisplus, neu_is_retention_positive_fluctuation, neu_messagetocustomer, neu_area_wholesalers, neu_is_retention_strengthening, neu_is_program_ipra, neu_is_program_rpm, neu_is_potentialscoring_low, neu_communication_applicationid, neu_communication_channel_ownersid, neu_recipient_group, neu_is_retention_maintaining, neu_is_retention_maximizing_cooperation, neu_area_independent_sales_points, neu_realizationconfirmation, oid, neu_salesofficeid, neu_is_retention_extinguishing, neu_area_network_pharmacies, neu_area_medical_stores, neu_is_program_partnerplus, neu_is_retention_expanding, neu_pharmacymarket, neu_area_independent_pharmacies, createdon, neu_customermessageproposaltype, neu_confirmationstatus, neu_is_potentialscoring_medium, neu_area_open_health_care, neu_area_closed_health_care, neu_all_programs, neu_is_retention_negative_fluctuation
+  [neu_communication_channel_owners]: neu_isactioncoordination, neu_communication_channel_typeid
+  [neu_communicationChannelApplicationCommentsGridButtonsHandler]: neu_communication_applicationid, neu_name, neu_communication_channel_ownersid
+  [neu_competitor_quickform]: neu_sapcode, neu_competitoraccountid, neu_name
+  [neu_conf_attribute]: neu_attributetypeid, neu_attributecategoryid
+  [neu_conf_contractgenerator]: neu_name, neu_flag_periodofreturn, neu_accountid, neu_utilizationpaymentpercentage, neu_flag_isanypartnerposition, neu_flag_iscommonalert, neu_loancontractid, neu_flag_correctionivoicesettlementtype, neu_flag_turnoverfrompharmbrand, neu_paymenttype, neu_aptelinescope, neu_contractype, neu_flag_isanyutilization, neu_medicineandcorrectioninvoiceformat, neu_payerid, neu_flag_iscontractedfineforsalescontract, neu_flag_isanyinterestcancellation, neu_isneuca, neu_flag_discountcorrectiontype, neu_flag_isdeclaredinterest, neu_flag_isanyzwhrebatespharmbrand, neu_opportunityid, neu_efusformat, neu_flag_contractdeclaredmonthlyturnover, neu_conf_salesrepresentationid, neu_flag_isanypartnerplusposition, neu_paybacktype, neu_invoicescope, neu_flag_turnoversettlement, neu_flag_isanyloancontracts, neu_ismonthettlementrotation, neu_contractid
+  [neu_conf_contractrelations]: neu_relatedcontractid, neu_contractid
+  [neu_conf_offerconfiguration]: neu_ispayer, neu_isclient, neu_ispharmacy
+  [neu_conf_operationmanagecontactconnection]: neu_relatedrecordtype, neu_franchiseid, neu_isnewcontact, neu_connectionid, neu_contactlastname, neu_contacttelephone1, neu_contacttelephone2, neu_conf_connectionroleid, neu_neu_contacttelephone4, neu_selectedmainphone, neu_accountid, neu_contactid, neu_contactemailaddress1, neu_medicalfacilityid, neu_contactcustomertypecode, neu_contacttype, neu_neu_contacttelephone3, neu_conf_warehouseid
+  [neu_conf_rolepermission]: neu_appliedconnectionroleid
+  [neu_conf_survey]: neu_expected_result_on_parent, neu_ismandatory, neu_parentconfsurveyid, neu_regardsto, neu_reccurencytype, neu_accountslistid, neu_contactslistid, neu_place, neu_userslistid
+  [neu_contract]: neu_crm2015id, modifiedon, neu_isutilization, createdon, neu_ispharmacypayment, neu_clientid, neu_paymenttype, neu_iscontractedfine, neu_payerid, neu_contracttype, neu_name
+  [neu_contract_quickform]: neu_utilizationpaymentpercentage, neu_applicationid, neu_isutilization, neu_action, neu_paymenttype, neu_annexed_neu_contractid
+  [neu_contractaccount_quickform]: neu_contractid
+  [neu_contractop]: neu_noorder, neu_fordelay, neu_cancelcontractbyclient, neu_annexedcontractopid, neu_other, neu_contractnumber, neu_annexnumber, neu_contracttype, neu_nocomplaintconsideration, neu_cancelcontractbyneuca
+  [neu_contractop_nonpharmacyarea]: neu_contracttype
+  [neu_contractop_przetargiszpitalne]: neu_opportunityid, neu_conf_salesofficeid, neu_clientid, neu_purchasegroupid
+  [neu_customermood]: neu_phonecallid, neu_taskid, neu_clientid, neu_incidentid, neu_accountid, neu_appointmentid
+  [neu_customermood_subgrid]: from, to
+  [neu_deliverypactivitydefined]: neu_establishmentdateyear, neu_establishmentdatemonth
+  [neu_feedback]: neu_source, neu_isinbir
+  [neu_importtasks]: neu_status
+  [neu_incidenttask]: neu_contactid, neu_incidentstage, neu_flowtaskid, statuscode, to, neu_taskincidentdescritpion, neu_incidentid, neu_customersapcode, neu_customerid, subject, neu_conf_incidenttasktypeid
+  [neu_incidenttask_quickform]: subject, neu_pfarmacyofferid, neu_incidentstage, neu_producer, description, neu_incidentid, neu_contactid, neu_customerid, neu_customersapcode, neu_conf_incidenttasktypeid, neu_conf_warehouseid, neu_taskincidentdescritpion
+  [neu_indicator]: neu_typeofindicatorid
+  [neu_jquery]: href, classid, type, id, xml:lang, disabled, class, lang, value, style, classname
+  [neu_jqueryui]: data-month, data-year, data-handler, data-event
+  [neu_knockout]: params, data-bind
+  [neu_licence]: neu_payerid, neu_code, neu_sourcelicenceid, neu_nip, neu_address_line1, neu_fullname, neu_address_countryid, neu_gifcode, neu_name, neu_address_line2, neu_permissionnumber, neu_address_county, neu_address_city, neu_accountid, neu_licencestatus, neu_customerid, neu_datefrom, neu_sapcode, neu_dateto, neu_address_province, neu_address_postalcode, neu_address_line3, neu_regon, neu_address_community
+  [neu_listtradeterms]: neu_issenttosap
+  [neu_mappedproduct]: neu_pricepurchasemwir, neu_productid, neu_priceassize, neu_name, neu_ispricingperitem, neu_acceptdescription, neu_tenderproductid, neu_zeroindexflag, neu_infopriceassize, neu_pricewholesalemaximum, neu_isgeneratepositionzpzk, neu_overheadadjustment, neu_sapcode, neu_isproblem, neu_calcflag, neu_pricepurchaseafterdiscounts, neu_overheadpercent, neu_tenderid, neu_isoherheadpercentchanged, neu_pricedrugprogramlimit, neu_pricerss, neu_inforss, neu_isaccept, neu_type, neu_infotenderpricewholesale, neu_priceselling, neu_pricesellingmwir, neu_infotenderpriceassize, neu_isproducermwir, neu_isdrugprogram, neu_tenderstructureid, neu_infodrugprogram
+  [neu_medicalfacility]: neu_address_province, statecode, neu_address_postalcode
+  [neu_medicalfacility_account]: neu_medicalfacilityid, neu_medicalfacility_distributionid, neu_distributionid, neu_servicetypeid, statecode
+  [neu_medicalfacility_account_checkbox]: neu_accountid
+  [neu_medicalfacility_distribution]: neu_distributionid, statecode, neu_servicetypeid
+  [neu_newfeedback]: neu_authorid, neu_regardingid, neu_regardingaccount, neu_regardingclient, ownerid
+  [neu_noncampaigntask]: statecode
+  [neu_offerasset_quickform]: neu_offeraccountgroupid, neu_conf_offerconfigurationgroupid, neu_isallpayers, neu_payerid, neu_iscopyfromanotheraccount, neu_opportunityid, neu_iscrosssalesrep, neu_clientid, neu_accountid, neu_assettype, neu_conf_offerconfigurationid, neu_applicationid, neu_isgroupconfiguration, neu_sourceaccountid
+  [neu_oltask]: neu_accountid, neu_type, neu_leadid
+  [neu_operation_newconnection_quickform]: neu_enddate, defaultviewid, neu_conf_connectionroleid
+  [neu_opportunity]: neu_clientsapcode, neu_individualactionimplementationdate, neu_offerisvalid, neu_acquiredfinancialdocuments, neu_negotiationassetschanged, name, src, neu_currentvaluationid, neu_reasonforlackoffinancialdocuments, ownerid, neu_clientid, neu_error, neu_termsofbusinessimplementationdate, neu_isofferassetsimportfinished, statuscode, neu_conf_salesrepresentation, neu_ispharmacyinterestedinrebranding, neu_dateofferstart, neu_offerstatustno, neu_conf_opportunitytypeid
+  [neu_opportunity_przetarg]: neu_conf_opportunitytypeid, neu_iscombiningorders, neu_isformchangeconsent, neu_tenderpaymentperiod, neu_purchasegroupid, neu_isclinicaltests, name, neu_isgeneratequotevalidation, neu_proceduretype, neu_isonetimedelivery, neu_stateprefferproducer, neu_durationinmonthschange, neu_openingdate, neu_tendervalidityterm, neu_caltulationtype, neu_packagingchangemethodvalue_x, neu_durationinmonths, neu_sapcode, neu_calcflag, neu_tenderreferential, neu_packagingchangemethod, neu_cash, neu_releasedate, neu_salesoffice, neu_valuecontrol, neu_iscopyprefferedproducer, neu_pzp, neu_overheadflag, neu_isoverheadvalidation, neu_isequalizepriceassize, neu_salesdepartment, neu_isequalizepricewholesale, neu_annoucementdate, neu_validitydateto, neu_isrecalcvalidation, neu_state, neu_isgeneratezpzkproducer, neu_packagingcalculatemethod, neu_daysofvalidquote, neu_issimplified, neu_isdrugprogram, neu_iscollectiveinvoice, neu_statepreflag, neu_validitydatefrom, neu_ischeckprice
+  [neu_opportunitytenderusercheck]: neu_tenderid
+  [neu_packagemissing]: neu_flowtaskid, neu_requiredinformation, neu_centralwarehousecode, neu_issendingtoflow, neu_localwarehousecode, neu_localwarehouse, neu_queuecontactid, neu_accountid, neu_centralwarehouse, neu_locationtype, neu_solutionlocation, statuscode, neu_sapnumber
+  [neu_payer]: neu_name, neu_contractstate, neu_purchasegroupid
+  [neu_pharmacyattribute]: neu_conf_pharmacyattributecategoryid, neu_type
+  [neu_pharmacyprograms]: neu_letterofintentstatus, neu_contractstatus
+  [neu_phonecontactsearchopen]: neu_contactid, neu_iscontactfilter
+  [neu_processtask]: statuscode, createdby, neu_buttonconfig, neu_businessstatus, ownerid
+  [neu_producer]: emailaddress, neu_createemailflag
+  [neu_promotion]: neu_isforselectedaccounts
+  [neu_quote]: neu_isgenerateaddressingforxls, neu_statesccept, neu_validto, neu_activatequoteflag, neu_userexecutingid, neu_statecodeforquote, neu_usersupportingid, neu_useracceptingid, neu_tenderid, neu_exporterrormessage, neu_validfrom, neu_wonoffercalcflag, neu_tenderstructureid
+  [neu_receiver]: neu_opportunityid
+  [neu_receiversgroup]: neu_lastmodificationofgroup, neu_name, neu_calculatedautomatically, neu_iscalculatinggroup
+  [neu_replacement]: neu_appliestoaccountconnections, neu_from, neu_processingtime, neu_to, neu_includehours
+  [neu_responsiblePharmacists]: neu_specialdeploymentid, neu_responsiblepharmacists
+  [neu_sdpermission]: neu_configuration, neu_businessunitid, neu_domainname, neu_systemuserid, neu_userstate, neu_disabledreason, neu_istorealization
+  [neu_segmentationsummaryviewmodel]: params, data-bind
+  [neu_servicedeskresolution]: neu_sdresolution
+  [neu_specialdeployment]: neu_standtype, neu_dried, neu_customeracceptedhempmedicinepharmacyterms, neu_specialdeploymentdisinterestreasonid, neu_doescustomerwantexpositor, neu_customerplacedorder, neu_specialdeploymenttype, neu_lossreason, neu_cooperationtype, neu_deploymenttype, modifiedon, neu_termsrejectionreason, neu_extracts, neu_hascustomerpurchasedpackage, createdon, neu_newisinterested, statuscode, neu_isacquisitiontask
+  [neu_specialdeploymenttask]: neu_isdiplomarequired, neu_cooperationtype, neu_doescustomerwantexpositor, neu_customerplacedorder, neu_isleaserequired, neu_taskrejectionreason, neu_taskholdreason, neu_tasktype, neu_prefferedcontacthours, neu_pharmacyemail, neu_lossreason, neu_pharmacyphonenumber, statuscode, neu_termsrejectionreason, neu_newisinterested, neu_customeracceptedhempmedicinepharmacyterms, neu_dried, neu_ispossent, neu_specialdeploymentdisinterestreasonid, neu_isleasedelivered, neu_standtype, neu_posmaterials, neu_hascustomerpurchasedpackage, neu_iscbdstarterkit, neu_possentdate, neu_isstockshipmentsent, neu_guidesentdate, neu_stocksentdate, neu_nfzapplicationdate, neu_taskrealizationdate, neu_pointperson, neu_iscertificatedelivered, neu_pharmacybankaccountnumber, neu_isreimbursementcontractsigned, neu_specialdeploymenttype, neu_pointpersoncontactnumber, neu_refundstartdate, neu_isincontinenceprojectacceptedbycustomer, neu_iseducationalguide, neu_ispharmacyskuadded, neu_nfzservicecode, neu_extracts, neu_standsentdate
+  [neu_specialization]: neu_iscontracted, statecode, neu_medicalfacility_distributionid, neu_medicalfacility_accountid
+  [neu_substantive_verification]: neu_name, neu_areaid
+  [neu_summaryCountOfAccountOfClient]: neu_synoptispluscount, neu_pharmacycount, neu_area, neu_franchisecount, neu_client, neu_pharmacymarket, neu_rpmcount, neu_partnerpluscount, neu_clientid, neu_deliverypointcount, neu_partnercount, neu_ipracount, neu_partnerboxcount
+  [neu_templatecriterion]: neu_systemname, neu_name, neu_type, neu_criteriaid
+  [neu_tenderbundle]: neu_durationinmonths, neu_isonetimedelivery, neu_itemsamountinbundle, neu_validitydatefrom, neu_stateprefferproducer, neu_calcflag, neu_state, neu_validitydateto, neu_overheadflag, neu_isoverheadvalidation, neu_isrecalcvalidation, neu_tenderid, neu_overheadpercent, neu_statepreflag, neu_overheadpercentsource, neu_releasedate, neu_openingdate, createdon, neu_durationinmonthschange
+  [neu_tenderproduct]: neu_pricepurchasemwir, neu_acceptdescription, neu_ischecked, neu_priceassize, neu_calcflag, neu_ispricingperitem, neu_pricerss, neu_pricewholesalemaximum, neu_overheadpercentsource, neu_overheadadjustment, neu_packagingchangemethodvalue_x, neu_isproblem, neu_tenderid, neu_packagingchangemethod, neu_pricepurchaseafterdiscounts, neu_overheadpercent, neu_packagingcalculatemethod, neu_tenderbundleid, neu_pricedrugprogramlimit, neu_infopriceassize, modifiedon, neu_inforss, neu_isaccept, neu_productid, neu_infotenderpricewholesale, neu_state, neu_priceselling, neu_name, neu_isgeneratepositionzpzk, neu_numberofmappedproducts, neu_infotenderpriceassize, neu_isproducermwir, neu_isdrugprogram, neu_tenderstructureid, neu_infodrugprogram, neu_pricesellingmwir
+  [neu_tenderproduct_calc_notification]: neu_calcflag, neu_tenderstructureid
+  [neu_tenderproduct_runMapper]: neu_tenderbundleid, neu_tenderstructureid
+  [neu_tenderproducts]: neu_tenderstructureid
+  [neu_tenderstructure]: neu_mapperprocesscode, neu_statecode, neu_importerprocesscode
+  [neu_tenderstructure_calc_notification]: neu_statecode
+  [neu_tradeterms]: neu_emailflag, neu_bagindate, neu_generatecsvflag, neu_status, neu_enddate
+  [neu_uiutils]: transactioncurrencyid
+  [neu_users_list]: neu_type
+  [NeuApplicationHelper]: neu_opportunityid, neu_applicationcategory, neu_ispartialoffer
+  [OpportunityContractButtonsHandler]: neu_opportunityid, neu_applicationcategory, neu_ispartialoffer
+  [phonecall]: neu_selectedmaintelephone, neu_notification, neu_contactid, neu_customersapcode, subject, to, neu_customermoodid, directioncode, neu_accountid, regardingobjectid, from, neu_iscontactfilter, statuscode, neu_taskid, phonenumber
+  [PhoneCallButtons]: neu_connectionid, statuscode, neu_confclosereasonid, directioncode, neu_errormessage
+  [popover]: data-content
+  [product]: neu_eancode, productnumber, neu_isroblem
+  [quote]: neu_statecode
+  [selector]: lang, id, class, type, xml:lang
+  [sorter]: data-type, data-nosort, data-col, data-value
+  [SurveyBuilder]: neu_surveybody
+  [SurveyResult]: neu_conf_surveyid, neu_result
+  [tab]: role
+  [task]: neu_notification, prioritycode, neu_createdfromentityname, neu_source, neu_customermoodid, neu_channel, createdby, regardingobjectid, ownerid
+  [tooltip]: title, data-original-title, x-placement
+  [util]: href, data-target
+  [val]: value
+
+
+========== PODSUMOWANIE ==========
+
+Formularze (solution): 41 encj, 1261 pol.
+Pluginy (repo):        15 encj, 19 pol.
+JavaScript (repo):     321 plikow, 2100 odwolan.
+
+Pola tylko w pluginie (brak na formularzu w solution):
+  [neu_campaign]: neu_finishtaskdeadline, neu_campaingidentifier
+  [neu_campaigntaskhistory]: neu_name
+  [neu_conversationokpm]: statuscode, statecode
+  [neu_feedback]: neu_ismoderated
+  [neu_incidenttask]: neu_queueid, neu_incidenttaskstatus
+  [neu_licence]: neu_licencestatus
+  [neu_offerasset]: ownerid
+  [neu_oltask]: statuscode
+  [neu_specialdeploymenttask]: neu_tasktype
+  [neu_survey]: statuscode
+  [opportunity]: neu_contractstatus
+  [salesorder]: neu_salesgeneralordertype
+
+Pola tylko w JS (brak na formularzu; encja z nazwy pliku):
+  [account]: neu_sapcode, neu_purchasegroupid, neu_isinpartnerplus, neu_pharmacyprogramlicencenumber, neu_code, name, neu_area, neu_conf_pharmaceuticaltypeid, neu_client, neu_pharmacymarket, neu_contractstate, createdon, neu_payerid, neu_pharmacyprogram, neu_isinpartner, neu_isinipra
+  [account_bok]: neu_conf_pharmaceuticaltypeid, neu_client, neu_pharmacymarket, neu_area, neu_sapcode, neu_code, neu_payerid
+  [account_medicalarea]: neu_client, neu_payerid, neu_commonclientformedicalandpatientarea
+  [angular]: open, innerhtml, href, checked, selected, class, data-ng-csp, disabled, ng-csp, ng-cloak, readonly, type, value
+  [appointment]: modifiedon, neu_conf_appointmenttypeid, neu_notification, neu_customermoodid, regardingobjectid
+  [bootstrap]: href, data-interval, x-placement, title, data-content, data-slide-to, data-original-title, data-parent, data-target, role, aria-pressed
+  [bootstrap.bundle]: href, data-interval, x-placement, title, data-content, data-slide-to, data-original-title, data-parent, data-target, role, aria-pressed
+  [button]: aria-pressed
+  [campaignactivity]: neu_involvement_description, neu_involved
+  [carousel]: data-interval, data-slide-to
+  [classes]: class
+  [collapse]: data-parent
+  [contact]: neu_selectedmaintelephone, emailaddress1, mobilephone, neu_medicalspecialization, neu_rodoconsentdate, home2, neu_emailrodoconsent, neu_withdrawalrodoconsent, neu_job, neu_visitrodoconsent, neu_isrodoconsent, neu_phonerodoconsent, telephone2, business2
+  [contact_cc]: business2, lastname, telephone2, neu_selectedmaintelephone, neu_contacttype, mobilephone, firstname, home2, emailaddress1
+  [contact_quickform]: business2, lastname, telephone2, neu_selectedmaintelephone, mobilephone, home2, emailaddress1
+  [ContractOpFormHelper]: neu_contractstate, neu_purchasegroupid
+  [CreateOpportunityPanel]: neu_opportunityid, neu_searchappisvalid
+  [CrmLookupDialog]: src
+  [DownloadActivityTemplate]: neu_accountid
+  [dw_documentswizard]: href, value, type, id, xml:lang, disabled, class, data-bind, lang, params, classname
+  [html]: data-group
+  [incident]: neu_origincontact, ownerid, neu_internaldescription, neu_sapcodeverified, neu_stageslakpiid, neu_clientid, statecode, customerid, subjectid, caseorigincode, neu_payerid, modifiedon
+  [IncidentTaskButtons]: neu_sdrequesturl, neu_sdresolutionurl
+  [jquery]: value, type, id, xml:lang, class, lang, nonce
+  [jquery-3.3.1]: href, value, type, xml:lang, disabled, id, lang, class, classname
+  [jquery-3.3.1.slim]: href, value, type, xml:lang, disabled, id, lang, class, classname
+  [jquery.slim]: value, type, id, xml:lang, class, lang, nonce
+  [knockout-3.4.1]: params, data-bind
+  [knockout-3.4.1.debug]: params
+  [list]: neu_sapcode
+  [main]: kendo-no-bullet, aria-label, aria-hidden, aria-rowindex, neu_mood, style, href, data-kendo-grid-item-index, src, data-index, data-kendo-chart, kendo-split-index, data-timelist-item-index, data-timelist-index, group-index, tabindex, role, data-date-index, index, createdon, modifiedon, aria-colindex, colspan, data-cell-index
+  [manipulation]: nonce, type
+  [neu_account_neu_dedicatedpricelist]: neu_extend_pricelist
+  [neu_activitypanelviewmodel]: params, stageid, customerid, data-bind
+  [neu_activitytemplate]: neu_isforselectediok, createdon
+  [neu_addressform]: statecode
+  [neu_affiliateprogramsandvariants]: neu_assetid, neu_name, neu_accountid, neu_variantexitdate
+  [neu_application]: neu_opportunityid, neu_ispartialoffer, neu_name, neu_error, neu_accountid, statecode, neu_firstdeliveryamount, neu_delivery_afternoon, neu_firstdeliveryplanneddate, neu_termsofbusinesschanged, neu_conf_flowmodelid, neu_setsalesoffiefromzipcode, ownerid, neu_applicationdata, neu_searchappisvalid, statuscode, neu_termsofbusinessimplementationdate, neu_commodityreturn, neu_issplitprocessingfinished, neu_invoicefileformat, neu_delivery_morning, neu_author, neu_isapprovallevelprocessingfinished, neu_offerisvalid, neu_clientid, modifiedon, neu_sentapplicationdata, neu_retailpricebase, neu_delivery_customerrelationshipimpact_other, neu_negotiationassetschanged, neu_applicationcategory, neu_accountarea, neu_flowid, neu_isjoinfranchise, neu_conf_salesrepresentationid, neu_iomsetup, neu_parentapplicationid, neu_isneworexistingchain, neu_issendprocessingfinished, neu_delivery_customerrelationshipimpact, neu_delivery_other
+  [neu_applicationautonumbering]: neu_applicationcategory, neu_relatedentityname
+  [neu_businessrelation]: neu_enddate, neu_startdate, neu_accountid
+  [neu_campaign]: neu_parent_campaign
+  [neu_campaign_nonpharmacyarea]: neu_zoz, neu_campaignstartdate, neu_campaigncompletion, neu_campaigncategory, neu_ischildcampaign, neu_cancelreason, neu_oltaskgeneratingstatus, neu_campaignenddate, neu_campaigntarget, neu_finishtaskdeadline, neu_clientbenefit, neu_closurereason, neu_parentcampaignid, statecode, neu_createfor, neu_campaigntype, neu_finishrequiredpercentage, statuscode, neu_strategictarget, neu_hospital, neu_taskdescription
+  [neu_campaignfilterbuttons]: neu_createfor, neu_lost, neu_terminated, neu_activeendangered, neu_activetorecover, neu_ownfacility, neu_active, neu_publicprocurementlawbool, neu_oltaskgeneratingstatus
+  [neu_campaigntask]: statecode, neu_campaignid
+  [neu_campaigntaskhistory]: neu_campaigntaskaction, neu_nextcontactdate
+  [neu_campaigntaskhistory_quickform]: neu_campaigntaskaction, neu_nextcontactdate
+  [neu_cc_accountlastincidentsgrid]: name, description, neu_name, subject, neu_accountid, neu_customersapcode, regardingobjectid
+  [neu_cc_contactarea_grid_controller]: name, createdon, customerid, neu_conf_salesofficeid, neu_clientid, regardingobjectid, neu_payerid, kbarticleid
+  [neu_cc_email]: regardingobjectid, neu_taskid
+  [neu_cc_incident]: kbarticleid, subjectid, neu_internaldescription
+  [neu_cc_incidentribbon]: statecode
+  [neu_cc_notes]: neu_name
+  [neu_cc_phonecall]: to
+  [neu_cc_phonecallactions]: regardingobjectid
+  [neu_cc_sdpermission]: neu_configuration, neu_businessunitid, neu_domainname, neu_systemuserid, neu_userstate, neu_disabledreason
+  [neu_cc_subjectsearch]: caseorigincode, neu_categorydictionaryvalue, statecode, subjectid
+  [neu_cc_task]: createdby
+  [neu_changeareaoperation]: neu_clientsapcode, neu_designatepf, neu_clientline2, neu_error, neu_destinationsystemuserid, neu_clientmarket, neu_clientpostalcode, neu_destinationmarket, neu_rulekslz, neu_destinationsalesofficeid, neu_destinationarea, neu_positionid, neu_clientline3, neu_clientid, neu_clientarea, neu_clientcity, neu_clientline1, neu_clientsalesofficeid, neu_statuscode, neu_designatedkwa, neu_designatesystemuser
+  [neu_changeareaoperationaccount]: neu_changeareaoperationid
+  [neu_client]: neu_sapcode, neu_conf_countryid, neu_address_line2, neu_crmcode, neu_ispharmacycommonnameforpatients, neu_centralaccountid, neu_address_line1, neu_isonlinepharmacy, neu_name, neu_address_county, neu_address_city, neu_isjointmarketing, createdon, neu_pharmacycommonnameforpatients, neu_address_postalcode, neu_address_line3
+  [neu_clientconnection]: neu_client2id, neu_client1id
+  [neu_clientspecialdeployment]: neu_cooperationtype, statecode, neu_specialdeploymenttype, neu_origin
+  [neu_clientSpecialDeploymentProgramEdit]: neu_specialdeployment, neu_specialdeploymenttype, neu_account, neu_type, ownerid
+  [neu_communication_application]: neu_other, neu_numerics, neu_implementinglegalrequirements, neu_customermessageproposal, neu_istemplate, neu_acquisitionprogramservice, neu_education, neu_sale, neu_customerbenefits, neu_datefrom, statuscode, neu_externalrevenue, neu_description, neu_dateto, createdon
+  [neu_communication_channel]: neu_is_retention_reducing, neu_is_potentialscoring_high, neu_is_retention_discontinuation, neu_is_program_partner, neu_area_network_sales_points, neu_outside_programs, neu_area_clinical_trials, neu_is_program_synoptisplus, neu_is_retention_positive_fluctuation, neu_messagetocustomer, neu_area_wholesalers, neu_is_retention_strengthening, neu_is_program_ipra, neu_is_program_rpm, neu_is_potentialscoring_low, neu_communication_applicationid, neu_communication_channel_ownersid, neu_recipient_group, neu_is_retention_maintaining, neu_is_retention_maximizing_cooperation, neu_area_independent_sales_points, neu_realizationconfirmation, oid, neu_salesofficeid, neu_is_retention_extinguishing, neu_area_network_pharmacies, neu_area_medical_stores, neu_is_program_partnerplus, neu_is_retention_expanding, neu_pharmacymarket, neu_area_independent_pharmacies, createdon, neu_customermessageproposaltype, neu_confirmationstatus, neu_is_potentialscoring_medium, neu_area_open_health_care, neu_area_closed_health_care, neu_all_programs, neu_is_retention_negative_fluctuation
+  [neu_communication_channel_owners]: neu_isactioncoordination, neu_communication_channel_typeid
+  [neu_communicationChannelApplicationCommentsGridButtonsHandler]: neu_communication_applicationid, neu_name, neu_communication_channel_ownersid
+  [neu_competitor_quickform]: neu_sapcode, neu_competitoraccountid, neu_name
+  [neu_conf_attribute]: neu_attributetypeid, neu_attributecategoryid
+  [neu_conf_contractgenerator]: neu_name, neu_flag_periodofreturn, neu_accountid, neu_utilizationpaymentpercentage, neu_flag_isanypartnerposition, neu_flag_iscommonalert, neu_loancontractid, neu_flag_correctionivoicesettlementtype, neu_flag_turnoverfrompharmbrand, neu_paymenttype, neu_aptelinescope, neu_contractype, neu_flag_isanyutilization, neu_medicineandcorrectioninvoiceformat, neu_payerid, neu_flag_iscontractedfineforsalescontract, neu_flag_isanyinterestcancellation, neu_isneuca, neu_flag_discountcorrectiontype, neu_flag_isdeclaredinterest, neu_flag_isanyzwhrebatespharmbrand, neu_opportunityid, neu_efusformat, neu_flag_contractdeclaredmonthlyturnover, neu_conf_salesrepresentationid, neu_flag_isanypartnerplusposition, neu_paybacktype, neu_invoicescope, neu_flag_turnoversettlement, neu_flag_isanyloancontracts, neu_ismonthettlementrotation, neu_contractid
+  [neu_conf_contractrelations]: neu_relatedcontractid, neu_contractid
+  [neu_conf_offerconfiguration]: neu_ispayer, neu_isclient, neu_ispharmacy
+  [neu_conf_operationmanagecontactconnection]: neu_relatedrecordtype, neu_franchiseid, neu_isnewcontact, neu_connectionid, neu_contactlastname, neu_contacttelephone1, neu_contacttelephone2, neu_conf_connectionroleid, neu_neu_contacttelephone4, neu_selectedmainphone, neu_accountid, neu_contactid, neu_contactemailaddress1, neu_medicalfacilityid, neu_contactcustomertypecode, neu_contacttype, neu_neu_contacttelephone3, neu_conf_warehouseid
+  [neu_conf_rolepermission]: neu_appliedconnectionroleid
+  [neu_conf_survey]: neu_expected_result_on_parent, neu_ismandatory, neu_parentconfsurveyid, neu_regardsto, neu_reccurencytype, neu_accountslistid, neu_contactslistid, neu_place, neu_userslistid
+  [neu_contract]: neu_crm2015id, modifiedon, neu_isutilization, createdon, neu_ispharmacypayment, neu_clientid, neu_paymenttype, neu_iscontractedfine, neu_payerid, neu_contracttype, neu_name
+  [neu_contract_quickform]: neu_utilizationpaymentpercentage, neu_applicationid, neu_isutilization, neu_action, neu_paymenttype, neu_annexed_neu_contractid
+  [neu_contractaccount_quickform]: neu_contractid
+  [neu_contractop_nonpharmacyarea]: neu_contracttype
+  [neu_contractop_przetargiszpitalne]: neu_opportunityid, neu_conf_salesofficeid, neu_clientid, neu_purchasegroupid
+  [neu_customermood]: neu_phonecallid, neu_taskid, neu_clientid, neu_incidentid, neu_accountid, neu_appointmentid
+  [neu_customermood_subgrid]: from, to
+  [neu_deliverypactivitydefined]: neu_establishmentdateyear, neu_establishmentdatemonth
+  [neu_feedback]: neu_source, neu_isinbir
+  [neu_importtasks]: neu_status
+  [neu_incidenttask]: neu_contactid, neu_incidentstage, neu_flowtaskid, statuscode, to, neu_taskincidentdescritpion, neu_incidentid, neu_customersapcode, neu_customerid, subject, neu_conf_incidenttasktypeid
+  [neu_incidenttask_quickform]: subject, neu_pfarmacyofferid, neu_incidentstage, neu_producer, description, neu_incidentid, neu_contactid, neu_customerid, neu_customersapcode, neu_conf_incidenttasktypeid, neu_conf_warehouseid, neu_taskincidentdescritpion
+  [neu_indicator]: neu_typeofindicatorid
+  [neu_jquery]: href, classid, type, id, xml:lang, disabled, class, lang, value, style, classname
+  [neu_jqueryui]: data-month, data-year, data-handler, data-event
+  [neu_knockout]: params, data-bind
+  [neu_licence]: neu_payerid, neu_code, neu_sourcelicenceid, neu_nip, neu_address_line1, neu_fullname, neu_address_countryid, neu_gifcode, neu_name, neu_address_line2, neu_permissionnumber, neu_address_county, neu_address_city, neu_accountid, neu_licencestatus, neu_customerid, neu_datefrom, neu_sapcode, neu_dateto, neu_address_province, neu_address_postalcode, neu_address_line3, neu_regon, neu_address_community
+  [neu_medicalfacility]: neu_address_province, statecode, neu_address_postalcode
+  [neu_medicalfacility_account]: neu_medicalfacilityid, neu_medicalfacility_distributionid, neu_distributionid, neu_servicetypeid, statecode
+  [neu_medicalfacility_account_checkbox]: neu_accountid
+  [neu_medicalfacility_distribution]: neu_distributionid, statecode, neu_servicetypeid
+  [neu_newfeedback]: neu_authorid, neu_regardingid, neu_regardingaccount, neu_regardingclient, ownerid
+  [neu_noncampaigntask]: statecode
+  [neu_offerasset_quickform]: neu_offeraccountgroupid, neu_conf_offerconfigurationgroupid, neu_isallpayers, neu_payerid, neu_iscopyfromanotheraccount, neu_opportunityid, neu_iscrosssalesrep, neu_clientid, neu_accountid, neu_assettype, neu_conf_offerconfigurationid, neu_applicationid, neu_isgroupconfiguration, neu_sourceaccountid
+  [neu_oltask]: neu_accountid, neu_type, neu_leadid
+  [neu_operation_newconnection_quickform]: neu_enddate, defaultviewid, neu_conf_connectionroleid
+  [neu_opportunity]: neu_clientsapcode, neu_individualactionimplementationdate, neu_offerisvalid, neu_acquiredfinancialdocuments, neu_negotiationassetschanged, name, src, neu_currentvaluationid, neu_reasonforlackoffinancialdocuments, ownerid, neu_clientid, neu_error, neu_termsofbusinessimplementationdate, neu_isofferassetsimportfinished, statuscode, neu_conf_salesrepresentation, neu_ispharmacyinterestedinrebranding, neu_dateofferstart, neu_offerstatustno, neu_conf_opportunitytypeid
+  [neu_opportunity_przetarg]: neu_conf_opportunitytypeid, neu_iscombiningorders, neu_isformchangeconsent, neu_tenderpaymentperiod, neu_purchasegroupid, neu_isclinicaltests, name, neu_isgeneratequotevalidation, neu_proceduretype, neu_isonetimedelivery, neu_stateprefferproducer, neu_durationinmonthschange, neu_openingdate, neu_tendervalidityterm, neu_caltulationtype, neu_packagingchangemethodvalue_x, neu_durationinmonths, neu_sapcode, neu_calcflag, neu_tenderreferential, neu_packagingchangemethod, neu_cash, neu_releasedate, neu_salesoffice, neu_valuecontrol, neu_iscopyprefferedproducer, neu_pzp, neu_overheadflag, neu_isoverheadvalidation, neu_isequalizepriceassize, neu_salesdepartment, neu_isequalizepricewholesale, neu_annoucementdate, neu_validitydateto, neu_isrecalcvalidation, neu_state, neu_isgeneratezpzkproducer, neu_packagingcalculatemethod, neu_daysofvalidquote, neu_issimplified, neu_isdrugprogram, neu_iscollectiveinvoice, neu_statepreflag, neu_validitydatefrom, neu_ischeckprice
+  [neu_opportunitytenderusercheck]: neu_tenderid
+  [neu_packagemissing]: neu_flowtaskid, neu_requiredinformation, neu_centralwarehousecode, neu_issendingtoflow, neu_localwarehousecode, neu_localwarehouse, neu_queuecontactid, neu_accountid, neu_centralwarehouse, neu_locationtype, neu_solutionlocation, statuscode, neu_sapnumber
+  [neu_payer]: neu_name, neu_contractstate, neu_purchasegroupid
+  [neu_pharmacyattribute]: neu_conf_pharmacyattributecategoryid, neu_type
+  [neu_pharmacyprograms]: neu_letterofintentstatus, neu_contractstatus
+  [neu_phonecontactsearchopen]: neu_contactid, neu_iscontactfilter
+  [neu_processtask]: statuscode, createdby, neu_buttonconfig, neu_businessstatus, ownerid
+  [neu_promotion]: neu_isforselectedaccounts
+  [neu_receiversgroup]: neu_lastmodificationofgroup, neu_name, neu_calculatedautomatically, neu_iscalculatinggroup
+  [neu_replacement]: neu_appliestoaccountconnections, neu_from, neu_processingtime, neu_to, neu_includehours
+  [neu_responsiblePharmacists]: neu_specialdeploymentid, neu_responsiblepharmacists
+  [neu_sdpermission]: neu_configuration, neu_businessunitid, neu_domainname, neu_systemuserid, neu_userstate, neu_disabledreason, neu_istorealization
+  [neu_segmentationsummaryviewmodel]: params, data-bind
+  [neu_servicedeskresolution]: neu_sdresolution
+  [neu_specialdeployment]: neu_standtype, neu_dried, neu_customeracceptedhempmedicinepharmacyterms, neu_specialdeploymentdisinterestreasonid, neu_doescustomerwantexpositor, neu_customerplacedorder, neu_specialdeploymenttype, neu_lossreason, neu_cooperationtype, neu_deploymenttype, modifiedon, neu_termsrejectionreason, neu_extracts, neu_hascustomerpurchasedpackage, createdon, neu_newisinterested, statuscode, neu_isacquisitiontask
+  [neu_specialdeploymenttask]: neu_isdiplomarequired, neu_cooperationtype, neu_doescustomerwantexpositor, neu_customerplacedorder, neu_isleaserequired, neu_taskrejectionreason, neu_taskholdreason, neu_tasktype, neu_prefferedcontacthours, neu_pharmacyemail, neu_lossreason, neu_pharmacyphonenumber, statuscode, neu_termsrejectionreason, neu_newisinterested, neu_customeracceptedhempmedicinepharmacyterms, neu_dried, neu_ispossent, neu_specialdeploymentdisinterestreasonid, neu_isleasedelivered, neu_standtype, neu_posmaterials, neu_hascustomerpurchasedpackage, neu_iscbdstarterkit, neu_possentdate, neu_isstockshipmentsent, neu_guidesentdate, neu_stocksentdate, neu_nfzapplicationdate, neu_taskrealizationdate, neu_pointperson, neu_iscertificatedelivered, neu_pharmacybankaccountnumber, neu_isreimbursementcontractsigned, neu_specialdeploymenttype, neu_pointpersoncontactnumber, neu_refundstartdate, neu_isincontinenceprojectacceptedbycustomer, neu_iseducationalguide, neu_ispharmacyskuadded, neu_nfzservicecode, neu_extracts, neu_standsentdate
+  [neu_specialization]: neu_iscontracted, statecode, neu_medicalfacility_distributionid, neu_medicalfacility_accountid
+  [neu_substantive_verification]: neu_name, neu_areaid
+  [neu_summaryCountOfAccountOfClient]: neu_synoptispluscount, neu_pharmacycount, neu_area, neu_franchisecount, neu_client, neu_pharmacymarket, neu_rpmcount, neu_partnerpluscount, neu_clientid, neu_deliverypointcount, neu_partnercount, neu_ipracount, neu_partnerboxcount
+  [neu_tenderproduct_calc_notification]: neu_calcflag, neu_tenderstructureid
+  [neu_tenderproduct_runMapper]: neu_tenderbundleid, neu_tenderstructureid
+  [neu_tenderproducts]: neu_tenderstructureid
+  [neu_tenderstructure_calc_notification]: neu_statecode
+  [neu_uiutils]: transactioncurrencyid
+  [neu_users_list]: neu_type
+  [NeuApplicationHelper]: neu_opportunityid, neu_applicationcategory, neu_ispartialoffer
+  [OpportunityContractButtonsHandler]: neu_opportunityid, neu_applicationcategory, neu_ispartialoffer
+  [phonecall]: neu_selectedmaintelephone, neu_notification, neu_contactid, neu_customersapcode, subject, to, neu_customermoodid, directioncode, neu_accountid, regardingobjectid, from, neu_iscontactfilter, statuscode, neu_taskid, phonenumber
+  [PhoneCallButtons]: neu_connectionid, statuscode, neu_confclosereasonid, directioncode, neu_errormessage
+  [popover]: data-content
+  [quote]: neu_statecode
+  [selector]: lang, id, class, type, xml:lang
+  [sorter]: data-type, data-nosort, data-col, data-value
+  [SurveyBuilder]: neu_surveybody
+  [SurveyResult]: neu_conf_surveyid, neu_result
+  [tab]: role
+  [task]: neu_notification, prioritycode, neu_createdfromentityname, neu_source, neu_customermoodid, neu_channel, createdby, regardingobjectid, ownerid
+  [tooltip]: title, data-original-title, x-placement
+  [util]: href, data-target
+  [val]: value

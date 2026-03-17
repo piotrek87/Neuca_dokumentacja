@@ -1,0 +1,33 @@
+var Neuca;
+(function (Neuca) {
+    var Crm;
+    (function (Crm) {
+        var Magellan;
+        (function (Magellan) {
+            var WebResource;
+            (function (WebResource) {
+                var Entities;
+                (function (Entities) {
+                    var EmailLogic = /** @class */ (function () {
+                        function EmailLogic(Page) {
+                            var _this = this;
+                            this.Page = Page;
+                            this.Page.getAttribute("createdon").addOnChange(function () { return _this.refreshAttachments(); });
+                        }
+                        EmailLogic.OnLoad = function () {
+                            new this(Xrm.Page);
+                        };
+                        EmailLogic.prototype.refreshAttachments = function () {
+                            var src = this.Page.getControl("WebResource_UploadDropZone").getSrc();
+                            this.Page.getControl("WebResource_UploadDropZone").setSrc(null);
+                            this.Page.getControl("WebResource_UploadDropZone").setSrc(src);
+                        };
+                        return EmailLogic;
+                    }());
+                    Entities.EmailLogic = EmailLogic;
+                })(Entities = WebResource.Entities || (WebResource.Entities = {}));
+            })(WebResource = Magellan.WebResource || (Magellan.WebResource = {}));
+        })(Magellan = Crm.Magellan || (Crm.Magellan = {}));
+    })(Crm = Neuca.Crm || (Neuca.Crm = {}));
+})(Neuca || (Neuca = {}));
+//# sourceMappingURL=email.js.map

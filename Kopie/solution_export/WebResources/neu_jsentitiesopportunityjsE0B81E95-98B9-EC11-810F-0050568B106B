@@ -1,0 +1,1128 @@
+var Neuca;
+(function (Neuca) {
+    var Crm;
+    (function (Crm) {
+        var Magellan;
+        (function (Magellan) {
+            var WebResource;
+            (function (WebResource) {
+                var Entities;
+                (function (Entities) {
+                    var NeuOpportunityPrzetargLogic = /** @class */ (function () {
+                        function NeuOpportunityPrzetargLogic(Page) {
+                            this.Page = Page;
+                            this.isEqualizeControl = function (parent) {
+                                var neu_isequalizepriceassize = parent.Xrm.Page.getAttribute("neu_isequalizepriceassize").getValue();
+                                var neu_isequalizepricewholesale = parent.Xrm.Page.getAttribute("neu_isequalizepricewholesale").getValue();
+                                if (neu_isequalizepriceassize && neu_isequalizepricewholesale) {
+                                    parent.Xrm.Page.getAttribute("neu_isequalizepriceassize").setValue(false);
+                                    parent.Xrm.Page.getAttribute("neu_isequalizepricewholesale").setValue(false);
+                                    parent.Xrm.Page.ui.setFormNotification("Ceny mogą być wyrównane tylko do jednej ceny.", "INFO", "2");
+                                }
+                                else {
+                                    parent.Xrm.Page.ui.clearFormNotification("2");
+                                }
+                            };
+                            this.adminVisibility = function (parent) {
+                                if (globalThis.getUserAccessLevel() != 3) {
+                                    parent.Xrm.Page.ui.controls.get("WebResource_SetPreviousStatus").setVisible(false);
+                                    return false;
+                                }
+                            };
+                            this.neu_validitydateValidation = function (parent) {
+                                var from = parent.Xrm.Page.getAttribute("neu_validitydatefrom").getValue();
+                                var to = parent.Xrm.Page.getAttribute("neu_validitydateto").getValue();
+                                var openingdate = parent.Xrm.Page.getAttribute("neu_openingdate").getValue();
+                                var annoucementdate = parent.Xrm.Page.getAttribute("neu_annoucementdate").getValue();
+                                if (to < from && to > 0) {
+                                    alert("'Data obowiązywania przetargu DO' nie może być wcześniejsza niż 'Data obowiązywania przetargu OD'");
+                                }
+                                if (from < openingdate && from > 0 && openingdate > 0) {
+                                    alert("'Data otwarcia' nie może być póżniejsza niż 'Data obowiązywania OD");
+                                }
+                                ;
+                                if (from < annoucementdate && from > 0 && annoucementdate > 0) {
+                                    alert("'Data ogłoszenia' nie może być póżniejsza niż 'Data obowiązywania OD");
+                                }
+                                ;
+                            };
+                            this.setFieldsRequirements = function (parent) {
+                                var packagingchangemethod = parent.Xrm.Page.getAttribute("neu_packagingchangemethod").getValue();
+                                var packagingcalculatemethod = parent.Xrm.Page.getAttribute("neu_packagingcalculatemethod");
+                                if (packagingchangemethod != null && packagingchangemethod != 279660007) {
+                                    packagingcalculatemethod.setRequiredLevel("required");
+                                }
+                                else {
+                                    packagingcalculatemethod.setRequiredLevel("none");
+                                }
+                            };
+                            this.neu_openingdateValidation = function (parent) {
+                                var openingdate = parent.Xrm.Page.getAttribute("neu_openingdate").getValue();
+                                var releasedate = parent.Xrm.Page.getAttribute("neu_releasedate").getValue();
+                                if (openingdate < releasedate && openingdate > 0 && releasedate > 0) {
+                                    alert("Data otwarcia nie może byś starsza niż data złożenia");
+                                }
+                            };
+                            this.HideOrShowSectionFAILURECAUSES();
+                            this.HideOrShowSectionGRID_MATRIXFORM();
+                            this.HideOrShowFieldneu_onetimedeliverydate();
+                            this.HideOrShowFieldneu_packagingchangemethodvalue_x();
+                            this.HideOrShowFieldneu_rejectioncausedescription();
+                            this.neu_stateChangeValidation(globalThis);
+                            this.setHideOrVisibleGenerateQuoteButton();
+                            this.DurationInMonths();
+                            this.tenderValidityTerm();
+                            this.setHideOrVisibleCopyPrefferedProducersButton();
+                            this.HideOrShowFieldneu_purchasegrouppayer();
+                            this.neu_sapcodeBlock();
+                            this.tender_iscash();
+                            this.neu_openingdateValidation(window.parent);
+                            this.neu_validitydateValidation(window.parent);
+                            this.setFieldsRequirements(window.parent);
+                            this.BackgroundProcessInProgress();
+                            this.adminVisibility(window.parent);
+                            this.generateZPZKProducerProgress();
+                            this.isEqualizeControl(window.parent);
+                            this.tenderStructurePluginStatusCheck(window.parent);
+                            this.Page.data.entity.addOnSave(this.tenderStructurePluginStatusCheck.bind(this));
+                        }
+                        NeuOpportunityPrzetargLogic.OnLoad = function () {
+                            new this(Xrm.Page);
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.tenderStructurePluginStatusCheck = function (parent) {
+                            var _a;
+                            var ctx = (_a = parent.Xrm) !== null && _a !== void 0 ? _a : Xrm;
+                            if (ctx.Page.ui.getFormType() == 1 /*formularz tworzenia rekordu*/) {
+                                return;
+                            }
+                            var opportunityId = ctx.Page.data.entity.getId().replace(/[{ }]/g, "").toUpperCase();
+                            var previousValue = ctx.Page.getAttribute("neu_state").getInitialValue();
+                            var req7 = new XMLHttpRequest();
+                            req7.open("GET", ctx.Page.context.getClientUrl() + "/api/data/v8.2/neu_tenderstructures?$select=neu_name&$filter=(neu_pluginlist eq 279660007) and (_neu_tenderid_value eq " + opportunityId + ")&$count=true", false);
+                            req7.setRequestHeader("OData-MaxVersion", "4.0");
+                            req7.setRequestHeader("OData-Version", "4.0");
+                            req7.setRequestHeader("Accept", "application/json");
+                            req7.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                            req7.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+                            req7.onreadystatechange = function () {
+                                if (this.readyState === 4) {
+                                    req7.onreadystatechange = null;
+                                    if (this.status === 200) {
+                                        var result = JSON.parse(this.response);
+                                        var recordCount = result["@odata.count"];
+                                        if (recordCount > 0) {
+                                            ctx.Page.ui.setFormNotification("Zmiana statusu przetargu jest zablokowana, ponieważ na strukturze przetargu " + result.value[0].neu_name + " trwa przenoszenie statusów. Odświerz stronę i spróbuj ponownie", "INFO", "1");
+                                            ctx.Page.getControl("neu_state").setDisabled(true);
+                                            ctx.Page.getAttribute("neu_state").setValue(previousValue);
+                                        }
+                                    }
+                                    else {
+                                        Xrm.Utility.alertDialog("System nie odpowiada. Odśwież stronę i spróbuj ponownie");
+                                    }
+                                }
+                            };
+                            req7.send();
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.templateSave = function (executionContext, getUserAccessLevel) {
+                            if (getUserAccessLevel() == 1) {
+                                alert("Funkcja niedostępna z powodu braku uprawnień.");
+                                return false;
+                            }
+                            executionContext.Xrm.Page.ui.setFormNotification("Rozpoczęto tworzenie nowego szablonu.", "INFO", "10");
+                            var isTemplate = false;
+                            var isChangeMatrix = false;
+                            var name = "Szablon do zmian postaci na przetargu " + executionContext.Xrm.Page.getAttribute("name").getValue() + " " + 1;
+                            var tenderId = executionContext.Xrm.Page.data.entity.getId().replace(/[{ }]/g, "");
+                            var req2 = new XMLHttpRequest();
+                            req2.open("GET", executionContext.Xrm.Page.context.getClientUrl() + "/api/data/v8.2/neu_formchangetemplates?$select=neu_name", false);
+                            req2.setRequestHeader("OData-MaxVersion", "4.0");
+                            req2.setRequestHeader("OData-Version", "4.0");
+                            req2.setRequestHeader("Accept", "application/json");
+                            req2.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                            req2.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+                            req2.onreadystatechange = function () {
+                                if (req2.readyState === 4) {
+                                    req2.onreadystatechange = null;
+                                    if (req2.status === 200) {
+                                        var results = JSON.parse(req2.response);
+                                        if (results.value.length > 0) {
+                                            for (var i = 0; i < results.value.length; i++) {
+                                                if (results.value[i].neu_name == name) {
+                                                    var lastChar = results.value[i].neu_name.charAt(results.value[i].neu_name.length - 1);
+                                                    name = name.substring(0, name.length - 1) + (parseInt(lastChar) + 1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            };
+                            req2.send();
+                            function getIdFromUri(uri) {
+                                var match = uri.match(/\(([^)]+)\)/);
+                                if (match && match.length > 1) {
+                                    return match[1];
+                                }
+                                return null;
+                            }
+                            var req3 = new XMLHttpRequest();
+                            req3.open("GET", executionContext.Xrm.Page.context.getClientUrl() + "/api/data/v8.2/neu_conf_tenderformchangematrixes?$select=_neu_opportunityid_value,_neu_formchancematrix_value&$filter=_neu_opportunityid_value eq " + tenderId + "", false);
+                            req3.setRequestHeader("OData-MaxVersion", "4.0");
+                            req3.setRequestHeader("OData-Version", "4.0");
+                            req3.setRequestHeader("Accept", "application/json");
+                            req3.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                            req3.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+                            req3.onreadystatechange = function () {
+                                if (this.readyState === 4) {
+                                    req3.onreadystatechange = null;
+                                    if (this.status === 200) {
+                                        var results = JSON.parse(this.response);
+                                        if (results.value.length > 0) {
+                                            var formChangesInOtherTemplate = [];
+                                            var formChanges = [];
+                                            for (var i = 0; i < results.value.length; i++) {
+                                                var formChangeId = results.value[i]._neu_formchancematrix_value;
+                                                var req5 = new XMLHttpRequest();
+                                                req5.open("GET", executionContext.Xrm.Page.context.getClientUrl() + "/api/data/v8.2/neu_conf_formchangematrixes(" + formChangeId + ")?$select=neu_name,_neu_neu_formchangetemplateidid_value", false);
+                                                req5.setRequestHeader("OData-MaxVersion", "4.0");
+                                                req5.setRequestHeader("OData-Version", "4.0");
+                                                req5.setRequestHeader("Accept", "application/json");
+                                                req5.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                                                req5.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+                                                req5.onreadystatechange = function () {
+                                                    if (req5.readyState === 4) {
+                                                        req5.onreadystatechange = null;
+                                                        if (req5.status === 200) {
+                                                            var results = JSON.parse(req5.response);
+                                                            if (results._neu_neu_formchangetemplateidid_value != null) {
+                                                                formChangesInOtherTemplate.push(results.neu_name);
+                                                            }
+                                                            else {
+                                                                formChanges.push(formChangeId);
+                                                            }
+                                                        }
+                                                    }
+                                                };
+                                                req5.send();
+                                            }
+                                            if (formChangesInOtherTemplate.length > 0) {
+                                                formChangesInOtherTemplate.length == 1 ?
+                                                    executionContext.Xrm.Page.ui.setFormNotification("Ta zamiana postaci istnieje już w innym szablonie: " + formChangesInOtherTemplate + ". Informacja o powiązanym szablonie znajduje się na formularzu Matrycy Zmian Postaci", "ERROR", "3") :
+                                                    executionContext.Xrm.Page.ui.setFormNotification("Te zamiany postaci istnieją już w innych szablonach: " + formChangesInOtherTemplate.join(", ") + ". Informacja o powiązanym szablonie znajduje się na formularzu Matrycy Zmian Postaci", "ERROR", "3");
+                                            }
+                                            if (formChanges.length > 0) {
+                                                var newTemplateId = newTemplateCreate(name);
+                                                for (var k = 0; k < formChanges.length; k++) {
+                                                    var dataToUpdate = {
+                                                        "neu_neu_formchangetemplateidId@odata.bind": "/neu_formchangetemplates(" + newTemplateId + ")"
+                                                    };
+                                                    var req4 = new XMLHttpRequest();
+                                                    req4.open("PATCH", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/neu_conf_formchangematrixes(" + formChanges[k] + ")", false);
+                                                    req4.setRequestHeader("OData-MaxVersion", "4.0");
+                                                    req4.setRequestHeader("OData-Version", "4.0");
+                                                    req4.setRequestHeader("Accept", "application/json");
+                                                    req4.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                                                    req4.onreadystatechange = function () {
+                                                        if (this.readyState === 4) {
+                                                            req4.onreadystatechange = null;
+                                                            if (this.status === 204) {
+                                                            }
+                                                            else {
+                                                            }
+                                                        }
+                                                    };
+                                                    req4.send(JSON.stringify(dataToUpdate));
+                                                    var record1Id = tenderId;
+                                                    var record2Id = newTemplateId;
+                                                    var relationship = {
+                                                        "@odata.id": Xrm.Page.context.getClientUrl() + "/api/data/v8.2/opportunities(" + record1Id + ")"
+                                                    };
+                                                    var req6 = new XMLHttpRequest();
+                                                    req6.open("POST", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/neu_formchangetemplates(" + record2Id + ")/neu_neu_formchangetemplate_opportunity/$ref", false);
+                                                    req6.setRequestHeader("Content-Type", "application/json");
+                                                    req6.setRequestHeader("Accept", "application/json");
+                                                    req6.setRequestHeader("OData-MaxVersion", "4.0");
+                                                    req6.setRequestHeader("OData-Version", "4.0");
+                                                    req6.onreadystatechange = function () {
+                                                        if (req6.readyState === 4) {
+                                                            if (req6.status === 204) {
+                                                                console.log("Powiązanie utworzone pomyślnie!");
+                                                            }
+                                                            else {
+                                                                console.error("Błąd podczas tworzenia powiązania. Status: " + req6.status);
+                                                                console.error("Szczegóły błędu: " + req6.responseText);
+                                                            }
+                                                        }
+                                                    };
+                                                    req6.send(JSON.stringify(relationship));
+                                                }
+                                            }
+                                            else {
+                                                executionContext.Xrm.Page.ui.setFormNotification("Brak zamian postaci do utworzenia nowego szablonu.", "ERROR", "2");
+                                            }
+                                        }
+                                        else {
+                                            executionContext.Xrm.Page.ui.setFormNotification("Brak zamian postaci do utworzenia nowego szablonu.", "ERROR", "2");
+                                        }
+                                    }
+                                }
+                            };
+                            req3.send();
+                            function newTemplateCreate(name) {
+                                //var tempId = executionContext.createGuid();
+                                var newTemplate = { "neu_name": name };
+                                var newTemplateId;
+                                var req = new XMLHttpRequest();
+                                req.open("POST", executionContext.Xrm.Page.context.getClientUrl() + "/api/data/v8.2/neu_formchangetemplates", false);
+                                req.setRequestHeader("OData-MaxVersion", "4.0");
+                                req.setRequestHeader("OData-Version", "4.0");
+                                req.setRequestHeader("Accept", "application/json");
+                                req.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+                                req.onreadystatechange = function () {
+                                    if (req.readyState === 4) {
+                                        req.onreadystatechange = null;
+                                        if (req.status === 204) {
+                                            var uri = req.getResponseHeader("OData-EntityId");
+                                            var locationHeader = req.getResponseHeader("Location");
+                                            if (locationHeader) {
+                                                newTemplateId = getIdFromUri(locationHeader).toUpperCase();
+                                            }
+                                            ;
+                                            executionContext.Xrm.Page.ui.setFormNotification("Utworzono nowy szablon: " + name + ".", "INFO", "1");
+                                        }
+                                        else {
+                                            executionContext.Xrm.Page.ui.setFormNotification("Wystąpił bąd przy tworzeniu szablonu." + name, "ERROR", "1");
+                                        }
+                                    }
+                                };
+                                req.send(JSON.stringify(newTemplate));
+                                return newTemplateId;
+                            }
+                            executionContext.Xrm.Page.ui.clearFormNotification("10");
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.getTenderreferential = function (executionContext) {
+                            var FormCtx = executionContext.getFormContext();
+                            var tenderId = FormCtx.getAttribute("neu_tenderreferential");
+                            var neu_conf_opportunitytypeid = FormCtx.getAttribute("neu_conf_opportunitytypeid");
+                            var flag = true;
+                            var neu_type;
+                            var neu_salesoffice = FormCtx.getAttribute("neu_salesoffice");
+                            var neu_salesdepartment = FormCtx.getAttribute("neu_salesdepartment");
+                            var neu_proceduretype = FormCtx.getAttribute("neu_proceduretype");
+                            var neu_pzp = FormCtx.getAttribute("neu_pzp");
+                            var neu_issimplified = FormCtx.getAttribute("neu_issimplified");
+                            var neu_valuecontrol = FormCtx.getAttribute("neu_valuecontrol");
+                            var neu_caltulationtype = FormCtx.getAttribute("neu_caltulationtype");
+                            var neu_isclinicaltests = FormCtx.getAttribute("neu_isclinicaltests");
+                            var neu_isdrugprogram = FormCtx.getAttribute("neu_isdrugprogram");
+                            var neu_iscollectiveinvoice = FormCtx.getAttribute("neu_iscollectiveinvoice");
+                            var neu_iscombiningorders = FormCtx.getAttribute("neu_iscombiningorders");
+                            var Refneu_conf_opportunitytypeid;
+                            var Refneu_salesoffice;
+                            var Refneu_salesdepartment;
+                            var Refneu_proceduretype;
+                            var Refneu_pzp;
+                            var Refneu_issimplified;
+                            var Refneu_valuecontrol;
+                            var Refneu_caltulationtype;
+                            var Refneu_isclinicaltests;
+                            var Refneu_isdrugprogram;
+                            var Refneu_iscollectiveinvoice;
+                            var Refneu_iscombiningorders;
+                            var Refneu_type;
+                            var Refneu_name;
+                            if (tenderId.getValue() != null) {
+                                tenderId = tenderId.getValue()[0].id.replace(/[{ }]/g, "");
+                                var req = new XMLHttpRequest();
+                                req.open("GET", FormCtx.context.getClientUrl() + "/api/data/v8.2/opportunities(" + tenderId.toUpperCase() + ")?$select=neu_salesoffice,neu_salesdepartment,neu_proceduretype,neu_pzp,neu_issimplified,neu_valuecontrol,neu_caltulationtype,neu_isclinicaltests,neu_isdrugprogram,neu_iscollectiveinvoice,neu_iscombiningorders&$expand=neu_conf_opportunitytypeid($select=neu_type,neu_name)", false);
+                                req.setRequestHeader("OData-MaxVersion", "4.0");
+                                req.setRequestHeader("OData-Version", "4.0");
+                                req.setRequestHeader("Accept", "application/json");
+                                req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                                req.onreadystatechange = function () {
+                                    if (this.readyState === 4) {
+                                        req.onreadystatechange = null;
+                                        if (this.status === 200) {
+                                            var result = JSON.parse(this.response);
+                                            Refneu_type = result["neu_conf_opportunitytypeid"]["neu_type"];
+                                            Refneu_name = result["neu_conf_opportunitytypeid"]["neu_name"];
+                                            //if (Refneu_type != 279660003) { flag = false; return false; }
+                                            Refneu_conf_opportunitytypeid = result["neu_conf_opportunitytypeid"];
+                                            Refneu_salesoffice = result["neu_salesoffice"];
+                                            Refneu_salesdepartment = result["neu_salesdepartment"];
+                                            Refneu_proceduretype = result["neu_proceduretype"];
+                                            Refneu_pzp = result["neu_pzp"];
+                                            Refneu_issimplified = result["neu_issimplified"];
+                                            Refneu_valuecontrol = result["neu_valuecontrol"];
+                                            Refneu_caltulationtype = result["neu_caltulationtype"];
+                                            Refneu_isclinicaltests = result["neu_isclinicaltests"];
+                                            Refneu_isdrugprogram = result["neu_isdrugprogram"];
+                                            Refneu_iscollectiveinvoice = result["neu_iscollectiveinvoice"];
+                                            Refneu_iscombiningorders = result["neu_iscombiningorders"];
+                                            var lookupValue = new Array();
+                                            lookupValue[0] = new Object();
+                                            lookupValue[0].id = Refneu_conf_opportunitytypeid.neu_conf_opportunitytypeid;
+                                            lookupValue[0].name = Refneu_name;
+                                            lookupValue[0].entityType = "neu_conf_opportunitytype";
+                                            neu_conf_opportunitytypeid.setValue(lookupValue);
+                                            neu_salesoffice.setValue(Refneu_salesoffice);
+                                            neu_salesdepartment.setValue(Refneu_salesdepartment);
+                                            neu_proceduretype.setValue(Refneu_proceduretype);
+                                            neu_pzp.setValue(Refneu_pzp);
+                                            neu_issimplified.setValue(Refneu_issimplified);
+                                            neu_valuecontrol.setValue(Refneu_valuecontrol);
+                                            neu_caltulationtype.setValue(Refneu_caltulationtype);
+                                            neu_isclinicaltests.setValue(Refneu_isclinicaltests);
+                                            neu_isdrugprogram.setValue(Refneu_isdrugprogram);
+                                            neu_iscollectiveinvoice.setValue(Refneu_iscollectiveinvoice);
+                                            neu_iscombiningorders.setValue(Refneu_iscombiningorders);
+                                        }
+                                    }
+                                };
+                                req.send();
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.setPreviousStatus = function (executionContext, getUserAccessLevel) {
+                            if (executionContext.Xrm.Page.ui.getFormType() == 1 /*formularz tworzenia rekordu*/) {
+                                return;
+                            }
+                            var opportunityId = executionContext.Xrm.Page.data.entity.getId().replace(/[{ }]/g, "").toUpperCase();
+                            var req8 = new XMLHttpRequest();
+                            req8.open("GET", executionContext.Xrm.Page.context.getClientUrl() + "/api/data/v8.2/neu_tenderstructures?$select=neu_name&$filter=(neu_pluginlist eq 279660007) and (_neu_tenderid_value eq " + opportunityId + ")&$count=true", false);
+                            req8.setRequestHeader("OData-MaxVersion", "4.0");
+                            req8.setRequestHeader("OData-Version", "4.0");
+                            req8.setRequestHeader("Accept", "application/json");
+                            req8.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                            req8.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+                            req8.onreadystatechange = function () {
+                                if (this.readyState === 4) {
+                                    req8.onreadystatechange = null;
+                                    if (this.status === 200) {
+                                        var result = JSON.parse(this.response);
+                                        var recordCount = result["@odata.count"];
+                                        if (recordCount > 0) {
+                                            executionContext.Xrm.Page.ui.setFormNotification("Zmiana statusu przetargu jest zablokowana, ponieważ na strukturze przetargu " + result.value[0].neu_name + " trwa przenoszenie statusów. Odświerz stronę i spróbuj ponownie", "INFO", "1");
+                                            executionContext.Xrm.Page.getControl("neu_state").setDisabled(true);
+                                        }
+                                        else {
+                                            if (getUserAccessLevel() == 1) {
+                                                alert("Funkcja niedostępna z powodu braku uprawnień.");
+                                                return false;
+                                            }
+                                            executionContext.Xrm.Page.getAttribute("neu_statepreflag").setValue(true);
+                                            executionContext.Xrm.Page.data.entity.save();
+                                        }
+                                    }
+                                    else {
+                                        Xrm.Utility.alertDialog("System nie odpowiada. Odśwież stronę i spróbuj ponownie");
+                                    }
+                                }
+                            };
+                            req8.send();
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.getPriceFromZPZKposition = function (executionContext, getUserAccessLevel) {
+                            if (getUserAccessLevel() == 1) {
+                                alert("Funkcja niedostępna z powodu braku uprawnień.");
+                                return false;
+                            }
+                            var neu_ischeckprice = executionContext.Xrm.Page.getAttribute("neu_ischeckprice").getValue();
+                            if (neu_ischeckprice == null) {
+                                executionContext.Xrm.Page.getAttribute("neu_ischeckprice").setValue(false);
+                                executionContext.Xrm.Page.data.entity.save();
+                            }
+                            executionContext.Xrm.Page.getAttribute("neu_ischeckprice").setValue(true);
+                            executionContext.Xrm.Page.data.entity.save();
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.tender_iscash = function () {
+                            var value = this.Page.getAttribute("neu_cash").getValue();
+                            if (value != null) {
+                                if (value == true) {
+                                    var neu_tenderpaymentperiod = this.Page.getAttribute("neu_tenderpaymentperiod").getValue();
+                                    if (neu_tenderpaymentperiod != null) {
+                                        if (neu_tenderpaymentperiod > 0) {
+                                            this.Page.getAttribute("neu_tenderpaymentperiod").setValue(0);
+                                            this.Page.data.save();
+                                        }
+                                    }
+                                    this.Page.getControl("neu_tenderpaymentperiod").setDisabled(true);
+                                }
+                                else {
+                                    this.Page.getControl("neu_tenderpaymentperiod").setDisabled(false);
+                                }
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.neu_sapcodeBlock = function () {
+                            var _this = this;
+                            var grupaZakupowa = this.Page.getAttribute("neu_purchasegroupid").getValue() == null ? false : true;
+                            var grid = this.Page.getControl("GRID_RECEIVERS");
+                            var sapField = this.Page.ui.controls.get("neu_sapcode");
+                            var state = this.Page.getAttribute("neu_state").getValue();
+                            if (state != null) {
+                                if (state == 279660011 /* neu_opportunity_neu_state.aktywowanywSAP */) {
+                                    sapField.setDisabled(true);
+                                }
+                                else {
+                                    if (grupaZakupowa) {
+                                        sapField.setDisabled(false);
+                                    }
+                                    else if (!grupaZakupowa) {
+                                        grid.addOnLoad(function (f) {
+                                            var qty = grid.getGrid().getTotalRecordCount();
+                                            if (qty == 1) {
+                                                sapField.setDisabled(false);
+                                            }
+                                            else if (qty > 1) {
+                                                sapField.setDisabled(true);
+                                                _this.Page.getAttribute("neu_sapcode").setValue(null);
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.tenderValidityTerm = function () {
+                            var releaseDate = new Date(this.Page.getAttribute("neu_openingdate").getValue());
+                            var daysOfValidQuote = this.Page.getAttribute("neu_daysofvalidquote").getValue();
+                            var tenderValidityTerm = new Date();
+                            tenderValidityTerm = new Date(releaseDate.getTime() + daysOfValidQuote * 24 * 60 * 60 * 1000);
+                            if (this.Page.getAttribute("neu_openingdate").getValue() == null) {
+                                this.Page.getAttribute("neu_tendervalidityterm").setValue(null);
+                            }
+                            else {
+                                this.Page.getAttribute("neu_tendervalidityterm").setValue(tenderValidityTerm);
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.HideOrShowFieldneu_purchasegrouppayer = function () {
+                            if (this.Page.getAttribute("neu_purchasegroupid").getValue() == null) {
+                                /*this=Xrm*/ this.Page.getControl("neu_purchasegrouppayer").setVisible(false);
+                            }
+                            else { /*formContext=Xrm.Page*/
+                                this.Page.getControl("neu_purchasegrouppayer").setVisible(true);
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.overheadFlagChange = function (executionContext, getUserAccessLevel) {
+                            if (getUserAccessLevel() == 1) {
+                                alert("Funkcja niedostępna z powodu braku uprawnień.");
+                                return false;
+                            }
+                            parent.Xrm.Page.ui.setFormNotification("Propagacja narzutu w trakcie wykonywania", "INFO", "101");
+                            var neu_isrecalcvalidation = executionContext.Xrm.Page.getAttribute("neu_isoverheadvalidation").getValue();
+                            if (neu_isrecalcvalidation == null) {
+                                executionContext.Xrm.Page.getAttribute("neu_isoverheadvalidation").setValue(false);
+                                executionContext.Xrm.Page.data.entity.save();
+                            }
+                            executionContext.Xrm.Page.getAttribute("neu_isoverheadvalidation").setValue(true);
+                            executionContext.Xrm.Page.data.entity.save();
+                        };
+                        ;
+                        NeuOpportunityPrzetargLogic.prototype.calculate = function (executionContext, getUserAccessLevel) {
+                            if (getUserAccessLevel() == 1) {
+                                alert("Funkcja niedostępna z powodu braku uprawnień.");
+                                return false;
+                            }
+                            executionContext.Xrm.Page.ui.setFormNotification("Rekalkulacja w trakcie wykonywania", "INFO", "102");
+                            var neu_isrecalcvalidation = executionContext.Xrm.Page.getAttribute("neu_isrecalcvalidation").getValue();
+                            if (neu_isrecalcvalidation == null) {
+                                executionContext.Xrm.Page.getAttribute("neu_isrecalcvalidation").setValue(false);
+                                executionContext.Xrm.Page.data.entity.save();
+                            }
+                            executionContext.Xrm.Page.getAttribute("neu_isrecalcvalidation").setValue(true);
+                            executionContext.Xrm.Page.data.entity.save();
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.generateZPZKProducer = function (executionContext, getUserAccessLevel) {
+                            if (getUserAccessLevel() == 1) {
+                                alert("Funkcja niedostępna z powodu braku uprawnień.");
+                                return false;
+                            }
+                            var neu_isgeneratezpzkproducer = executionContext.Xrm.Page.getAttribute("neu_isgeneratezpzkproducer").getValue();
+                            if (neu_isgeneratezpzkproducer == null) {
+                                executionContext.Xrm.Page.getAttribute("neu_isgeneratezpzkproducer").setValue(false);
+                                executionContext.Xrm.Page.data.entity.save();
+                                executionContext.Xrm.Page.ui.controls.get("WebResource_ButtonGenerateZPZKProducer").setVisible(true);
+                            }
+                            executionContext.Xrm.Page.getAttribute("neu_isgeneratezpzkproducer").setValue(true);
+                            executionContext.Xrm.Page.data.entity.save();
+                            executionContext.Xrm.Page.ui.setFormNotification("Generowanie ZPZK w trakcie wykonywania. Po wygenerowaniu rekordy pojawią się na liście poniżej.", "INFO", "105");
+                            executionContext.Xrm.Page.ui.controls.get("WebResource_ButtonGenerateZPZKProducer").setVisible(false);
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.generateZPZKProducerProgress = function () {
+                            var neu_isgeneratezpzkproducer = this.Page.getAttribute("neu_isgeneratezpzkproducer").getValue();
+                            if (neu_isgeneratezpzkproducer != null) {
+                                if (neu_isgeneratezpzkproducer == true) {
+                                    this.Page.ui.setFormNotification("Generowanie ZPZK w trakcie wykonywania. Po wygenerowaniu rekordy pojawią się na liście poniżej.", "INFO", "105");
+                                    this.Page.ui.controls.get("WebResource_ButtonGenerateZPZKProducer").setVisible(false);
+                                }
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.generateQuote = function (executionContext) {
+                            if (globalThis.getUserAccessLevel() == 1) {
+                                alert("Funkcja niedostępna z powodu braku uprawnień.");
+                                return false;
+                            }
+                            executionContext.Xrm.Page.getAttribute("neu_isgeneratequotevalidation").setValue(true);
+                            executionContext.Xrm.Page.data.save();
+                            executionContext.Xrm.Page.ui.setFormNotification("Generowanie oferty w trakcie. Po wygenerowaniu pojawi się ona na liście poniżej.", "INFO", "1");
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.copyPrefferdeProducers = function (executionContext, getUserAccessLevel) {
+                            if (getUserAccessLevel() == 1) {
+                                alert("Funkcja niedostępna z powodu braku uprawnień.");
+                                return false;
+                            }
+                            executionContext.Xrm.Page.getAttribute("neu_iscopyprefferedproducer").setValue(true);
+                            executionContext.Xrm.Page.data.save();
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.setPayer = function (executionContext) {
+                            if (typeof executionContext !== 'undefined') {
+                                // Get the Form Contex
+                                var formContext = executionContext.getFormContext();
+                                var group = formContext.data.entity.attributes.get("neu_purchasegroupid").setValue(null);
+                                var payerFromGroup = formContext.data.entity.attributes.get("neu_purchasegrouppayer").setValue(null);
+                                formContext.getControl("neu_purchasegrouppayer").setVisible(false);
+                                formContext.data.entity.save();
+                            }
+                            else {
+                                console.log("executionContext is undefined");
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.setGroup = function (executionContext) {
+                            if (typeof executionContext !== 'undefined') {
+                                // Get the Form Context
+                                var formContext = executionContext.getFormContext();
+                                var group = formContext.data.entity.attributes.get("neu_payerorganizerid").setValue(null);
+                                formContext.getControl("neu_purchasegrouppayer").setVisible(true);
+                                formContext.data.entity.save();
+                            }
+                            else {
+                                console.log("executionContext is undefined");
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.calculateReset = function (executionContext) {
+                            if (globalThis.getUserAccessLevel() == 1) {
+                                alert("Funkcja niedostępna z powodu braku uprawnień.");
+                                return false;
+                            }
+                            executionContext.Xrm.Page.getAttribute("neu_calcflag").setValue(false);
+                            executionContext.Xrm.Page.data.save();
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.BackgroundProcessInProgress = function () {
+                            var neu_overheadflag = this.Page.getAttribute("neu_overheadflag").getValue();
+                            var neu_calcflag = this.Page.getAttribute("neu_calcflag").getValue();
+                            var neu_stateprefferproducer = this.Page.getAttribute("neu_stateprefferproducer").getValue();
+                            if (neu_stateprefferproducer == null) {
+                                neu_stateprefferproducer = 279660000 /* neu_opportunity_neu_stateprefferproducer.Brakuwzględnieniapreferowanychproducentów */;
+                            }
+                            if (neu_overheadflag != null && neu_calcflag != null && neu_stateprefferproducer != null) {
+                                if (neu_overheadflag || neu_calcflag || neu_stateprefferproducer == 279660001 /* neu_opportunity_neu_stateprefferproducer.Uwzględnianiepreferowanychproducentówwtrakcie */
+                                    || neu_stateprefferproducer == 279660003 /* neu_opportunity_neu_stateprefferproducer.Przywracaniewynikówmapowaniawtrakcie */) {
+                                    var tenderId = parent.Xrm.Page.data.entity.getId();
+                                    tenderId = tenderId.replace(/[{ }]/g, "").toUpperCase();
+                                    var status;
+                                    var req = new XMLHttpRequest();
+                                    req.open("GET", parent.Xrm.Page.context.getClientUrl() + "/api/data/v8.2/asyncoperations?$select=statuscode&$filter=_regardingobjectid_value eq " + tenderId + "&$orderby=startedon desc", false);
+                                    req.setRequestHeader("OData-MaxVersion", "4.0");
+                                    req.setRequestHeader("OData-Version", "4.0");
+                                    req.setRequestHeader("Accept", "application/json");
+                                    req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                                    req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+                                    req.onreadystatechange = function () {
+                                        if (this.readyState === 4) {
+                                            req.onreadystatechange = null;
+                                            if (this.status === 200) {
+                                                var results = JSON.parse(this.response);
+                                                status = results.value[0]["statuscode@OData.Community.Display.V1.FormattedValue"];
+                                            }
+                                            else {
+                                                Xrm.Utility.alertDialog("System nie odpowiada. Odśwież stronę i spróbuj ponownie");
+                                            }
+                                        }
+                                    };
+                                    req.send();
+                                    if (status == "W toku") {
+                                        if (neu_calcflag) {
+                                            this.Page.ui.setFormNotification("Rekalkulacja w trakcie wykonywania", "INFO", "102");
+                                            this.Page.ui.controls.get("WebResource_ButtonOpportunityTenderGenerateQuote").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_OVERHEAD_PROPAGATION_BUTTON").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_CalcButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_CalcReset").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_MapPrefProducerButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_RestoreResultsMapperButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_SetPreviousStatus").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_neu_opportunityTenderGetListProducerPriceListPriceToZPZKPosition").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_ButtonGenerateZPZKProducer").setVisible(false);
+                                        }
+                                        if (neu_overheadflag) {
+                                            this.Page.ui.setFormNotification("Propagacja narzutu w trakcie wykonywania", "INFO", "101");
+                                            this.Page.ui.controls.get("WebResource_ButtonOpportunityTenderGenerateQuote").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_OVERHEAD_PROPAGATION_BUTTON").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_CalcButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_CalcReset").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_MapPrefProducerButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_RestoreResultsMapperButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_SetPreviousStatus").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_neu_opportunityTenderGetListProducerPriceListPriceToZPZKPosition").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_ButtonGenerateZPZKProducer").setVisible(false);
+                                        }
+                                        if (neu_stateprefferproducer == 279660001 /* neu_opportunity_neu_stateprefferproducer.Uwzględnianiepreferowanychproducentówwtrakcie */) {
+                                            this.Page.ui.setFormNotification("Uwzględnianie preferowanych producentów na pakiecie jest aktywne", "INFO", "102");
+                                            this.Page.ui.controls.get("WebResource_ButtonOpportunityTenderGenerateQuote").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_OVERHEAD_PROPAGATION_BUTTON").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_CalcButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_CalcReset").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_MapPrefProducerButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_RestoreResultsMapperButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_SetPreviousStatus").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_neu_opportunityTenderGetListProducerPriceListPriceToZPZKPosition").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_ButtonGenerateZPZKProducer").setVisible(false);
+                                        }
+                                        if (neu_stateprefferproducer == 279660003 /* neu_opportunity_neu_stateprefferproducer.Przywracaniewynikówmapowaniawtrakcie */) {
+                                            this.Page.ui.setFormNotification("Przywracanie wyników mapowania na pakiecie jest aktywne", "INFO", "102");
+                                            this.Page.ui.controls.get("WebResource_ButtonOpportunityTenderGenerateQuote").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_OVERHEAD_PROPAGATION_BUTTON").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_CalcButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_CalcReset").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_MapPrefProducerButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_RestoreResultsMapperButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_SetPreviousStatus").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_neu_opportunityTenderGetListProducerPriceListPriceToZPZKPosition").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_ButtonGenerateZPZKProducer").setVisible(false);
+                                        }
+                                    }
+                                    else if (status == "Anulowanie" || status == "Niepowodzenie" || status == "Anulowane") {
+                                        if (neu_calcflag) {
+                                            this.Page.ui.setFormNotification("Wystąpił błąd przy rekalkulacji, zadanie zostało przerwane", "ERROR", "2");
+                                            this.Page.ui.controls.get("WebResource_ButtonOpportunityTenderGenerateQuote").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_ButtonOpportunityTenderGenerateQuote").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_OVERHEAD_PROPAGATION_BUTTON").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_CalcButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_CalcReset").setVisible(true);
+                                            this.Page.ui.controls.get("WebResource_MapPrefProducerButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_RestoreResultsMapperButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_SetPreviousStatus").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_neu_opportunityTenderGetListProducerPriceListPriceToZPZKPosition").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_ButtonGenerateZPZKProducer").setVisible(false);
+                                        }
+                                        if (neu_overheadflag) {
+                                            this.Page.ui.setFormNotification("Wystąpił błąd przy propagacji narzutu, zadanie zostało przerwane", "ERROR", "2");
+                                            this.Page.ui.controls.get("WebResource_ButtonOpportunityTenderGenerateQuote").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_ButtonOpportunityTenderGenerateQuote").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_OVERHEAD_PROPAGATION_BUTTON").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_CalcButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_CalcReset").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_MapPrefProducerButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_RestoreResultsMapperButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_SetPreviousStatus").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_neu_opportunityTenderGetListProducerPriceListPriceToZPZKPosition").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_ButtonGenerateZPZKProducer").setVisible(false);
+                                        }
+                                        if (neu_stateprefferproducer == 279660001 /* neu_opportunity_neu_stateprefferproducer.Uwzględnianiepreferowanychproducentówwtrakcie */) {
+                                            this.Page.ui.setFormNotification("Zadanie uwzględniania preferowanych producentów na przetargu zostało zatrzymane, wycofaj zmiany i spróbuj ponownie.", "ERROR", "2");
+                                            this.Page.ui.controls.get("WebResource_ButtonOpportunityTenderGenerateQuote").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_OVERHEAD_PROPAGATION_BUTTON").setVisible(true);
+                                            this.Page.ui.controls.get("WebResource_CalcButton").setVisible(true);
+                                            this.Page.ui.controls.get("WebResource_CalcReset").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_MapPrefProducerButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_RestoreResultsMapperButton").setVisible(true);
+                                            this.Page.ui.controls.get("WebResource_SetPreviousStatus").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_neu_opportunityTenderGetListProducerPriceListPriceToZPZKPosition").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_ButtonGenerateZPZKProducer").setVisible(false);
+                                        }
+                                        if (neu_stateprefferproducer == 279660003 /* neu_opportunity_neu_stateprefferproducer.Przywracaniewynikówmapowaniawtrakcie */) {
+                                            parent.Xrm.Page.ui.setFormNotification("Zadanie przywracania wyników mapowania na przetargu zostało zatrzymane, wycofaj zmiany i spróbuj ponownie.", "ERROR", "2");
+                                            this.Page.ui.controls.get("WebResource_ButtonOpportunityTenderGenerateQuote").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_OVERHEAD_PROPAGATION_BUTTON").setVisible(true);
+                                            this.Page.ui.controls.get("WebResource_CalcButton").setVisible(true);
+                                            this.Page.ui.controls.get("WebResource_CalcReset").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_MapPrefProducerButton").setVisible(true);
+                                            this.Page.ui.controls.get("WebResource_RestoreResultsMapperButton").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_SetPreviousStatus").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_neu_opportunityTenderGetListProducerPriceListPriceToZPZKPosition").setVisible(false);
+                                            this.Page.ui.controls.get("WebResource_ButtonGenerateZPZKProducer").setVisible(false);
+                                        }
+                                    }
+                                    else {
+                                        this.Page.ui.controls.get("WebResource_ButtonOpportunityTenderGenerateQuote").setVisible(true);
+                                        this.Page.ui.controls.get("WebResource_OVERHEAD_PROPAGATION_BUTTON").setVisible(true);
+                                        this.Page.ui.controls.get("WebResource_CalcButton").setVisible(true);
+                                        this.Page.ui.controls.get("WebResource_CalcReset").setVisible(false);
+                                        this.Page.ui.controls.get("WebResource_MapPrefProducerButton").setVisible(true);
+                                        this.Page.ui.controls.get("WebResource_RestoreResultsMapperButton").setVisible(false);
+                                        this.Page.ui.controls.get("WebResource_SetPreviousStatus").setVisible(true);
+                                        this.Page.ui.controls.get("WebResource_neu_opportunityTenderGetListProducerPriceListPriceToZPZKPosition").setVisible(true);
+                                        this.Page.ui.controls.get("WebResource_ButtonGenerateZPZKProducer").setVisible(true);
+                                    }
+                                }
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.HideOrShowSectionFAILURECAUSES = function () {
+                            var value = this.Page.getAttribute("neu_state").getValue();
+                            if (value != null) {
+                                if (value == 279660013 /* neu_opportunity_neu_state.przegrany */) {
+                                    this.Page.ui.tabs.get("Summary").sections.get("SECTION_FAILURECAUSES").setVisible(true);
+                                }
+                                else {
+                                    this.Page.ui.tabs.get("Summary").sections.get("SECTION_FAILURECAUSES").setVisible(false);
+                                }
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.HideOrShowSectionGRID_MATRIXFORM = function () {
+                            var value = this.Page.getAttribute("neu_isformchangeconsent").getValue();
+                            if (value != null) {
+                                if (value == true) {
+                                    this.Page.ui.tabs.get("Summary").sections.get("SECTION_MATRIXFORM").setVisible(true);
+                                    this.Page.ui.tabs.get("Summary").sections.get("SECTION_FORMCHANGETEMPLATES").setVisible(true);
+                                }
+                                else {
+                                    this.Page.ui.tabs.get("Summary").sections.get("SECTION_MATRIXFORM").setVisible(false);
+                                    this.Page.ui.tabs.get("Summary").sections.get("SECTION_FORMCHANGETEMPLATES").setVisible(false);
+                                }
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.HideOrShowFieldneu_packagingchangemethodvalue_x = function () {
+                            var value = this.Page.getAttribute("neu_packagingchangemethod").getValue();
+                            if (value != null) {
+                                if (value == 279660005 /* neu_zmianasposobuopakowania.Zmianaxwartośćzopakowanierozczytaneowskazanywpolux */ || value == 279660006 /* neu_zmianasposobuopakowania.Zmianaxwartośćzopakowanierozczytaneowskazanywpolux_2 */ || value == 279660008 /* neu_zmianasposobuopakowania.Zmianaxwartośćzopakowanierozczytaneowskazanywpolux_3 */) {
+                                    this.Page.getControl("neu_packagingchangemethodvalue_x").setVisible(true);
+                                    this.Page.getAttribute("neu_packagingchangemethodvalue_x").setRequiredLevel("required");
+                                }
+                                else {
+                                    this.Page.getControl("neu_packagingchangemethodvalue_x").setVisible(false);
+                                    this.Page.getAttribute("neu_packagingchangemethodvalue_x").setRequiredLevel("none");
+                                }
+                            }
+                            else {
+                                this.Page.getControl("neu_packagingchangemethodvalue_x").setVisible(false);
+                                this.Page.getAttribute("neu_packagingchangemethodvalue_x").setRequiredLevel("none");
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.HideOrShowFieldneu_onetimedeliverydate = function () {
+                            var value = this.Page.getAttribute("neu_isonetimedelivery").getValue();
+                            if (value != null) {
+                                if (value == true) {
+                                    this.Page.getControl("neu_onetimedeliverydate").setVisible(true);
+                                }
+                                else {
+                                    this.Page.getControl("neu_onetimedeliverydate").setVisible(false);
+                                }
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.HideOrShowFieldneu_rejectioncausedescription = function () {
+                            var value = this.Page.getAttribute("neu_state").getValue();
+                            if (value != null) {
+                                if (value == 279660001 /* neu_opportunity_neu_state.nieprzystępujemy */) {
+                                    this.Page.getControl("neu_rejectioncausedescription").setVisible(true);
+                                    this.Page.getControl("neu_rejectioncause").setVisible(true);
+                                }
+                                else {
+                                    this.Page.getControl("neu_rejectioncausedescription").setVisible(false);
+                                    this.Page.getControl("neu_rejectioncause").setVisible(false);
+                                }
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.neu_stateChangeValidation = function (globalThis) {
+                            if (globalThis.getUserAccessLevel() === 3) {
+                                return false;
+                            }
+                            var pickList = this.Page.getControl("neu_state");
+                            var options = this.Page.getAttribute("neu_state").getOptions();
+                            var value = this.Page.getAttribute("neu_state").getValue();
+                            var nowy = { value: 279660000 /* neu_opportunity_neu_state.nowy */, text: "nowy" };
+                            var niePrzystepujemy = { value: 279660001 /* neu_opportunity_neu_state.nieprzystępujemy */, text: "nie przystępujemy" };
+                            var wAnalizie = { value: 279660002 /* neu_opportunity_neu_state.wanalizie */, text: "w analizie" };
+                            var wPrzygotowaniu = { value: 279660003 /* neu_opportunity_neu_state.wprzygotowaniu */, text: "w przygotowaniu" };
+                            var zlozony = { value: 279660004 /* neu_opportunity_neu_state.złożony */, text: "złożony" };
+                            var aktywowanyWarunkowoWSAP = { value: 279660005 /* neu_opportunity_neu_state.aktywowanywarunkowowSAP */, text: "aktywowany warunkowo w SAP" };
+                            var wygrany = { value: 279660006 /* neu_opportunity_neu_state.wygrany */, text: "wygrany" };
+                            var wygranyCzesciowo = { value: 279660007 /* neu_opportunity_neu_state.wygranyczęściowo */, text: "wygrany częściowo" };
+                            var wyslanyDoSAP = { value: 279660008 /* neu_opportunity_neu_state.wysłanydoSAP */, text: "wysłany do SAP" };
+                            var wyslanyCzesciowoDoSAP = { value: 279660009 /* neu_opportunity_neu_state.wysłanyczęściowodoSAP */, text: "wysłany częściowo do SAP" };
+                            var bladAktywacjiWSAP = { value: 279660010 /* neu_opportunity_neu_state.błądaktywacjiwSAP */, text: "błąd aktywacji w SAP" };
+                            var aktywowanyWSAP = { value: 279660011 /* neu_opportunity_neu_state.aktywowanywSAP */, text: "aktywowany w SAP" };
+                            var aktywowanyCzesciowoWSAP = { value: 279660012 /* neu_opportunity_neu_state.aktywowanyczęściowowSAP */, text: "Aktywowany częściowo w SAP" };
+                            var przegrany = { value: 279660013 /* neu_opportunity_neu_state.przegrany */, text: "przegrany" };
+                            var unieważniony = { value: 279660014 /* neu_opportunity_neu_state.unieważniony */, text: "unieważniony" };
+                            var odrzucony = { value: 279660015 /* neu_opportunity_neu_state.odrzucony */, text: "odrzucony" };
+                            function clearOptions() {
+                                for (var i = 0; i < options.length; i++) {
+                                    pickList.removeOption(options[i].value);
+                                }
+                            }
+                            switch (value) {
+                                case 279660000 /* neu_opportunity_neu_state.nowy */: //nowy
+                                    clearOptions();
+                                    pickList.addOption(nowy);
+                                    pickList.addOption(niePrzystepujemy);
+                                    break;
+                                case 279660001 /* neu_opportunity_neu_state.nieprzystępujemy */: //nie przystępujemy
+                                    clearOptions();
+                                    pickList.addOption(niePrzystepujemy);
+                                    break;
+                                case 279660002 /* neu_opportunity_neu_state.wanalizie */: //w analizie
+                                    clearOptions();
+                                    pickList.addOption(wAnalizie);
+                                    pickList.addOption(niePrzystepujemy);
+                                    break;
+                                case 279660003 /* neu_opportunity_neu_state.wprzygotowaniu */: //w przygotowaniu
+                                    clearOptions();
+                                    pickList.addOption(wPrzygotowaniu);
+                                    pickList.addOption(niePrzystepujemy);
+                                    break;
+                                case 279660004 /* neu_opportunity_neu_state.złożony */: //złożony
+                                    clearOptions();
+                                    pickList.addOption(zlozony);
+                                    pickList.addOption(aktywowanyWarunkowoWSAP);
+                                    pickList.addOption(wygrany);
+                                    pickList.addOption(wygranyCzesciowo);
+                                    pickList.addOption(przegrany);
+                                    pickList.addOption(unieważniony);
+                                    pickList.addOption(odrzucony);
+                                    break;
+                                case 279660005 /* neu_opportunity_neu_state.aktywowanywarunkowowSAP */: //aktywowany warunkowo w SAP
+                                    clearOptions();
+                                    pickList.addOption(aktywowanyWarunkowoWSAP);
+                                    break;
+                                case 279660006 /* neu_opportunity_neu_state.wygrany */: //wygrany
+                                    clearOptions();
+                                    pickList.addOption(wygrany);
+                                    pickList.addOption(wygranyCzesciowo);
+                                    break;
+                                case 279660007 /* neu_opportunity_neu_state.wygranyczęściowo */: //wygrany częściowo
+                                    clearOptions();
+                                    pickList.addOption(wygranyCzesciowo);
+                                    pickList.addOption(wygrany);
+                                    break;
+                                case 279660008 /* neu_opportunity_neu_state.wysłanydoSAP */: //wysłany do SAP
+                                    clearOptions();
+                                    pickList.addOption(wyslanyDoSAP);
+                                    pickList.addOption(aktywowanyWSAP);
+                                    pickList.addOption(bladAktywacjiWSAP);
+                                    break;
+                                case 279660009 /* neu_opportunity_neu_state.wysłanyczęściowodoSAP */: //wysłany częściowo do SAP
+                                    clearOptions();
+                                    pickList.addOption(aktywowanyCzesciowoWSAP);
+                                    pickList.addOption(bladAktywacjiWSAP);
+                                    pickList.addOption(wyslanyDoSAP);
+                                    break;
+                                case 279660010 /* neu_opportunity_neu_state.błądaktywacjiwSAP */: //błąd aktywacji w SAP
+                                    clearOptions();
+                                    pickList.addOption(bladAktywacjiWSAP);
+                                    pickList.addOption(wyslanyDoSAP);
+                                    pickList.addOption(wyslanyCzesciowoDoSAP);
+                                    break;
+                                case 279660011 /* neu_opportunity_neu_state.aktywowanywSAP */: //aktywowany w SAP
+                                    clearOptions();
+                                    pickList.addOption(aktywowanyWSAP);
+                                    break;
+                                case 279660012 /* neu_opportunity_neu_state.aktywowanyczęściowowSAP */: //aktywowany częściowo w SAP
+                                    clearOptions();
+                                    pickList.addOption(aktywowanyCzesciowoWSAP);
+                                    break;
+                                case 279660013 /* neu_opportunity_neu_state.przegrany */: //przegrany
+                                    clearOptions();
+                                    pickList.addOption(przegrany);
+                                    break;
+                                case 279660014 /* neu_opportunity_neu_state.unieważniony */: //unieważniony
+                                    clearOptions();
+                                    pickList.addOption(unieważniony);
+                                    break;
+                                case 279660015 /* neu_opportunity_neu_state.odrzucony */: //odrzucony
+                                    clearOptions();
+                                    pickList.addOption(odrzucony);
+                                    break;
+                                default: alert("Nieprawidłowy status. Sprawdź wartości przypisane do opcji w dynamics-sie");
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.neu_changesInProductValidation = function (executionContext) {
+                            if (globalThis.getUserAccessLevel() == 1) {
+                                alert("Funkcja niedostępna z powodu braku uprawnień.");
+                                return false;
+                            }
+                            if (typeof executionContext !== 'undefined') {
+                                var formContext = executionContext.getFormContext();
+                                var neu_changespharmindex = formContext.data.entity.attributes.get("neu_changespharmindex").getValue();
+                                var neu_changessap = formContext.data.entity.attributes.get("neu_changessap").getValue();
+                                if (neu_changespharmindex != null) {
+                                    if (neu_changespharmindex > 0) {
+                                        formContext.ui.setFormNotification("Statusy produktów Pharmindex użytych w przetargu zmieniły się.", "INFO", "1");
+                                        formContext.data.entity.attributes.get("neu_changespharmindex").setValue(0);
+                                        formContext.data.entity.save();
+                                    }
+                                }
+                                if (neu_changessap != null) {
+                                    if (neu_changessap > 0) {
+                                        formContext.ui.setFormNotification("Dane produktów SAP użytych w przetargu zostały zmienione w katalogu SAP.", "INFO", "1");
+                                        formContext.data.entity.attributes.get("neu_changessap").setValue(0);
+                                        formContext.data.entity.save();
+                                    }
+                                }
+                            }
+                            else {
+                                console.log("executionContext is undefined");
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.setHideOrVisibleGenerateQuoteButton = function () {
+                            var status = this.Page.getAttribute("neu_state").getValue();
+                            if (status == 279660003 /* neu_opportunity_neu_state.wprzygotowaniu */) {
+                                this.Page.ui.controls.get("WebResource_ButtonOpportunityTenderGenerateQuote").setVisible(true);
+                            }
+                            else {
+                                this.Page.ui.controls.get("WebResource_ButtonOpportunityTenderGenerateQuote").setVisible(false);
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.setHideOrVisibleCopyPrefferedProducersButton = function () {
+                            var neu_tenderreferential = this.Page.getAttribute("neu_tenderreferential").getValue();
+                            if (neu_tenderreferential != null) {
+                                this.Page.ui.controls.get("WebResource_ButtonTenderCopyPrefProducersButton").setVisible(true);
+                            }
+                            else {
+                                this.Page.ui.controls.get("WebResource_ButtonTenderCopyPrefProducersButton").setVisible(false);
+                            }
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.DurationInMonths = function () {
+                            var durationChange = this.Page.getAttribute("neu_durationinmonthschange").getValue();
+                            var dateFrom = new Date(this.Page.getAttribute("neu_validitydatefrom").getValue());
+                            var dateTo = new Date(this.Page.getAttribute("neu_validitydateto").getValue());
+                            var duration = (dateTo.getDate() - dateFrom.getDate()) / 30 + (dateTo.getMonth() - dateFrom.getMonth()) + (12 * (dateTo.getFullYear() - dateFrom.getFullYear()));
+                            duration = duration < 0 || this.Page.getAttribute("neu_validitydatefrom").getValue() == null || this.Page.getAttribute("neu_validitydateto").getValue() == null
+                                ? 0 :
+                                dateFrom.getTime() == dateTo.getTime() ? 1 : Math.ceil(duration);
+                            duration = durationChange == 0 || durationChange == null ? duration : durationChange;
+                            this.Page.getAttribute("neu_durationinmonths").setValue(duration);
+                            this.Page.data.save();
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.remapWithPrefferedProducer = function (executionContext, getUserAccessLevel) {
+                            if (getUserAccessLevel() == 1) {
+                                alert("Funkcja niedostępna z powodu braku uprawnień.");
+                                return false;
+                            }
+                            var tenderId = executionContext.Xrm.Page.data.entity.getId();
+                            tenderId = tenderId.replace(/[{ }]/g, "").toUpperCase();
+                            var reqPrefProdCount = new XMLHttpRequest();
+                            reqPrefProdCount.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/neu_preferredproducers?$filter=_neu_opportunityid_value eq " + tenderId + "&$count=true", true);
+                            reqPrefProdCount.setRequestHeader("OData-MaxVersion", "4.0");
+                            reqPrefProdCount.setRequestHeader("OData-Version", "4.0");
+                            reqPrefProdCount.setRequestHeader("Accept", "application/json");
+                            reqPrefProdCount.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                            reqPrefProdCount.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+                            reqPrefProdCount.onreadystatechange = function () {
+                                if (this.readyState === 4) {
+                                    reqPrefProdCount.onreadystatechange = null;
+                                    if (this.status === 200) {
+                                        var results = JSON.parse(this.response);
+                                        var recordCountTender = results["@odata.count"];
+                                        if (recordCountTender == 0) {
+                                            executionContext.Xrm.Page.ui.setFormNotification("Brak preferowanych producentów do przetargu", "ERROR", "1");
+                                        }
+                                        else {
+                                            NeuOpportunityPrzetargLogic.prototype.validatePrefProd(executionContext, tenderId);
+                                        }
+                                    }
+                                }
+                            };
+                            reqPrefProdCount.send();
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.restoreMapperResult = function (executionContext, getUserAccessLevel) {
+                            if (getUserAccessLevel() == 1) {
+                                alert("Funkcja niedostępna z powodu braku uprawnień.");
+                                return false;
+                            }
+                            var tenderId = executionContext.Xrm.Page.data.entity.getId();
+                            tenderId = tenderId.replace(/[{ }]/g, "").toUpperCase();
+                            var req = new XMLHttpRequest();
+                            req.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/neu_tenderbundles?$(filter=_neu_tenderid_value eq " + tenderId + ") and  (neu_stateprefferproducer eq " + 279660003 /* neu_tenderbundle_neu_stateprefferproducer.Przywracaniewynikówmapowaniawtrakcie */ + " or  neu_stateprefferproducer eq " + 279660001 /* neu_tenderbundle_neu_stateprefferproducer.Uwzględnianiepreferowanychproducentówwtrakcie */ + ")&$count=true", true);
+                            req.setRequestHeader("OData-MaxVersion", "4.0");
+                            req.setRequestHeader("OData-Version", "4.0");
+                            req.setRequestHeader("Accept", "application/json");
+                            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                            req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+                            req.onreadystatechange = function () {
+                                if (this.readyState === 4) {
+                                    req.onreadystatechange = null;
+                                    if (this.status === 200) {
+                                        var results = JSON.parse(this.response);
+                                        var recordCount = results["@odata.count"];
+                                        if (recordCount > 0) {
+                                            executionContext.Xrm.Page.ui.setFormNotification("Uwzględnianie preferowanych producentów lub przywracanie wyników mapowania jest aktywne dla Pakietu pod przetargiem", "ERROR", "1");
+                                        }
+                                        else {
+                                            executionContext.Xrm.Page.ui.setFormNotification("Przywracanie wyników mapowania rozpoczęte", "INFO", "1");
+                                            var entity = {};
+                                            entity['neu_stateprefferproducer'] = 279660003 /* neu_opportunity_neu_stateprefferproducer.Przywracaniewynikówmapowaniawtrakcie */;
+                                            var req2 = new XMLHttpRequest();
+                                            req2.open("PATCH", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/opportunities(" + tenderId + ")", true);
+                                            req2.setRequestHeader("OData-MaxVersion", "4.0");
+                                            req2.setRequestHeader("OData-Version", "4.0");
+                                            req2.setRequestHeader("Accept", "application/json");
+                                            req2.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                                            req2.onreadystatechange = function () {
+                                                if (this.readyState === 4) {
+                                                    req2.onreadystatechange = null;
+                                                    if (this.status === 204) {
+                                                        executionContext.Xrm.Utility.openEntityForm("opportunity", executionContext.Xrm.Page.data.entity.getId());
+                                                    }
+                                                }
+                                            };
+                                            req2.send(JSON.stringify(entity));
+                                        }
+                                    }
+                                    else {
+                                        Xrm.Utility.alertDialog("System nie odpowiada. Odśwież stronę i spróbuj ponownie");
+                                    }
+                                }
+                            };
+                            req.send();
+                        };
+                        NeuOpportunityPrzetargLogic.prototype.validatePrefProd = function (executionContext, tenderId) {
+                            var req = new XMLHttpRequest();
+                            req.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/neu_tenderbundles?$filter=(_neu_tenderid_value eq " + tenderId + ") and  (neu_stateprefferproducer eq " + 279660003 /* neu_tenderbundle_neu_stateprefferproducer.Przywracaniewynikówmapowaniawtrakcie */ + " or  neu_stateprefferproducer eq " + 279660001 /* neu_tenderbundle_neu_stateprefferproducer.Uwzględnianiepreferowanychproducentówwtrakcie */ + ")&$count=true", true);
+                            req.setRequestHeader("OData-MaxVersion", "4.0");
+                            req.setRequestHeader("OData-Version", "4.0");
+                            req.setRequestHeader("Accept", "application/json");
+                            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                            req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+                            req.onreadystatechange = function () {
+                                if (this.readyState === 4) {
+                                    req.onreadystatechange = null;
+                                    if (this.status === 200) {
+                                        var results = JSON.parse(this.response);
+                                        var recordCount = results["@odata.count"];
+                                        if (recordCount > 0) {
+                                            executionContext.Xrm.Page.ui.setFormNotification("Uwzględnianie preferowanych producentów lub przywracanie wyników mapowania jest aktywne dla Pakietu pod przetargiem", "ERROR", "1");
+                                        }
+                                        else {
+                                            executionContext.Xrm.Page.ui.setFormNotification("Uwzględnianie preferowanych producentów rozpoczęte", "INFO", "1");
+                                            var entity = {};
+                                            entity['neu_stateprefferproducer'] = 279660001 /* neu_opportunity_neu_stateprefferproducer.Uwzględnianiepreferowanychproducentówwtrakcie */;
+                                            var req2 = new XMLHttpRequest();
+                                            req2.open("PATCH", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/opportunities(" + tenderId + ")", true);
+                                            req2.setRequestHeader("OData-MaxVersion", "4.0");
+                                            req2.setRequestHeader("OData-Version", "4.0");
+                                            req2.setRequestHeader("Accept", "application/json");
+                                            req2.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                                            req2.onreadystatechange = function () {
+                                                if (this.readyState === 4) {
+                                                    req2.onreadystatechange = null;
+                                                    if (this.status === 204) {
+                                                        executionContext.Xrm.Utility.openEntityForm("opportunity", executionContext.Xrm.Page.data.entity.getId());
+                                                    }
+                                                    else {
+                                                    }
+                                                }
+                                            };
+                                            req2.send(JSON.stringify(entity));
+                                        }
+                                    }
+                                    else {
+                                        Xrm.Utility.alertDialog("System nie odpowiada. Odśwież stronę i spróbuj ponownie");
+                                    }
+                                }
+                            };
+                            req.send();
+                        };
+                        return NeuOpportunityPrzetargLogic;
+                    }());
+                    Entities.NeuOpportunityPrzetargLogic = NeuOpportunityPrzetargLogic;
+                })(Entities = WebResource.Entities || (WebResource.Entities = {}));
+            })(WebResource = Magellan.WebResource || (Magellan.WebResource = {}));
+        })(Magellan = Crm.Magellan || (Crm.Magellan = {}));
+    })(Crm = Neuca.Crm || (Neuca.Crm = {}));
+})(Neuca || (Neuca = {}));
+//# sourceMappingURL=neu_opportunity_przetarg.js.map

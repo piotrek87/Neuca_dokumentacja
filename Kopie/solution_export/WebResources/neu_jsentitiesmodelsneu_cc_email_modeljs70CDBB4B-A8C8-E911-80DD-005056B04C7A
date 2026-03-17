@@ -1,0 +1,50 @@
+﻿/// <reference path="../../common/neu_consts.js" />
+/// <reference path="../email.js" />
+
+if (typeof (Neuca) == "undefined") {
+    Neuca = {};
+}
+
+if (typeof (Neuca.Crm) == "undefined") {
+    Neuca.Crm = {};
+}
+
+if (typeof (Neuca.Crm.Email) == "undefined") {
+    Neuca.Crm.Email = {};
+}
+
+if (typeof (Neuca.Crm.Email.Model) == "undefined") {
+    Neuca.Crm.Email.Model = {};
+}
+
+if (typeof (Neuca.Crm.Email.Model.Form) == "undefined") {
+    Neuca.Crm.Email.Model.Form = {};
+}
+
+if (typeof (Neuca.Crm.Email.Model.Form.Main) == "undefined") {
+    Neuca.Crm.Email.Model.Form.Main = {};
+}
+
+
+Neuca.Crm.Email.Model.Form.Main = function () {
+    var form = Neuca.Crm.Email.Form.Main,
+        formTabs = form.Tabs,
+        formSections = form.Sections,
+        formVisibleRules = form.VisibleRules,
+        formRequiredRules = form.RequiredRules,
+        formEnableRules = form.EnableRules,
+        formFields = Neuca.Crm.Consts.Email.Fields;
+
+    this.Tabs = [
+        {
+            Name: formTabs.TAB_EMAIL,
+            VisibleRule: null,
+            Sections: [
+                {
+                    Name: formSections.SECTION_MARKETING,
+                    VisibleRule: formVisibleRules.sectionMarketingVisibleRule
+                }
+            ]
+        },
+    ];
+};

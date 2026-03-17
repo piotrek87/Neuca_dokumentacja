@@ -1,0 +1,91 @@
+var Neuca;
+(function (Neuca) {
+    var Crm;
+    (function (Crm) {
+        var Magellan;
+        (function (Magellan) {
+            var WebResource;
+            (function (WebResource) {
+                var Entities;
+                (function (Entities) {
+                    var NeuProductLogic = /** @class */ (function () {
+                        function NeuProductLogic(Page) {
+                            this.Page = Page;
+                            this.HideOrShowFieldneu_isProblemChange();
+                        }
+                        NeuProductLogic.OnLoad = function () {
+                            new this(Xrm.Page);
+                        };
+                        NeuProductLogic.prototype.HideOrShowFieldneu_isProblemChange = function () {
+                            var value = this.Page.getAttribute("neu_isroblem").getValue();
+                            if (value == false || value == null) {
+                                this.Page.getControl("neu_problemdescription").setVisible(false);
+                            }
+                            else {
+                                this.Page.getControl("neu_problemdescription").setVisible(true);
+                            }
+                        };
+                        NeuProductLogic.prototype.EanCheck = function (excutionContext) {
+                            var formCtx = excutionContext.getFormContext();
+                            var eanCode = formCtx.getAttribute("neu_eancode").getValue();
+                            var productnumber = formCtx.getAttribute("productnumber").getValue();
+                            var id = formCtx.data.entity.getId().replace(/[{}]/g, '').toLowerCase();
+                            ;
+                            var recordCount = 0;
+                            var results;
+                            if (eanCode) {
+                                var req = new XMLHttpRequest();
+                                req.open("GET", formCtx.context.getClientUrl() + "/api/data/v8.2/products?$select=neu_eancode,name,productnumber&$filter=neu_eancode eq '" + eanCode + "'", false);
+                                req.setRequestHeader("OData-MaxVersion", "4.0");
+                                req.setRequestHeader("OData-Version", "4.0");
+                                req.setRequestHeader("Accept", "application/json");
+                                req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                                req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+                                req.onreadystatechange = function () {
+                                    if (this.readyState === 4) {
+                                        req.onreadystatechange = null;
+                                        if (this.status === 200) {
+                                            results = JSON.parse(this.response).value;
+                                            results = results.filter(function (q) { return q.productid != id; });
+                                            recordCount = results.length;
+                                        }
+                                        else {
+                                            Xrm.Utility.alertDialog("System nie odpowiada. Odśwież stronę i spróbuj ponownie");
+                                        }
+                                    }
+                                };
+                                req.send();
+                            }
+                            else {
+                                formCtx.ui.clearFormNotification("1");
+                            }
+                            var txt = "";
+                            if (recordCount == 1) {
+                                txt = "Jest to produkt z kodem SAP: " + results[0].productnumber;
+                            }
+                            else if (recordCount > 1) {
+                                txt += "Są to produkty z kodem SAP: ";
+                                results.forEach(function (el, index, array) {
+                                    txt += el.productnumber;
+                                    if (index < array.length - 1) {
+                                        txt += ", ";
+                                    }
+                                });
+                            }
+                            if (recordCount > 0) {
+                                formCtx.ui.clearFormNotification("1");
+                                formCtx.ui.setFormNotification("Wprowadzony EAN istnieje już w bazie produktów SAP. " + txt, "INFO", "1");
+                            }
+                            else if (recordCount == 0) {
+                                formCtx.ui.clearFormNotification("1");
+                            }
+                        };
+                        return NeuProductLogic;
+                    }());
+                    Entities.NeuProductLogic = NeuProductLogic;
+                })(Entities = WebResource.Entities || (WebResource.Entities = {}));
+            })(WebResource = Magellan.WebResource || (Magellan.WebResource = {}));
+        })(Magellan = Crm.Magellan || (Crm.Magellan = {}));
+    })(Crm = Neuca.Crm || (Neuca.Crm = {}));
+})(Neuca || (Neuca = {}));
+//# sourceMappingURL=product.js.map
