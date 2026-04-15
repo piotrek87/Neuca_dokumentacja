@@ -1,0 +1,61 @@
+---
+description: Zbiorcze dodawanie wierszy do dokumentacji Word (pola, przyciski, akcje) z listy Excel lub tabeli w czacie oraz pliku docelowego w Kopie.
+alwaysApply: false
+---
+
+# Zbiorcze wiersze POC w Word (pola / przyciski / akcje)
+
+## Wspólne (wszystkie trzy tryby)
+
+1. **Plik docelowy:** wyłącznie pod ścieżką w `Kopie/` (np. `Kopie/opis_pol_przyciskow_akcji_v4.docx`). Użytkownik podaje nazwę lub ścieżkę względem `Kopie/`. Zamknij plik w Wordzie przed zapisem przez asystenta lub skrypt.
+2. **Wejście listy:** tabela z czatu, screen lub plik Excel (kolumny sensowne dla trybu). **Nazwa logiczna encji** w liście (np. `neu_mappedproduct`) bywa **kontekstem tabeli** („o które pole w której encji chodzi”), gdy ta sama etykieta lub opis może dotyczyć wielu encji; **nie** zastępuje to kolumny „Logiczna nazwa pola” w Wordzie, tam wpisuj **logiczną nazwę atrybutu** z `customizations.xml` po rozstrzygnięciu pary encja + pole (`dokumentacja-wiersz-pole-poc.mdc`, „Kontekst encji z listy Excel”). Numer sekcji dokumentu (np. 4.3.23) jest **odniesieniem do specyfikacji użytkownika**, nie automatycznym miejscem wstawienia w Wordzie; miejsce ustala się z **kolejności pól na formularzu głównym** w `customizations.xml` albo z **kotwicą** podaną przez użytkownika (np. „wstaw po `neu_activesubstance`”).
+3. **Źródło prawdy metadanych:** `tabele_z_dokumentacji_*/customizations.xml` (read-only). Magellan: read-only. Nie kopiować widoczności ani opisów z innego wiersza bez weryfikacji pod tę kontrolkę lub to pole.
+4. **Po zapisie `.docx`:** uruchomić właściwy pipeline reformatu z katalogu `Kopie/` (patrz komendy `pola`, `przyciski-zbiorczo`, `akcje-zbiorczo` oraz `dokumentacja-pole-excel-pipeline.mdc`, `dokumentacja-przyciski-akcje-pipeline.mdc`).
+5. **Odpowiedź w czacie:** pełny tekst nowych lub zmienionych komórek zgodnie z `dokumentacja-pokaz-wyjscie-w-czacie.mdc` (dla pól łącznie z «Typ pola» gdy dotyczy).
+
+---
+
+## A) Pola — pierwsza tabela
+
+**Układ wiersza:** Formularz, Nazwa pola, Logiczna nazwa pola, Typ pola, Źródło wartości, Opis logiki, Moment aktualizacji, Znaczenie biznesowe.
+
+**Treść — każdy wiersz jak osobne `/pole`:** Tryb zbiorczy (`/pola`) **nie zmniejsza** standardu dokumentacji. Dla **każdego** wiersza w zakresie zadania obowiązują **te same** reguły co przy komendzie `@.cursor/commands/pole.md`: w szczególności `dokumentacja-opis-logiki-kolumna.mdc` (w tym pkt 11, 21b, **21c** — zakaz masowego placeholdera zamiast pseudokodu per pole), `dokumentacja-wiersz-pole-poc.mdc`, `dokumentacja-tabelka-pola-formularz-repo.mdc`, `dokumentacja-zrodlo-wartosci-tresc.mdc`, `dokumentacja-pokaz-wyjscie-w-czacie.mdc`. «Typ pola» ze skalara D365; «Opis logiki» po polsku (`JEŻELI` / `TO` / …); w «Źródło wartości» bez półpauzy U+2014 itd. — wszystko jak w `pole.md`. Wspólny moduł/skrypt z tekstami może **tylko** wtedy, gdy **każdy** klucz (logiczna nazwa) ma w nim **osobny**, zgodny z regułami opis — nie jeden szablon dla wielu różnych pól.
+
+**Kolumna Formularz w `opis_pol_przyciskow_akcji*.docx`:** Po **zbiorczym** dodaniu wierszy (`/pola`) **zawsze** uruchom **forward-fill** skryptem referencyjnym `Kopie/_fill_formularz_forward_blok_v5.py` (pierwsza tabela; uzupełnia puste komórki «Formularz» w kontynuacji bloku tą samą etykietą co ostatni niepusty wiersz powyżej — np. „Produkt dopasowany”, „Produkt przetargu”, „Pakiet»). Dzięki temu **nie myli się encja** przy tej samej `LogicalName` w jednej tabeli. (Wariant historyczny **(A)**: tylko pierwszy wiersz bloku z nagłówkiem — nadal możliwy ręcznie, ale nie jako domyślny skutek `/pola`.) Forward-fill **nie** zastępuje automatycznie nazwy `systemform` z XML — jeśli potrzebna jest wyłącznie nazwa formularza z CRM, odczyt z `customizations.xml` per encja, jak w `dokumentacja-tabelka-pola-formularz-repo.mdc` (kolumna Formularz).
+
+**Miejsce wstawienia:** preferencja (1) kolejność pól jak w `FormXml` formularza głównego encji dla pól z tej samej encji; (2) jeśli użytkownik poda „po polu `neu_*`”, wstaw bezpośrednio po tym wierszu w tabeli; (3) unikać rozjechania kolejności względem formularza bez uzasadnienia.
+
+**Ta sama `LogicalName` w kilku encjach — kotwica bez pomyłki:** W jednej tabeli POC (np. `opis_pol_przyciskow_akcji*.docx`) **nie** wolno wskazywać miejsca wstawienia wyłącznie pierwszym trafieniem `neu_*` z listy, jeśli to pole **powtarza się** na `neu_mappedproduct` i np. `neu_tenderproduct` (np. `neu_marginbrutto`, `neu_overheadpercent`, `neu_unitamount`). Przed wstawieniem: **(a)** odczytaj w górę kolumnę **Formularz** do pierwszej niepustej etykiety bloku (`dokumentacja-wiersz-pole-poc.mdc`, sekcja o kontekście bloku), albo **(b)** użyj kotwicy **unikalnej** dla docelowej encji (np. dla pól katalogowych Produktu Dopasowanego po wierszu `neu_quantityfromexcel`, jeśli ten wiersz w pliku jest tuż przed nagłówkiem bloku „Produkt przetargu”), albo **(c)** poproś użytkownika o kotwicę („po `neu_activesubstance` na formularzu X”). **Błąd:** wstawienie bloku pól `neu_mappedproduct` zaraz po `neu_marginbrutto`, gdy jedynym `neu_marginbrutto` w tabeli jest wiersz w bloku **Produkt przetargu**.
+
+**Duplikaty:** jeśli logiczna nazwa już istnieje w dokumencie z błędną treścią (inna encja), zastąp wiersz lub usuń duplikat po uzgodnieniu z kontekstem.
+
+**Reformat:** `python reformat_poc_pipeline_polski_docx.py "NAZWA.docx"` (opcjonalnie `--backup`).
+
+---
+
+## B) Przyciski — druga tabela
+
+**Układ wiersza:** Formularz, Nazwa (etykieta), Logiczna nazwa (kontrolka Web Resource), Widoczność, Dostępność, Opis logiki (w tym sekcja Walidacja po dwóch enterach), Znaczenie biznesowe.
+
+**Treść:** `dokumentacja-wiersz-przycisk-web.mdc`, `@.cursor/commands/przycisk.md`. Kontrolka i formularz zweryfikowane w XML dla właściwej encji.
+
+**Miejsce:** logiczna kolejność jak na formularzu lub sekcja z XML; kotwica od użytkownika możliwa.
+
+**Reformat:** `python reformat_przyciski_akcje_pipeline_polski_docx.py "NAZWA.docx"` (tylko tabele 2–3; `--pelny-dokument` jeśli trzeba też pierwszą tabelę).
+
+---
+
+## C) Akcje — trzecia tabela
+
+**Układ wiersza:** Obiekt, Akcja, Opis logiki, Znaczenie biznesowe (bez Widoczność/Dostępność).
+
+**Treść:** `dokumentacja-wiersz-akcja-crm.mdc`, `dokumentacja-akcje-crm.mdc`, `@.cursor/commands/akcja.md`.
+
+**Reformat:** jak w punkcie B (ten sam skrypt dotyczy «Opis logiki» w tabeli akcji).
+
+---
+
+## Czego nie robić
+
+- Nie wstawiać wierszy „pod numer sekcji z Excela” bez powiązania z rzeczywistą strukturą tabeli i formularza.
+- Nie pomijać kolumny «Znaczenie biznesowe» ani «Typ pola» (dla pól), jeśli reguła pole je wymaga w zakresie zadania.

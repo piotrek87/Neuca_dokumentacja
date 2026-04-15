@@ -1,0 +1,111 @@
+---
+description: Tworzenie / edycja wiersza dla PRZYCISKU (Web Resource, kontrolka na formularzu) — Widoczność, Dostępność, Opis logiki, Walidacja, Znaczenie biznesowe
+alwaysApply: false
+---
+
+# Wiersz typu: przycisk (Web Resource / akcja na formularzu w UI)
+
+## Kiedy to jest „przycisk”, a nie pole ani akcja standardowa
+
+- Dokumentujesz **kontrolkę** (przycisk) na formularzu: kolumny **Logiczna nazwa**, **Widoczność**, **Dostępność**, **Opis logiki**, **Znaczenie biznesowe** (układ jak w tabeli przycisków / dokumencie `opis_pol_przyciskow_akcji*.docx`).
+- Logika w **Web Resource (JS/HTML)** + ewent. plugin przy kliknięciu — weryfikacja w Magellan (read-only).
+- **Nie** mylić ze **standardową akcją CRM** (np. samo **Usuń** jako operacja platformy opisana innym schematem) — wtedy patrz reguła **akcja** (`dokumentacja-wiersz-akcja-crm.mdc` + `dokumentacja-akcje-crm.mdc`), chyba że dokumentujesz wyłącznie przycisk odpalający ten sam scenariusz — wiersz „przycisku” nadal ma Widoczność/Dostępność.
+
+## Widoczność i Dostępność — forma dla biznesu
+
+- **[Widoczność]** przy wielu warunkach połączonych „lub”: stały wstęp **Przycisk jest niewidoczny jeśli wystąpi jedna z poniższych sytuacji:** (lub uzasadniony odpowiednik, np. widoczny tylko gdy…), potem lista `•` z krótkimi hasłami biznesowymi — **nie** jeden akapit opisowy z nazwami procedur / flag z JS (np. OverheadPropagation). **Forma** (wstęp + punkty): sekcja **Ilustracja stylu — kolumna [Widoczność]** w `dokumentacja-widocznosc-dostepnosc-forma-word.mdc` — tam jest **wzór układu**, a **nie** gotowa treść merytoryczna; punkty w dokumencie ustala się **per kontrolka** po kodzie/spec Word. Mapowanie na `setVisible`, `neu_*`, metody — **Uwagi (repo)**.
+- Krótki wstęp + lista `•`; dla przetargu: wzór **role → LUB → (przypisanie + statusy)** jak w specyfikacji Word — **nie** ściana techniczna ani nagłówki „KIEDY…”.
+- Źródło list ról/statusów: **CRM / istniejąca tabela Word / dokument ról** — nie wymyślać list z samego skrótu JS (`getUserAccessLevel` itd. → **Uwagi**).
+- Pełna metoda: `dokumentacja-widocznosc-dostepnosc-forma-word.mdc` (w tym sekcja **`getUserAccessLevel` (`neu_opportunitytenderusercheck.js`)** — poziom 3 wyłącznie rola **[CRM] Administrator biznesowy**; wyjątek przy braku kontekstu przetargu przed sprawdzeniem ról).
+- Nie kopiować widoczności z innego wiersza bez weryfikacji w kodzie pod **tę** kontrolkę.
+
+## Kontekst encji, formularza i nazwy kontrolki (obowiązkowo przed [Widoczność] i [Opis logiki])
+
+**Cel:** uniknąć sytuacji, w której w dokumentacji trafia logika ze **skryptu innej encji** albo z **innej nazwy kontrolki** niż w wierszu tabeli (np. Przetarg `WebResource_RestoreResultsMapperButton` vs Pakiet `WebResource_ButtonTenderBundleRestoreMapperResults`).
+
+1. **Encja i wiersz:** z tabeli / kontekstu zadania ustal **encję** (np. Pakiet `neu_tenderbundle`, Przetarg `opportunity`) — nie zakładać, że przycisk o tej samej etykiecie PL na innym formularzu ma ten sam WR i ten sam JS.
+2. **Formularz i kontrolka w CRM:** w eksporcie solution (`customizations.xml`, tylko odczyt) znajdź **formularz główny** danej encji, w którym jest dokumentowany przycisk; odczytaj **unikalną nazwę kontrolki** Web Resource (`datafieldname` / `classid` webresource) — to jest string przekazywany do `controls.get("…")` w JS dla **tego** formularza.
+3. **Skrypt formularza:** w `solution.xml` / metadanych lub w strukturze Magellan ustal **który plik** `neu_*.js` jest biblioteką formularza dla **tej** encji (np. `neu_tenderbundle.js` dla Pakietu, `neu_opportunity_przetarg.js` / `neu_jsentitiesopportunityjs` dla Przetargu). W tym pliku (read-only) szukaj wyłącznie **dokładnej nazwy kontrolki** z pkt 2 oraz powiązanego HTML (np. `onclick` → `…Logic.prototype.nazwaMetody`).
+4. **Brak pliku w workspace dokumentacji:** jeśli w katalogu projektu nie ma wyeksportowanego Web Resource / `customizations.xml` z pełnym FormXml, napisz w **Uwagi (repo):** weryfikacja w pełnym eksporcie CRM lub w repozytorium **Neuca.Crm.Magellan** (read-only); **nie** uzupełniaj [Widoczność] ani [Opis logiki] logiką z innej encji bez jednoznacznego potwierdzenia.
+5. **Widoczność:** jeśli w skrypcie formularza **tej** encji **nie ma** `setVisible` / podobnej logiki dla **tej** nazwy kontrolki, w [Widoczność] napisz wprost, że widoczność wynika z konfiguracji formularza w CRM, a nie z warunków w podanym pliku JS — zamiast przenosić warunki z formularza innej encji.
+
+## Opis logiki (przycisk) — **te same zasady co przy polach**
+
+- Obowiązują **identyczne** wymogi co kolumna [Opis logiki] dla **pól** w tym projekcie: wyłącznie **schemat pseudokodu** (`JEŻELI` / `TO` / `I` / `LUB` / `DLA KAŻDEGO` / `NIE JEST W` / `ZBIERZ` …), notacja `[Encja].[Pole]`, **bez** opisowych akapitów, bez zdań intencji („najpierw…”, „następnie warstwa serwera…”, „plugin uruchamia…”) w środku komórki — **pkt 6b** i **13–15** w `dokumentacja-opis-logiki-kolumna.mdc`, sekcja **[Opis logiki] przy `/pole`** w `dokumentacja-wiersz-pole-poc.mdc` (w tym **Gęstość warunków — bez prozy w `JEŻELI`**).
+- **Czytelnik biznesowy:** w głównym bloku [Opis logiki] **nie** umieszczać warunków w stylu **„poziom dostępu w skrypcie”**, numerów poziomów z Web Resource ani odwołań do `getUserAccessLevel` — to nie jest język pól CRM i nie jest zrozumiałe w tabeli dla biznesu. **[Dostępność]** opisuje kto może użyć przycisku; techniczne mapowanie na JS — **Uwagi (repo)**.
+- **Bez odnośników nawiasowych do sekcji:** w głównym pseudokodzie **zakaz** dopisków `(Walidacja)`, `(komunikat — Walidacja)` itp. przy `TO` — czytelnik nie ma szukać znaczenia poza widoczną treścią komórki. Komunikaty po niepowodzeniu i alerty z warstwy formularza wpisuj **wyłącznie** pod nagłówkiem **Walidacja** (po dwóch enterach), z pełnym brzmieniem lub skrótem uzgodnionym w projekcie — **bez** odsyłaczy z głównego bloku do „innej części” tej samej komórki.
+- **Zakaz** zastępowania szkieletu zdaniami typu „w repozytorium Magellan…”, „w pluginie ustawiane jest…” zamiast kolejnego bloku `JEŻELI zapis [Encja] …` / `TO [Encja].[Pole] = …`. Nazwy klas, jobów, plików — **Uwagi (repo)**.
+- Główny łańcuch + sekcja **Walidacja** (po dwóch enterach, nagłówek pogrubiony w Wordzie); **bez** `UPDATE`; **bez** `neu_*` w liście biznesowej; **bez** powielania [Dostępność] w [Walidacja] — `dokumentacja-opis-logiki-kolumna.mdc` (Walidacja dla przycisków).
+- **Wariant polski:** `format_opis_cell_polish` w `Kopie/docx_cell_format.py`, skrypt `Kopie/reformat_opis_logiki_polski_docx.py`.
+
+### Schemat zamiast opisu zdaniowego — rozbicie gałęzi, pętle, zbiory (obowiązkowo przy komendzie `/przycisk`)
+
+- **Zakaz** jednego wiersza `TO` z długą polszczyzną w stylu: „propagacja / przypisanie do powiązanych pozycji i mapowań zgodnie z ustawionym źródłem narzutu na pozycji”, „aktualizacja powiązanych rekordów według źródeł” — zamiast tego **rozbicie na schemat**: kolejne `JEŻELI` / `DLA KAŻDEGO` / `TO` z notacją `[Encja].[Pole]`, wartościami słownika z CRM (np. `Automat`, `Kalkulowany`) i osobnymi warunkami na istnienie powiązanych rekordów (`istnieje [Produkt mapowany]`, `brak [Produkt mapowany]` itd.).
+- **Gałęzie odrębne:** gdy w kodzie są osobne ścieżki (np. są rekordy podrzędne vs brak, `if` / `else`, osobne zachowanie przy wyborze ze słownika) — w [Opis logiki] **osobne** bloki `JEŻELI` (ew. drugi `JEŻELI` po tym samym nagłówku `DLA KAŻDEGO`, albo jeden `JEŻELI` z `I` / `LUB` i nawiasami — wg gęstości z `dokumentacja-wiersz-pole-poc.mdc`), **nie** jedna parafraza obejmująca wszystkie przypadki.
+- **Zbiory i zadanie wsadowe:** rekordy lub identyfikatory zbierane do partii zapisuj jako **`dopisz … do zbioru przeliczenia wsadowego`** (albo równoważnik uzgodniony w projekcie ze **ZBIERZ** w pkt 6a `dokumentacja-opis-logiki-kolumna.mdc`); następnie **`JEŻELI zbiór … <> pusty`** + jedna linia `TO uruchomienie jednego zadania wsadowego … po zbiorze …`, oraz **`JEŻELI zbiór … = pusty`** + skutek biznesowy (np. zwrot flagi procesu). **Nazwa joba**, parametry wywołania, klasa — **Uwagi (repo)**.
+- **Spójność** z regułami pól: `DLA KAŻDEGO`, `NIE JEST W`, nierówność `<>` — jak w `dokumentacja-wiersz-pole-poc.mdc` oraz pkt 6a–6c, 13–16 w `dokumentacja-opis-logiki-kolumna.mdc`.
+
+### Pełny proces w jednej komórce [Opis logiki] (klient + zapis + serwer / tło)
+
+- Jeden ciąg: `JEŻELI` (klik / JS) → `TO` / zapis → `JEŻELI zapis [Encja]` → `TO` (plugin) → ewent. `DLA KAŻDEGO` / tło. **pkt 16** w `dokumentacja-opis-logiki-kolumna.mdc`. Między blokami **zero** akapitów; kolejny krok = kolejny `JEŻELI`. Tło/job: jedna linia `TO` (skutek biznesowy), reszta → **Uwagi (repo)**. Magellan — read-only.
+
+### Flaga żądania (często „walidacja” w etykiecie) → plugin → flaga procesu
+
+Szkielet (uzupełnij etykietami z UI i warunkami z kodu):
+
+```
+JEŻELI klik [przycisk] …
+TO [Encja].[pole żądania] = …
+TO zapis [Encja]
+
+JEŻELI zapis [Encja]
+I … (warunki z pluginu)
+TO [Encja].[pole docelowe procesu] = …
+TO [Encja].[pole żądania] = Nie (lub wyczyszczenie)
+TO zapis [Encja]
+```
+
+- [Opis logiki]: **nie** kończyć na pierwszym `TO` po kliknięciu — dodać gałąź `JEŻELI zapis [Encja]` z efektami pluginu.
+- [Znaczenie biznesowe]: efekt **procesu** (np. rekalkulacja), nie sama etykieta z „walidacja”; 1–2 zdania.
+- Przykład nazwany: Pakiet / Kalkuluj (`WebResource_CalcButton`) — `dokumentacja-opis-logiki-kolumna.mdc` (podsekcja przyciski przy [Znaczenie biznesowe]).
+
+### Zadanie w tle (Hangfire / kolejka) — forma w [Opis logiki]
+
+```
+JEŻELI zbiór z poprzednich TO <> pusty
+TO jeden efekt biznesowy w tle (partia)
+```
+
+- **Zakaz** sztucznych `[Treść żądania…]` jeśli to nie pola CRM — **Uwagi (repo)** (JSON, job, akcja CRM).
+- Zamiast akapitów o GUID / serializacji: `JEŻELI` / `TO` / `I` albo Uwagi.
+
+## Format Word — po edycji
+
+Z katalogu `Kopie/`:
+
+```bash
+python reformat_opis_logiki_polski_docx.py "NAZWA.docx"
+```
+
+- Kopia zapasowa: `*.bak_polski_opis.docx`; przetwarzane wszystkie tabele z nagłówkiem zawierającym „opis logiki”.
+- Czcionka: **Aptos 8 pt** w przetworzonej tabeli — jak w `dokumentacja-tabelka-pola-formularz-repo.mdc`.
+
+**Komenda Cursor `/formatuj`:** pełna reguła — `dokumentacja-komenda-formatuj.mdc`. **Zakres [Opis logiki]** w narzędziu (m.in. nawiasy wokół wieloliniowego warunku — `ensure_multiline_jezeli_outer_parens_pl` w `docx_cell_format.py`): `dokumentacja-formatuj-opis-logiki-rozszerzenia.mdc`. Polecenia terminala: `.cursor/commands/formatuj.md`.
+
+## Znaczenie biznesowe
+
+- Efekt **końcowy** dla użytkownika / procesu (1–2 zdania); warunki → [Opis logiki] / [Walidacja]. **Zakaz:** sam opis „waliduje / sprawdza”, jeśli po pluginie jest realna akcja — wtedy nazwać akcję (rekalkulacja, utworzenie …).
+- Szczegóły i przyciski: `dokumentacja-opis-logiki-kolumna.mdc`, podsekcja **[Znaczenie biznesowe] — przyciski (Web Resource)**.
+
+## Przed pracą
+
+- `dokumentacja-przed-praca-czytaj-reguly.mdc`.
+
+## Powiązane reguły
+
+- `dokumentacja-wiersz-pole-poc.mdc` — **ta sama forma [Opis logiki]** co dla pól (PL: `JEŻELI` / `TO`, gęstość, **bez prozy w `JEŻELI`**, `DLA KAŻDEGO` / `NIE JEST W`); komenda Cursor **`/przycisk`** odsyła tu przy uzupełnianiu kolumny [Opis logiki].
+- `dokumentacja-komenda-formatuj.mdc` — reguła komendy `/formatuj` (pipeline, warianty A/B).
+- `dokumentacja-formatuj-opis-logiki-rozszerzenia.mdc` — zakres narzędzia formatowania [Opis logiki] w Wordzie; kierunek rozwoju (heurystyki tekstowe); powiązanie z `.cursor/commands/formatuj.md`.
+- `dokumentacja-opis-logiki-kolumna.mdc` — Zasady wspólne, sekcja [Przyciski Web Resource / plugin], pkt **16** (pełny rozkład), Walidacja.
+- `dokumentacja-tabelka-pola-formularz-repo.mdc` — sekcja przyciski i [Opis logiki] w Word (Walidacja, wariant polski, skrypty `reformat_*`).
+- `dokumentacja-pokaz-wyjscie-w-czacie.mdc` — pełny tekst zmian w odpowiedzi asystenta.

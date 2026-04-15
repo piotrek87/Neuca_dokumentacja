@@ -1,0 +1,48 @@
+---
+description: Szybki pipeline formatowania Word po dodaniu lub edycji wierszy pól (Typ, Źródło, Opis logiki PL) oraz import pól z Excela jako wejścia do uzupełnienia dokumentacji.
+alwaysApply: false
+---
+
+# Pipeline pól z Excela / szybki reformat Word (POC, tabela pól)
+
+## Cel
+
+- Po wklejeniu lub masowej edycji wierszy w pierwszej tabeli dokumentu typu opis pól (kolumny m.in. «Typ pola», «Źródło wartości», «Opis logiki») uruchomić **jednym poleceniem** ten sam efekt co wcześniejsza sekwencja trzech skryptów.
+- Unikać trzech osobnych procesów Python i trzech zapisów tego samego pliku (szybciej, mniej ryzyka częściowego wykonania).
+
+## Skrypt (źródło prawdy technicznej)
+
+Z katalogu `Kopie/`:
+
+```text
+python reformat_poc_pipeline_polski_docx.py "Nazwa.docx"
+```
+
+Opcjonalnie kopia przed zmianą:
+
+```text
+python reformat_poc_pipeline_polski_docx.py "Nazwa.docx" --backup
+```
+
+Ekwiwalent (dłużej, trzy starty interpretera):  
+`reformat_poc_typ_pola_docx.py` → `reformat_poc_zrodlo_wartosci_docx.py` → `reformat_opis_logiki_polski_docx.py`.
+
+Dokument wyłącznie po angielsku w «Opis logiki»: zamiast ostatniego kroku użyć `reformat_poc_opis_logiki_docx.py` (pipeline PL nie zastępuje tego przypadku).
+
+## Excel jako wejście listy pól
+
+- Excel (kolumny: encja, logiczna nazwa, etykieta, ewent. sekcja) jest **listą kontrolną** dla asystenta lub dla skryptu pomocniczego; **źródłem prawdy metadanych** pozostaje `tabele_z_dokumentacji_*/customizations.xml` (read-only) oraz ewent. odczyt Magellan (read-only).
+- Treść merytoryczna wierszy (Źródło, Opis logiki, Moment, Znaczenie) musi być spójna z `.cursor/rules/dokumentacja-opis-logiki-kolumna.mdc`, `dokumentacja-wiersz-pole-poc.mdc`, `dokumentacja-zrodlo-wartosci-tresc.mdc`; komenda Cursor: `.cursor/commands/pole.md`.
+- **Zbiorcze wstawianie wielu wierszy pól** (lista + plik `.docx` w `Kopie/`): komenda `.cursor/commands/pola.md` oraz reguła `dokumentacja-zbiorczo-wiersze-poc-docx.mdc` (sekcja A); po zapisie ten sam skrypt `reformat_poc_pipeline_polski_docx.py`.
+
+## Kiedy nie stosować pipeline PL
+
+- Gdy zmieniono **tylko** jedną kolumnę i skrypt dedykowany jest prostszy do debugowania (np. wyłącznie «Typ pola»).
+- Gdy plik nie ma pierwszej tabeli POC w oczekiwanym układzie kolumn.
+
+## Powiązanie z innymi regułami
+
+- Format kolumn po normalizacji: `dokumentacja-tabelka-pola-formularz-repo.mdc`.
+- Czcionka tabel: Aptos 8 pt (jak po skryptach `reformat_*`).
+- Odpowiedź w czacie z pełnym tekstem zmienionych komórek: `dokumentacja-pokaz-wyjscie-w-czacie.mdc`.
+- Tylko przyciski i akcje (druga/trzecia tabela, «Opis logiki» PL): `dokumentacja-przyciski-akcje-pipeline.mdc` i skrypt `reformat_przyciski_akcje_pipeline_polski_docx.py`.

@@ -1,0 +1,122 @@
+---
+description: Pełny sposób uzupełniania tabeli dokumentacji pól (Formularz, Typ pola, Źródło wartości, Opis logiki w Word POC, repo, xlsx)  -  projekt Neuca
+alwaysApply: true
+---
+
+# Dokumentacja pól  -  przepływ pracy (szablon na przyszłość)
+
+## Kolumny tabeli POC (ustalone zestawy)
+
+- Pola: Logiczna nazwa pola, Typ pola, Źródło wartości, Opis logiki, Moment aktualizacji, Znaczenie biznesowe.
+- W dokumencie **Word POC** format kolumn **[Typ pola]**, **[Źródło wartości]** i **[Opis logiki]** ustala się skryptami: `reformat_poc_typ_pola_docx.py`, `reformat_poc_zrodlo_wartosci_docx.py`, `reformat_poc_opis_logiki_docx.py` (szczegóły poniżej); **nie** odtwarzać ręcznie innego układu / pogrubień niż po normalizacji.
+- Przyciski (Web Resource / akcja na formularzu): Logiczna nazwa, Widoczność, Dostępność, Opis logiki, Znaczenie biznesowe.
+- „Znaczenie biznesowe” jest obowiązkowe dla każdego pola i przycisku (1–2 zdania, bez duplikatu kolumny Źródło ani łańcucha z [Opis logiki]); nie pomijać nawet przy długim pseudokodzie.
+
+Szczegóły stylu [Opis logiki] i [Znaczenie biznesowe]: `dokumentacja-opis-logiki-kolumna.mdc`. Metadane pól i kontekst formularza z XML nadal można dopisywać wg sekcji poniżej (np. przy weryfikacji w `customizations.xml`).
+
+Porządek pracy: najpierw reguły z `.cursor/rules/` (w tym `dokumentacja-przed-praca-czytaj-reguly.mdc`).
+
+[Opis logiki] przy warunkach: szkielet pseudokodu (IF/AND/THEN), nie opis słowny w jednym akapicie; nierówność wyłącznie symbolem `<>`  -  `dokumentacja-opis-logiki-kolumna.mdc` (punkty 13–14).
+
+## Zasady ogólne
+
+1. Oryginałów nie zmieniać: wyeksportowana solucja CRM (`tabele_z_dokumentacji_*.zip` / folder z `customizations.xml`)  -  tylko odczyt.
+2. Repozytorium kodu `Neuca.Crm.Magellan` (`C:\Users\piotr.kowalczyk\source\repos\Neuca.Crm.Magellan`)  -  wyłącznie odczyt (bez commitów/edycji); szukanie logicznej nazwy pola w C#, pluginach, Hangfire, WebResources (JS/HTML).
+3. Wyniki robocze zapisywać w `Kopie/` (np. arkusz Excel), nie nadpisywać głównego pliku dokumentacji bez zgody użytkownika.
+4. **Dokumenty Word z tabelami w `Kopie/` (POC, przyciski itd.):** czcionka **Aptos**, rozmiar **8 pt** we wszystkich komórkach tabel — także po ręcznych poprawkach treści, nie tylko po skryptach `reformat_*_docx.py`. Po edycji programowej: `apply_font_aptos_8_table` w `Kopie/docx_cell_format.py` albo uruchomienie właściwego skryptu reformatującego na pliku.
+5. Format zapisu fragmentów tabeli: preferencja użytkownika  -  plik `.xlsx` (nie CSV). Można wygenerować skryptem Python (`openpyxl`), z arkuszami np. `Pola_lacznie`, `Formularz`, `Typ_pola`.
+6. Treść do użytkownika po wygenerowaniu / edycji komórek oraz format odpowiedzi (wklejanie do Worda bez pogrubień markdown): `.cursor/rules/dokumentacja-pokaz-wyjscie-w-czacie.mdc`. Szczegóły workflow: `Kopie/README_POC_xlsx.md`.
+7. Nazewnictwo: wyłącznie **Pharmindex**, zakaz „Farmindex” — `dokumentacja-opis-logiki-kolumna.mdc` (sekcja „Skąd brać treść”, pkt 5).
+
+## Kolumna „Formularz” (nazwa z CRM)
+
+- W `customizations.xml` znajdź `datafieldname="<logiczna_nazwa>"` w FormXml → `forms type="main"` → `systemform` dla danej encji.
+- Nazwę formularza (PL) weź z `LocalizedNames` → `LocalizedName`, `languagecode="1045"`, pod zamykającym `</form>` tego `systemform`, w którym jest kontrolka (np. „Informacje”).
+- **Obowiązkowo przy uzupełnianiu wiersza pola (`/pole`):** dla tej samej kontrolki sprawdź **`disabled`** na elemencie `<control … datafieldname="…">`. Jeśli `disabled="true"`, nie dokumentuj ścieżki „użytkownik edytuje pole na formularzu” w [Opis logiki] / [Źródło wartości] / [Momencie] — wartość nie jest zmieniana przez użytkownika w tej kontrolce (źródło: tworzenie, API, plugin, import itd.). **Nie dopisuj** do treści tych kolumn informacji technicznej o konfiguracji formularza (np. „kontrolka wyłączona w FormXml”, „`disabled` w eksporcie”) — to wynik wewnętrznej weryfikacji, nie treść dla czytelnika biznesowego. Pełna procedura i wyjątki: `dokumentacja-wiersz-pole-poc.mdc` (sekcja **Kontrolka na formularzu głównym (`disabled`)**).
+- Uwaga semantyczna: etykieta „Produkt Dopasowany” w interfejsie to zwykle nazwa encji (`Entity` → `LocalizedName`), a nie nazwa formularza  -  w XML `LocalizedName description="Produkt Dopasowany"` przy encji ≠ nazwa `systemform`. Nie mylić kolumn „encja” i „formularz”.
+- To samo pole na innej encji = osobny wiersz / osobna nazwa formularza (często ta sama etykieta „Informacje”).
+- **Wiele wierszy z tą samą logiczną nazwą w jednej tabeli:** w niektórych dokumentach Word (`opis_pol_przyciskow_akcji*.docx`) wiersze są w **blokach** — kolumna Formularz bywa wypełniona tylko przy nagłówku bloku, niżej puste komórki należą nadal do tego samego kontekstu. **Ta sama `LogicalName` w dwóch wierszach** może oznaczać **to samo pole na dwóch encjach** (np. dopasowanie vs produkt przetargu), z **inną** logiką w kolumnach treściowych. Nie kopiuj treści między takimi wierszami bez weryfikacji w `customizations.xml` i repo. Pełna procedura: `dokumentacja-wiersz-pole-poc.mdc`, sekcja **„Ta sama logiczna nazwa w kilku wierszach jednej tabeli Word”**.
+- Opcjonalnie dopisz zakładkę/sekcję z XML (np. `tab` / `section` → `label description`) dla kontekstu UI.
+
+## Kolumna „Typ pola” (metadane z CRM)
+
+- W `customizations.xml` w sekcji atrybutów encji znajdź `<attribute PhysicalName="<logiczna_nazwa>">`.
+- Dla pól liczbowych typu decimal zapisz w stylu czytelnym dla ludzi, np.:
+  - Liczba dziesiętna (Decimal) + `Accuracy` = liczba miejsc po przecinku;
+  - `MinValue` / `MaxValue` (np. ±100 000 000 000);
+  - przy `RequiredLevel` = `required` w **notatkach roboczych przy XML** można odnotować wymagalność (np. Business Required)  -  bez kopiowania dosłownie całej ściany eksportu do Worda.
+- **`Accuracy` jest właściwością konkretnego atrybutu** (`<attribute PhysicalName="…">` w `customizations.xml`), nie „rodzaju pola” (np. procent). Pola o podobnej etykiecie lub w tym samym bloku dokumentu mogą mieć **różną** liczbę miejsc po przecinku. **Nie** stosuj jednego szablonu typu „10 miejsc” dla wszystkich pól procentowych ani nie zakładaj tej samej dokładności co u sąsiada w tabeli — odczytaj `<Accuracy>` dla **tej** `LogicalName` (i przy wielu wierszach z tą samą nazwą na różnych encjach zweryfikuj XML dla każdej encji). Przykład z eksportu: `neu_marginbruttopercent` ma `Accuracy` 2; `neu_stockfinancingpercent` i `neu_percentbenefitforzach` mają `Accuracy` 10.
+- Opisy typu „wpis użytkownika / ZPZK / pakiet” to **źródło wartości lub logika biznesowa**  -  trzymać w kolumnie **„Źródło wartości”** (albo drugim zdaniu poza [Typ pola]), żeby nie mylić z typem skalarnym D365.
+
+### [Typ pola] w dokumencie Word (POC)  -  format ustalony (nie zmieniać „na oko”)
+
+**Cel:** jedna, spójna kolumna **czytelna dla biznesu**  -  bez ściany tekstu z eksportu CRM i bez dopisywania ręcznie tego samego, co już usuwa normalizacja.
+
+1. **Docelowy wygląd** ustala **pipeline** w `Kopie/docx_cell_format.py` (`format_typ_cell`, `typ_to_bullet_lines`) oraz uruchomienie **`Kopie/reformat_poc_typ_pola_docx.py`** na właściwym pliku `.docx` (pierwsza tabela, kolumna [Typ pola] wg skryptu; z katalogu `Kopie`: `python reformat_poc_typ_pola_docx.py "Nazwa.docx"`). Po przetworzeniu: **Aptos 8 pt** w tabeli (jak w skrypcie).
+2. **Układ:** każdy fragment w **osobnym akapicie**, z **`• `** na początku linii; sklejone w jednym wierszu listy `… • … • …` rozbijane na osobne punkty (nie jedna długa linijka).
+   - **Generatory / skrypty masowe (np. szablony `TYP_DEC_2` vs `TYP_DEC_10` w `Kopie/`):** mapowanie **pole po polu** według `<Accuracy>` z `customizations.xml` dla danej `LogicalName` — bez grupowania „wszystkie decimal z bloku cenowego = ten sam szablon”, jeśli XML ma różne wartości.
+   - **Odnośnik do użytkownika:** dla pól Lookup do użytkownika (np. Utworzony przez) obowiązuje uproszczona treść [Typ pola] — **• Odwołanie** / **• Użytkownik** — zgodnie z `dokumentacja-wiersz-pole-poc.mdc` (komenda `/pole`).
+   - **Data i godzina (`datetime` w CRM, m.in. `createdon`, `modifiedon`):** uproszczona treść [Typ pola] przy `/pole` — **• Data** (jeden punkt); szczegóły odczytu / platformy — w [Źródło wartości] lub Uwagi — `dokumentacja-wiersz-pole-poc.mdc`.
+   - **Tak lub Nie (`bit` / Two Options, wartości 0/1):** treść [Typ pola] przy `/pole` — **• Tak lub Nie** / **• Nie: 0** / **• Tak: 1** — `dokumentacja-wiersz-pole-poc.mdc`.
+3. **Czego nie trzymać w tej kolumnie po normalizacji** (skrypt to czyści lub odrzuca całe linie):
+   - dopiski eksportu / wymagalności w nawiasach w stylu CRM: m.in. `(none)`, `(recommended)`, `(Business Required)` oraz podobne frazy poza nawiasem (`not Business Required` itd.)  -  patrz `_TYP_PAREN_DROP_INNER` / czyszczenie w `docx_cell_format.py`;
+   - **osobny punkt listy `• Zalecane`** (albo sama linia „Zalecane” jako punkt typu)  -  **nie** dopisywać; to echo poziomu `recommended` z metadanych, a nie opis typu danych dla czytelnika biznesowego. Wymagalność pola, jeśli musi być widoczna poza eksportem, jedna informacja w Uwagi (repo) lub poza listą punktów typu skalarnego;
+   - linie czysto opisowe z metadanych („Opis metadanych w CRM…”, „Zestaw opcji w CRM…”, „Wpis użytkownika / lub logika” itd.)  -  to należy do **innych kolumn** (np. [Źródło wartości]), nie do [Typ pola];
+   - nazwy logiczne zestawów `neu_*` w tej kolumnie  -  usuwane w normalizacji.
+4. **Co może zostać** w nawiasach: krótkie etykiety sensu biznesowego (np. Tak/Nie, optional/required w zwięzłej formie)  -  zgodnie z regułą `_typ_paren_keep_inner` w `docx_cell_format.py` (nie mylić z pełnymi opisami technicznymi z eksportu).
+5. **Workflow:** po wklejeniu z CRM / masowej edycji komórek w Wordzie **uruchom** `reformat_poc_typ_pola_docx.py` na tym samym pliku POC; nie „ręcznie odtwarzaj” powyższego  -  żeby uniknąć rozjazdu z ustalonym formatem.
+
+Ta sekcja jest **źródłem prawdy** dla formatu kolumny [Typ pola] w Wordzie; przy zmianach wyłącznie w skrypcie zaktualizuj tutaj tylko te punkty, które faktycznie zmieniły się w kodzie (`docx_cell_format.py`).
+
+### [Źródło wartości] w dokumencie Word (POC)  -  zawsze wypunktowanie
+
+**Cel:** ta sama czytelna lista **•** co w pozostałych wierszach  -  bez akapitów „gołym tekstem” bez punktów i bez jednej ściany zamiast listy.
+
+1. **Normalizacja:** `Kopie/docx_cell_format.py` — `zrodlo_text_to_lines` + `format_zrodlo_cell` (nie używać `typ_to_bullet_lines` z [Typ pola]).
+2. **Skrypt na plik POC:** `Kopie/reformat_poc_zrodlo_wartosci_docx.py` (kolumna [Źródło wartości], pierwsza tabela; z katalogu `Kopie`: `python reformat_poc_zrodlo_wartosci_docx.py "Nazwa.docx"`). Po przetworzeniu: **Aptos 8 pt** w tabeli.
+3. **Co jest dzielone na osobne punkty:** osobne akapity / entery; w jednym wierszu sklejone `… • …`; **szerokie odstępy** (≥3 spacje) jako zamiennik enterów; opcjonalnie **średnik** (`; `) przy długim bloku lub przy ≥2 średnikach w linii (żeby nie krajać krótkich fraz z jednym `;`).
+4. **Workflow:** po edycji treści [Źródło wartości] w Wordzie uruchom **`reformat_poc_zrodlo_wartosci_docx.py`** na tym pliku POC (tak jak dla [Typ pola] osobny skrypt).
+
+Ta sekcja jest **źródłem prawdy** dla formatu kolumny [Źródło wartości] w Wordzie; przy zmianach wyłącznie w `zrodlo_text_to_lines` / `format_zrodlo_cell` zaktualizuj tutaj tylko te punkty, które faktycznie zmieniły się w kodzie (`docx_cell_format.py`).
+
+**Treść merytoryczna** [Źródło wartości] (język biznesowy, system vs użytkownik vs przyciski, bez nazw klas w komórce): `dokumentacja-zrodlo-wartosci-tresc.mdc`.
+
+### [Opis logiki] w dokumencie Word (POC)  -  słowa kluczowe i lewa krawędź
+
+**Cel:** ta sama czytelność pseudokodu co w arkuszu z generatora `Buduj-dokumentacja_pola_*_xlsx.py`  -  **IF**, **THEN**, **AND**, **OR**, **ELSE IF**, **ELSE**, **FOR EACH**, **NOT**, **CREATE**, **LUB** pogrubione (wszystkie wystąpienia w wierszu), wiersze ze słowem kluczowym **bez zbędnego wcięcia** (przy lewej krawędzi komórki). W treści [Opis logiki] **nie** stosuj słowa **UPDATE** (ustalenie: `dokumentacja-opis-logiki-kolumna.mdc`, punkt 0); w starych plikach mogło się zdarzyć — w wersji polskiej `format_opis_cell_polish` usuwa `UPDATE` z tekstu.
+
+1. **Implementacja:** `Kopie/docx_cell_format.py` — `format_opis_cell` (`_OPIS_KW_BOUND`, `_OPIS_LINE_LEADING_KW`, `_flush_paragraph_left`).
+2. **Skrypt na plik POC:** `Kopie/reformat_poc_opis_logiki_docx.py`  -  przetwarza **wszystkie** tabele z nagłówkiem [Opis logiki] (tabela POLA i PRZYCISKI; kolumna `5`). `python reformat_poc_opis_logiki_docx.py "Nazwa.docx"` z katalogu `Kopie`. Po przetworzeniu: **Aptos 8 pt** w tych tabelach.
+3. **Workflow:** po edycji [Opis logiki] w Wordzie uruchom ten skrypt; nie odtwarzać ręcznie pogrubień dla każdego wiersza. **Komenda Cursor `/formatuj`:** pełna reguła — `dokumentacja-komenda-formatuj.mdc`; **kierunek rozwoju** narzędzia (heurystyki na tekście, bez obowiązkowego porównania z kodem przy każdym uruchomieniu): `dokumentacja-formatuj-opis-logiki-rozszerzenia.mdc`; polecenia terminala — `.cursor/commands/formatuj.md`.
+4. **Treść merytoryczna** pseudokodu (IF/THEN, `<>`, brak opisu słownego zamiast warunków)  -  nadal `dokumentacja-opis-logiki-kolumna.mdc` i ewent. `dokumentacja-opis-logiki-if-then-pluginy.mdc`; ta podsekcja dotyczy wyłącznie **wyglądu w Wordzie**.
+5. **Przyciski — sekcja [Walidacja]:** w tej samej komórce [Opis logiki], **po dwóch enterach** od głównego pseudokodu: nagłówek `Walidacja` (w Wordzie **pogrubiony**), potem **ten sam styl co główny opis** (IF/THEN, mało prozy); **bez** powielania **[Dostępność]** (poziom dostępu); **bez** `neu_*` i nazw klas w komórce — warunki i skutek dla czytelnika. W **głównym** bloku nad [Walidacja] **bez** dopisków `(Walidacja)` i **bez** warunków „poziom dostępu w skrypcie” — `dokumentacja-wiersz-przycisk-web.mdc`, `dokumentacja-opis-logiki-kolumna.mdc` (sekcja przyciski). Rozdzielenie: `_split_opis_walidacja` w `docx_cell_format.py`. Skrypt treści: `Kopie/dopisz_walidacja_przyciski_poc.py` (`--force` — podmiana sekcji). **Pełne zasady treści** (cel, forma, JS + serwer, komunikaty): `dokumentacja-opis-logiki-kolumna.mdc`, podsekcja [Sekcja Walidacja w komórce Opis logiki (tylko przyciski)].
+6. **Wariant polski przycisków** (`JEŻELI` / `TO`, pliki np. `opis_pol_przyciskow_akcji*.docx`): `Kopie/reformat_opis_logiki_polski_docx.py` + `format_opis_cell_polish` w `docx_cell_format.py`. Scalanie zagnieżdżonego `TO` z następną linią `JEŻELI` wykonuje `_merge_to_jezeli_adjacent_lines`: jeśli po `JEŻELI` w tej samej linii nie ma jeszcze treści, a nawias `(` jest dopiero w kolejnym wierszu, **nie** wolno wypisywać samego pustego `TO JEŻELI` (wtedy w Wordzie pojawia się błędne `JEŻELI ()`); skrypt scala wtedy trzy linie do `TO JEŻELI (` …).
+7. **Nawiasy `( )` wokół wieloliniowego warunku (PL):** przed `nest_polish_opis_structure` pipeline wywołuje `ensure_multiline_jezeli_outer_parens_pl` (w `indent_polish_opis_structure`): jeśli warunek `JEŻELI` / `INACZEJ JEŻELI` ma co najmniej jedną linię kontynuacji `I …` / `LUB …` przed `TO`, a po słowie kluczowym nie ma jeszcze `(`, dopisywane są otaczające nawiasy; znaki `(` `)` są pogrubiane w komórce. Ustalenia biznesowe: `dokumentacja-formatuj-opis-logiki-rozszerzenia.mdc` (podsekcja o nawiasach w obecnym zakresie).
+8. **Wariant polski — lewa krawędź `ZBIERZ` / `DLA KAŻDEGO` / `NIE JEST W`:** Te słowa mają być **na początku wiersza** (przy lewej krawędzi komórki), także gdy wcześniej wpadły do wciętego bloku po `TO`. Normalizacja w `docx_cell_format.py`: `split_pl_structure_keywords_to_own_lines` (łamanie m.in. po `= ZBIERZ`, przed `DLA KAŻDEGO`, przed `NIE JEST W` gdy nie zaczyna linii) oraz `flush_pl_structure_keywords_left_edge` (usunięcie wiodącego wcięcia dla wierszy zaczynających się od tych operatorów). Szczegół przy ręcznym wpisywaniu: `dokumentacja-wiersz-pole-poc.mdc` (akapit o lewej krawędzi).
+9. **Polskie `I` (AND) w jednej linii z `JEŻELI`:** Gdy w jednym wierszu zapisano wiele predykatów z operatorem **`` I ``** (spacja-I-spacja), Word przy wąskiej kolumnie może **zawinąć** linię tak, że drugi predykat (np. `istnieje …`) zaczyna się wizualnie „w środku” komórki, a pierwsza litera drugiego słowa (`I` w „istnieje”) wygląda jak źle wyrównany operator **I**. Pipeline PL przed `ensure_multiline_jezeli_outer_parens_pl` wywołuje `split_inline_i_pl` (oraz wcześniej `split_inline_lub_pl` dla `LUB`), żeby **I** / **LUB** jako łączniki stanęły w **osobnym wierszu**; `nest_polish_opis_structure` nadaje im to samo wcięcie co pozostałym kontynuacjom warunku w nawiasach. **Nie** pisz w [Opis logiki] wielu predykatów z **`` I ``** w jednym wierszu bez uruchomienia `reformat_opis_logiki_polski_docx.py` po edycji — zgodnie z workflow skryptu.
+10. **Kolumna [Logiczna nazwa pola]:** Jedna linia, ciągły identyfikator (`neu_*`) **bez** ręcznych Enterów w środku komórki. Jeśli Word **łamie** długą nazwę wizualnie przy wąskiej kolumnie, poszerz kolumnę lub skróć nagłówek tabeli — nie zapisuj nazwy w kilku akapitach (ryzyko „pociętego” `neu_…` w PDF / na screenie).
+
+Ta sekcja jest **źródłem prawdy** dla formatu wizualnego kolumny [Opis logiki] w Wordzie (pogrubienia słów kluczowych, brak zbędnego wcięcia przed IF/THEN itd., sekcja [Walidacja], lewa krawędź operatorów agregacji po polsku, nawiasy wokół wieloliniowego warunku); przy zmianach wyłącznie w `format_opis_cell` / `format_opis_cell_polish` / wzorcach `_OPIS_*` / `_split_opis_walidacja` / `_merge_to_jezeli_adjacent_lines` / `ensure_multiline_jezeli_outer_parens_pl` / `split_pl_structure_keywords_to_own_lines` / `split_inline_lub_pl` / `split_inline_i_pl` / `flush_pl_structure_keywords_left_edge` zaktualizuj tutaj tylko te punkty, które faktycznie zmieniły się w kodzie (`docx_cell_format.py`).
+
+## Kolumny „Widoczność” i „Dostępność”
+
+- Pełna metoda: `.cursor/rules/dokumentacja-widocznosc-dostepnosc-forma-word.mdc` (forma wstęp + lista jak w Wordzie, weryfikacja per kontrolka).
+
+## Kolumny logiki / kod (repo Magellan)
+
+- Wyszukiwanie po logicznej nazwie pola w całym repozytorium.
+- Rozróżniaj: plugin, Hangfire/kalkulator, serwis, skrypt formularza (Web Resource), same typy `.d.ts` (bez logiki).
+- Kolumna [Opis logiki] (pola i przyciski): `.cursor/rules/dokumentacja-opis-logiki-kolumna.mdc`  -  m.in. sekcja [Zasady wspólne] (język dla użytkownika, Excel vs „notatki”, bez `.cs` w komórce; punkty 6-9 i 13-14: ten sam styl co [Generuj ofertę] / [Przenieś narzut], `FOR EACH`, schemat IF zamiast akapitów w warunkach, nierówność tylko `<>`, bez zbędnego „kalkulacji”, opis logiki i moment aktualizacji dotyczą wartości tego pola (nie efektów na innych encjach), RB w Momencie / Uwagi).
+- Kolumna [Znaczenie biznesowe]: ta sama reguła  -  `.cursor/rules/dokumentacja-opis-logiki-kolumna.mdc`, sekcja [Znaczenie biznesowe] (efekt dla użytkownika; bez powtórzenia [Źródło wartości]; przyciski często „System …”). **Pola:** w [Moment aktualizacji] i [Znaczenie biznesowe] bez nazw metod i klas z repozytorium — `dokumentacja-wiersz-pole-poc.mdc`, sekcja [Moment aktualizacji] i [Znaczenie biznesowe] — bez nazw z repozytorium i kodu. **Przyciski:** [Znaczenie biznesowe] opisuje **akcję i efekt końcowy**, nie zastępuje go wyłącznie opisem walidacji statusów — szczegóły w podsekcji przyciski w tym pliku oraz w `dokumentacja-wiersz-przycisk-web.mdc`.
+- Przyciski — **treść** sekcji [Walidacja] w [Opis logiki] (warunki po kliknięciu, komunikat lub skutek, forma IF/THEN, bez duplikatu [Dostępność], JS + pluginy): `.cursor/rules/dokumentacja-opis-logiki-kolumna.mdc`, podsekcja [Sekcja Walidacja w komórce Opis logiki (tylko przyciski)] (format wizualny Word: ta reguła, sekcja [Opis logiki w dokumencie Word]).
+- Pseudokod IF/THEN z `[ID]` i wzorzec [Propaguj ceny z cenników]: `.cursor/rules/dokumentacja-opis-logiki-if-then-pluginy.mdc` (uzupełnia `dokumentacja-opis-logiki-kolumna.mdc`).
+
+## Plik Excel (`.xlsx`) w `Kopie/`
+
+- Sugerowana struktura: arkusz łączny (wszystkie kolumny dla wybranych pól) + opcjonalnie osobne arkusze tylko pod Formularz i tylko pod Typ pola.
+- Nagłówki pogrubione, dla długich tekstów włączyć zawijanie tekstu i sensowną szerokość kolumn.
+- W generatorze `Buduj-dokumentacja_pola_*_xlsx.py` kolumny [Opis logiki] i [Moment aktualizacji] używają `opis_logiki_rich_text` — słowa IF, THEN, AND, FOR EACH, CREATE itd. są w komórce zapisane pogrubieniem (zgodnie z punktem 4 w `dokumentacja-opis-logiki-kolumna.mdc`; **bez** `UPDATE` w treści).
+
+## Nazewnictwo plików (przykład)
+
+- `Kopie\dokumentacja_pola_<kontekst>_<zakres_pól>.xlsx`  -  np. fragment encji + zestaw pól logicznych nazw.

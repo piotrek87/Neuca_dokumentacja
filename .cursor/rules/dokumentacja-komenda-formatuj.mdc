@@ -1,0 +1,39 @@
+---
+description: Reguła dla komendy Cursor /formatuj — pipeline skryptów Word w Kopie/, Aptos 8 pt, powiązanie z tabelą POC i z dokumentacja-formatuj-opis-logiki-rozszerzenia.mdc
+alwaysApply: false
+---
+
+# Komenda Cursor /formatuj
+
+## Powiązanie z plikiem komendy
+
+Polecenia do uruchomienia w terminalu (kolejność skryptów, warianty A/B): `.cursor/commands/formatuj.md`.
+
+## Cel
+
+Uruchomić **ustalony pipeline** skryptów Python w `Kopie/` (`reformat_*_docx.py` + `docx_cell_format.py`) na wskazanym pliku `.docx` — **bez wymyślania własnego układu** kolumn ani pomijania kroków „bo wygląda ok”. Docelowy wygląd kolumn ustala `dokumentacja-tabelka-pola-formularz-repo.mdc` i kod w `Kopie/docx_cell_format.py` (m.in. `indent_polish_opis_structure`: `ensure_multiline_jezeli_outer_parens_pl` — nawiasy wokół wieloliniowego warunku `JEŻELI` / `INACZEJ JEŻELI` przed `TO`, szczegóły: `dokumentacja-formatuj-opis-logiki-rozszerzenia.mdc`).
+
+## Reguły — co uwzględnić przed / przy działaniu
+
+1. `dokumentacja-przed-praca-czytaj-reguly.mdc` — kolejność pracy w projekcie dokumentacji.
+2. `dokumentacja-tabelka-pola-formularz-repo.mdc` — **który skrypt na którą kolumnę** (Word POC: Typ pola, Źródło wartości, Opis logiki; przyciski); czcionka **Aptos 8 pt** w komórkach tabel po przetworzeniu.
+3. `dokumentacja-formatuj-opis-logiki-rozszerzenia.mdc` — **zakres narzędzia** dla kolumny [Opis logiki] (normalizacja wyglądu pseudokodu; **bez** obowiązkowego porównania z kodem przy każdym uruchomieniu); możliwe przyszłe heurystyki na samym tekście; **uwaga:** wiele akapitów w jednej komórce Word — unikanie „dziur” `\n\n` w środku jednego warunku `JEŻELI`…`TO` (szczegół: ta sama reguła, podpunkt o `cell_text_opis_logiki_for_reformat` i `_collapse_paragraph_gaps_in_polish_opis`).
+4. Gdy oceniasz sens treści pseudokodu (nie sam wygląd Worda): `dokumentacja-opis-logiki-kolumna.mdc`, ewent. `dokumentacja-opis-logiki-if-then-pluginy.mdc`.
+5. Kolumny **Widoczność** / **Dostępność**: forma listy — `dokumentacja-widocznosc-dostepnosc-forma-word.mdc`; skrypty `/formatuj` zwykle **nie przepisują** tych komórek automatycznie, chyba że użytkownik wyraźnie prosi o poprawę treści.
+
+## Warianty dokumentu (skrót)
+
+- **Wariant A — dokument przycisków / polski schemat** (`JEŻELI`, `TO`, …): z katalogu `Kopie/` uruchom `reformat_opis_logiki_polski_docx.py` (kopie zapasowe `*.bak_polski_opis.docx` — szczegóły w `formatuj.md`).
+- **Wariant B — POC pól:** w tej kolejności: `reformat_poc_typ_pola_docx.py` → `reformat_poc_zrodlo_wartosci_docx.py` → `reformat_poc_opis_logiki_docx.py`. Ostatni krok [Opis logiki]: ewentualnie zamiennie `reformat_opis_logiki_polski_docx.py` przy polskim pseudokodzie — patrz uwaga w `formatuj.md` i nagłówki skryptów w `Kopie/`.
+
+## Relacja do /pole, /przycisk, /akcja
+
+Merytoryka i forma wierszy: komendy `.cursor/commands/pole.md`, `.cursor/commands/przycisk.md`, `.cursor/commands/akcja.md` oraz `dokumentacja-wiersz-pole-poc.mdc`, `dokumentacja-wiersz-przycisk-web.mdc`, `dokumentacja-wiersz-akcja-crm.mdc`. Komenda **`/formatuj`** wyłącznie **normalizuje** plik Word po edycji; nie zastępuje reguł treściowych.
+
+## Relacja do /unifikacja-opis-pol-docx
+
+Pełniejszy workflow (czyszczenie treści [Opis logiki] skryptami `strip_*` / opcjonalnie `bulk_sanitize_*`, potem ten sam pipeline kolumn POC + PL): `.cursor/rules/dokumentacja-komenda-unifikacja-opis-pol-docx.mdc`, komenda `.cursor/commands/unifikacja-opis-pol-docx.md`.
+
+## Repozytorium Neuca.Crm.Magellan
+
+Tylko **odczyt** — bez edycji kodu CRM (reguła projektu).

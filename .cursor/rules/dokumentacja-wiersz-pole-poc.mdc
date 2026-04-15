@@ -1,0 +1,262 @@
+---
+description: Reguła dla komendy Cursor /pole — wiersz dokumentacji POLA CRM (tabela POC pól); kolumny w tym [Typ pola] i [Opis logiki] (szkielet JEŻELI/TO), skrypty reformatu Word. Komenda .cursor/commands/pole.md importuje ten plik.
+alwaysApply: false
+---
+
+# Wiersz typu: pole (atrybut na encji / formularzu)
+
+## Powiązanie z komendą `/pole`
+
+- **Źródło prawdy dla `/pole`:** ten plik (`.cursor/rules/dokumentacja-wiersz-pole-poc.mdc`).
+- **Komenda Cursor:** `.cursor/commands/pole.md` — w czacie `/pole`; pierwszy krok to zastosowanie niniejszej reguły oraz odesłania z niej do `dokumentacja-opis-logiki-kolumna.mdc`, `dokumentacja-tabelka-pola-formularz-repo.mdc` itd.
+- **Wzorzec gęstości [Opis logiki]:** `Kopie/opis_pol_przyciskow_akcji_v3.docx` — **polski** schemat (`JEŻELI` / `TO` / `I` / `LUB` / `DLA KAŻDEGO` / `UTWÓRZ` / `INACZEJ`), same wiersze pseudokodu, bez akapitów.
+
+## Kiedy to jest „pole”, a nie przycisk ani akcja
+
+- Dokumentujesz **atrybut danych** (kolumna w tabeli POC **pól**): Logiczna nazwa pola, **Typ pola**, Źródło wartości, Opis logiki, Moment aktualizacji, Znaczenie biznesowe (+ opcjonalnie Formularz, Uwagi). Przy **`/pole` kolumna [Typ pola] jest obowiązkowa** w tym samym sensie co pozostałe ustalone kolumny — nie pomijać jej w odpowiedzi, jeśli użytkownik uzupełnia lub poprawia wiersz.
+- **Nie** dotyczy: kontrolki HTML/Web Resource (**przycisk**) ani standardowej operacji rekordu typu Usuń w potoku (**akcja**).
+
+## Źródła prawdy
+
+- **Eksport CRM** (`customizations.xml` w `tabele_z_dokumentacji_*`) — tylko odczyt; etykiety PL, typ skalarny, formularz, `datafieldname`.
+- **Repozytorium** `Neuca.Crm.Magellan` — tylko odczyt; logika pluginów, JS, Hangfire przy weryfikacji opisu.
+
+## Kontrolka na formularzu głównym (`disabled`) — obowiązkowa weryfikacja przy `/pole`
+
+**Zakres:** wyłącznie **procedura wewnętrzna asystenta** (co sprawdzić w eksporcie CRM przed napisaniem treści). **Nie wklejaj** do żadnej kolumny POC treści technicznej o eksporcie: ani „FormXml”, ani „`disabled`”, ani „kontrolka wyłączona w XML”, ani odwołań do węzłów `<control>` / `systemform`. Czytelnik biznesowy nie czyta `customizations.xml`. **Skutek** tej weryfikacji: w [Źródło wartości], [Moment aktualizacji] i [Opis logiki] **nie sugeruj** edycji przez użytkownika na formularzu, gdy `disabled="true"` — opisz faktyczne źródło wartości (mapowanie, zapis powiązanej encji, import itd.). **Nie** dopisuj **osobnego punktu listy** wyłącznie po to, by napisać „odczyt na formularzu…”, „bez wprowadzania wartości na formularzu głównym” ani innego zdania o interfejsie, które nie wnosi źródła biznesowego (to nie jest [Widoczność]). Wyjątek: **Uwagi (repo)** mogą zawierać technikalia dla IT, jeśli zespół tego wymaga, nadal **bez** obowiązku powielania metadanych formularza tam, gdzie wystarczy odesłanie do repo.
+
+**Zawsze** sprawdź w `customizations.xml` stan kontrolki dla dokumentowanego pola na **formularzu głównym** encji: `FormXml` → `forms type="main"` → `systemform` → węzeł `<control … datafieldname="<logiczna_nazwa>" …>`.
+
+- Odczytaj atrybut **`disabled`**: `disabled="true"` albo `disabled="false"` (brak atrybutu traktuj jak możliwość edycji zgodnie z zachowaniem eksportu — jeśli niepewność, sprawdź w tym samym węźle jawnie).
+- **`disabled="true"`:** użytkownik **nie zmienia** wartości tego pola przez kontrolkę na tym formularzu. **Nie** pisz w [Opis logiki], [Źródło wartości] ani [Momencie aktualizacji], że „użytkownik wprowadza / wybiera / zmienia” pole na formularzu. Opisuj źródło wartości: zapis przy **tworzeniu** rekordu, **API**, **plugin**, **import**, **Web Resource** (wg repo i kontekstu), ewentualnie odczyt w UI bez edycji.
+- **Antywzorzec szablonu „`JEŻELI` zapis … z formularza” (w tym „`JEŻELI` zapis [Produkt dopasowany] z formularza …”):** nie używaj go jako **domyślnego** nagłówka warunku dla pozycji dopasowania **bez** sprawdzenia w `customizations.xml`, czy dla tej encji i pola kontrolka ma `disabled="true"`. Gdy pole jest **tylko do odczytu** na formularzu [Produkt dopasowany], w pseudokodzie **nie** sugeruj ścieżki „użytkownik zapisuje na formularzu”, skoro edycja nie występuje w UI — opisz faktyczne źródło (np. **kopiowanie z rekordu [Produkt]** po ustawieniu [Produkt SAP] przy pobraniu wartości katalogowych na pozycję, plugin, synchronizacja na [Produkt przetargu]). Dla pól o tej samej `LogicalName` na encji **[Produkt]** w CRM często istnieje wartość źródłowa w katalogu; w repozytorium Magellan szukaj m.in. przypisań z `product.*` do `postmappedProduct.*` w `GetProductValues` i pokrewnych ścieżkach (nazw metod **nie** wklejaj do kolumn biznesowych — **Uwagi (repo)**).
+- **`disabled="false"`:** można opisać ścieżkę edycji przez użytkownika na formularzu **po spójności z** metadanymi i repo (plugin może nadal nadpisywać — wtedy dopisz w **Uwagi**).
+- **Inny kontekst:** quick create, inny `systemform` lub formularz mobilny może mieć inną wartość `disabled` — wtedy w kolumnie **Formularz** podaj nazwę tego formularza, dla którego wykonujesz weryfikację.
+- **`locklevel` na `<cell>`** w XML bywa pomocnicze; dla dokumentacji **źródłem prawdy o braku edycji w UI** jest **`disabled` na `<control>`** (plus ewentualna logika JS w Web Resource — wtedy skrót w **Uwagi (repo)**).
+
+Powiązanie: sekcja **„Formularz”** w `dokumentacja-tabelka-pola-formularz-repo.mdc` (ten sam plik `customizations.xml`).
+
+## Ustalanie wartości poza formularzem i wiele ścieżek w repozytorium
+
+Po weryfikacji odczytu w **Magellan** (tylko read-only): jeśli pole jest ustawiane **nie wyłącznie** przez zwykły zapis użytkownika z edytowalnej kontrolki — dokumentacja musi to odzwierciedlać we **wszystkich** wierszach, których to dotyczy (nie tylko w jednym przykładzie).
+
+- **[Źródło wartości]:** wypunktuj **ścieżki biznesowe** ustawienia wartości, np. tworzenie rekordu z **mapowania** (Hangfire / integracja z wynikiem dopasowania), **żądanie API** / import, **plugin w trakcie lub po zapisie** (w tym podmiana po odpowiedzi z usługi zewnętrznej), **synchronizacja na powiązaną encję** — zamiast sugerować wyłącznie „wybór na formularzu”, gdy po weryfikacji (sekcja **`disabled`** powyżej) pole **nie jest edytowane przez użytkownika na tym formularzu** albo gdy repo wskazuje inne źródło.
+- **[Moment aktualizacji]:** dopisz momenty specyficzne dla ścieżki (np. **po zapisie** rekordu, gdy plugin synchroniczny zmienia wartość; **po zakończeniu zadania** w tle — jeśli dotyczy zmiany **tego** pola), bez dublowania długiej listy z [Opis logiki].
+- **[Opis logiki]:** osobne bloki `JEŻELI` / `TO` **tylko** gdy **różni się warunek wejścia** albo **wartość po `=`** (np. pierwsze ustawienie z mapowania vs inny produkt katalogowy po regule podmiany). Gdy wszystkie ścieżki prowadzą do tego samego przypisania `[Produkt Dopasowany].[Pole] = [Pole]`, połącz wejścia **`LUB`** lub krótkie etykiety w liniach `I` (np. `I mapowanie ustala [Produkt SAP]`, `LUB I żądanie zapisu ustala [Produkt SAP]`) — jedno `TO`, zgodnie z sekcją **Integracja / zewnętrzne źródło** poniżej; **bez** drugiego bloku będącego wyłącznie parafrazą [Źródło wartości].
+- **Uwagi (repo):** nazwy klas, plików, usług zewnętrznych — tutaj; nie zastępują warunków na polach CRM w pseudokodzie.
+
+### Pola kwotowe (kalkulacja) i pola ustawiane przez proces zewnętrzny / mapowanie — ten sam poziom szczegółowości
+
+Dla pól **wyliczanych** (kwoty, agregaty, wzory liczbowe) dokumentacja wymaga jawnego mechanizmu: wzór albo łańcuch `JEŻELI` / `TO` z polami źródłowymi — wg sekcji **Trzy warstwy** w `dokumentacja-opis-logiki-kolumna.mdc` (warstwa **Wzór liczbowy**) oraz pkt **21a** dla agregatów na [Pakiet].
+
+**To samo oczekiwanie co do „jak wartość powstaje”** obowiązuje pola, które **nie** są prostym wpisem użytkownika z edytowalnej kontrolki — w tym **lookupów** i innych pól referencyjnych ustawianych przez **mapowanie**, **zadanie w tle**, **odpowiedź usługi zewnętrznej**, **plugin w trakcie lub po zapisie**, gdy w repozytorium widać **odróżnialne ścieżki** lub **wejścia z konkretnych pól CRM** (kolejność kryteriów, rozgałęzienie „jest kod / nie ma kodu”, podmiana po zwrotce z integracji itd.).
+
+- **[Źródło wartości]:** **wykaz źródeł** (kanały: mapowanie, formularz, plugin, kalkulacja struktury przetargu, proces na [Pakiet] itd.) — **zwięzło**, bez opisywania mechanizmu; szczegóły wejść, warunków i przypisań wyłącznie w [Opis logiki] — zgodnie z `dokumentacja-zrodlo-wartosci-tresc.mdc`, sekcja **Zwięzłość: tylko wykaz źródeł**. Bez nazw klas w tej kolumnie.
+- **[Opis logiki]:** rozłóż na **osobne gałęzie** `JEŻELI` / `INACZEJ JEŻELI` / `TO` tam, gdzie **różni się** warunek wejścia albo **różni się** wynik przypisania do dokumentowanego pola — jak w pkt **12** w `dokumentacja-opis-logiki-kolumna.mdc`. Po `=` podawaj **konkret**: `[Encja].[Pole] =` rekord wskazywany przez lookup z ustalonego źródła, `= puste` przy braku dopasowania, kopia z `[Encja źródłowa].[Pole]` itd. (pkt **11**). **Niewystarczające** jako jedyna treść gałęzi: ogólne „ustalane przez mapowanie”, „z żądania zapisu”, „plugin ustawia” **bez** warunków na **etykietach pól CRM** i bez rozróżnienia ścieżek, jeśli w kodzie takie rozróżnienie jest — spójnie z pkt **21b** w `dokumentacja-opis-logiki-kolumna.mdc`.
+- **[Moment aktualizacji]:** zdarzenia specyficzne dla ścieżki (np. po zapisie gdy plugin podstawia wartość po odpowiedzi zewnętrznej; po zakończeniu zadania w tle), bez dublowania całej listy z [Opis logiki].
+- **Uwagi (repo):** indeksy wyszukiwania, nazwy klas mapperów, kolejki, dokładne nazwy usług zewnętrznych.
+
+**Spójność z zakazem parafrazy:** nadal **nie** wolno drugiego bloku `JEŻELI` będącego **wyłącznie** powtórzeniem punktów z [Źródło wartości] bez nowych warunków na `[Encja].[Pole]` — sekcja **Integracja / zewnętrzne źródło** poniżej. Różnica: obowiązek **mechanizmu ustalenia wartości** dotyczy treści merytorycznej gałęzi (co jest warunkiem, co jest przypisywane), a **nie** ponownego wypisania samej listy kanałów z [Źródło wartości].
+
+## Kolumny — co pamiętać
+
+- **Kontekst encji z listy Excel / specyfikacji (nie mylić z logiczną nazwą atrybutu):** zespół może podawać **nazwę logiczną encji** (np. `neu_mappedproduct`), żeby jednoznacznie wskazać **o którą tabelę w CRM chodzi**, gdy ta sama etykieta pola lub podobny opis występuje w kilku encjach. To jest **identyfikator encji**, nie zamiennik kolumny „Logiczna nazwa pola” w dokumencie POC. Asystent **wewnętrznie** szuka w `customizations.xml` w tej encji właściwego **atrybutu** (`LogicalName`, np. lookup `neu_mappedproductid`) i w wierszu POC w kolumnie **Logiczna nazwa pola** wpisuje **nazwę atrybutu z metadanych**. Jeśli użytkownik wprost wymaga innej konwencji kolumny (wyłącznie nazwa encji), potwierdza to osobno.
+- **Formularz:** nazwa `systemform` z XML (PL, languagecode 1045), nie mylić z nazwą encji — szczegóły w `dokumentacja-tabelka-pola-formularz-repo.mdc` (sekcja „Formularz”). Przy `/pole` **zawsze** wykonaj wewnętrznie sekcję powyżej (**`disabled`**); w komórkach nie cytuj XML ani stanu kontrolki. **Plik `opis_pol_przyciskow_akcji*.docx`:** albo **pusta** kolumna Formularz w wierszach kontynuacji (spójnie z istniejącymi wierszami), albo — **na prośbę użytkownika** — **forward-fill** etykietą bloku w każdym wierszu (`dokumentacja-zbiorczo-wiersze-poc-docx.mdc`, skrypt `Kopie/_fill_formularz_forward_blok_v5.py`), żeby nie mylić encji przy tej samej `LogicalName`.
+- **Typ pola:** metadane skalarne D365; opisy „skąd wartość” **nie** wciskaj do [Typ pola] jeśli należą do Źródła — `dokumentacja-tabelka-pola-formularz-repo.mdc` (sekcja [Typ pola] + skrypt). Szczegóły dla komendy `/pole`: poniżej sekcja **Kolumna [Typ pola] przy `/pole`**.
+- **Źródło wartości:** lista punktów `•`, język biznesowy — `dokumentacja-zrodlo-wartosci-tresc.mdc` (w tym **wykaz źródeł** bez dublowania mechanizmu z [Opis logiki]) + ten sam plik „tabelka” (sekcja [Źródło wartości]). W treści tej kolumny: odniesienia do pól w nawiasach **`[ ]`**, nie [ ]; bez logicznych nazw atrybutów (`neu_*`); dla pól wyliczanych/agregowanych zwrot **Kalkulacja** (nie „obliczenie systemowe”) — szczegóły w `dokumentacja-zrodlo-wartosci-tresc.mdc`. **Interpunkcja:** bez znaku U+2014 (`—`) w punktach listy; przecinek, kropka lub drugi punkt zamiast „A — B”; `dokumentacja-pokaz-wyjscie-w-czacie.mdc`, sekcja 3b oraz sekcja „Czego pisać - forma” w `dokumentacja-zrodlo-wartosci-tresc.mdc`.
+- **Opis logiki:** przy **`/pole` — język polski** w pseudokodzie (`JEŻELI` / `TO` …), tak jak w `opis_pol_przyciskow_akcji_v3.docx`; format Word: `format_opis_cell_polish` w `Kopie/docx_cell_format.py`, skrypt `Kopie/reformat_opis_logiki_polski_docx.py`. **Bez** `UPDATE`; nierówność `<>`; notacja `[Encja].[Pole]` — treść merytoryczna: `dokumentacja-opis-logiki-kolumna.mdc`, ewent. `dokumentacja-opis-logiki-if-then-pluginy.mdc`. (Inne dokumenty POC utrzymywane wyłącznie po angielsku — `format_opis_cell` / `reformat_poc_opis_logiki_docx.py` — wtedy spójnie z `dokumentacja-tabelka-pola-formularz-repo.mdc`; **nie mieszać** języków w jednym pliku.)
+- **Moment aktualizacji** i **Znaczenie biznesowe:** obowiązkowe sensownie wypełnione; zakres tylko zmiany **tego** pola — punkt 9 w `dokumentacja-opis-logiki-kolumna.mdc`. Dla pól agregowanych na **[Pakiet]** — poniżej sekcja **[Moment aktualizacji] — pola wyliczane na [Pakiet]**. **Język:** bez nazw metod i klas z repo w tych kolumnach — poniżej sekcja **[Moment aktualizacji] i [Znaczenie biznesowe] — bez nazw z repozytorium i kodu**.
+
+## [Moment aktualizacji] i [Znaczenie biznesowe] — bez nazw z repozytorium i kodu
+
+Czytelnik biznesowy nie interpretuje nazw z kodu C# ani wewnętrznych procedur Magellan. W kolumnach **[Moment aktualizacji]** i **[Znaczenie biznesowe]** (oraz w **[Źródło wartości]** — spójnie z `dokumentacja-zrodlo-wartosci-tresc.mdc`):
+
+- **Zakaz symboli « i »** w treści komórki do wklejki; odniesienia do pól i encji w notacji `[Encja].[Pole]` lub opis słowami; cytat dosłowny techniczny w cudzysłowie ASCII `"…"`. Pełna zasada: `dokumentacja-zrodlo-wartosci-tresc.mdc`, sekcja „Nawiasy « » — [Źródło wartości], [Moment aktualizacji], [Znaczenie biznesowe]” oraz `dokumentacja-pokaz-wyjscie-w-czacie.mdc`, sekcja 2.
+- **Zakaz** nazw metod (np. `SetProductSAP`, `GetProductValues`, `SetIsTradingAdmissionDateInTerm`), klas (`PluginHelper`, `TenderStructureCalculator`), plików `.cs` / `.js`, nazw Web Resource, logicznych nazw atrybutów `neu_*`.
+- **Stosuj** zdarzenia i kontekst zrozumiały w CRM: przy zapisie rekordu [Produkt Dopasowany], po uzupełnieniu wskazań do [Przetarg] i [Produkt Przetargu], przy przeliczeniu struktury przetargu, w zadaniu w tle przeliczającym strukturę, przy zapisie gdy reguły w systemie ustawiają pole, mapowanie z karty [Produkt] — w zależności od weryfikacji w eksporcie i repozytorium. **Bez** zwrotów „warstwa serwera”, „logika serwerowa”, „po stronie serwera” w kolumnach dla biznesu (`dokumentacja-zrodlo-wartosci-tresc.mdc`, zakaz architektury wdrożenia w komórce).
+- **Zakaz zbędnych odsyłaczy do innej kolumny:** w **[Moment aktualizacji]** (i w odpowiedziach `/pole` do wklejki) **nie** dopisuj zwrotów w stylu „(warunki jak w [Opis logiki])”, „zgodnie z [Opis logiki]”, „o którym mowa w [Opis logiki]”, „gdy spełnione są warunki wejścia z [Opis logiki]”. Czytelnik ma obok pełną kolumnę [Opis logiki]; w [Momencie] wystarczą **same zdarzenia lub kontekst czasowy** (np. przy zapisie rekordu, po zmianie wskazania [Produkt SAP], przy przeliczeniu struktury przetargu), bez metaparafrazy „jak w sąsiedniej komórce”. Zamiast odwołania do konkretnej metody z repo nadal: język biznesowy, bez nazw klas (powyżej).
+- **Mapowanie dla IT:** nazwa metody, klasa, plik — wyłącznie w **Uwagi (repo)** lub **Uwagi techniczne**.
+
+Ta sama zasada dotyczy odpowiedzi asystenta przy komendzie `/pole`: pełny tekst [Moment aktualizacji] do wklejki musi być czytelny dla biznesu; technikalia na końcu w Uwagi (repo), nie w środku listy punktów [Momencie].
+
+## [Moment aktualizacji] — forma listy przy wielu zdarzeniach
+
+Gdy wartość pola może się zmieniać w **kilku odrębnych sytuacjach czasowych**, wypisz **każdą** jako **osobny punkt** `•` (osobny akapit w Wordzie), zamiast łączyć je w jednym punkcie spójnikami „lub”, „albo”, „i”. Przykład: zamiast „Zapis rekordu po kalkulacji pozycji lub przy synchronizacji z [Produkt przetargu], gdy dotyczy” — osobno `•` dla przeliczenia / zapisu po kalkulacji i osobno `•` dla synchronizacji z [Produkt przetargu], gdy dotyczy. Dotyczy szablonów zbiorczych w `Kopie/` (np. `MOMENT_BLOK` w `blok39_pd_economia_opisy.py`) oraz odpowiedzi przy `/pole`.
+
+## [Moment aktualizacji] — pola wyliczane na [Pakiet]
+
+Gdy [Opis logiki] opiera się na skrócie **`JEŻELI kalkulacja [Pakiet]`** (wartość z przeliczenia / agregacji po produktach, zwykle **0** przy utworzeniu rekordu pakietu), **zalecany** zwięzły układ **dwóch punktów** z **`• `** (lista jak w innych kolumnach):
+
+- `Przy utworzeniu [Pakiet] (zero)` — gdy pole jest zerowane na starcie.
+- `Kalkulacja` — gdy dalsze zmiany wartości następują wyłącznie przy przeliczeniu pakietu (to samo słowo co w ustaleniach [Źródło wartości], pkt 5 w `dokumentacja-zrodlo-wartosci-tresc.mdc`).
+
+Szczegóły techniczne (pluginy, zadania w tle), jeśli nie są potrzebne w [Momencie], trzymaj w **Uwagi (repo)** — bez dublowania długiej listy zdarzeń w komórce [Moment aktualizacji].
+
+## Kolumna [Typ pola] przy `/pole` (obowiązkowa w zakresie wiersza)
+
+**Źródło prawdy treści i formatu:** sekcja **[Typ pola] w dokumencie Word (POC) — format ustalony** oraz podsekcje o metadanych z `customizations.xml` w pliku `dokumentacja-tabelka-pola-formularz-repo.mdc` (nie wymyślać innego układu ani dublować treści z [Źródło wartości]).
+
+**Skąd brać merytorykę:** w eksporcie CRM, w sekcji atrybutów encji, element `<attribute PhysicalName="<logiczna_nazwa>">` — typ skalarny (np. Decimal, Money, Two Options, Picklist), dla liczb: `Accuracy` (miejsca po przecinku), ewent. `MinValue` / `MaxValue`; dla opcji: krótka informacja że wartości pochodzą z zestawu opcji w CRM (bez listy `neu_*` w tej kolumnie po normalizacji).
+
+**Decimal — `Accuracy` per pole:** Liczba miejsc po przecinku bierz z **tego** atrybutu w XML dla dokumentowanej encji. **Nie** zakładaj tej samej dokładności dla wszystkich pól „procentowych” ani sąsiadów w tabeli — różne `LogicalName` mogą mieć różne `<Accuracy>` (np. `neu_marginbruttopercent`: 2; `neu_stockfinancingpercent` i `neu_percentbenefitforzach`: 10 w tym samym eksporcie). Skrypty i szablony w `Kopie/` muszą rozróżniać pola według XML, nie według etykiety lub bloku dokumentu.
+
+**Odnośnik do użytkownika (pole Lookup do użytkownika w CRM, typowo encja `systemuser`, np. `createdby`, `modifiedby`, pola „Utworzony przez” / „Zmodyfikowany przez”):** W [Typ pola] wystarczy **zwięzła lista dwóch punktów** (format `•` jak po normalizacji Word):
+• Odwołanie
+• Użytkownik
+
+Dłuższy opis angielskiego typu z eksportu („Lookup”, pełna nazwa encji docelowej, `RequiredLevel`) nie jest wtedy obowiązkowy w tej komórce — doprecyzowanie dla IT można dać w **Uwagi (repo)** lub przy weryfikacji w `customizations.xml`.
+
+**Data i godzina (pole `datetime` w CRM — m.in. znaczniki systemowe `createdon`, `modifiedon`, etykiety typu „Data utworzenia rekordu” / „Data modyfikacji rekordu”):** W [Typ pola] przy `/pole` stosuj **jeden punkt** (format `•` jak po normalizacji Word):
+• Data
+
+Nie rozwijać w tej kolumnie do „Data i godzina (DateTime)” ani pełnego opisu zachowania strefy — to **[Źródło wartości]** / **[Uwagi (repo)]** (np. tylko odczyt, wartość z platformy przy zapisie).
+
+**Tekst (łańcuch / nvarchar, w tym pola „rozczytane” z Excela):** W dokumencie **`opis_pol_przyciskow_akcji*.docx`** stosuj **to samo brzmienie co w istniejących wierszach tej tabeli** — zwykle **• Pole tekstowe jednoliniowe**. **Nie** wprowadzaj jako domyślnego wzorca pary „• Tekst” + „• Maksymalna długość 4000 znaków” ani „• Tekst (wielowierszowy)” + długość, jeśli w **tym samym pliku** przyjęto już formę „jednoliniowe” dla podobnych pól. **Przed dopisaniem nowego wiersza** porównaj [Typ pola] u **2–3 podobnych pól** w tej samej tabeli.
+
+**Liczba całkowita (`Whole Number` / int):** W **`opis_pol_przyciskow_akcji*.docx`** trzymaj się wzorca z istniejących wierszy (np. **• Liczba całkowita**, **• wartość minimalna: …**, **• wartość maksymalna: …** jak przy polach typu `neu_packagingqty` w tym pliku), a nie ogólnego opisu z eksportu CRM w innej formie, jeśli dokument już utrwalił inny układ punktów.
+
+**Tak lub Nie (pole `bit` / Two Options w CRM, zestaw opcji z wartościami 0 i 1, np. flagi `neu_*`):** W [Typ pola] przy `/pole` stosuj **trzy punkty** (format `•` jak po normalizacji Word):
+• Tak lub Nie
+• Nie: 0
+• Tak: 1
+
+Dopisek o domyślnej wartości z `AppDefaultValue` w XML — w **[Źródło wartości]** lub jedna linia w **Uwagi**, nie jako czwarty punkt w [Typ pola], o ile projekt nie wymaga wyjątkowo jawnego „domyślnie: Nie” w tym samym bloku.
+
+**Forma w dokumencie:** po uzupełnieniu lub wklejce z CRM uruchomić z katalogu `Kopie/`: `python reformat_poc_typ_pola_docx.py "Nazwa.docx"`; implementacja formatu komórki: `format_typ_cell` / `typ_to_bullet_lines` w `Kopie/docx_cell_format.py`. Czcionka tabeli po przetworzeniu: **Aptos 8 pt** (jak w pozostałych kolumnach).
+
+**Odpowiedź w czacie przy `/pole`:** jeśli w zadaniu podajesz lub poprawiasz wiersz, dołącz **pełny tekst komórki [Typ pola]** (gotowy do wklejenia), **obok** [Opis logiki] i innych zmienianych kolumn — zgodnie z `dokumentacja-pokaz-wyjscie-w-czacie.mdc` (użytkownik musi móc zweryfikować treść bez otwierania pliku).
+
+**Czego nie robić:** nie zastępować [Typ pola] jednym zdaniem typu „jak w CRM” bez skalarnego opisu; nie kopiować do tej kolumny opisu logiki biznesowej ani [Źródło wartości] (np. „plugin”, „ZPZK”) — to osobne kolumny.
+
+## [Opis logiki] przy /pole — forma i treść (zgodnie z dokumentacja-opis-logiki-kolumna.mdc)
+
+**Pierwszeństwo:** pełne ustalenia są w `dokumentacja-opis-logiki-kolumna.mdc` (pkt 0, 5, 6a–6c, 8–11 w tym podpunkt przy **etykiecie CRM niejasnej**, 13–15, 18–19, **21a**, **21b**). Ten plik dodaje tylko **język polski** i **gęstość** jak w `Kopie/opis_pol_przyciskow_akcji_v3.docx`. **Nie** stosuj skrótów z tej reguły wbrew głównemu plikowi.
+
+**Skrót `JEŻELI kalkulacja [Pakiet]`:** Dla agregatów na **[Pakiet]** zamiast długiego warunku o strukturze przetargu i zapisie produktów — użyj **`JEŻELI kalkulacja [Pakiet]`** (definicja i granice: **pkt 21a** w `dokumentacja-opis-logiki-kolumna.mdc`); [Moment aktualizacji] — wg sekcji **[Moment aktualizacji] — pola wyliczane na [Pakiet]** w tym pliku (np. utworzenie → zero + punkt **Kalkulacja**).
+
+**Forma:** polskie słowa kluczowe (`JEŻELI`, `TO`, `I`, `LUB`, `INACZEJ JEŻELI`, **`DLA KAŻDEGO`**, `ZBIERZ`, `UTWÓRZ`, `NIE JEST W` …); wyłącznie **wiersze pseudokodu** — nawiasy `(` `)`, notacja `[Encja].[Pole]` (etykiety jak w UI); **w tej komórce nie stosuj symboli « i » wokół nazw pól** — tylko nawiasy kwadratowe, zgodnie z pkt 10 w `dokumentacja-opis-logiki-kolumna.mdc` (podpunkt o « »); przy przyciskach osobna sekcja **Walidacja** po dwóch enterach (nagłówek), **bez** dopisków `(Walidacja)` przy liniach `TO` w głównym bloku — `dokumentacja-wiersz-przycisk-web.mdc` (w tym sekcja **Schemat zamiast opisu zdaniowego — rozbicie gałęzi, pętle, zbiory** przy pluginie wieloetapowym i zadaniu wsadowym), `dokumentacja-opis-logiki-kolumna.mdc`. **Zakaz** akapitów, wstępów opisowych i powielania treści z kolumny [Źródło wartości] (lista pluginów / skrót źródła zostaje w [Źródło], nie jako zamiast szkieletu).
+
+**Dlaczego asystent nadmiernie „prozuje” [Opis logiki] (najczęstsze przyczyny):**
+
+1. **Pomyłka kolumn:** treść, która należy do [Źródło wartości] (kanały, „skąd się bierze”), [Moment aktualizacji] (kiedy) lub [Znaczenie biznesowe] (po co), jest wklejana do pseudokodu zamiast zostawienia tam wyłącznie gałęzi decyzyjnych.
+2. **Zdaniowy warunek zamiast predykatów:** jedna linia po `JEŻELI` w stylu „uzupełnianie wartości produktu ładuje dane z karty … gdy … w przepływie …” zamiast kilku krótkich wierszy z `I` i warunkami na polach `[ ]` albo zamiast skrótu `JEŻELI kalkulacja [Encja]` / `JEŻELI zapis [Encja]` (pkt 21a tam gdzie pasuje).
+3. **Opis mechanizmu zamiast przypisania:** frazy typu „odwzorowanie słownika na tekst”, „parsowanie liczby z pola tekstowego”, „synchronizacja kopiuje na encję nadrzędną” — to **Uwagi (repo)** lub [Źródło wartości], nie środek komórki [Opis logiki]; w pseudokodzie wystarcza `TO [Pole docelowe] = [Encja źródłowa].[Pole źródłowe]` lub `TO [Pole] = wartość wg słownika [Produkt SAP].[Pole słownikowe]` jednym krótkim ujęciem, bez drugiego zdania.
+4. **Nawyk językowy modelu:** naturalne brzmienie „ładnego” opisu biznesowego — w tym projekcie **nie** jest celem komórki [Opis logiki]; celem jest **schemat decyzyjny** zgodny z `opis_pol_przyciskow_akcji_v3.docx`.
+
+**Zakaz formuł brzmiących jak proza (zamień na predykaty lub skrót):** nie zaczynaj warunku od „JEŻELI uzupełnianie wartości produktu …”, „JEŻELI wykonywane jest mapowanie …”, „JEŻELI po zapisie następuje propagacja …” jako pełnych zdań — użyj `JEŻELI zapis [Encja]`, `JEŻELI [Pole] <> puste`, `JEŻELI kalkulacja [Produkt Dopasowany]` albo `I` z kolejnym predykatem na `[ ]`. Wyjątek: jedna **krótka etykieta ścieżki** w jednej linii (np. `I integracja API`), bez dalszego rozwinięcia w tym samym wierszu.
+
+**Zakaz „prozy w jednej linii `JEŻELI`” (częsty błąd po edycji treści):** Pojedyncza linia `JEŻELI …` / `INACZEJ JEŻELI …` **nie może** brzmieć jak zdanie z dokumentacji funkcjonalnej (długi komplement, „w ramach …”, „skutkujące wyzerowaniem … na …”, „rekordu” jako wypełniacz). To nadal **proza w [Opis logiki]**, tylko w krótszej formie niż akapit. **Poprawka:** skrót z ustalonym znaczeniem — `JEŻELI kalkulacja [Encja]` (w tym `JEŻELI kalkulacja [Produkt Dopasowany]`, `JEŻELI kalkulacja struktury przetargu` tam gdzie chodzi o synchronizację wiersza, nie o agregat na [Pakiet]), `JEŻELI utworzenie [Encja]`, `JEŻELI usunięcie [Encja]`, ewent. `JEŻELI zapis [Encja]` — szczegół **kiedy** i opis skutku poza pseudokodem w [Momencie aktualizacji] / [Źródło wartości], nie w rozwlekłym warunku. **Antywzorzec → wzorzec:** `JEŻELI kalkulacja produktu dopasowanego w ramach struktury przetargu` → `JEŻELI kalkulacja [Produkt Dopasowany]`; `JEŻELI usunięcie powiązanego [Produkt Dopasowany] skutkujące wyzerowaniem pól na [Produkt przetargu]` → `JEŻELI usunięcie [Produkt Dopasowany]`.
+
+**Test przed wysłaniem odpowiedzi (`/pole`):** Przejrzyj każdą linię bloku [Opis logiki]. Jeśli linia **nie** jest: (a) słowem kluczowym struktury, (b) kontynuacją nawiasu warunku, (c) krótkim predykatem z `[ ]` / `=` / `<>`, (d) przypisaniem po `TO` — przepisz albo usuń. Jeśli linia czyta się jak akapit z dokumentacji funkcjonalnej — przenieś treść do innej kolumny lub **Uwagi (repo)**.
+
+**Antywzorzec / wzorzec (kopiowanie z encji źródłowej, ten sam sens):**
+
+- Źle (proza w `JEŻELI`):  
+  `JEŻELI uzupełnianie wartości produktu ładuje dane z karty [Produkt SAP] dla ustawionego [Produkt] i w tym samym przepływie [Produkt Pharmindex] jest pusty`  
+- Dobrze:  
+  `JEŻELI zapis [Produkt Dopasowany]`  
+  `I [Produkt] <> puste`  
+  `I [Produkt Pharmindex] = puste`  
+  `TO [Pole docelowe] = [Produkt SAP].[Pole źródłowe]`  
+
+- Źle (mechanizm zamiast przypisania):  
+  `TO [Droga podania] = tekst odpowiadający polu drogi podania na [Produkt SAP] po odwzorowaniu wartości słownika na etykietę tekstową`  
+- Dobrze:  
+  `TO [Droga podania] = etykieta z [Produkt SAP].[Droga podania]`  
+  (szczegół mapowania opcji na tekst — **Uwagi (repo)**, nie druga linia `TO`).
+
+**Schemat zamiast „ściany tekstu” w odpowiedzi asystenta (`/pole` w czacie i wklejka do Worda):** W [Opis logiki] **nie** zamieniać zdania z [Źródło wartości] na dłuższy parafraz w liniach `JEŻELI` / `TO`. **Zakaz** rozwlekłych dopisków w tej samej komórce w stylu: „wartość przekazana w żądaniu (pole … w treści POST)”, „identyfikator rekordu … użyty przy tworzeniu”, „ten sam rekord co przy kopiowaniu …” — jeśli dopisek jest potrzebny dla IT, **jedna linia** w **Uwagi (repo)**, a w pseudokodzie zostaje krótkie `TO [Encja].[Pole] = …` z notacją `[ ]` lub literałem (pkt 11 w `dokumentacja-opis-logiki-kolumna.mdc`). W liniach warunku wystarcza **krótka etykieta ścieżki**: np. `I generowanie oferty z przetargu`, `I integracja API`, `I import JSON` — **bez** powielania pełnej listy punktów z [Źródło wartości]. Po `TO` przy kopiowaniu lookupu: **`= [Encja źródłowa]`** lub **`= [Encja].[Pole lookupu]`** z rekordu źródłowego; **bez** powtórzenia całego opisu biznesowego w nawiasie.
+
+**Po `TO` — zakaz „prozy roli pola”:** Jedna linia `TO [Encja].[Pole] = …` **nie** może być **akapitem** wyjaśniającym rolę pola w łańcuchu wyliczeń (np. „współdziała z innymi progami…”, „łączy się z [Cena urzędowa] i … przy ustalaniu …”, „data powiązana z podwyżką…”, „od której może być liczona lub obcinana [Cena sprzedaży] przy…”). To idzie do **[Znaczenie biznesowe]** lub do **osobnych** linii `JEŻELI` / `I` na polach `[ ]`, jeśli warunek jest częścią przypisania. Skrót: po `=` preferuj **krótkie źródło** (`= próg …`, `= pole z [Produkt]`, `= wzór na [ ]`) — pkt **6b2** w `dokumentacja-opis-logiki-kolumna.mdc`. **Uwaga:** „krótkie źródło” to **nadal** jawne `[Encja].[Pole]` lub wzór z `[ ]` (pkt 11), a **nie** fraza-placeholder w stylu „na pozycji”, „z reguł programu na pozycji” bez pola źródłowego — wtedy czytelnik nie wie, z którego atrybutu CRM pochodzi wartość.
+
+**Jedna ścieżka = jeden blok:** Kilka podobnych zdań opisowych zamiast kolejnych `JEŻELI` z tym samym `TO` = błąd formy — scalić warunki wejścia (`LUB` / jedna linia `I`) albo skrócić etykietę ścieżki do jednego wiersza.
+
+**Integracja / zewnętrzne źródło (częsty błąd w odpowiedziach assistenta):** Osobny drugi blok `JEŻELI` tylko po to, żeby opisać kanał już wypunktowany w [Źródło wartości] (np. „synchronizacja Pharmindex”, „dane firmy zawierają adres e-mail”) jest **parafrazą [Źródło wartości] w [Opis logiki]**, a nie szkieletem — **zakazane** jako zamiennik prawdziwego pseudokodu. Poprawka: **jeden** łańcuch wejścia — `JEŻELI zapis [Encja]` oraz w kolejnych liniach krótkie `I` / `LUB` (np. `I w żądaniu jest [Pole]`, `LUB`, `I integracja Pharmindex`), potem **jedno** `TO [Encja].[Pole] = …` z notacją `[ ]` lub literałem zgodnie z pkt 11 w `dokumentacja-opis-logiki-kolumna.mdc`. Pełny opis integracji, nazwy klas, mapowanie pól w kodzie — wyłącznie **[Źródło wartości]** i **Uwagi (repo)**; nie dublować ich jako drugiego „akapitu” pod `JEŻELI`.
+
+**Wiele wejść (np. pole Primary Name + skrypt formularza + API) — bez drugiego „kanałowego” bloku:** Gdy [Źródło wartości] wymienia kilka sposobów ustalenia wartości (skrypt kopiujący z lookupu, zapis API), w [Opis logiki] **nie** dopisuj drugiego `JEŻELI` wyłącznie po to, żeby napisać „np. API”, „inny kanał niż formularz”, „zapis z żądania” w **nawiasie** przy warunku — to nadal **proza w środku `JEŻELI`**, nie schemat. **Poprawka:** osobne gałęzie tylko gdy **różni się przypisanie po `TO`** albo **różni się warunek na polach** w notacji `[ ]`; w przeciwnym razie scal wejścia **`LUB`** w jednym bloku albo użyj **dwóch bloków** `JEŻELI` / `TO` z **krótkimi** warunkami (`[Pole] <> puste`, `[Pole] = puste` + `I zapis zawiera [Nazwa]`), **bez** dopisków wyjaśniających kanał w tej samej linii co `JEŻELI`. Opis „Web Resource ustawia z …”, „równolegle API” — **Uwagi (repo)** lub [Źródło wartości], nie nawias w warunku.
+
+**Zakaz rozwlekłych opisów lookupu w `JEŻELI`:** Zamiast „atrybut ma wartość (odnośnik z nazwą wyświetlaną)” stosuj **`[Etykieta pola] <> puste`** lub **`lookup [Etykieta pola] ma nazwę wyświetlaną`** jako **jedna krótka linia** — spójnie z pkt 14 (`<>`) w `dokumentacja-opis-logiki-kolumna.mdc`.
+
+**Gęstość warunków — bez prozy w `JEŻELI` (flagi `bit`, pola sterujące, akcje ukrytego pola):** W liniach warunku **nie** rozwijać drugiego zdania w nawiasach (np. pełne „Web Resource”, „warstwa serwerowa”, lista encji „Pakiet i Produkty przetargu”, nazwy klas pluginów) — to **Uwagi (repo)** lub [Źródło wartości], nie środek pseudokodu. Zamiast tego jedna krótka fraza: albo **`zapis [Pakiet] po akcji "…"`** (cudzysłów ASCII jak etykieta przycisku / akcji w UI), albo **`[Pakiet].[Pole] = Tak`** + w kolejnej linii **`I`** + jeden skrót końca procesu (np. `przywrócenie statusów zakończone`), bez dopisku „(serwer)” jeśli sens jest jasny z [Momentu] / Uwagi. **Przykład wzorcowy** (ten sam sens co rozwlekła wersja — do dostosowania etykietą pola):
+
+JEŻELI UTWÓRZ [Pakiet]  
+TO [Pakiet].[Flaga do poprzedniego statusu] = Nie  
+
+JEŻELI zapis [Pakiet] po akcji "Przywróć poprzedni status"  
+TO [Pakiet].[Flaga do poprzedniego statusu] = Tak  
+
+JEŻELI [Pakiet].[Flaga do poprzedniego statusu] = Tak  
+I przywrócenie statusów zakończone  
+TO [Pakiet].[Flaga do poprzedniego statusu] = Nie  
+
+**Nazwa akcji w cudzysłowie (Pakiet — propagacja narzutu):** Dla **[Pakiet].[Pochodzenie narzutu %]** (`neu_overheadpercentsource`) w liniach typu `JEŻELI zapis [Pakiet] po akcji "…"` używaj ustalonej etykiety biznesowej **Propagacja narzutu** (nie starszego zwrotu „Automatyzacja narzutu”). Inna nazwa przycisku / identyfikator w Web Resource lub w repozytorium Magellan — w **Uwagi (repo)**, nie zamiast cudzysłowu w pseudokodzie.
+
+**Lewa krawędź komórki — `ZBIERZ`, `DLA KAŻDEGO`, `NIE JEST W`:** Te oznaczenia muszą **rozpoczynać osobny wiersz** pseudokodu i być **przy lewej krawędzi komórki** (bez wiodącego wcięcia spacji), tak jak `JEŻELI` / `TO` w bloku głównym — nie w środku linii po `=` ani jako zawinięcie po polu (np. nie `… = ZBIERZ` w jednej linii z przypisaniem; nie `…] DLA KAŻDEGO` bez łamania przed `DLA KAŻDEGO`). Po zapisie treści w Wordzie uruchom `Kopie/reformat_opis_logiki_polski_docx.py` — `format_opis_cell_polish` w `Kopie/docx_cell_format.py` (`split_pl_structure_keywords_to_own_lines`, `flush_pl_structure_keywords_left_edge`) ustala ten układ automatycznie.
+
+**Operator `I` (AND) w jednym wierszu z `JEŻELI`:** Jeśli w jednej linii są co najmniej dwa predykaty rozdzielone spacją, literą I i spacją (operator AND w PL), pipeline PL rozbija je na osobne wiersze (`split_inline_i_pl` w `indent_polish_opis_structure`), potem `nest_polish_opis_structure` wyrównuje wcięcia kontynuacji w bloku — **nie** polegaj na wizualnym zawinięciu Worda (wtedy „istnieje…” może wyglądać jak błędne wcięcie, a litera I w słowie myli się z operatorem). **Kolumna [Logiczna nazwa pola]:** bez Enterów w środku `neu_*`; wąska kolumna może **złamać** długą nazwę w widoku — poszerz kolumnę (`dokumentacja-tabelka-pola-formularz-repo.mdc`, punkt 10 przy [Opis logiki] w Wordzie).
+
+**Agregacje (suma / zbieranie po wielu rekordach):** Gdy wartość pola to **łączny wynik po wielu wierszach** (np. produkty w pakiecie, pozycje mapowane), **nie** zamieniać tego na jedno opisowe zdanie ani na samo `TO … = suma …` bez kontekstu zbioru. Obowiązuje **blok `DLA KAŻDEGO`** z warunkiem na zbiór (linie z `I` / filtr statusów / warunek `gdzie` — jak w wzorcu v3), potem **`TO [Encja].[Pole docelowe] =`** z **`SUMA`** lub **`ZBIERZ`** nad `[Encja].[Pole źródłowe]` zgodnie z pkt 6a w `dokumentacja-opis-logiki-kolumna.mdc`. **Zakaz** zastępowania `DLA KAŻDEGO` długą prozą typu „dla wszystkich produktów przetargu należących do pakietu z wyłączeniem…” — to ma być lista warunków w liniach pseudokodu, nie akapit.
+
+**Zbiór / wykluczenie wartości — `NIE JEST W`:** W polskim pseudokodzie odpowiada to angielskiemu **`NOT IN`** (zamiana w `Kopie/docx_cell_format.py` w `polish_opis_plain_text`; nagłówek mapowania w `Kopie/reformat_opis_logiki_polski_docx.py`). Używaj **`[Encja].[Pole] NIE JEST W (…)`** (nawias z etykietami wartości CRM / statusów), gdy rekord ma **nie należeć** do podanego zestawu — typowo **wewnątrz** warunku pod `DLA KAŻDEGO` albo w linii `I` / `JEŻELI`. **Nie** rozwijaj tego jednym zdaniem „z pominięciem statusów…” bez schematu — pkt 6c w `dokumentacja-opis-logiki-kolumna.mdc`.
+
+**Opis słowny poza komórką:** Efekt dla użytkownika („po co pole”, „co przechowuje”) — wyłącznie w **[Znaczenie biznesowe]**; kiedy się przelicza — w **[Momencie aktualizacji]**; nie kopiować tych treści do [Opis logiki] (pkt 6b w `dokumentacja-opis-logiki-kolumna.mdc`).
+
+**Treść — czego nie robić (najczęstszy błąd):**
+
+- **Antywzorzec odpowiedzi asystenta w czacie (`/pole`):** W bloku przeznaczonym do wklejenia do **[Opis logiki]** **nie** umieszczać zdań opisowych, nagłówków („Opis logiki:”), ani meta-komentarzy w nawiasach (np. „ten sam blok co…”, „pełny mechanizm poniżej”) — tylko **wiersze pseudokodu** jak w `opis_pol_przyciskow_akcji_v3.docx`. Uzasadnienie lub uwaga do użytkownika — poza blokiem do Worda (`dokumentacja-pokaz-wyjscie-w-czacie.mdc`, sekcja 1).
+- **Zakaz** jedynie ogólnego wzorca w stylu „zapis rekordu ustawia pole” / „wartość z żądania zapisu” / „ustawiane przy zapisie” jako **jedynego** `TO` **bez** warunków na **polach z CRM (PL)** i **bez** jawnego `= [Inna encja].[Pole]` lub literału — to **nie** jest ustalona forma [Opis logiki] dla pól w tym projekcie (pkt 11, 15, 18). Wyjątek ściśle uzasadniony: pole **wyłącznie** wpisywane przez użytkownika na formularzu — **po potwierdzeniu** w `customizations.xml`: kontrolka pola ma **`disabled="false"`** (sekcja **Kontrolka na formularzu głównym (`disabled`)** powyżej); wtedy warunki `JEŻELI` opisują **biznesowo** sytuację zapisu (np. zmiana którego atrybutu), a po `=` nadal konkret (np. wpis użytkownika w polu [Etykieta]), nie pusta fraza „z żądania”. Przy **`disabled="true"`** nie stosuj tego wyjątku — opisuj procesy poza edycją kontrolki (tworzenie, plugin, API itd.).
+- Przy logice **pluginów / synchronizacji:** warunki wejścia **z perspektywy użytkownika CRM** — które **etykiety pól** się zmieniają (pkt 18). Nazwy klas, `.cs` — **Uwagi techniczne**, nie zamiast `JEŻELI`/`TO`. **Dopiski w stylu `(plugin …)`, `…Action`, nazwy klas w nawiasie** po `TO` — **zakaz** w tej komórce (pkt **8** w `dokumentacja-opis-logiki-kolumna.mdc`, skrypt `Kopie/strip_opis_repo_jargon_docx.py`).
+- Synchronizacja **[Przetarg] → powiązane [Pakiet]** (gdy dotyczy dokumentowanego pola na pakiecie): pkt **19** — konkretne `JEŻELI` / `I` na polach z UI i `TO [Pakiet].[…] = …` z **jawnym** źródłem, zamiast zwrotu „synchronizacja jak w pluginie”.
+- **Jeden wiersz = jedno pole** (pkt 5, 9): nie wklejać pełnego mapowania wszystkich encji w jednej komórce; dłuższy rozkład — Uwagi / plik roboczy; w [Opis logiki] nadal **każde** `TO` z konkretnym `=`.
+
+To samo pole na **innej encji** = **inny wiersz** — bez kopiowania łańcucha bez weryfikacji.
+
+## Ta sama logiczna nazwa w kilku wierszach jednej tabeli Word (kontekst encji / bloku)
+
+W plikach typu `Kopie/opis_pol_przyciskow_akcji*.docx` **pierwsza tabela** to nadal **jedna** tabela Word, ale **wiersze są grupowane** tematycznie: kolumna **Formularz** bywa albo wypełniona tylko w **wierszu nagłówka bloku**, a w kontynuacji **pusta** (czytelnik łączy z nagłówkiem), albo — **gdy użytkownik wymaga uniknięcia pomyłek** — **powtórzona** w każdym wierszu bloku (forward-fill z nagłówka, `dokumentacja-zbiorczo-wiersze-poc-docx.mdc`).
+
+**Ustalenie merytoryczne:** w CRM ta sama **logiczna nazwa atrybutu** (np. `neu_termbenefitspercent`) może występować na **więcej niż jednej encji** (`customizations.xml`: osobne `<entity>` z tym samym `PhysicalName` przy różnych encjach). W dokumentacji = **osobny wiersz na encję**, nawet gdy etykieta pola w kolumnie „Nazwa pola” jest taka sama.
+
+**Dla asystenta (obowiązkowo przed skopiowaniem treści między wierszami):**
+
+1. **Nie traktuj dwóch wierszy z identyczną kolumną „Logiczna nazwa pola” jako duplikatu do nadpisania tą samą treścią.** Sprawdź w eksporcie CRM, czy chodzi o **tę samą encję**, czy o **dwie encje** z tym samym atrybutem.
+2. **Kontekst encji z układu tabeli:** jeśli wiersz ma pusty **Formularz**, przytnij kontekst **skanując w górę** (od bieżącego wiersza do nagłówka tabeli) aż do **pierwszej niepustej** komórki w kolumnie Formularz — to etykieta bloku (np. „Produkt dopasowany” vs „Produkt przetargu”) odpowiada **innej encji / innemu zestawowi formularzy** w dokumencie.
+
+3. **Zbiorcze wstawianie wierszy (`/pola`, skrypty):** przed użyciem **samej** logicznej nazwy jako kotwicy („wstaw po `neu_marginbrutto`”) sprawdź w tabeli, **który blok encji** zawiera ten wiersz (pkt 2). Ta sama `LogicalName` może wystąpić **dwa razy** (Produkt Dopasowany vs Produkt przetargu). Kotwica musi jednoznacznie trafiać w docelową encję albo być zastąpiona polem **występującym tylko w jednym kontekście** w tym pliku (np. `neu_quantityfromexcel` przed nagłówkiem „Produkt przetargu” dla bloku pól katalogowych dopasowania). Szczegóły: `dokumentacja-zbiorczo-wiersze-poc-docx.mdc` (sekcja A, akapit o duplikatach `LogicalName`).
+
+4. **[Źródło wartości], [Opis logiki], [Moment aktualizacji], [Znaczenie biznesowe]** dopasuj do **tej encji i tej ścieżki w kodzie** (np. wartość z katalogu produktu na dopasowaniu vs kopia z dopasowania na wiersz przetargu przy kalkulacji struktury). Kopiowanie opisu z wiersza „sąsiedniego bloku” bez weryfikacji w `customizations.xml` i repozytorium = błąd.
+5. **Skrypty masowe** dopasowujące wiersze wyłącznie po `LogicalName` w kolumnie 2 muszą **rozgałęziać treść** wg kontekstu (np. funkcja „pierwszy niepusty Formularz powyżej”) albo wg jawnej listy wierszy encji — inaczej nadpiszą oba wiersze tą samą logiką.
+
+Powiązanie: sekcja **„Formularz”** (puste vs forward-fill w `opis_pol_*`) oraz **„To samo pole na innej encji”** w `dokumentacja-tabelka-pola-formularz-repo.mdc`.
+
+Komenda **`/pole`:** w odpowiedzi podaj **pełny tekst zmienianych kolumn** wiersza (w tym **[Typ pola]** i **[Opis logiki]** jako blok pseudokodu PL), zgodnie z `dokumentacja-pokaz-wyjscie-w-czacie.mdc`; nie dublować [Źródło wartości] ani [Znaczenie biznesowe] bez potrzeby.
+
+## Format Word — po edycji komórek
+
+**Gdy [Opis logiki] jest po polsku** (workflow `/pole`):
+
+1. `python reformat_poc_typ_pola_docx.py "Nazwa.docx"`
+2. `python reformat_poc_zrodlo_wartosci_docx.py "Nazwa.docx"`
+3. `python reformat_opis_logiki_polski_docx.py "Nazwa.docx"`
+
+**Gdy cały dokument POC utrzymujecie po angielsku** (`IF`/`THEN` w [Opis logiki]): zamiast pkt 3 użyjcie `python reformat_poc_opis_logiki_docx.py "Nazwa.docx"` — `dokumentacja-tabelka-pola-formularz-repo.mdc`.
+
+**Komenda Cursor `/formatuj`:** pełna reguła — `dokumentacja-komenda-formatuj.mdc`. **Zakres [Opis logiki]** w narzędziu (m.in. uzupełnianie nawiasów `( )` wokół wieloliniowego warunku `JEŻELI` / `INACZEJ JEŻELI` przed `TO`; możliwe przyszłe heurystyki na tekście): `dokumentacja-formatuj-opis-logiki-rozszerzenia.mdc`. Polecenia terminala: `.cursor/commands/formatuj.md`.
+
+Czcionka tabeli: **Aptos 8 pt**.
+
+## Arkusz Excel / generator
+
+- `Kopie/Buduj-dokumentacja_pola_*_xlsx.py`, `opis_logiki_rich_text` — spójnie z kolumną [Opis logiki]; workflow: `Kopie/README_POC_xlsx.md`, pokazywanie pełnego tekstu w czacie: `dokumentacja-pokaz-wyjscie-w-czacie.mdc`.
+
+## Przed pracą
+
+- `dokumentacja-przed-praca-czytaj-reguly.mdc` (kolejność: reguły → treść).
+
+## Powiązane reguły (pełnia)
+
+- `dokumentacja-tabelka-pola-formularz-repo.mdc` — główny przewodnik tabeli POC pól.
+- `dokumentacja-komenda-formatuj.mdc` — reguła komendy `/formatuj` (pipeline, warianty A/B, lista reguł).
+- `dokumentacja-formatuj-opis-logiki-rozszerzenia.mdc` — zakres narzędzia formatowania [Opis logiki] w Wordzie; kierunek rozwoju (heurystyki tekstowe); powiązanie z `.cursor/commands/formatuj.md`.
+- `dokumentacja-opis-logiki-kolumna.mdc` — treść [Opis logiki] i [Znaczenie biznesowe].
+- `dokumentacja-narzut-oferta-cenowa.mdc` — gdy wiersz dotyczy narzutu / oferty cenowej (nie dublować z innymi polami).

@@ -1,0 +1,67 @@
+---
+description: Pseudokod IF/THEN dla [Opis logiki] pluginów  -  styl z porównaniami [ID], bez zbędnych flag technicznych; wzorzec [Propaguj ceny z cenników] (GetPriceFromProducerPriceListAction)
+alwaysApply: false
+---
+
+# Opis logiki  -  pseudokod IF/THEN dla pluginów (wzór roboczy)
+
+## Kiedy stosować
+
+- Dla przycisków Web Resource i akcji pluginu, gdy w kolumnie „Opis logiki” ma być krótki, czytelny dla biznesu łańcuch warunków  -  bez opisywania kliku, `getUserAccessLevel` ani wyłącznie technicznych flag uruchamiających zapis (to osobno: Dostępność / warstwa JS), o ile zespół tak ustali.
+- Źródło prawdy w kodzie: repo `Neuca.Crm.Magellan` (tylko odczyt); etykiety pól PL: `customizations.xml` (CRM).
+
+## Konwencje notacji
+
+- Porównywanie rekordów: używaj `[Encja].[Pole].[ID]` (np. `[ZPZK].[Przetarg].[ID] = [Przetarg].[ID]`, `[Cennik producenta].[Producent].[ID] = [Producent].[ID]`), zamiast „= ten sam przetarg” w stylu opisowym.
+- Nierówność w pseudokodzie POC: wyłącznie `<>`. Nie `!=`, nie [różne od], nie ≠ w warunkach (zob. punkt 14 w `dokumentacja-opis-logiki-kolumna.mdc`). W kodzie C# bywa `!=` / `!= null`  -  w tabeli mapuj na `<>` albo na warunek słowny („[Pole].[ID] jest wypełnione”).
+- „Jest wypełnione”: dla lookupów w warunkach typu `!= null` w C# zapisuj jako „[Pole].[ID] jest wypełnione” lub „jest ustawione”  -  spójnie w całym bloku.
+- Nie myl akcji: np. `GenerateZPZKForProducersAction` (Generuj ZPZK dla producentów) <> `GetPriceFromProducerPriceListAction` (Propaguj ceny z cenników na Pozycję ZPZK).
+
+### Nazwy encji (PL jak w CRM)
+
+- Oferta cenowa  -  rekord nagłówka oferty (nie skracać do samego „oferty”, jeśli chodzi o encję).
+- Produkt oferty cenowej  -  wiersz pod ofertą cenową (w pseudokodzie `CREATE [Produkt oferty cenowej]`); nie używać synonimu „pozycja oferty”, jeśli w interfejsie i metadanych jest Produkt oferty cenowej.
+
+### Słowa kluczowe pseudokodu (spójnie w całym POC)
+
+- Pętle: `FOR EACH` (nie [DLA KAŻDEJ] / [DLA KAŻDEGO]).
+- Nowy rekord: `CREATE` (nie [UTWÓRZ]).
+- Zmiana wartości na istniejącym rekordzie: **bez** słowa `UPDATE` — linie `THEN` z przypisaniami `[Encja].[Pole] = …` (jak w bloku [Propaguj ceny] po przeróbce na ten styl), ewentualnie krótkie „skopiuj …” gdy to kopiowanie notatek między encjami. Ustalenie: punkt 0 w `dokumentacja-opis-logiki-kolumna.mdc`.
+- Niejasne skróty: unikać sformułowań w stylu „z mapowania …” bez wyjaśnienia  -  zamiast tego jedno zdanie skąd biorą się dane (`[Przetarg]`, `[Struktura przetargu]`, itd.). W komórce POC bez nawiasów z nazwą pliku `.cs` ani [implementacja: Klasa.cs]  -  szczegóły techniczne poza tabelą lub w Uwagi bez przepisywania ścieżek do kodu, o ile zespół tak ustali.
+- Cudzysłowy: w treści do Excela preferuj zwykłe ASCII `"` zamiast [ ] / „ ”.
+- Flagi pól CRM: w [Opis logiki] nie dopisywać linii typu `[Encja].[Pole flagi] = TRUE/FALSE` jako opisu końcowego kroku  -  to warstwa techniczna; w razie potrzeby opisz zdaniami służbowymi ([kończy proces na przetargu]) lub w Uwagi.
+- Pełny opis (walidator przed generowaniem, klik, widoczność): osobny plik roboczy lub dokumentacja poza kolumną  -  patrz `dokumentacja-opis-logiki-kolumna.mdc` (sekcja o pluginach).
+
+## Wzorzec kanoniczny  -  [Propaguj ceny z cenników] (`GetPriceFromProducerPriceListAction`)
+
+Odtwarza logikę z `GetPriceFromProducerPriceListAction.cs`: najpierw filtrowanie Pozycji ZPZK, potem dobór Cennika producenta (typ vs biuro sprzedaży przetargu, producent, zakres dat), potem przypisanie wartości z Listy cen producenta do pól [Pozycja ZPZK] (w [Opis logiki] bez słowa `UPDATE` — patrz punkt 0 w `dokumentacja-opis-logiki-kolumna.mdc`).
+
+FOR EACH [Pozycja ZPZK] należącej do [Przetarg].[ID] (lista z przetargu):
+
+IF [Pozycja ZPZK].[Cena ZPZK] = 0  
+AND [Pozycja ZPZK].[Produkt SAP].[ID] jest wypełnione  
+AND [Pozycja ZPZK].[Warunki ZPZK].[ID] jest wypełnione  
+
+THEN niech [ZPZK] = rekord wskazany przez [Pozycja ZPZK].[Warunki ZPZK].[ID]  
+I [Producent] = [ZPZK].[Producent sprzedażowy] (zgodność: ten sam co [Producent].[ID] z ZPZK)
+
+THEN IF istnieje [Cennik producenta], dla którego jednocześnie:
+
+([Cennik producenta].[Typ] = Globalny  
+LUB ([Przetarg].[Biuro sprzedaży] = Szpitale I [Cennik producenta].[Typ] = Szpitale)  
+LUB ([Przetarg].[Biuro sprzedaży] = ZOZ I [Cennik producenta].[Typ] = ZOZ))
+
+AND [Cennik producenta].[Producent].[ID] = [Producent].[ID]
+
+AND data bieżąca mieści się między [Cennik producenta].[Data obowiązywania OD] a [Cennik producenta].[Data obowiązywania DO] (w kodzie porównanie po datach kalendarzowych; szczegół czasu: plik akcji w repo)
+
+THEN dla pozycji [Pozycja cennika producenta] powiązanej z [Produkt SAP].[ID] z [Pozycja ZPZK] i z tym [Cennik producenta].[ID]  
+AND [Pozycja ZPZK].[Cena ZPZK] = cena z listy  
+AND [Pozycja ZPZK].[Limit ilościowy ZPZK] = limit z listy  
+AND [Pozycja ZPZK].[kod] = [Cennik producenta].[Numer oferty]
+
+Na końcu akcji plugin ustawia [Przetarg].[Flaga do zaciągania cen ZPZK] na NIE (`neu_ischeckprice`).
+
+## Inne pluginy
+
+Ten sam styl można stosować do innych akcji: najpierw odczyt warunków z pliku `*Action.cs` w Magellan, potem mapowanie pól na etykiety z `customizations.xml`, na końcu skrót IF/THEN z `[ID]` tam, gdzie chodzi o powiązanie rekordów.

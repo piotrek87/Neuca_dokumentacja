@@ -1,0 +1,51 @@
+---
+description: Pola Narzut / Narzut SAP na [Oferta cenowa] — ustalenia dokumentacyjne (źródło w Magellan, forma opisu, bez powtórzeń z Narzut %)
+alwaysApply: false
+---
+
+# [Oferta cenowa] — pola kwoty „Narzut” (nie mylić z „Narzut %”)
+
+## Zakres
+
+Dotyczy wyłącznie pól **kwoty** na rekordzie [Oferta cenowa]:
+
+- `neu_overhead` — Narzut (kalkulacje marżowe oferty)
+- `neu_overheadsap` — Narzut SAP / kwota narzutu do SAP (kalkulacje marżowe oferty SAP)
+- `neu_overheadwon` — Narzut w sekcji wygranej (wariant oferty)
+- `neu_overheadsapwon` — Narzut SAP w sekcji wygranej
+
+**Nie** stosować tej reguły do pól procentowych `neu_overheadpercent*`, o ile użytkownik wyraźnie nie łączy w jednym zadaniu — domyślnie dokumentować **osobno** albo pytać, czy chodzi o % czy o kwotę.
+
+## Źródło wartości w repozytorium Magellan (tylko odczyt)
+
+W kodzie **Neuca.Crm.Magellan** jedyne **automatyczne** przypisanie `neu_overhead` i `neu_overheadsap` na rekordzie **oferty** przy **tworzeniu** rekordu to:
+
+- `[Oferta cenowa].[Narzut]` ← `[Przetarg].[Cena do kalkulacji wartości narzutu]`
+- `[Oferta cenowa].[Narzut]` (wariant SAP / opis metadanych „do SAP”) ← `[Przetarg].[Cena do kalkulacji wartości narzutu do SAP]`
+
+(Implementacja: `UpdateGenerateQuoteFlagAction` przy generowaniu oferty z przetargu.)
+
+**Nie** ma w tym repozytorium pluginu, który przy **Update** oferty **przeliczałby** te dwie kwoty z produktów przetargu albo inną regułą serwerową.
+
+Pola **kwoty** na formularzu głównym oferty są w eksporcie **edytowalne** (`disabled="false"` na kontrolkach) — przy **zapisie** rekordu wartość może być **nadpisana** z formularza.
+
+Dla `neu_overheadwon` i `neu_overheadsapwon` przypisanie przy **kalkulacji wygranej** wynika z sumy składowych po **[Produkt dopasowany]** (logika w `WonOfferCalcAction` — kwoty z `PriceToOverheadCalcCalc` / wariant SAP; szczegół w `PluginHelper`).
+
+## Jak pisać w POC (Opis logiki / Źródło wartości)
+
+1. **Pola 1 i 2** (`neu_overhead`, `neu_overheadsap`): **krótki** opis jest **poprawny** — przy utworzeniu oferty: kopia z przetargu; przy zapisie z formularza: wartość wpisana przez użytkownika (w [Opis logiki] bez słowa `UPDATE` — przypisanie po `THEN`). **Nie** dublować w całości logiki wyliczenia `[Przetarg].[Cena do kalkulacji wartości narzutu]` / `… do SAP` w wierszu oferty: pełna ścieżka na przetargu to **osobny** wiersz dokumentacji lub **„Źródło wartości”** / **Uwagi** („wartość pochodzi z przetargu z pola …”), zgodnie z regułą zakresu „tylko to pole” (`dokumentacja-opis-logiki-kolumna.mdc`).
+
+2. **Środowisko CRM**: możliwe są **przepływy / reguły spoza tego repozytorium** — jedna linia w **Uwagi techniczne** po weryfikacji w środowisku, jeśli coś dodatkowo nadpisuje te pola.
+
+3. **Forma tekstu** (preferencje ustalone w projekcie):
+   - **Nie** używać nawiasów francuskich `[ ]` dla zmiennych roboczych.
+   - **Nie** używać skrótów typu „ten sam warunek” — w razie potrzeby **warunek w całości** w każdym bloku, albo **osobna komórka na pole** bez wspólnego bloku „definicji na górze”, jeśli użytkownik żąda pełnej powtarzalności.
+   - Rozróżniać wiersze tabeli **nazwą logiczną pola** / kontekstem sekcji (w CRM etykieta „Narzut” się powtarza).
+
+4. **Kalkulacja wygranej**: można dopisać w **Uwagi** — wykonanie **asynchroniczne** po stronie serwera (użytkownik może zobaczyć wartość po odświeżeniu).
+
+## Powiązanie z innymi regułami
+
+- Ogólny styl **Opis logiki**: `dokumentacja-opis-logiki-kolumna.mdc`
+- Repo **Magellan** tylko odczyt: `neuca-crm-magellan-readonly.mdc`
+- Pokazywanie treści w czacie przy generacji xlsx: `dokumentacja-pokaz-wyjscie-w-czacie.mdc`

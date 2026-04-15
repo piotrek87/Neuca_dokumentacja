@@ -1,0 +1,62 @@
+---
+description: Treść w czacie (pełny tekst do POC) oraz format odpowiedzi bez pogrubień markdown (wklejanie do Worda)
+alwaysApply: true
+---
+
+# Pokazywanie treści i format odpowiedzi
+
+## 1. Pełny tekst w czacie (arkusz POC)
+
+Gdy przygotujesz lub zmienisz treści do arkusza POC (`Kopie/dokumentacja_pola_Produkt_Dopasowany_neu_term_overhead.xlsx` przez `Buduj-dokumentacja_pola_Produkt_Dopasowany_xlsx.py` lub ręcznie w tym samym zakresie):
+
+- Zawsze w odpowiedzi w czacie wklej to, co wytworzyłeś, co najmniej dla zmienionych wierszy: kolumny takie jak Opis logiki, Znaczenie biznesowe, Moment aktualizacji (wg kontekstu zadania).
+- Przy komendzie **`/pole`**: treść przeznaczona do skopiowania do kolumny **[Opis logiki]** musi być **wyłącznie pseudokodem** (`JEŻELI`, `TO`, `I`, `LUB`, `DLA KAŻDEGO`, `NIE JEST W` itd., linie jak w `Kopie/opis_pol_przyciskow_akcji_v3.docx`). **Zakaz** w tej samej treści do wklejki: wstępów zdań, nagłówków typu „Opis logiki:”, meta-komentarzy w nawiasach (np. „ten sam blok co wcześniej”, „bez zmian merytorycznych”), pojedynczych linii opisowych zamiast `JEŻELI`. Wyjaśnienia dla użytkownika (jeśli konieczne) podaj **poniżej** bloku do skopiowania, oddzielnie od komórki Word.
+- **Proza w przebraniu `JEŻELI`:** jedna linia z pełnym zdaniem („uzupełnianie … ładuje … gdy … w przepływie …”) to nadal proza, nie pseudokod. Przed wysłaniem odpowiedzi wykonaj **test linia po linii** i antywzorce **źle / dobrze** z sekcji [Opis logiki] przy `/pole` w `dokumentacja-wiersz-pole-poc.mdc` (tam też: dlaczego model rozlewa prozę i co przenieść do [Źródło wartości] / Uwagi).
+- Przy **`/pole`** tekst kolumn **[Moment aktualizacji]** i **[Znaczenie biznesowe]** do wklejki: **język biznesowy**, bez nazw metod C#, klas i innych identyfikatorów z repozytorium (np. `SetProductSAP`). Technikalia wyłącznie w **Uwagi (repo)**. Szczegóły: `dokumentacja-wiersz-pole-poc.mdc`, sekcja [Moment aktualizacji] i [Znaczenie biznesowe] bez nazw z repozytorium i kodu.
+- **Bez technikaliów z eksportu formularza** w treściach do wklejki ([Źródło wartości], [Opis logiki], [Moment], [Znaczenie]): nie dopisuj np. „kontrolka wyłączona w FormXml”, „`disabled` w XML”. Weryfikacja `disabled` w `customizations.xml` jest **tylko** krokiem roboczym asystenta; w komórce opisz skutek po biznesu (`dokumentacja-wiersz-pole-poc.mdc`, sekcja **Kontrolka … (`disabled`)**).
+- **Bez żargonu warstw wdrożenia** w tych samych kolumnach: nie używaj „warstwa serwera”, „warstwa serwerowa”, „logika serwerowa”, „po stronie serwera”, „na serwerze” — opisuj zdarzenia i źródło wartości językiem procesu (zapis w CRM, system, mapowanie, reguły przy zapisie, zadanie w tle). Szczegóły: `dokumentacja-zrodlo-wartosci-tresc.mdc` (zakaz architektury wdrożenia w komórce).
+- W **[Moment aktualizacji]** nie dodawaj odsyłaczy typu „jak w [Opis logiki]” / „warunki jak w [Opis logiki]”; opisz **kiedy** wartość się zmienia zwięzłymi faktami (zdarzenie w CRM), bez metajęzyka o sąsiedniej kolumnie — `dokumentacja-wiersz-pole-poc.mdc`, ten sam blok co zakaz zbędnych odsyłaczy.
+- [Opis logiki] i [Moment aktualizacji] dla **jednego pola**: tylko to, **co zmienia wartość tego pola** i **kiedy**. Nie opisuj tu pełnej walidacji ani procesów, które pole tylko **odczytują**; takie treści daj w Uwagi albo w wierszu innej akcji (punkt 9 w `dokumentacja-opis-logiki-kolumna.mdc`).
+- Nie kończ wyłącznie komunikatem „zapisano do xlsx” / „uruchom skrypt”. Użytkownik ma widzieć pełny tekst do weryfikacji bez otwierania pliku.
+- Po uruchomieniu skryptu generującego plik możesz dodatkowo podać ścieżkę i przypomnieć o zamkniętym Excelu, ale treść merytoryczna musi być w wiadomości.
+
+Szczegóły workflow: `Kopie/README_POC_xlsx.md`.
+
+## 2. Format odpowiedzi — wklejanie do Worda
+
+- W odpowiedziach przeznaczonych do skopiowania do dokumentacji (Word, Excel) nie używaj składni markdown na pogrubienie (gwiazdki wokół tekstu). Użytkownik wkleja treść do Worda i usuwałby ręcznie pogrubienia.
+- W treściach merytorycznych używaj wyłącznie **Pharmindex**, nie „Farmindex”. Ustalenie: `dokumentacja-opis-logiki-kolumna.mdc` (sekcja „Skąd brać treść”, pkt 5).
+- Nagłówki, listy i bloki kodu są w porządku; unikaj wyróżniania wyrazów pogrubieniem w tekście opisowym do skopiowania.
+- Wyjątek: gdy użytkownik wyraźnie poprosi o formatowanie (np. slajd, inny styl).
+- [Opis logiki] do wklejki do Worda: **nie używaj słowa `UPDATE`**. Opisuj zmiany jako `THEN` z przypisaniami `[Encja].[Pole] = …`, ewentualnie `THEN CREATE` dla nowego rekordu; przy scalaniu wartości na istniejącym rekordzie jedno `THEN` z przypisaniem do `[Wartość]` (bez słowa UPDATE). Spójne z `polish_opis_plain_text` w `Kopie/docx_cell_format.py` i z punktami 0 i 9 w `dokumentacja-opis-logiki-kolumna.mdc`. Pełny rozkład wielu przypisań w sensie reguły 16 („pełny rozkład przypisań”) jest osobnym przypadkiem: tam, gdzie dokumentujesz całą akcję wielopolową i użytkownik lub arkusz xlsx tego wymaga, nadal **bez** słowa `UPDATE`, osobno od zwykłej wklejki do Word.
+- W treści [Opis logiki] (pseudokód): **nie używaj symboli « i »** (nawiasy francuskie / cudzysłowy typograficzne) do cytowania etykiet pól ani fraz; **używaj wyłącznie** nawiasów kwadratowych w notacji `[Encja].[Pole]` (pkt 10 w `dokumentacja-opis-logiki-kolumna.mdc`, podpunkt „Bez nawiasów francuskich « »…”). Dla dosłownych literałów (np. wartość statusu ze źródła kodu) dopuszczalny jest **cudzysłów ASCII** `"…"`, nie «…».
+- W treści **[Źródło wartości]** do wklejki do Worda / Excela: **ta sama zasada** — bez symboli « i » wokół etykiet pól, encji ani wartości; odniesienia `[Encja].[Pole]` lub zwykły opis słowami; ewentualny cytat techniczny w `"…"`. Pełna reguła: `dokumentacja-zrodlo-wartosci-tresc.mdc`, sekcja „Nawiasy « » — [Źródło wartości], [Moment aktualizacji], [Znaczenie biznesowe]”.
+- W treści **[Moment aktualizacji]** i **[Znaczenie biznesowe]** do wklejki: **bez symboli « i »**; odniesienia do pól i encji jak wyżej (`[Encja].[Pole]` lub opis słowami); dosłowny cytat techniczny tylko w `"…"`. Pełna reguła: ten sam plik co wyżej, ta sama sekcja; przykłady sformułowań: `dokumentacja-wiersz-pole-poc.mdc`, sekcja [Moment aktualizacji] i [Znaczenie biznesowe] — bez nazw z repozytorium i kodu.
+- [Opis logiki]: **bez ściany prozy** zamiast pseudokodu (zakaz zastępowania szkieletu `IF` / `AND` / `THEN` opisem „jak w kodzie”, „mapowanie pól”, „np. …” w jednym akapicie). Trzymaj się punktów 13–15 w `dokumentacja-opis-logiki-kolumna.mdc`. Gdy w kodzie jest długi `switch` / wiele gałęzi — w komórce jedna linia `THEN [Pole docelowe] = …` z **jawnym** źródłem lub skrót `[Produkt oferty cenowej].*` tylko jeśli w tym samym dokumencie jest legenda; **pełna lista gałęzi** (nazwy kryteriów → pole źródłowe) w **Uwagi (repo: …)** albo osobna tabela, nie w środku [Opis logiki].
+- **Zakaz dopinków kończących się na „Uwagi techniczne” / „w Uwagi”** w treści do wklejki w [Opis logiki], [Źródło wartości], [Moment aktualizacji] i [Znaczenie biznesowe]: nie dodawaj na końcu linii nawiasów w stylu „(szczegół — Uwagi techniczne)”, „(pełny rozkład w Uwagi techniczne)”, „(gałęzie jak … — Uwagi techniczne)”. Czytelnik biznesowy nie powinien widzieć metajęzyka o innej kolumnie dokumentu w środku opisu. Szczegóły dla IT zapisuj w osobnej kolumnie Uwagi jako **samodzielny wpis**, bez odsyłaczy z sąsiednich kolumn. Pełna reguła: `dokumentacja-opis-logiki-kolumna.mdc`, punkt **8d**.
+- **Zakaz pustych metafor „łańcuch cenowy”, „wejście do kalkulacji”, „składnik łańcucha”** bez efektu dla użytkownika CRM w treści do wklejki; zamiast tego opisz, **co się dzieje na ofercie** (która cena jest ograniczana, z czym porównanie, skąd wartość). Pełna reguła: `dokumentacja-opis-logiki-kolumna.mdc`, punkt **8e**.
+
+## 3. Myślnik i półpauza w treści do wklejki (POC, kolumny opisowe)
+
+### 3a. Skróty i etykiety (myślnik ASCII)
+
+- W odpowiedziach z treścią do skopiowania do Worda / Excela / arkusza POC używaj **zwykłego myślnika ASCII `-`** jako separatora w frazach i skrótach, np. `[Pharmindex - STD]`, `[Formularz - użytkownik]`, `ścieżka standardowa - krótka nazwa`.
+- **Nie** używaj półpauzy Unicode `—` (U+2014) zamiast tego separatora. Użytkownik ustalił preferencję myślnika `-`, żeby uniknąć zamieszania z typografią i wklejką.
+
+### 3b. Zdania opisowe (zakaz półpauzy „—” jako łącznika)
+
+- W kolumnach **[Typ pola]**, **[Źródło wartości]**, **[Moment aktualizacji]**, **[Znaczenie biznesowe]**, **[Uwagi]** oraz w wyjaśnieniach przy komendzie **`/pole`** **nie** stosuj znaku **półpauzy Unicode `—` (U+2014)** do łączenia myśli, wstawek wyjaśniających ani „dłuższego myślnika” między frazami.
+- **Szczególnie w [Źródło wartości]:** zakaz wzorca **„A — B”** w jednym punkcie listy (np. ścieżka biznesowa — skutek). To nadal jedna myśl rozdzielona `—`; użytkownik zgłaszał powtarzający się błąd właśnie w tej kolumnie. Rozbij na przecinek, dwa zdania lub **dwa osobne punkty `•`**.
+- **Zamiast tego:** przecinek, kropka i następne zdanie, ewentualnie średnik tam, gdzie to naturalne w jednym zdaniu. Rozbij długą myśl na dwa krótkie zdania zamiast jednego zdania z `—`.
+- Ta zasada dotyczy treści przeznaczonej do skopiowania do Worda. W plikach reguł w `.cursor/rules/` także unikaj `—` na rzecz przecinka lub kropki (spójność z oczekiwanym wyjściem asystenta).
+
+Powiązanie: [Źródło wartości] ma już język biznesowy w `dokumentacja-zrodlo-wartosci-tresc.mdc`; forma interpunkcyjna przy wklejce, także tutaj.
+
+### 3c. Końcowa kropka w kolumnach opisowych (wklejka do Worda)
+
+- W treściach do skopiowania do **[Źródło wartości]**, **[Moment aktualizacji]** i **[Znaczenie biznesowe]** (oraz w **[Typ pola]**, gdy są tam zdania opisowe) **nie** kończ **ostatniego** zdania ani **ostatniego** punktu listy **kropką**.
+- Kropki **w środku** wpisu (między zdaniami w jednym akapicie lub w jednym punkcie) są dozwolone.
+
+## 4. Pliki reguł w tym katalogu
+
+Treść reguł w `.cursor/rules/*.mdc` jest pisana zwykłym tekstem (bez składni markdown na pogrubienie), żeby była spójna z powyższym i nie sugerowała wzorca z gwiazdkami w odpowiedziach.

@@ -1,0 +1,46 @@
+---
+description: Tworzenie / edycja wiersza dla AKCJI CRM (standardowa operacja rekordu, plugin potoku) — nie przycisk HTML
+alwaysApply: false
+---
+
+# Wiersz typu: akcja CRM (standardowa operacja / plugin na zdarzeniu rekordu)
+
+## Kiedy to jest „akcja”, a nie przycisk ani zwykłe pole
+
+- Opisujesz **standardową operację CRM** na rekordzie (np. **Usuń**, zapis uruchamiający wyłącznie logikę serwerową/plugin bez osobnej kontrolki Web Resource w tym wierszu) albo **wiersz dokumentacji**, którego celem jest **cały przebieg pluginu / potoku** (wiele `THEN`, `FOR EACH`, `DELETE`, etapy PreValidation / MainOperation).
+- **Przycisk** w UI (klikalna kontrolka) to osobny typ — `dokumentacja-wiersz-przycisk-web.mdc`.
+- **Pojedyncze pole** (atrybut) — `dokumentacja-wiersz-pole-poc.mdc`.
+
+## [Opis logiki] — schemat i pełnia
+
+- Pseudokod: `IF` / `THEN` / `FOR EACH` / `AND`; notacja `[Encja].[Pole]`; **bez** słowa `UPDATE`; nierówność tylko `<>`; **pełny rozkład przypisań** przy wielopolowej logice (reguła 16) — **bez** skrótów „jak w pluginie”.
+- **Usuń (Delete):** wyłącznie schemat z `IF DELETE [Encja] (etap)` — **reguła 17** w `dokumentacja-opis-logiki-kolumna.mdc`; bez opisowej prozy zamiast pseudokodu.
+- Technikalia (klasy `.cs`, `Contains`, pre-image) — **Uwagi techniczne** lub Moment, nie zamiast szkieletu.
+- Pseudokod pluginów z porównaniami `[ID]`: `dokumentacja-opis-logiki-if-then-pluginy.mdc`.
+
+## [Znaczenie biznesowe]
+
+- Proza **bez** notacji `[Encja].[Pole]` w tym bloku; 2–4 zdania: efekt dla użytkownika/procesu; warunki słownie jeśli potrzeba — spójnie z `dokumentacja-akcje-crm.mdc`.
+
+## Źródła
+
+- **Magellan** — read-only; **customizations.xml** — etykiety PL.
+- Pełny przewodnik merytoryczny dla tego typu wiersza: **`dokumentacja-akcje-crm.mdc`** (nie duplikuj tutaj — stosuj ten plik razem z niniejszym zakresem „kiedy akcja”).
+
+## Format Word
+
+- Jeśli [Opis logiki] wpisujesz do **tego samego dokumentu POC** co pola: po edycji uruchom łańcuch `reformat_poc_*` jak dla pól (`dokumentacja-wiersz-pole-poc.mdc`) albo ręcznie zachowaj spójność pogrubień IF/THEN z `dokumentacja-tabelka-pola-formularz-repo.mdc`. **Komenda Cursor `/formatuj`:** pełna reguła — `dokumentacja-komenda-formatuj.mdc` (wariant B); polecenia — `.cursor/commands/formatuj.md`.
+- **Zakres [Opis logiki]** w narzędziu (m.in. nawiasy wokół wieloliniowego warunku w PL): `dokumentacja-formatuj-opis-logiki-rozszerzenia.mdc`.
+- Osobne dokumenty przycisków (polski schemat) **nie** są domyślnym miejscem na długi opis samej akcji Delete — chyba że oddzielny wiersz tabeli to świadomie opisuje ten sam scenariusz.
+
+## Przed pracą
+
+- `dokumentacja-przed-praca-czytaj-reguly.mdc`.
+
+## Powiązane reguły
+
+- `dokumentacja-akcje-crm.mdc` — **główna treść** merytoryczna dla akcji CRM i [Znaczenie biznesowe].
+- `dokumentacja-opis-logiki-kolumna.mdc` — punkty 0, 16, 17, pełny rozkład, DELETE.
+- `dokumentacja-tabelka-pola-formularz-repo.mdc` — kontekst tabeli POC wspólnej z polami.
+- `dokumentacja-komenda-formatuj.mdc` — reguła komendy `/formatuj`.
+- `dokumentacja-formatuj-opis-logiki-rozszerzenia.mdc` — zakres narzędzia formatowania [Opis logiki] w Wordzie; kierunek rozwoju (heurystyki tekstowe); powiązanie z `.cursor/commands/formatuj.md`.

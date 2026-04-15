@@ -1,0 +1,79 @@
+---
+description: Forma [Widoczność] i [Dostępność] w POC (Word: wstęp+lista; Dostępność: role+LUB+nawias; weryfikacja per kontrolka)
+alwaysApply: true
+---
+
+# Kolumny [Widoczność] i [Dostępność]  -  forma jak w Wordzie
+
+## Cel
+
+Treść ma być czytelna dla biznesu: krótki wstęp i lista punktowana z równoległymi hasłami  -  nie ściana technicznego opisu ani nagłówków typu „KIEDY…”.
+
+## Wzorzec formy (przyciski)
+
+1. Jedno zdanie wstępne, potem lista:
+   - **Stały wstęp (preferowany przy liście warunków „lub”):** `Przycisk jest niewidoczny jeśli wystąpi jedna z poniższych sytuacji:`
+   - Inne uzasadnione wstępy dopuszczalne (np. „Przycisk jest widoczny tylko gdy…”), o ile spójne z tabelą POC — ale **nie** zamieniać listy punktów na jeden akapit techniczny.
+2. Pod spodem punktowanie (`•` lub numeracja w Wordzie), każdy punkt  -  krótko (rzeczownik / krótkie hasło), jak w dokumentacji Word w organizacji.
+3. **Forma jak w przykładzie poniżej** — zestaw punktów ma być **równoległą listą haseł** (proces, stan, ewent. „na pakiecie” / „na przetargu”), a nie opisem „w procedurze OverheadPropagation…”. Mapowanie na `setVisible`, flagi `neu_*`, nazwy metod JS — **Uwagi (repo)**.
+
+### Ilustracja stylu [Widoczność] — **nie** gotowiec merytoryczny
+
+**Styl:** jedno zdanie wstępne (np. niewidoczny, gdy zajdzie jedna z sytuacji poniżej) + osobne krótkie punkty `•`.
+
+**Treść punktów:** wyłącznie po **weryfikacji dla danej kontrolki** — `customizations.xml` / Web Resource formularza tej encji, ewent. tabela Word (POC) jako źródło biznesowe. **Nie** kopiować z tej reguły gotowej listy warunków do żadnego wiersza „bo tak wygląda przykład” ani nie traktować dawnego przykładu rozmówcy (rekalkulacja, mapowanie, błędy itd.) jako kompletu prawd dla konkretnego przycisku — to był wzorzec **gęstości i tonu**, nie audyt kodu.
+
+Poniżej **fikcyjna mini-lista** — pokazuje tylko układ; zastąp każdy punkt hasłami wynikającymi z kodu i specyfikacji dla **tego** przycisku:
+
+Przycisk jest niewidoczny jeśli wystąpi jedna z poniższych sytuacji:
+
+• [krótkie hasło biznesowe — warunek 1 po weryfikacji]
+• [warunek 2 po weryfikacji]
+• [warunek 3 po weryfikacji]
+
+4. Dla dostępności przycisków na formularzu przetargu ([Zmiana oferty]) stosuj wzór ze specyfikacji Word (jak na screenach POC):
+   - Wstęp: *Funkcjonalność przycisku dostępna dla użytkownika, który ma jedną z ról:* → lista ról (`•`).
+   - Osobna linia ze słowem LUB (w Wordzie pogrubione; w Excelu może być zwykły tekst).
+   - Grupa w nawiasach: najpierw zdanie o przypisaniu do przetargu + lista ról (np. realizujący / wspierający / akceptujący), potem zdanie *I jednocześnie (razem z przypisaniem) status przetargu wynosi jeden z poniższych:* + lista statusów.
+   - Mapowanie na kod (`getUserAccessLevel`, pluginy)  -  w Uwagi, nie w środku listy biznesowej.
+
+## `getUserAccessLevel` (`neu_opportunitytenderusercheck.js`) — Widoczność / Dostępność a poziom 3
+
+W repozytorium **Neuca.Crm.Magellan** (tylko odczyt) funkcja globalna `getUserAccessLevel()` w pliku Web Resource `neu_opportunitytenderusercheck.js` zwraca wartości **1**, **2** lub **3** (komentarz w pliku: 1 — blokada; 2 — brak blokad i ograniczenie statusów; 3 — brak blokad i pełny zakres statusów w sensie tej funkcji).
+
+- **Poziom 3** jest zwracany **wyłącznie**, gdy bieżący użytkownik ma rolę zabezpieczeń **`[CRM] Administrator biznesowy`** (tablica `rolesFullSatus` w tym pliku — pierwszy warunek przed dalszą logiką).
+- Niektóre kontrolki na formularzu **Pakiet** (np. `WebResource_SetPreviousStatus`, metoda `adminVisibility` w `neu_tenderbundle.ts`) ustawiają `setVisible(false)`, gdy `globalThis.getUserAccessLevel() != 3`. W **[Widoczność]** można więc podać krótko, że przycisk jest niewidoczny m.in. **gdy użytkownik nie ma roli [CRM] Administrator biznesowy** — to jest zgodne z kodem dla typowego przypadku (poziom 1 lub 2 zamiast 3).
+- **Wyjątek (ważny przy weryfikacji z kodem):** na początku funkcji, gdy **nie da się** ustalić identyfikatora przetargu (np. pusty lookup **Przetarg** / `neu_tenderid` na formularzu pakietu w sytuacji opisanej w pliku), zwracane jest **2** **zanim** wykonane zostanie sprawdzenie ról — wtedy przycisk nadal jest ukryty przy warunku `!= 3`, **nawet** gdy użytkownik ma rolę **[CRM] Administrator biznesowy**. Ten drugi przypadek warto dopisać jako osobny punkt w [Widoczność] (np. brak powiązania pakietu z przetargiem w wymaganym kontekście) albo jedną linijką w **Uwagi techniczne**, żeby dokumentacja nie sugerowała wyłącznie „braku roli”.
+- Pełne mapowanie poziomów na role, przypisania do przetargu i statusy — w **Uwagi (repo)** z odesłaniem do `neu_opportunitytenderusercheck.js`; w głównej liście biznesowej nie wypisywać numerów poziomów ani nazw plików, jeśli organizacja wymaga samej listy ról ze specyfikacji Word.
+
+## Kolumna „Dostępność”  -  workflow (jak to robić)
+
+1. Źródło prawdy dla treści biznesowej  -  istniejąca tabela w Wordzie (POC) lub dokument ról CRM dla danego formularza; nie wymyślać list ról z samego JS (tam często jest tylko poziom dostępu / jedna flaga).
+2. Forma tekstu  -  zachować układ ze specyfikacji:
+   - akapit wstępny + lista ról (`•`);
+   - pusta linia, potem LUB (w Wordzie pogrubione; w Excelu po eksporcie można pogrubić ręcznie);
+   - pusta linia, potem ( … )  -  wewnątrz: przypisanie do przetargu + lista; zdanie łączące *I jednocześnie … status …* + lista statusów.
+3. Generator `Kopie/Buduj-dokumentacja_pola_*_xlsx.py`: treść biznesową trzymać w jednej stałej (np. `DOSTEP_PRZYCISK_ZMIANA_OFERTY_WORD`), przypisywać do pól `dostep_*` wierszy przycisków; duplikować stałą tylko gdy inna encja/formularz ma inne role lub statusy (np. pakiet vs przetarg  -  najpierw potwierdzić w CRM).
+4. Kolumna Uwagi  -  krótko: że pełna lista pochodzi z CRM/Word; że w kodzie Web Resource może być uproszczenie (`getUserAccessLevel` itd.); gdzie szukać mapowania.
+5. Weryfikacja  -  tak jak przy widoczności: ten sam szablon z innego wiersza Worda nie znaczy automatycznie tych samych reguł dla innej kontrolki.
+
+## Wzorzec formy (pola na formularzu)
+
+- Wstęp dopasowany do encji (np. kiedy pole widoczne / ukryte na formularzu głównym).
+- Lista krótkich przyczyn lub stanów UI, bez rozwlekłych zdań z nazwami atrybutów w środku punktu.
+
+## Czego nie robić
+
+- Nie kopiować list widoczności z innego wiersza tabeli Word ani z innej kontrolki bez sprawdzenia, że ten sam warunek dotyczy tego samego pola lub przycisku (kod: `customizations.xml`, Web Resource JS, plugin).
+- Nie dopisywać punktów „bo były w innym dokumencie”  -  każdy punkt musi mieć źródło (CRM, JS, plugin) albo być oznaczony jako do potwierdzenia w środowisku.
+- Unikać skrótów typu „m.in.” w treści przeznaczonej do wklejenia do dokumentacji, jeśli wymaga to pełnego wyliczenia (preferencja projektu).
+
+## Gdzie schować technikalia
+
+- Nazwy kontrolek (`WebResource_*`), flag (`neu_*`), ścieżki plików JS  -  kolumna „Uwagi techniczne” lub „Uwagi (repo)”, nie główna lista widoczności.
+- Tam samo: zastrzeżenia (np. „punkt X wymaga jednocześnie statusu zadania asynchronicznego”)  -  jedna linijka, żeby nie rozpychać listy biznesowej.
+
+## Powiązanie z innymi regułami
+
+- Metadane formularza i `disabled` na kontrolce (weryfikacja w eksporcie CRM): reguła `dokumentacja-tabelka-pola-formularz-repo` oraz sekcja **`disabled`** w `dokumentacja-wiersz-pole-poc.mdc` — **skutek** opisuj językiem biznesowym, bez wklejania „FormXml” / „disabled” do kolumn POC.
+- Opis logiki: dokumentacja-opis-logiki-kolumna.

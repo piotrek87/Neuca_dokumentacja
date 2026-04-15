@@ -1,0 +1,38 @@
+---
+description: Zakres komendy /formatuj dla «Opis logiki», granice względem kodu repo oraz możliwe heurystyki czytelności (bez obowiązkowego porównania z JS/pluginami)
+alwaysApply: false
+---
+
+# Komenda /formatuj — «Opis logiki»: co robi dziś i co można dobudować
+
+## Cel narzędzia
+
+Pipeline skryptów w `Kopie/` (`reformat_*_docx.py` + `docx_cell_format.py`) ma zapewnić **ustalony wygląd** dokumentu Word (m.in. Aptos 8 pt, pogrubienia słów kluczowych, lewa krawędź, wcięcia zagnieżdżeń w wersji polskiej) zgodnie z `dokumentacja-tabelka-pola-formularz-repo.mdc` — tak, żeby **czytelnik biznesowy** widział spójny pseudokód, a nie „ścianę tekstu” z Worda.
+
+## Obecny zakres (bez analizy repozytorium CRM)
+
+- Normalizacja struktury wizualnej i słów kluczowych (`JEŻELI`, `TO`, `I`, `LUB`, `DLA KAŻDEGO`, `ZBIERZ`, `NIE JEST W` itd. w PL).
+- Wcięcia poziomów (`nest_polish_opis_structure` i powiązane — patrz `Kopie/docx_cell_format.py`).
+- Rozbicia linii tam, gdzie reguły projektu to przewidują (np. `LUB`, słowa struktury przy lewej krawędzi).
+- **Nawiasy `( )` wokół warunku:** w Wordzie znaki `(` `)` są **pogrubiane** (`_OPIS_PL_TOKENS` w `docx_cell_format.py`), żeby było widać granice wyrażeń. Wcześniej część komórek miała warunek w nawiasach (np. `JEŻELI ( … )` w jednej lub wielu liniach), a część — wieloliniowy warunek (`I …` / `LUB …`) **bez** otaczającego nawiasu, stąd niespójność dla czytelnika. Pipeline przed zagnieżdżeniem wywołuje **`ensure_multiline_jezeli_outer_parens_pl`**: jeśli po `JEŻELI` / `INACZEJ JEŻELI` jest **co najmniej jedna** kontynuacja w osobnej linii (`I …` / `LUB …`) przed `TO`, a tuż po słowie kluczowym **nie** ma jeszcze `(`, skrypt **dopisuje** otaczające `( … )` wokół całości warunku. **Jednolinijkowych** warunków (bez osobnych linii `I` / `LUB`) skrypt **nie zmienia** — można wtedy nawiasy zostawić lub dopisać ręcznie przy długiej linii z mieszanym `I` / `LUB`.
+- **Word: kilka akapitów w jednej komórce** — przy odczycie komórki każdy akapit był łączony w tekst przez `cell_text_opis_logiki_for_reformat` (`docx_cell_format.py`). Gdy między akapitami powstawała **pusta linia** (np. `\n\n` zamiast pojedynczego `\n`), skan kontynuacji `I …` / `LUB …` w `ensure_multiline_jezeli_outer_parens_pl` **urywał się** przed `TO`, więc **nie dopinały się** nawiasy zewnętrzne ani spójne wcięcia z `nest_polish_opis_structure`. Naprawa: **pojedynczy `\n` między akapitami** przy składaniu komórki oraz **`_collapse_paragraph_gaps_in_polish_opis`** na wejściu `indent_polish_opis_structure` (zsunięcie sekwencji pustych wierszy). Po pipeline nadal obowiązuje `insert_blank_lines_between_top_level_blocks` dla przerw między blokami głównymi.
+- **Nie** jest wymagane ani planowane jako domyślne kroków formatowania: automatyczne **porównanie treści z plikami Web Resource / pluginów** w `Neuca.Crm.Magellan` — to osobna warstwa (przegląd merytoryczny, ewentualnie osobne narzędzie).
+
+## Rozsądny kierunek rozszerzeń (tylko tekst pseudokodu)
+
+Można rozbudować pipeline o **heurystyki czytelności i prostych błędów składniowych** wyłącznie z treści komórki «Opis logiki», **bez** odczytu kodu:
+
+- kontrola **balansu nawiasów** `(` `)` w obrębie linii lub bloku;
+- ostrzeżenie, gdy po `JEŻELI` w tym samym fragmencie brakuje sensownego `TO` (heurystyka, nie dowód formalny);
+- sugestia podziału **zbyt długich** linii warunku;
+- wykrywanie oczywistych duplikatów / pustych linii strukturalnych.
+
+Implementacja możliwa jako dodatkowe funkcje w `docx_cell_format.py`, osobny skrypt `Kopie/hint_*` z raportem na stderr / w czacie, albo tryb `--check` przy istniejących `reformat_*`. **Merytoryczna zgodność z logiką biznesową i kodem** pozostaje w regule `dokumentacja-opis-logiki-kolumna.mdc` i w przeglądzie człowieka; heurystyki **nie zastępują** tej warstwy.
+
+## Powiązanie z komendą Cursor
+
+**Reguła całej komendy** (pipeline skryptów, lista reguł, warianty A/B): `dokumentacja-komenda-formatuj.mdc`.
+
+Szczegóły poleceń terminala: `.cursor/commands/formatuj.md`.
+
+**Te same ustalenia** (zakres narzędzia, brak obowiązkowego diffu z Magellan przy formatowaniu) obowiązują przy uzupełnianiu kolumny [Opis logiki] niezależnie od typu wiersza: komendy `.cursor/commands/pole.md`, `.cursor/commands/przycisk.md`, `.cursor/commands/akcja.md` — odsyłają do reguł `dokumentacja-wiersz-pole-poc.mdc`, `dokumentacja-wiersz-przycisk-web.mdc`, `dokumentacja-wiersz-akcja-crm.mdc`, które z kolei odsyłają tutaj przy pipeline Word.

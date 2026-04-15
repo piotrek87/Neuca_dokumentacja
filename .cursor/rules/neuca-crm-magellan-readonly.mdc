@@ -1,0 +1,10 @@
+---
+description: Lokalizacja repozytorium Neuca.Crm.Magellan  -  wyłącznie do odczytu
+alwaysApply: true
+---
+
+# Neuca.Crm.Magellan  -  bez zmian w plikach
+
+- Ścieżka repozytorium: `C:\Users\piotr.kowalczyk\source\repos\Neuca.Crm.Magellan`
+- Zasada: W tym katalogu nie wolno nic zmieniać (brak edycji, zapisów, commitów ani innych modyfikacji przez asystenta). Można wyłącznie czytać pliki w razie potrzeby kontekstu.
+- Jeśli zadanie wymaga zmian w kodzie CRM, wskaż użytkownikowi, że zmiany muszą być robione poza tą ścieżką lub w innym repozytorium zgodnie z ich procesem.

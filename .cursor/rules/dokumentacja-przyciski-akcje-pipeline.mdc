@@ -1,0 +1,45 @@
+---
+description: Szybkie formatowanie «Opis logiki» PL dla tabel przycisków i akcji w opis_pol_przyciskow_akcji*.docx (bez ponownego przetwarzania tabeli pól, o ile nie potrzeba).
+alwaysApply: false
+---
+
+# Pipeline przyciski + akcje (Word, «Opis logiki» PL)
+
+## Kontekst pliku
+
+W `opis_pol_przyciskow_akcji*.docx` (wzorzec: `Kopie/opis_pol_przyciskow_akcji_v3.docx`):
+
+- **Pierwsza tabela** — pola (inne kolumny niż przyciski).
+- **Druga tabela** — przyciski (Web Resource): m.in. Widoczność, Dostępność, «Opis logiki» (w tym sekcja Walidacja w komórce).
+- **Trzecia tabela** — akcje CRM: «Opis logiki», «Znaczenie biznesowe».
+
+Reguły treści: `dokumentacja-wiersz-przycisk-web.mdc`, `dokumentacja-wiersz-akcja-crm.mdc`, `dokumentacja-opis-logiki-kolumna.mdc`; komendy: `.cursor/commands/przycisk.md`, `.cursor/commands/akcja.md`.
+
+## Skrypt zbiorczy (źródło prawdy technicznej)
+
+Z katalogu `Kopie/` — **jedno** uruchomienie, ten sam efekt co `reformat_opis_logiki_polski_docx.py` na tabelach 2–3, domyślnie **bez** ponownego formatowania pierwszej tabeli (pola):
+
+```text
+python reformat_przyciski_akcje_pipeline_polski_docx.py "Nazwa.docx"
+```
+
+Opcje:
+
+- `--backup` — kopia zapasowa przed zapisem.
+- `--pelny-dokument` — przetwórz także pierwszą tabelę (jak pełny `reformat_opis_logiki_polski_docx.py`).
+
+Implementacja korzysta z `apply_polish_opis_logiki_to_document` w `reformat_opis_logiki_polski_docx.py` (`skip_first_table=True` domyślnie).
+
+## Kiedy użyć pełnego reformatu opisu PL
+
+- Zmieniano **pola** w pierwszej tabeli **lub** chcesz jednego przebiegu identycznego z `reformat_opis_logiki_polski_docx.py`: użyj `--pelny-dokument` albo skrypt `reformat_opis_logiki_polski_docx.py` (tworzy też `.bak_polski_opis.docx`).
+
+## Relacja do pipeline pól (Typ + Źródło + Opis)
+
+- `reformat_poc_pipeline_polski_docx.py` — pierwsza tabela: «Typ pola» i «Źródło wartości» oraz «Opis logiki» we **wszystkich** tabelach z tym nagłówkiem.
+- Po edycji **wyłącznie** przycisków/akcji wygodniej: `reformat_przyciski_akcje_pipeline_polski_docx.py` (szybciej, pomija pierwszą tabelę).
+
+## Powiązanie
+
+- Reguła pipeline dla pól: `dokumentacja-pole-excel-pipeline.mdc`.
+- Komenda Cursor: `.cursor/commands/przyciski-akcje-pipeline.md`.

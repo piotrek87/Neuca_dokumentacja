@@ -1,0 +1,80 @@
+---
+description: Treść kolumny [Źródło wartości] - język biznesowy, system vs użytkownik vs przyciski, bez technikaliów w komórce
+alwaysApply: true
+---
+
+# Kolumna [Źródło wartości] - ustalenia treści (POC, arkusz, czat)
+
+## Dla kogo
+
+Czytelnik biznesowy. Zakłada się, że nie zna nazw klas pluginów, plików C#, ani nazw Web Resource.
+
+To samo ograniczenie dotyczy kolumn **[Moment aktualizacji]** i **[Znaczenie biznesowe]** (nie wolno tam nazw metod typu `SetProductSAP` ani klas z Magellan). Pełna reguła i przykłady sformułowań: `dokumentacja-wiersz-pole-poc.mdc`, sekcja [Moment aktualizacji] i [Znaczenie biznesowe] bez nazw z repozytorium i kodu.
+
+## Czego nie pisać w tej kolumnie
+
+- **Puste meta „formularz pozycji” / „pola ekonomiczne”:** **Zakaz** punktów w stylu „wartość w polach ekonomicznych dopasowania na formularzu pozycji” — czytelnik nie wie, czy chodzi o wpis użytkownika, kalkulację struktury, mapowanie z [Produkt], rekordy [Ceny urzędowe MZ], czy synchronizację. **Zamiast:** wykaz **kanałów** z sekcji „Skąd bierze się wartość” poniżej (Kalkulacja przy przeliczeniu…, mapowanie z [Produkt] / [Ceny urzędowe MZ], zapis lub synchronizacja z [Przetarg] / [ZPZK] / [Produkt przetargu], parametry z nagłówka [Przetarg] tam, gdzie wchodzą do wzoru). Ten sam poziom konkretu co w `dokumentacja-tabelka-pola-formularz-repo.mdc` (lista źródeł, nie opis „że pole jest na formularzu”).
+- Nazwy klas pluginów, akcji technicznych, ścieżek plików `.cs` / `.js`, nazwy Web Resource.
+- **Logicznych nazw atrybutów CRM** (`neu_*` i inne nazwy techniczne z metadanych). W [Źródło wartości] tylko etykiety jak w interfejsie. Mapowanie na nazwy logiczne zostaw w **Uwagi (repo)** lub notatce technicznej.
+- Mapowanie „wartość z kodu repozytorium Magellan” - to do kolumny Uwagi (repo / techniczne) albo notatki roboczej, nie do [Źródło wartości].
+- **Konfiguracja formularza z eksportu CRM** używana przy weryfikacji w projekcie (`FormXml`, atrybut **`disabled`** na kontrolce, `systemform`, surowy XML). Czytelnik biznesowy nie potrzebuje tego w [Źródło wartości]. Jeśli pole nie jest wypełniane ręcznie na formularzu, opisz to zwięźle po biznesu (np. „ustalanie przy zapisie”, „wartość z mapowania z […]”), zgodnie z `dokumentacja-wiersz-pole-poc.mdc`, sekcja **`disabled`** — **bez** powielania nazw technicznych eksportu w komórce.
+- **Osobny punkt tylko o interfejsie:** nie dopisuj punktów w stylu „odczyt na formularzu [Produkt Dopasowany], bez wprowadzania wartości w tym polu na formularzu głównym”. Weryfikacja `disabled` jest krokiem wewnętrznym; w [Źródło wartości] wystarczy **wykaz źródeł wartości** (mapowanie, zapis encji źródłowej itd.), a spójność z brakiem edycji w UI realizuj przez **nie** pisanie w innych kolumnach, że użytkownik „wprowadza” lub „zmienia” to pole na formularzu, gdy w XML pole jest tylko do odczytu — `dokumentacja-wiersz-pole-poc.mdc`, sekcja **`disabled`**.
+- **Architektura wdrożenia (warstwy, serwer, plugin jako infrastruktura):** w treści do wklejki **nie** stosuj zwrotów w stylu „warstwa serwera”, „warstwa serwerowa”, „logika serwerowa”, „po stronie serwera”, „na serwerze” — to żargon zespołu implementacyjnego, nie język procesu dla biznesu. **Zamiast:** „przy zapisie rekordu w CRM”, „ustalanie przez system”, „mapowanie przy zapisie”, „reguły w systemie po zapisie”, „zadanie w tle” (gdy dotyczy czasu), „walidacja przy zapisie” — w zależności od sensu. Szczegóły techniczne (plugin, klasa) wyłącznie **Uwagi (repo)**. Pełna spójność: `dokumentacja-pokaz-wyjscie-w-czacie.mdc`, sekcja 1 (obok zakazu technikaliów z FormXml).
+
+## Czego pisać - forma
+
+- **Końcowa kropka:** w treści do wklejki w [Źródło wartości] (oraz analogicznie w [Moment aktualizacji] i [Znaczenie biznesowe], gdy to zdania lub lista) **nie** kończ **ostatniego** zdania ani **ostatniego** punktu listy **kropką**; kropki **w środku** wpisu (między zdaniami) są dozwolone. Pełna zasada: `dokumentacja-pokaz-wyjscie-w-czacie.mdc`, sekcja 3c.
+- Interpunkcja w treści do wklejki: **bez** półpauzy Unicode `—` (U+2014) jako łącznika między frazami. Stosuj przecinek, kropkę i następne zdanie. Pełna zasada: `dokumentacja-pokaz-wyjscie-w-czacie.mdc`, sekcja 3b.
+- **Antywzorzec (częsty błąd asystenta):** jeden punkt listy w stylu „coś — następstwo” lub „kontekst — wyjaśnienie”, np. „Przy tworzeniu produktu w ścieżce indeksu zero — wartość z Pharmindex”. **Nie** wklejaj takiego wzorca do [Źródło wartości]. **Zamiast:** rozdziel na **dwa krótkie punkty `•`** albo **jedno zdanie z przecinkiem**: „Przy tworzeniu produktu w ścieżce indeksu zero wartość pochodzi z [Produkt Pharmindex]”.
+- **Hierarchia formularza w tekście** (gdy trzeba ją wspomnieć przy źródle): **nie** „Informacje — zakładka X”. **Tak:** „formularz Informacje, zakładka X” albo „na formularzu Informacje, w zakładce X”.
+- Skróty etykiet (np. wariant STD): wyłącznie **myślnik ASCII `-`**, zgodnie z sekcją 3a w `dokumentacja-pokaz-wyjscie-w-czacie.mdc`, **nie** `—`.
+- **Skróty robocze i niejasne oznaczenia wewnętrzne:** W treści do wklejki ([Źródło wartości], [Opis logiki], [Moment aktualizacji], [Znaczenie biznesowe]) **nie** stosuj nieobjaśnionych skrótów projektowych ani dwuliterowych skrótów od nazw wewnętrznych zespołu (w tym skrótów mylnie kojarzonych z „warunkami handlowymi” zapisanych jako dwa znaki łacińskie zamiast etykiety CRM). Czytelnik biznesowy nie ma słownika skrótów zespołu. **Asystent nie powtarza w przykładach treści zakazanych skrótów** (nawet jako „antyprzykład”), żeby nie trafiały do dokumentu. **Zamiast:** pełne **etykiety encji i pól z CRM** (`LocalizedNames` / `displayname` z `customizations.xml`) w nawiasach `[…]`, np. `[ZPZK]`, `[Pozycja ZPZK]`; dla rekordów łączących jedno zdanie z czytelną nazwą z CRM (np. encja łącząca pozycję listy ZPZK z produktem dopasowanym) albo powtórzenie nazwy z rozwiązania bez symbolu `<->` w środku linii pseudokodu, jeśli szkodzi czytelności. Spójnie z pkt 3 i 10 w `dokumentacja-opis-logiki-kolumna.mdc`.
+- Pisownia zgodna z projektem: wyłącznie **Pharmindex**, nie „Farmindex”. Ustalenie: `dokumentacja-opis-logiki-kolumna.mdc` (sekcja „Skąd brać treść”, pkt 5).
+- Krótka lista punktowana z **`• `** (spójnie z normalizacją Word: `reformat_poc_zrodlo_wartosci_docx.py` i `dokumentacja-tabelka-pola-formularz-repo.mdc`).
+- Często jedna linia wstępu: że wartości pochodzą ze słownika w CRM / w systemie.
+- Dla pól ze słownikiem, gdzie każda opcja ma inne pochodzenie: osobny punkt na wartość (etykieta jak w CRM), nie jedna ściana tekstu.
+
+## Skąd bierze się wartość - słownik zwrotów
+
+Stosuj spójnie te formuły (dopasuj do faktycznego źródła po weryfikacji w kodzie lub w CRM):
+
+1. **Ustawienie przez system** - gdy wartość ustala się przy tworzeniu lub przy zapisie rekordu w CRM bez bezpośredniego wyboru przez użytkownika z listy (np. automatyczna ścieżka po spełnieniu warunków). **Nie** formułuj tego jako „logika serwerowa” / „warstwa serwera” w komórce (żargon wdrożeniowy — zakaz w treści do wklejki).
+
+2. **Ustawienie przez użytkownika** - gdy użytkownik wybiera wartość na liście lub zapisuje rekord z wybraną wartością, bez dedykowanego przycisku ustawiającego tę konkretną opcję.
+
+3. **Po użyciu przycisku na formularzu** - gdy w aplikacji wartość ustawiana jest w reakcji na kliknięcie kontrolki (przycisk na formularzu oferty lub innej encji), a nie tylko przez zwykły wybór z listy. Używaj etykiety przycisku takiej jak w interfejsie CRM; jeśli etykiety nie ma pod ręką, ogólna forma: „po użyciu przycisku … na formularzu” z dopiskiem w Uwagi: „dopisać etykietę z CRM”.
+
+4. **Po uruchomieniu procesu na formularzu** - gdy wartość wynika z wyraźnej akcji użytkownika innej niż lista (np. wysłanie do SAP, eksport) - opis po biznesu, bez nazwy technicznej flagi w [Źródło wartości].
+
+5. **Kalkulacja** - gdy wartość wynika z przeliczenia lub agregacji w systemie (np. sumy po produktach na pakiecie, pola wyliczane przy zapisie bez wpisu użytkownika w to pole). W [Źródło wartości] stosuj zwrot **Kalkulacja** (np. „Kalkulacja z agregacji po [Produkt przetargu] w [Pakiet]”). **Nie** używaj w tej kolumnie formuły „obliczenie systemowe” / „obliczenie automatyczne” (żeby słownictwo było spójne z [Opis logiki] i skrótem `JEŻELI kalkulacja [Pakiet]`).
+
+## Rozdział z [Opis logiki]
+
+- [Źródło wartości]: skąd w praktyce pochodzi wartość lub **typ źródła** (system, użytkownik, przycisk, proces, mapowanie, kalkulacja), w formie **wykazu**. Patrz punkt poniżej.
+- [Opis logiki]: warunki i przypisania w formie pseudokodu (`JEŻELI` / `TO` itd.) dla tego pola (wg `dokumentacja-opis-logiki-kolumna.mdc`); **tu** jest dokładny mechanizm, gałęzie, kaskady, jednoznaczność wartości.
+- Nie powielać w [Źródło wartości] pełnego pseudokodu z [Opis logiki].
+- **Zakaz meta-odsyłaczy do kolumny Uwagi:** W treści do wklejki w [Źródło wartości], [Opis logiki], [Moment aktualizacji] i [Znaczenie biznesowe] **nie** kończ punktów ani linii dopinkami w stylu „… — Uwagi techniczne”, „(szczegół w Uwagi techniczne)”, „(pełny rozkład w Uwagi techniczne)”. Czytelnik biznesowy nie powinien widzieć w środku opisu skrótu nazwy innej kolumny dokumentu. Szczegóły techniczne zapisuj w **osobnej** kolumnie Uwagi jako samodzielny wpis. Pełna reguła: `dokumentacja-opis-logiki-kolumna.mdc`, punkt **8d**; forma wklejki: `dokumentacja-pokaz-wyjscie-w-czacie.mdc`, sekcja 2.
+
+### Zwięzłość: tylko wykaz źródeł
+
+- W [Źródło wartości] wystarczy **wypisać źródła** (kanały / sytuacje ustawienia wartości): zwykle **jeden krótki punkt `•` na źródło**, np. wynik mapowania, wybór na formularzu, zapis po procesie na powiązanej encji, kalkulacja. **Bez** rozwlekłego opisywania kolejności warunków, kaskad ani reguł biznesowych; to należy wyłącznie do **[Opis logiki]**.
+- **Nie** zamieniać [Źródło wartości] w drugi opis procesu równoległy do [Opis logiki]; unikać powtórzenia tych samych zdań co w [Opis logiki] pod inną nazwą kolumny.
+- **Wykaz faktycznych źródeł, nie negacji:** unikaj punktów w stylu „wartość nie pochodzi od…”, „to nie jest pierwszym źródłem…”, „pole nie jest wpisywane przez użytkownika” jako substytutu listy źródeł. Zamiast tego wypisz **skąd wartość pochodzi** (np. kalkulacja struktury przetargu, mapowanie z […], zapis po procesie). Skutek „brak pierwszego źródła w UI” wynika z obecności innych źródeł na liście i ze spójności z [Opis logiki] / weryfikacji `disabled`, nie z osobnego punktu negującego — spójnie z sekcją o osobnym punkcie tylko o interfejsie w tym pliku (wyżej).
+- Dopuszczalne krótkie doprecyzowanie typu danych, jeśli nie wynika z [Typ pola], np. „wartości ze słownika w CRM”.
+
+## Dopiski i nawiasy
+
+- Preferencja projektu: unikać długich dopisków w nawiasach w [Źródło wartości]; wyjątki, integracje zewnętrzne, domyślne wartości pól - krótko w **Uwagi** albo w [Moment aktualizacji], jeśli dotyczy czasu.
+
+## Nawiasy « » — [Źródło wartości], [Moment aktualizacji], [Znaczenie biznesowe]
+
+Ta sama zasada dotyczy **treści do wklejki** w kolumnach opisowych z listą punktów (arkusz / Word), nie nagłówków tabeli w plikach reguł.
+
+- W **treści** wpisów do **[Źródło wartości]**, **[Moment aktualizacji]** i **[Znaczenie biznesowe]** **nie** używać symboli **«** i **»** (cudzysłowów francuskich) wokół etykiet pól, encji, wartości słownika ani fraz (spójnie z [Opis logiki] do wklejki; szczegół: `dokumentacja-pokaz-wyjscie-w-czacie.mdc`, sekcja 2).
+- Odniesienia do pól lub encji zapisywać z **nawiasami kwadratowymi**, jak w [Opis logiki]: np. `[Pakiet]`, `[Produkt przetargu].[Wartość netto oferta]`, `[Produkt Dopasowany].[Produkt Pharmindex]`. Wyłącznie etykiety biznesowe, bez logicznych nazw atrybutów (`neu_*`) w tej samej komórce tam, gdzie reguła [Źródło wartości] zabrania technikaliów.
+- Gdy potrzebny jest dosłowny cytat wartości technicznej (np. kod statusu w CRM), stosuj **cudzysłów ASCII** `"…"`, nie «…».
+
+## Powiązanie z innymi regułami
+
+- Format wizualny kolumny w Word (wypunktowanie, skrypty): `dokumentacja-tabelka-pola-formularz-repo.mdc`, sekcja [Źródło wartości].
+- Widoczność / dostępność przycisków (lista ról): `dokumentacja-widocznosc-dostepnosc-forma-word.mdc` - tam opis roli przycisków, nie ta reguła.

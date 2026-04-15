@@ -1,0 +1,57 @@
+---
+description: Komenda /unifikacja-opis-pol-docx — pełny workflow treści + formatu dla dokumentów opis_pol_przyciskow_akcji*.docx (skrypty Kopie/, relacja do /formatuj)
+alwaysApply: false
+---
+
+# Komenda: unifikacja dokumentu «opis pól / przyciski / akcje» (.docx)
+
+## Powiązanie z plikiem komendy
+
+Instrukcje krok po kroku i bloki terminala: `.cursor/commands/unifikacja-opis-pol-docx.md`.
+
+## Cel
+
+**Ujednolicić** plik Word z tabelami **pól**, **przycisków** i **akcji** (typowo `Kopie/opis_pol_przyciskow_akcji*.docx`) w dwóch warstwach:
+
+1. **Treść** — zgodnie z regułami POC (bez dopisków repozytoryjnych w [Opis logiki], bez `neu_*` w kolumnach biznesowych tam gdzie zakaz, Unicode, odsyłacze między kolumnami) — skrypty pomocnicze w `Kopie/`.
+2. **Forma Word** — ten sam pipeline co przy **`/formatuj`**: «Typ pola», «Źródło wartości», «Opis logiki» PL, **Aptos 8 pt** w tabelach.
+
+Komenda **`/formatuj`** sama w sobie **nie uruchamia** skryptów czyszczących treść (`strip_*`, `bulk_sanitize_*`); **unifikacja** = najpierw (opcjonalnie) warstwa treści, potem **obowiązkowo** pipeline formatujący jak w `dokumentacja-komenda-formatuj.mdc`.
+
+## Kiedy stosować
+
+- Po masowej edycji treści w Wordzie lub po imporcie z innego źródła.
+- Gdy trzeba **usunąć dopiski** w stylu `(plugin …)`, `…Action`, nazwy klas z repo z [Opis logiki] — pkt **8** w `dokumentacja-opis-logiki-kolumna.mdc`, skrypt `Kopie/strip_opis_repo_jargon_docx.py`.
+- Gdy dokument jest **wersją roboczą** konkretnego pliku (np. `v4`) i utrzymujecie **skrypt z zamianami per wiersz** — przykład: `Kopie/bulk_sanitize_opis_pol_v4_docx.py` (dostosuj lub sklonuj dla nowej wersji pliku; nie uruchamiaj ślepo na innym dokumencie bez przeglądu listy wierszy w skrypcie).
+
+## Reguły treści (obowiązkowo przed obietnicą „gotowe”)
+
+- `dokumentacja-przed-praca-czytaj-reguly.mdc`
+- `dokumentacja-opis-logiki-kolumna.mdc` (pkt 8 — dopiski repo; pkt 6c — `NIE JEST W`; brak `UPDATE` w PL)
+- `dokumentacja-zrodlo-wartosci-tresc.mdc` — forma listy, bez U+2014 w wklejkach
+- `dokumentacja-pokaz-wyjscie-w-czacie.mdc` — co pokazać użytkownikowi po zmianach
+- `dokumentacja-tabelka-pola-formularz-repo.mdc` — który skrypt na którą kolumnę pierwszej tabeli POC
+
+## Skrypty w `Kopie/` (kolejność logiczna)
+
+| Krok | Skrypt | Co robi |
+|------|--------|---------|
+| 1 (treść, pierwszy krok) | `strip_opis_repo_jargon_docx.py` | Usuwa / zamienia dopiski repo w **wszystkich** tabelach z kolumną «Opis logiki»; nie zmienia wartości pól CRM w cudzysłowie (np. tekst w `[PluginList]`). Komórka zapisywana tylko gdy tekst faktycznie się zmienia. |
+| 2 (treść, opcjonalnie) | `bulk_sanitize_opis_pol_v4_docx.py` | Szablon pod **konkretny** plik v4: Unicode, wybrane wiersze [Opis logiki], [Źródło] 98, [Moment], itd. **Sklonuj lub edytuj** przed użyciem na innym pliku. |
+| 3 (forma) | `reformat_poc_typ_pola_docx.py` | Pierwsza tabela — kolumna «Typ pola» (tylko `doc.tables[0]`). |
+| 4 (forma) | `reformat_poc_zrodlo_wartosci_docx.py` | Pierwsza tabela — «Źródło wartości». |
+| 5 (forma) | `reformat_opis_logiki_polski_docx.py` | **Wszystkie** tabele z nagłówkiem «Opis logiki» — polski pseudokod, m.in. `] IN (` → `] NALEŻY DO (` w `polish_opis_plain_text` (`Kopie/docx_cell_format.py`). Tworzy `*.bak_polski_opis.docx`. |
+
+**Uwagi:**
+
+- `reformat_poc_*` działają na **pierwszej** tabeli dokumentu — jeśli układ pliku jest inny, dostosuj skrypt lub kolejność tabel (reguła: pierwsza tabela = pola z kolumnami Typ / Źródło).
+- Po krokach 3–5 możesz jednym poleceniem Python ustawić **Aptos 8 pt** na wszystkich tabelach (`apply_font_aptos_8_table` w `docx_cell_format.py`) — `bulk_sanitize_*` robi to na końcu, jeśli go uruchamiasz; w samym pipeline z pkt 3–5 font jest ustawiany w obrębie przetwarzanych tabel przez skrypty `reformat_*`.
+
+## Relacja do innych komend
+
+- **`/formatuj`** — tylko kroki 3–5 (forma); bez strip/bulk.
+- **`/pole`**, **`/przycisk`**, **`/akcja`** — merytoryka pojedynczego wiersza; po edycji Word uruchom **`/formatuj`** lub pełną **unifikację**, jeśli czyścisz też cały plik ze schematów repo.
+
+## Repozytorium Neuca.Crm.Magellan
+
+Tylko **odczyt** przy weryfikacji treści — bez edycji kodu CRM.

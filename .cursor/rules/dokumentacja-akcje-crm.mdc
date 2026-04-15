@@ -1,0 +1,34 @@
+---
+description: Jak opisywać standardowe akcje CRM (Delete itd.) i pluginy — [Opis logiki] vs [Znaczenie biznesowe]
+alwaysApply: false
+---
+
+# Akcje CRM (nie przyciski Web Resource)
+
+## Kiedy stosować
+
+- Wiersz dokumentacji dotyczy **standardowej operacji CRM** na rekordzie (np. **Usuń** na encji), a nie kontrolki HTML/JS na formularzu.
+- Logika w **pluginach** / **Hangfire** (repozytorium Magellan — tylko odczyt w tym projekcie): treść merytoryczna z kodu i `customizations.xml` (etykiety PL).
+
+## [Opis logiki] — schemat, notacja `[]`
+
+- **Forma:** pseudokod: `IF` / `THEN` / `FOR EACH` / `AND`, z **nawiasami kwadratowymi** dla obiektów i pól CRM: `[Encja].[Pole]`, zgodnie z `dokumentacja-opis-logiki-kolumna.mdc` (w tym pogrubienia słów kluczowych w wygenerowanym `.xlsx` / Word).
+- **Pełne mapowanie pól:** przy akcji typu zapis, która uruchamia plugin z wieloma zapisami pól, **każde** przypisanie ma być rozpisane jako `THEN` + `[Encja].[Pole] = …` (osobne gałęzie dla każdej kombinacji warunków) — **reguła 16** w `dokumentacja-opis-logiki-kolumna.mdc` (pełny rozkład przypisań; **bez** słowa `UPDATE`). **Zakaz** skrótów w stylu „ścieżki jak w pluginie”.
+- **Zwięźle:** warunki i przypisania jako **szkielet**, nie akapity opisowe; technikalia (nazwy klas `.cs`, handlery) — **Uwagi techniczne** lub **Moment aktualizacji**.
+- **Nierówność:** tylko symbol `<>` (np. trzy osobne warunki na status, każdy z `<>`), zgodnie z regułą projektu — **bez** `!=`, bez symboli zbiorów (∅, ∉, ≠).
+- **„Puste”:** literacko **„puste”** lub **„= 0”** — nie wprowadzać skrótów typu ∅.
+- **Etapy potoku:** jeśli jest PreValidation + PostOperation (np. async), krótko oznaczyć w pseudokodzie (np. `(PreValidation)`, `(PostOperation, async)`), bez rozwlekłego opisu platformy.
+- **Usuń (Delete):** wyłącznie bloki `IF DELETE [Encja] (PreValidation, krok N)` / `(MainOperation)` + `AND` / `FOR EACH` / `THEN DELETE` / `THEN błąd:` + cytat komunikatu — **reguła 17** w `dokumentacja-opis-logiki-kolumna.mdc`. **Zakaz** zdań typu „w obrazie rekordu”, „przerwanie operacji”. Pre-image, `Contains`, efekty pluginów na rekordach podrzędnych — **Uwagi techniczne**. Wzorzec zatwierdzony: **Usuń [Pozycja ZPZK]**.
+
+## [Znaczenie biznesowe] — proza, bez `[]`
+
+- **Bez notacji `[Encja].[Pole]`** — zwykły język polski: *produkt dopasowany*, *produkt przetargu*, *warunki ZPZK*, *cena specjalna zakupu ZPZK* itd., tak jak rozumie to użytkownik biznesowy.
+- **Przejrzystość:** 2–4 zdania: co robi system **dla użytkownika / procesu**, jaki jest **efekt** (np. brak „starych” wartości po usunięciu źródła, spójność przetargu).
+- **Warunki w pełni w tym bloku:** jeśli logika zależy od statusów lub ścieżki (np. SAP), **wypisz je tutaj słownie** (*… gdy status nie jest … ani … ani …*) — **bez** odsyłaczy w stylu „jak wyżej” / „warunki jak w opisie logiki”.
+- **Styl:** spójny z innymi wierszami POC opisującymi działanie systemu (często zaczynające się od *System …* lub opis skutku), bez żargonu technicznego (SharedVariables, nazwy jobów) — te ostatnie tylko w Uwagi, jeśli potrzebne.
+
+## Powiązanie z innymi regułami
+
+- **[Opis logiki] dla wszystkich pól i przycisków** — ten sam wymóg szkieletu z `[]` i **punkt 15** (zakaz opisowej otoczki zamiast `IF`/`AND`/`THEN`), **punkt 16** (pełny rozkład przypisań; **bez** słowa `UPDATE`), **punkt 17** (schemat `DELETE`): `dokumentacja-opis-logiki-kolumna.mdc`.
+- Pseudokod IF/THEN, pluginy: `dokumentacja-opis-logiki-if-then-pluginy.mdc`.
+- Pokazywanie treści w czacie przy generowaniu arkusza: `dokumentacja-pokaz-wyjscie-w-czacie.mdc`.
